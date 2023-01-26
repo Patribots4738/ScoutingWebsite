@@ -1,0 +1,27 @@
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.4;
+  background: rgba(77,128,23);
+  height: 100vh;
+}
+
+.header {
+  width: 50%;
+  margin-bottom: 20px;
+  /* border-radius: calc(0.5 * 100px); */
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 100px;
+  /* line-height: 10; */
+  color: rgba(225,186,49);
+  background-color: egba(77,128,23);
+  /* height: 100vh */
+  
+}
