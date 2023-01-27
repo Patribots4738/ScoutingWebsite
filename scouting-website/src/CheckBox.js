@@ -3,9 +3,13 @@ import React from "react";
 
 class CheckBox extends React.Component{
 
+    state = false;
+
     render(){
 
         // const {id, title} = this.props.checkBox;
+
+        var state = false;
 
         return (
             <div>
@@ -15,9 +19,9 @@ class CheckBox extends React.Component{
             
                 <input
                     type="checkbox"
-                    className={"checkbox"}
-                    checked={false}
-                    onChange={() => this.props.handleCheckboxChange("test")}
+                    className={this.props.title}
+                    checked={state}
+                    onChange={() => this.props.handleCheckboxChange(this.props.id)}
                 />
             </div>
         )

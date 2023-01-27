@@ -8,41 +8,73 @@ class Container extends React.Component{
 
   state = {
     items: [
-      id: uuidv4(),: {
-              type: "checkbox",
-              title: "Test checkbox",
-              value: false
-            },
       {
         id: uuidv4(),
-        type: "textEntry",
-        name: "Test text entry",
-        value: ""
+        title: "Test checkbox",
+        value: false,
+        type: "checkbox"
       },
       {
-        id: uuidv4(),
-        type: "counter",
-        name: "Test counter",
-        limits: {max: 10, min: -10},
-        increment: 1,
-        
+        id: uuidv4()
+      },
+      {
+        id: uuidv4()
+      },
+      {
+        id: uuidv4()
       }
     ]
   }
 
+  getIDFromTitle = (title) => {
+    
+    this.state.items.filter(item => {
+      if (item.title === title){
+        return item.id
+      }
+    })
+  }
+
   handleCheckboxChange = (id) => {
-    this.state.id.value = !this.state.id.value
+    console.log(id)
+
+    this.setState({
+
+      items: this.state.items.map(item => {
+        console.log(item.id, id)
+        if (item.id === id) {
+          item.value = !item.value
+          console.log(item.value)
+        }
+        return item
+      })
+
+    })
   }
 
   render () {
     return (
-      <div className="App">
-        <CheckBox 
-          title="Test checkbox"
-          handleCheckboxChange={this.handleCheckboxChange}
-        />
-        
-      </div>
+
+      <ul className="App">
+
+        {this.state.items.map(item => {
+
+          console.log("salkjdsa;fzdf;DS")
+          // if (item.type === "checkbox") {
+             (
+              <CheckBox
+                key={uuidv4()}
+                title={"me fr"}
+                handleCheckboxChange={this.handleCheckboxChange}
+              />
+             )
+            {console.log(item.id, " ", item.title)}
+            
+          // }
+        })
+        }
+
+      </ul>
     );
   }
 }
