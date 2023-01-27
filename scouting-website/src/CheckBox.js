@@ -8,12 +8,18 @@ class CheckBox extends React.Component{
         // const {id, title} = this.props.checkBox;
 
         return (
-            <input
-                type="checkbox"
-                className={"test"}
-                checked={false}
-                onChange={() => this.props.handleChangeProps("test")}
-            />
+            <div>
+                <div>
+                    {this.props.title}
+                </div>
+            
+                <input
+                    type="checkbox"
+                    className={"checkbox"}
+                    checked={false}
+                    onChange={() => this.props.handleCheckboxChange("test")}
+                />
+            </div>
         )
     }
 }
