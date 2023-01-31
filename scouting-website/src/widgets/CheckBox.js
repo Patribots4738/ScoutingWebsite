@@ -2,26 +2,23 @@ import React from "react";
 
 
 class CheckBox extends React.Component{
-
-    state = false;
+        
+    value = this.props.value    
+    id = this.props.id
+    title = this.props.title
 
     render(){
-
-        // const {id, title} = this.props.checkBox;
-
-        var state = false;
-
         return (
             <div>
                 <div>
-                    {this.props.title}
+                    {this.title}
                 </div>
             
                 <input
                     type="checkbox"
-                    className={this.props.title}
-                    checked={state}
-                    onChange={() => this.props.handleCheckboxChange(this.props.id)}
+                    className={this.title+".inp"}
+                    value={this.value}
+                    onChange={() => this.props.handleCheckBoxChange(this.id)}
                 />
             </div>
         )
