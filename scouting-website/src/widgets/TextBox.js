@@ -15,7 +15,7 @@ class TextBox extends React.Component{
             
                 <input
                     type="text"
-                    className={this.title}
+                    className="textbox"
                 />
             </div>
         )

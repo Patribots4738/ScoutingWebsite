@@ -1,8 +1,12 @@
 import logo from './logo.svg';
 // import './App.css';
+
 import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox'
 import Counter from './widgets/Counter'
+import Submit from './widgets/Submit'
+import Dropdown from './widgets/Dropdown';
+
 import {v4 as uuidv4} from "uuid"
 import React from 'react';
 
@@ -26,6 +30,18 @@ class Container extends React.Component{
         title: "Test counter 4",
         value: 0,
         type: "counter"
+      },
+      {
+        id: uuidv4(),
+        title: "Test submit button",
+        url: "https://google.com",
+        type: "submit"
+      },
+      {
+        id: uuidv4(),
+        title: "test dropdown",
+        data: ["option1", "option2", "option3"],
+        type: "dropdown"
       },
     ]
   }
@@ -111,6 +127,24 @@ class Container extends React.Component{
               increaseCounter={this.increaseCounter}
               decreaseCounter={this.decreaseCounter}
               />
+            )
+          }
+          else if (item.type === "submit"){
+            return (
+              <Submit
+              id={item.id}
+              title={item.title}
+              url={item.url}
+              />              
+            )
+          }
+          else if (item.type === "dropdown"){
+            return (
+              <Dropdown
+              id={item.id}
+              title={item.title}
+              data={item.data}
+              />              
             )
           }
         })

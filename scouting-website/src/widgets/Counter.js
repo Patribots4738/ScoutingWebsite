@@ -12,21 +12,25 @@ class Counter extends React.Component{
         return (
             <div>
                 <div>
-                    <div>
+                    <div
+                    className="subtitle"
+                    >
                         {this.title}
                     </div>
-                    <div>
+                    <div
+                    className="value"
+                    >
                         {this.props.value}
                     </div>
                     
                     <button
-                        className={this.title + ".ubtn"}
+                        className={"ubtn"}
                         onClick={() => this.props.increaseCounter(this.id)}
                     >
                         +
                     </button>
                     <button
-                        className={this.title + ".dbtn"}
+                        className={"dbtn"}
                         onClick={() => this.props.decreaseCounter(this.id)}
                     >
                         -

@@ -10,13 +10,15 @@ class CheckBox extends React.Component{
     render(){
         return (
             <div>
-                <div>
+                <div
+                className="subtitle"
+                >
                     {this.title}
                 </div>
             
                 <input
                     type="checkbox"
-                    className={this.title+".inp"}
+                    className={"textInput"}
                     value={this.value}
                     onChange={() => this.props.handleCheckBoxChange(this.id)}
                 />
