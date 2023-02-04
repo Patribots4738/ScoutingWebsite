@@ -7,6 +7,7 @@ class Dropdown extends React.Component{
     id = this.props.id;
     title = this.props.title;
     items = this.props.items;
+    handleDropdownChange = this.props.handleDropdownChange;
 
     render(){
 
@@ -19,13 +20,21 @@ class Dropdown extends React.Component{
                     {this.title}
                 </div>
                 
-                <select name={this.title} id={this.id}>
-                    {this.items.map(item => (
-                        <option value={item.name}>
-                            {item.name}
+                <select
+                    onChange = {() => this.handleDropdownChange(this.id, this.value)}
+                >
+                    {this.items.map(item => {
+                        return (
+                        <option 
+                            key={item.id} 
+                            value={this.items.indexOf(item)}
+                        >
+                            {item.title}
                         </option>
-                    ))}
+                        );
+                    })}
                 </select>
+
             </div>
             
         )

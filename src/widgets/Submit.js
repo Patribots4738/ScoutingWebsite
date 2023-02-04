@@ -2,7 +2,6 @@ import React from "react";
 
 class Submit extends React.Component{
 
-    url = this.props.url;
     id = this.props.id;
     title = this.props.title;
     data = this.props.data;
@@ -10,7 +9,8 @@ class Submit extends React.Component{
     render(){
         return(
             <button
-            className="submit"
+                className="submit"
+                onClick={this.props.handleFormSubmit}
             >
                 {this.title}
             </button>

@@ -12,6 +12,8 @@ import React from 'react';
 
 class Container extends React.Component{
 
+  scriptUrl = "https://script.google.com/macros/s/AKfycbxlWrIFQhOyLexyXtRoVkoiuOWNnvaZNy8WAUNqd5i_T9mAxMwEp7TdaD-NutzOBZuJ/exec"
+
   state = {
     items: [
       {
@@ -33,17 +35,35 @@ class Container extends React.Component{
       },
       {
         id: uuidv4(),
-        title: "Test submit button",
-        url: "https://google.com",
-        type: "submit"
+        title: "test dropdown",
+        type: "dropdown",
+        items: [{
+                  id: uuidv4(),        
+                  title: "option1",
+                },
+                {
+                  id: uuidv4(),        
+                  title: "option2",
+                },
+                {
+                  id: uuidv4(),        
+                  title: "option3",
+                },
+              ],
+        value: -1,
       },
       {
         id: uuidv4(),
-        title: "test dropdown",
-        data: ["option1", "option2", "option3"],
-        type: "dropdown"
+        title: "Test submit button",
+        type: "submit"
       },
     ]
+  }
+
+  gatherData = () => {
+    return this.state.items.map(item => {
+      return item.title, item.value
+    })
   }
 
   increaseCounter = (id) => {
@@ -90,15 +110,52 @@ class Container extends React.Component{
     })
   }
 
-  handleTextBoxChange = (id) =>{
+  handleTextBoxChange = (id, value) => {
+    this.setState({
+      items: this.state.items.map(item => {
+        if (item.id === id) {
+          item.value = value
+        }
+        return item
+      })
+    })
+  }
+  
+  handleDropdownChange = (id, value) => {
+    console.log(id, value)
+    this.setState({
+      items: this.state.items.map(item => {
+        if (item.id === id) {
+          item.value = value
+        }
+        return item
+      })
+    })
+  }
 
+
+  handleFormSubmit = (e) =>{
+    e.preventDefault()
+
+    var data = this.gatherData()
+
+    var formDataObject = new FormData()
+
+    for (var i = 0; i < data.length; i++){
+      console.log(data[i])
+      formDataObject.append(data[i], data[i])
+    }
+
+    fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
+    .then(res => {
+        console.log("SUCCESSFULLY SUBMITTED")
+    })
+    .catch(err => console.log(err))
   }
 
   render () {
     return (
-
       <ul className="App">
-
         {this.state.items.map(item => {
           if (item.type === "checkbox") {
             return (
@@ -113,8 +170,9 @@ class Container extends React.Component{
           else if (item.type === "text"){
             return (
               <TextBox
-              id={item.id}
-              title={item.title}
+                id={item.id}
+                title={item.title}
+                handleTextBoxChange={this.handleTextBoxChange}
               />
             )
           }
@@ -132,18 +190,21 @@ class Container extends React.Component{
           else if (item.type === "submit"){
             return (
               <Submit
-              id={item.id}
-              title={item.title}
-              url={item.url}
+                id={item.id}
+                title={item.title}
+                handleFormSubmit={this.handleFormSubmit}
               />              
             )
           }
           else if (item.type === "dropdown"){
             return (
               <Dropdown
-              id={item.id}
-              title={item.title}
-              data={item.data}
+                id={item.id}
+                title={item.title}
+                data={item.data}
+                items={item.items}
+                handleDropdownChange={this.handleDropdownChange}
+                value={0}
               />              
             )
           }
