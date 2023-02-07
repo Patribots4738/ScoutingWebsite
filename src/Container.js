@@ -94,12 +94,20 @@ class Container extends React.Component{
   }
   
   gatherData = () => {
-    var arr = this.state.items.map(item => {
-      if (item.type !== "submit" && item.type !== "label"){
-        return [item.title, item.value]
-      }
-    })
-    return arr.slice(0, arr.length-1)
+    var arr = []
+
+    for (var i = 0; i < this.state.items.length; i++){
+      if (this.state.items[i].type !== "submit"
+          && this.state.items[i].type !== "label"
+          && this.state.items[i].type !== "image"
+          && this.state.items[i].type !== "header"){
+
+            arr.push([this.state.items[i].title, this.state.items[i].value])
+
+          }
+    }
+
+    return arr
   }
 
   increaseCounter = (id) => {
@@ -164,6 +172,8 @@ class Container extends React.Component{
     for (var i = 0; i < data.length; i++){
       formDataObject.append(data[i][0], data[i][1])
     }
+
+    console.log(formDataObject)
 
     fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
     .catch(err => console.log(err))
