@@ -1,5 +1,7 @@
 import logo from './logo.svg';
-// import './App.css';
+import notFound from './images/notFound.png'
+import patribotsLogo from './images/patribotsLogo.png'
+import './App.css';
 
 import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox'
@@ -18,8 +20,25 @@ class Container extends React.Component{
     items: [
       {
         id: uuidv4(),
+        title: "Test header",
+        type: "header",
+      },
+      {
+        id: uuidv4(),
+        title: "Test image",
+        src: patribotsLogo,
+        type: "image",
+      },
+      {
+        id: uuidv4(),
+        title: "Test label",
+        type: "label",
+      },
+      {
+        id: uuidv4(),
         title: "Test text box",
-        type: "text"
+        type: "textbox",
+        value: ""
       },
       {
         id: uuidv4(),
@@ -35,21 +54,22 @@ class Container extends React.Component{
       },
       {
         id: uuidv4(),
-        title: "test dropdown",
+        title: "Test dropdown",
         type: "dropdown",
-        items: [{
-                  id: uuidv4(),        
-                  title: "option1",
-                },
-                {
-                  id: uuidv4(),        
-                  title: "option2",
-                },
-                {
-                  id: uuidv4(),        
-                  title: "option3",
-                },
-              ],
+        items: [
+          {
+            id: uuidv4(),        
+            title: "option1",
+          },
+          {
+            id: uuidv4(),        
+            title: "option2",
+          },
+          {
+            id: uuidv4(),        
+            title: "option3",
+          },
+        ],
         value: -1,
       },
       {
@@ -57,13 +77,29 @@ class Container extends React.Component{
         title: "Test submit button",
         type: "submit"
       },
-    ]
+    ],
+    test: 0
   }
 
+  handleDropdownChange = (event) => {
+    this.setState({
+      items: this.state.items.map(item => {
+        if (item.id === event.target.id){
+          item.value = event.target.value
+        }
+        return item
+      })},
+    )
+    
+  }
+  
   gatherData = () => {
-    return this.state.items.map(item => {
-      return item.title, item.value
+    var arr = this.state.items.map(item => {
+      if (item.type !== "submit" && item.type !== "label"){
+        return [item.title, item.value]
+      }
     })
+    return arr.slice(0, arr.length-1)
   }
 
   increaseCounter = (id) => {
@@ -101,9 +137,6 @@ class Container extends React.Component{
       items: this.state.items.map(item => {
         if (item.id === id) {
           item.value = !item.value
-          console.log(item.id + ", " +
-                      item.value
-                      )
         }
         return item
       })
@@ -120,19 +153,6 @@ class Container extends React.Component{
       })
     })
   }
-  
-  handleDropdownChange = (id, value) => {
-    console.log(id, value)
-    this.setState({
-      items: this.state.items.map(item => {
-        if (item.id === id) {
-          item.value = value
-        }
-        return item
-      })
-    })
-  }
-
 
   handleFormSubmit = (e) =>{
     e.preventDefault()
@@ -142,16 +162,13 @@ class Container extends React.Component{
     var formDataObject = new FormData()
 
     for (var i = 0; i < data.length; i++){
-      console.log(data[i])
-      formDataObject.append(data[i], data[i])
+      formDataObject.append(data[i][0], data[i][1])
     }
 
     fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
-    .then(res => {
-        console.log("SUCCESSFULLY SUBMITTED")
-    })
     .catch(err => console.log(err))
   }
+
 
   render () {
     return (
@@ -167,12 +184,13 @@ class Container extends React.Component{
               />
              ) 
           }
-          else if (item.type === "text"){
+          else if (item.type === "textbox"){
             return (
               <TextBox
                 id={item.id}
                 title={item.title}
                 handleTextBoxChange={this.handleTextBoxChange}
+                value={item.value}
               />
             )
           }
@@ -204,13 +222,34 @@ class Container extends React.Component{
                 data={item.data}
                 items={item.items}
                 handleDropdownChange={this.handleDropdownChange}
-                value={0}
+                value={item.value}
               />              
+            )
+          }
+          else if (item.type === "label"){
+            return (
+              <div className='label'>
+                {item.title}
+              </div>
+            )
+          }
+          else if (item.type === "header"){
+            return (
+              <h1 className='header'>
+                {item.title}
+              </h1>
+            )
+          }
+          else if (item.type === "image"){
+            return (
+              <img
+                src = {item.src}
+                alt = {notFound}
+              />
             )
           }
         })
         }
-
       </ul>
     );
   }
