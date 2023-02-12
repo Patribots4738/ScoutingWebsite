@@ -20,42 +20,36 @@ class Container extends React.Component{
     items: [
       {
         id: uuidv4(),
-        title: "Test header",
-        type: "header",
-      },
-      {
-        id: uuidv4(),
-        title: "Test image",
-        src: patribotsLogo,
-        type: "image",
-      },
-      {
-        id: uuidv4(),
         title: "Test label",
         type: "label",
+        decorator: ""
       },
       {
         id: uuidv4(),
         title: "Test text box",
         type: "textbox",
-        value: ""
+        value: "",
+        decorator: ""
       },
       {
         id: uuidv4(),
         title: "Test checkbox 2",
         value: false,
-        type: "checkbox"
+        type: "checkbox",
+        decorator: "style1"
       },
       {
         id: uuidv4(),
         title: "Test counter 4",
         value: 0,
-        type: "counter"
+        type: "counter",
+        decorator: ""
       },
       {
         id: uuidv4(),
         title: "Test dropdown",
         type: "dropdown",
+        decorator: "",
         items: [
           {
             id: uuidv4(),        
@@ -75,10 +69,13 @@ class Container extends React.Component{
       {
         id: uuidv4(),
         title: "Test submit button",
-        type: "submit"
+        type: "submit",
+        decorator: ""
       },
+      
     ],
-    test: 0
+
+    
   }
 
   handleDropdownChange = (event) => {
@@ -182,36 +179,44 @@ class Container extends React.Component{
 
   render () {
     return (
-      <ul className="App">
+      <ul className="container">
         {this.state.items.map(item => {
           if (item.type === "checkbox") {
             return (
-              <CheckBox
-                id={item.id}
-                title={item.title}
-                value={item.value}
-                handleCheckBoxChange={this.handleCheckBoxChange}
-              />
+              <div>
+                <CheckBox
+                  className="checkbox widget"
+                  id={item.id}
+                  title={item.title}
+                  value={item.value}
+                  handleCheckBoxChange={this.handleCheckBoxChange}
+                  decorator={item.decorator}
+                />
+              </div>
              ) 
           }
           else if (item.type === "textbox"){
             return (
               <TextBox
+                className="textbox widget"
                 id={item.id}
                 title={item.title}
                 handleTextBoxChange={this.handleTextBoxChange}
                 value={item.value}
+                decorator={item.decorator}
               />
             )
           }
           else if (item.type === "counter"){
             return (
               <Counter
-              id={item.id}
-              title={item.title}
-              value={item.value}
-              increaseCounter={this.increaseCounter}
-              decreaseCounter={this.decreaseCounter}
+                className="counter widget"
+                id={item.id}
+                title={item.title}
+                value={item.value}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
+                decorator={item.decorator}
               />
             )
           }
@@ -221,6 +226,7 @@ class Container extends React.Component{
                 id={item.id}
                 title={item.title}
                 handleFormSubmit={this.handleFormSubmit}
+                decorator={item.decorator}
               />              
             )
           }
@@ -233,19 +239,20 @@ class Container extends React.Component{
                 items={item.items}
                 handleDropdownChange={this.handleDropdownChange}
                 value={item.value}
+                decorator={item.decorator}
               />              
             )
           }
           else if (item.type === "label"){
             return (
-              <div className='label'>
+              <div className={'label widget ' + item.decorator}>
                 {item.title}
               </div>
             )
           }
           else if (item.type === "header"){
             return (
-              <h1 className='header'>
+              <h1 className={'header widget ' + item.decorator}>
                 {item.title}
               </h1>
             )
@@ -255,6 +262,7 @@ class Container extends React.Component{
               <img
                 src = {item.src}
                 alt = {notFound}
+                className = {'image widget' + item.decorator}
               />
             )
           }
