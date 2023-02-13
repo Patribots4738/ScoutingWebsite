@@ -9,17 +9,20 @@ class Counter extends React.Component{
     value = this.props.value;
     id = this.props.id;
     title = this.props.title;
+    classNameDecorator = this.props.decorator
 
     render(){
 
         return (
-                <div className="widget">
+                <div className={"widget " + this.classNameDecorator}>
 
-                    <div className="subtitle">
+                    <div className="counterTitle">
                         {this.title}
                     </div>
 
-                    
+                    <div className="value">
+                            {this.props.value}
+                        </div> 
                     
                     <div className="btn-container">
                         
@@ -34,9 +37,7 @@ class Counter extends React.Component{
                             />
                         </button>
                         
-                        <div className="value">
-                            {this.props.value}
-                        </div>    
+                           
 
                         <button
                             className={"btn ubtn"}

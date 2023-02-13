@@ -9,7 +9,6 @@ class CheckBox extends React.Component{
     classNameDecorator = this.props.decorator
 
     render(){
-        console.log("widget " + this.classNameDecorator)
         return (
             <div className={"widget " + this.classNameDecorator}>
                 <div

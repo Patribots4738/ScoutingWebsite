@@ -5,6 +5,7 @@ import './App.css';
 
 import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox'
+import TextBoxLong from './widgets/TextBoxLong'
 import Counter from './widgets/Counter'
 import Submit from './widgets/Submit'
 import Dropdown from './widgets/Dropdown';
@@ -20,57 +21,200 @@ class Container extends React.Component{
     items: [
       {
         id: uuidv4(),
-        title: "Test label",
-        type: "label",
-        decorator: ""
-      },
-      {
-        id: uuidv4(),
-        title: "Test text box",
+        title: "Name",
         type: "textbox",
         value: "",
-        decorator: ""
+        decorator: "name"
+      },
+      
+      {
+        id: uuidv4(),
+        title: "Match Number: ",
+        type: "textbox",
+        value: "",
+        decorator: "matchNumber"
       },
       {
         id: uuidv4(),
-        title: "Test checkbox 2",
-        value: false,
-        type: "checkbox",
-        decorator: "style1"
+        title: "Team Number: ",
+        type: "textbox",
+        value: "",
+        decorator: "teamNumber"
       },
       {
         id: uuidv4(),
-        title: "Test counter 4",
+        title: "AUTO: ",
+        type: "label",
+        decorator: "label1"
+      },
+      
+      // {
+      //   id: uuidv4(),
+      //   title: "Test checkbox 2",
+      //   value: false,
+      //   type: "checkbox",
+      //   decorator: "style1"
+      // },
+      {
+        id: uuidv4(),
+        title: "Upper Cone",
         value: 0,
         type: "counter",
-        decorator: ""
+        decorator: "cone"
       },
       {
         id: uuidv4(),
-        title: "Test dropdown",
+        title: "Middle Cone",
+        value: 0,
+        type: "counter",
+        decorator: "cone"
+      },
+      {
+        id: uuidv4(),
+        title: "Lower Cone",
+        value: 0,
+        type: "counter",
+        decorator: "cone"
+      },
+      {
+        id: uuidv4(),
+        title: "Upper Cube",
+        value: 0,
+        type: "counter",
+        decorator: "cube"
+      },
+      {
+        id: uuidv4(),
+        title: "Middle Cube",
+        value: 0,
+        type: "counter",
+        decorator: "cube"
+      },
+      {
+        id: uuidv4(),
+        title: "Lower Cube",
+        value: 0,
+        type: "counter",
+        decorator: "cube"
+      },
+      {
+        id: uuidv4(),
+        title: "Parking",
         type: "dropdown",
         decorator: "",
         items: [
           {
             id: uuidv4(),        
-            title: "option1",
+            title: "engaged",
           },
           {
             id: uuidv4(),        
-            title: "option2",
+            title: "docked",
           },
           {
             id: uuidv4(),        
-            title: "option3",
+            title: "left community",
+          },
+          {
+            id: uuidv4(),        
+            title: "didn't move",
           },
         ],
-        value: -1,
+        value: 1,
+      },
+      
+      {
+        id: uuidv4(),
+        title: "TELEOP: ",
+        type: "label",
+        decorator: "label2"
+      },
+      {
+        id: uuidv4(),
+        title: "Upper Cone",
+        value: 0,
+        type: "counter",
+        decorator: "cone"
+      },
+      {
+        id: uuidv4(),
+        title: "Middle Cone",
+        value: 0,
+        type: "counter",
+        decorator: "cone"
+      },
+      {
+        id: uuidv4(),
+        title: "Lower Cone",
+        value: 0,
+        type: "counter",
+        decorator: "cone"
+      },
+      {
+        id: uuidv4(),
+        title: "Upper Cube",
+        value: 0,
+        type: "counter",
+        decorator: "cube"
+      },
+      {
+        id: uuidv4(),
+        title: "Middle Cube",
+        value: 0,
+        type: "counter",
+        decorator: "cube"
+      },
+      {
+        id: uuidv4(),
+        title: "Lower Cube",
+        value: 0,
+        type: "counter",
+        decorator: "cube"
+      },
+      {
+        id: uuidv4(),
+        title: "Fumble Count",
+        value: 0,
+        type: "counter",
+        decorator: "fumble"
+      },
+      {
+        id: uuidv4(),
+        title: "Parking",
+        type: "dropdown",
+        decorator: "parking2",
+        items: [
+          {
+            id: uuidv4(),        
+            title: "engaged",
+          },
+          {
+            id: uuidv4(),        
+            title: "docked",
+          },
+        ],
+        value: 1,
+      },
+      {
+        id: uuidv4(),
+        title: "Did They Defend The Majority of The Match?",
+        value: false,
+        type: "checkbox",
+        decorator: "style1"
+      },
+      
+      {
+        id: uuidv4(),
+        title: "Additional Comments",
+        type: "textbox-long",
+        value: "",
+        decorator: "comments"
       },
       {
         id: uuidv4(),
         title: "Test submit button",
         type: "submit",
-        decorator: ""
+        decorator: "submit"
       },
       
     ],
@@ -199,6 +343,18 @@ class Container extends React.Component{
             return (
               <TextBox
                 className="textbox widget"
+                id={item.id}
+                title={item.title}
+                handleTextBoxChange={this.handleTextBoxChange}
+                value={item.value}
+                decorator={item.decorator}
+              />
+            )
+          }
+          else if (item.type === "textbox-long"){
+            return (
+              <TextBoxLong
+                className="textbox-long widget"
                 id={item.id}
                 title={item.title}
                 handleTextBoxChange={this.handleTextBoxChange}
