@@ -15,69 +15,15 @@ import React from 'react';
 class Container extends React.Component{
 
   scriptUrl = "https://script.google.com/macros/s/AKfycbxlWrIFQhOyLexyXtRoVkoiuOWNnvaZNy8WAUNqd5i_T9mAxMwEp7TdaD-NutzOBZuJ/exec"
-
+  
   state = {
     items: [
       {
-        id: uuidv4(),
-        title: "Test label",
-        type: "label",
-        decorator: ""
-      },
-      {
-        id: uuidv4(),
-        title: "Test text box",
-        type: "textbox",
-        value: "",
-        decorator: ""
-      },
-      {
-        id: uuidv4(),
-        title: "Test checkbox 2",
-        value: false,
-        type: "checkbox",
-        decorator: "style1"
-      },
-      {
-        id: uuidv4(),
-        title: "Test counter 4",
-        value: 0,
-        type: "counter",
-        decorator: ""
-      },
-      {
-        id: uuidv4(),
-        title: "Test dropdown",
-        type: "dropdown",
-        decorator: "",
-        items: [
-          {
-            id: uuidv4(),        
-            title: "option1",
-          },
-          {
-            id: uuidv4(),        
-            title: "option2",
-          },
-          {
-            id: uuidv4(),        
-            title: "option3",
-          },
-        ],
-        value: -1,
-      },
-      {
-        id: uuidv4(),
-        title: "Test submit button",
-        type: "submit",
-        decorator: ""
-      },
-      
-    ],
-
-    
+        
+      }
+    ]
   }
-
+  
   handleDropdownChange = (event) => {
     this.setState({
       items: this.state.items.map(item => {
@@ -105,28 +51,6 @@ class Container extends React.Component{
     }
 
     return arr
-  }
-
-  increaseCounter = (id) => {
-    this.setState({
-        items: this.state.items.map(item => {
-          if (item.id === id) {
-            item.value = item.value + 1
-          }
-          return item
-        })
-    })
-  }
-
-  decreaseCounter = (id) => {
-    this.setState({
-        items: this.state.items.map(item => {
-          if (item.id === id) {
-            item.value = item.value - 1
-          }
-          return item
-        })
-    })
   }
 
   getIDFromTitle = (title) => {
@@ -175,99 +99,181 @@ class Container extends React.Component{
     fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
     .catch(err => console.log(err))
   }
-
+  
 
   render () {
     return (
       <ul className="container">
-        {this.state.items.map(item => {
-          if (item.type === "checkbox") {
-            return (
-              <div>
-                <CheckBox
-                  className="checkbox widget"
-                  id={item.id}
-                  title={item.title}
-                  value={item.value}
-                  handleCheckBoxChange={this.handleCheckBoxChange}
-                  decorator={item.decorator}
-                />
-              </div>
-             ) 
-          }
-          else if (item.type === "textbox"){
-            return (
-              <TextBox
-                className="textbox widget"
-                id={item.id}
-                title={item.title}
-                handleTextBoxChange={this.handleTextBoxChange}
-                value={item.value}
-                decorator={item.decorator}
-              />
-            )
-          }
-          else if (item.type === "counter"){
-            return (
+
+        <h1 className="title">
+          PATRIBOTS SCOUTNG
+        </h1>
+
+        <div className='identification-container'>
+          <h2 className="subtitle section-title">
+            IDENTIFICATION
+          </h2>
+
+          <TextBox
+            className="textbox name"
+            id={uuidv4()}
+            title={"Name"}
+            handleTextBoxChange={this.handleTextBoxChange}
+            value={""}
+          />
+          <TextBox
+            className="textbox match"
+            id={uuidv4()}
+            title={"Match Number"}
+            handleTextBoxChange={this.handleTextBoxChange}
+            value={""}
+          />
+          <TextBox
+            className="textbox team"
+            id={uuidv4()}
+            title={"Team Number"}
+            handleTextBoxChange={this.handleTextBoxChange}
+            value={""}
+          />
+        </div>
+        
+        <div className="auto-container">
+          <h2 className="subtitle section-title">
+            AUTONOMOUS
+          </h2>
+          <div>
+            <span className="upper">
               <Counter
                 className="counter widget"
-                id={item.id}
-                title={item.title}
-                value={item.value}
+                id={uuidv4()}
+                title={"Cone"}
+                value={0}
                 increaseCounter={this.increaseCounter}
                 decreaseCounter={this.decreaseCounter}
-                decorator={item.decorator}
               />
-            )
-          }
-          else if (item.type === "submit"){
-            return (
-              <Submit
-                id={item.id}
-                title={item.title}
-                handleFormSubmit={this.handleFormSubmit}
-                decorator={item.decorator}
-              />              
-            )
-          }
-          else if (item.type === "dropdown"){
-            return (
-              <Dropdown
-                id={item.id}
-                title={item.title}
-                data={item.data}
-                items={item.items}
-                handleDropdownChange={this.handleDropdownChange}
-                value={item.value}
-                decorator={item.decorator}
-              />              
-            )
-          }
-          else if (item.type === "label"){
-            return (
-              <div className={'label widget ' + item.decorator}>
-                {item.title}
-              </div>
-            )
-          }
-          else if (item.type === "header"){
-            return (
-              <h1 className={'header widget ' + item.decorator}>
-                {item.title}
-              </h1>
-            )
-          }
-          else if (item.type === "image"){
-            return (
-              <img
-                src = {item.src}
-                alt = {notFound}
-                className = {'image widget' + item.decorator}
+
+              <Counter
+                className="counter widget"
+                id={uuidv4()}
+                title={"Cube"}
+                value={0}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
               />
-            )
-          }
-        })
-        }
+            </span>
+          </div>
+          <div>
+            <span className="mid">
+              <Counter
+                className="counter widget"
+                id={uuidv4()}
+                title={"Cone"}
+                value={0}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
+              />
+
+              <Counter
+                className="counter widget"
+                id={uuidv4()}
+                title={"Cube"}
+                value={0}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
+              />
+            </span>
+          </div>
+          <div className="auto-container">
+            <span className="lower">
+              <Counter
+                className="counter widget"
+                id={uuidv4()}
+                title={"Cone"}
+                value={0}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
+              />
+
+              <Counter
+                className="counter widget"
+                id={uuidv4()}
+                title={"Cube"}
+                value={0}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
+              />
+            </span>
+          </div>
+        </div>
+       
+        <div className="teleop-container">
+          <h2 className="subtitle section-title">
+            TELEOP
+          </h2>
+          <div>
+            <span className="upper">
+              <Counter
+                className="counter widget"
+                id={uuidv4()}
+                title={"Cone"}
+                value={0}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
+              />
+
+              <Counter
+                className="counter widget"
+                id={uuidv4()}
+                title={"Cube"}
+                value={0}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
+              />
+            </span>
+          </div>
+          <div>
+            <span className="mid">
+              <Counter
+                className="counter widget"
+                id={uuidv4()}
+                title={"Cone"}
+                value={0}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
+              />
+
+              <Counter
+                className="counter widget"
+                id={uuidv4()}
+                title={"Cube"}
+                value={0}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
+              />
+            </span>
+          </div>
+          <div className="teleop-container">
+            <span className="lower">
+              <Counter
+                className="counter widget"
+                id={uuidv4()}
+                title={"Cone"}
+                value={0}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
+              />
+
+              <Counter
+                className="counter widget"
+                id={uuidv4()}
+                title={"Cube"}
+                value={0}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
+              />
+            </span>
+          </div>
+        </div>
       </ul>
     );
   }

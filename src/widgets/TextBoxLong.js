@@ -1,7 +1,7 @@
 import React from "react";
 
 
-class TextBox extends React.Component{
+class TextBoxLong extends React.Component{
 
     title = this.props.title
     id = this.props.id
@@ -14,9 +14,9 @@ class TextBox extends React.Component{
                     {this.title}
                 </div>
             
-                <input
+                <textarea
                     type="text"
-                    className="text-box widget"
+                    className="text-box-long widget"
                     onChange={e => {
                         this.props.handleTextBoxChange(this.id, e.target.value)
                     }}
@@ -27,4 +27,4 @@ class TextBox extends React.Component{
     }
 }
 
-export default TextBox;
+export default TextBoxLong;
