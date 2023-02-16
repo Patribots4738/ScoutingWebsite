@@ -19,33 +19,34 @@ class Counter extends React.Component{
     }
 
     decreaseCounter = () => {
-        this.setState({
-            value: this.state.value - 1
-        })
+        if (this.state.value !== 0){
+            this.setState({
+                value: this.state.value - 1
+            })
+        }
     }
     
 
     render(){
-
         return (
                 <span className="widget">
 
                     <div className="subtitle">
-                        {this.title}
+                        {this.state.title}
                     </div>
                     
-                    <span className="btn-container" id={this.id}>
+                    <span className="btn-container">
                         
                         <button
                             className={"btn dbtn"}
-                            onClick={() => this.decreaseCounter(this.id)}>
+                            onClick={() => this.decreaseCounter()}>
                             <img
                                 src = {minus}
                                 alt = {notFound}
                                 className="dbtn-ico"/>
                         </button>
                         
-                        <div className="value">
+                        <div className="value" id={this.state.id} value={this.state.value} title={this.state.title}>
                             {this.state.value}
                         </div>    
 
@@ -56,6 +57,7 @@ class Counter extends React.Component{
                                 src = {plus}
                                 alt = {notFound}
                                 className="ubtn-ico"/>
+                            
                         </button>
                     </span>
                     

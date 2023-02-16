@@ -1,15 +1,15 @@
 import React from "react";
 
 
-class TextBox extends React.Component{
+class Slider extends React.Component{
 
     state = {
-        value: "",
+        value: 0,
         id: this.props.id,
         title: this.props.title,
     }
 
-    handleTextBoxChange = (value) => {
+    handleSliderChange = (value) => {
         this.setState({value: value})
     }
 
@@ -19,21 +19,28 @@ class TextBox extends React.Component{
                 <div className="subtitle">
                     {this.state.title}
                 </div>
-            
+                
+                <div className="subtitle slider-labek">
+                    0
                 <input
-                    type="text"
+                    type="range"
                     className="text-box widget"
                     onChange={e => {
-                        this.handleTextBoxChange(e.target.value)
+                        this.handleSliderChange(e.target.value)
                     }}
                     id={this.state.id}
                     value={this.state.value}
                     title={this.state.title}
                 />
+                    100
+                </div>
+                <div className="subtitle slider-label">
+                    {this.state.value}
+                </div>
 
             </span>
         )
     }
 }
 
-export default TextBox;
+export default Slider;
