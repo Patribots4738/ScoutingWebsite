@@ -67,9 +67,8 @@ __IMPORTANT:__ For each peice of data that you want to record, name the Title of
 
 
 ### Local
-Now you should have the code open in a editor and google sheets set up. 
 
-Now open the ```Container.js``` file and replace the ```scriptUrl``` variable value with url of the app script we saved above.
+Dependng on what code editor you are using, open the ```Container.js``` file and replace the ```scriptUrl``` variable value with url of the app script we saved above.
 
 NOTE: To run the website, run: 
 ```npm start```
