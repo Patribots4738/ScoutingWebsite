@@ -15,7 +15,7 @@ import React from 'react';
 
 class Container extends React.Component{
 
-  scriptUrl = "https://script.google.com/macros/s/AKfycbxlWrIFQhOyLexyXtRoVkoiuOWNnvaZNy8WAUNqd5i_T9mAxMwEp7TdaD-NutzOBZuJ/exec"
+  scriptUrl = " https://script.google.com/macros/s/AKfycbz1Q-xLuk8w2mi7Edy06wgCHmsskpAkMMLso09RboigvgdegC7LOf0uNQAPYtvz-jNH/exec"
 
   state = {
     items: [
@@ -101,7 +101,7 @@ class Container extends React.Component{
         id: uuidv4(),
         title: "Parking",
         type: "dropdown",
-        decorator: "",
+        decorator: "parking1",
         items: [
           {
             id: uuidv4(),        
@@ -192,6 +192,10 @@ class Container extends React.Component{
             id: uuidv4(),        
             title: "docked",
           },
+          {
+            id: uuidv4(), 
+            title: "neither",
+          },
         ],
         value: 1,
       },
@@ -200,7 +204,7 @@ class Container extends React.Component{
         title: "Did They Defend The Majority of The Match?",
         value: false,
         type: "checkbox",
-        decorator: "style1"
+        decorator: "checkbox1"
       },
       
       {
@@ -212,7 +216,7 @@ class Container extends React.Component{
       },
       {
         id: uuidv4(),
-        title: "Test submit button",
+        title: "Submit",
         type: "submit",
         decorator: "submit"
       },
@@ -265,7 +269,8 @@ class Container extends React.Component{
   decreaseCounter = (id) => {
     this.setState({
         items: this.state.items.map(item => {
-          if (item.id === id) {
+          // no go below 0 !
+          if (item.id === id && item.value > 0) {
             item.value = item.value - 1
           }
           return item
@@ -318,8 +323,9 @@ class Container extends React.Component{
 
     fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
     .catch(err => console.log(err))
+    // window.location.reload();
   }
-
+  
 
   render () {
     return (

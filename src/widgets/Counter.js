@@ -33,7 +33,7 @@ class Counter extends React.Component{
                             <img
                                 src = {minus}
                                 alt = {notFound}
-                                className="btn-ico"
+                                className="btn-ico-down"
                             />
                         </button>
                         
@@ -47,7 +47,8 @@ class Counter extends React.Component{
                             <img
                                 src = {plus}
                                 alt = {notFound}
-                                className="btn-ico"
+                                className="btn-ico-up"
+                                
                             />
                         </button>
                     </div>

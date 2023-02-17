@@ -12,7 +12,7 @@ class CheckBox extends React.Component{
         return (
             <div className={"widget " + this.classNameDecorator}>
                 <div
-                className="subtitle"
+                className={"subtitle" + this.classNameDecorator}
                 >
                     {this.title}
                 </div>

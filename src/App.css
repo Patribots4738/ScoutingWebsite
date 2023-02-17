@@ -12,16 +12,19 @@ body {
 .container {
   margin-top: 20px;
 }
-div {
+
+/* hisssss rawr grrrrrrr arf arf woof (i don't like columns) */
+/* div {
   column-count: 2;
-}
+  column-gap: 10px;
+} */
 .widget {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 5px auto;
   width: 100%;
   margin-bottom: 20px;
   display: flex;
@@ -29,12 +32,15 @@ div {
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.38);
   justify-content: space-evenly;
   text-align: center;
-  padding: 10px;
+  padding-left: 10%;
+  padding-right: 10%;
   color: #ffffff
 }
 
 
+
 .text-box {
+  font-size: 16px;
   display: inline-block;
   border-radius: calc(0.5 * 100px);
   justify-content: space-evenly;
@@ -47,6 +53,22 @@ div {
   background-color: #ccc;
   color: black;
   max-width: 200px;
+  min-width: 200px;
+}
+
+.text-box-long {
+  display: inline-block;
+  font-size: 16px;
+  border-radius: calc(0.5 * 100px);
+  justify-content: space-evenly;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 300px;
+  height: 70px;
+  background-color: #ccc;
+  color: black;
   min-width: 200px;
 }
 
@@ -74,9 +96,10 @@ div {
 }
 
 .btn {
-  padding: 15px 25px;
+  padding: 20px 25px;
   font-size: 24px;
   text-align: center;
+  margin: 5px;
   display: flex;
   cursor: pointer;
   outline: none;
@@ -91,48 +114,118 @@ div {
 .btn:active {
   background-color: rgb(117, 117, 117);
   box-shadow: 0 5px #666;
-  transform: translateY(4px);
+  transform: translateY(4x);
 }
 
-.btn-ico {
+.btn-ico-down, .btn-ico-up {
   width: 20px;
   height: auto;
 }
 
+
 .btn-container {
   width: 45%;
+  display: flex;
+  justify-content: center;
 }
 .name, .matchNumber, .teamNumber {
   height: 75px;
 }
 
 .dbtn {
-  height: 50px;
-  padding-top: 22%;
+  height: auto;
 }
+
 .upbtn {
-  height: 50px;
+  height: auto;
 }
-.counterTitle {
-  padding-left: 18.5%;
+
+
+
+.dropdown {
+  height: 30px;
 }
-.label {
-  padding-right: 5%;
+.parking1, .parking2 {
+  height: 70px;
 }
-.parking2 {
-  height: 65px;
-}
-.parkingTitle {
-  padding-left: 13%;
-}
+
 .label {
   font-size: x-large;
+  box-shadow: none;
 }
-.textTitlematchNumber, .textTitleteamNumber {
-  padding-left: 29%;
+.style1 {
+  padding-bottom: 20%;
+  height: 40px;
 }
-.textTitlename {
-  padding-left: 10.5%;
+.subtitle1 {
+  font-size: medium;
+  padding-top: 20%;
+}
+.submit {
+  cursor: pointer;
+  border-radius: calc(0.5 * 100px);
+  justify-content: space-evenly;
+  text-align: center;
+  padding: 10px;
+  width: 300px;
+  height: 40px;
+  background-color: lightblue;
+  color: black;
+  
+}
+
+
+
+
+/* desktop mode */
+@media (min-width: 600px) {
+
+  div {
+    column-count: 2;
+    column-gap: 10px;
+    display:table-cell;
+    padding-left: 30px;
+  }
+  .widget {
+    display: table;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    margin: 10px auto;
+    width: 100%;
+    height: 110%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    display: flex;
+    border-radius: calc(0.5 * 100px);
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.38);
+    justify-content: space-evenly;
+    text-align: center;
+    padding-left: 10%;
+    padding-right: 10%;
+    color: #ffffff
+  }
+.parking1 {
+  height: 110px;
+  
+}
+.dropdown {
+  height: 35px;
+}
+.checkbox1 {
+  margin-top: 10px;
+  height: 28px;
+  padding-top: 10px;
+  width: 150%;
+  box-shadow: none;
+}
+
+.subtitlecheckbox1 {
+  font-size:
+}
+
+  
 }
 
 
