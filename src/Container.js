@@ -19,6 +19,13 @@ class Container extends React.Component{
 
   state = {
     items: [
+	  {
+        id: uuidv4(),
+        title: "Open Scouting",
+        type: "label",
+        value: "",
+        decorator: "title"
+      },
       {
         id: uuidv4(),
         title: "Name",
@@ -180,7 +187,9 @@ class Container extends React.Component{
     this.setState({
         items: this.state.items.map(item => {
           if (item.id === id) {
-            item.value = item.value - 1
+			if (item.value !== 0){
+				item.value = item.value - 1
+			}
           }
           return item
         })
@@ -315,7 +324,7 @@ class Container extends React.Component{
           }
           else if (item.type === "label"){
             return (
-              <div className={'label widget ' + item.decorator}>
+              <div className={'label widget section-title' + item.decorator}>
                 {item.title}
               </div>
             )
