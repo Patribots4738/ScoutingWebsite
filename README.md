@@ -61,9 +61,9 @@ Have __Execute as__ the owner of the document's email and make sure that __Who h
 
 Once you have made sure that the settings are correct, press __Deploy__.
 
-We are going to also need to know the url of our app script, to do this click on __Deploy >> Manage deployments__ and copy the url of your Web app and save it somewhere for future reference. 
+You are going to also need to know the url of our app script, to do this click on __Deploy >> Manage deployments__ and copy the url of your Web app and save it somewhere for future reference. 
 
-__IMPORTANT:__ Foe each peice of data that you want to record, name the Title of that data to row 1 of each column in the spreadsheet. 
+__IMPORTANT:__ For each peice of data that you want to record, name the Title of that data to row 1 of each column in the spreadsheet. 
 
 
 ### Local
