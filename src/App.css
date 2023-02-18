@@ -70,26 +70,24 @@ div {
 }
 
 .btn {
-  height: 50px;
-  width: 50px;
+  height: 70px;
+  width: 55px;
   font-size: 50px;
   text-align: center;
-  display: flex;
+  display: inline-block;
   color: black;
   background-color: gray;
   border-radius: 15px;
+  border-radius: 30px;
   border-color: black;
   padding-top: 0%;
   padding: 0%;
+  padding-left: 0%;
+  padding-right: 0%;
+  padding-bottom: 0%;
 }
 
-.dbtn {
-  height: 50px;
-}
 
-.ubtn {
-  height: 50px;
-}
 
 .value {
   padding: 10px;
