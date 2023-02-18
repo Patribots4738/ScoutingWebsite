@@ -21,7 +21,6 @@ class Slider extends React.Component{
                 </div>
                 
                 <div className="subtitle slider-label">
-                    0
                 <input
                     type="range"
                     className="slider widget"
@@ -31,10 +30,12 @@ class Slider extends React.Component{
                     id={this.state.id}
                     value={this.state.value}
                     title={this.state.title}
+                    min="0"
+                    max="100"
+                    
                 />
-                    100
                 </div>
-                <div className="subtitle slider-label">
+                <div className="subtitle slider-value">
                     {this.state.value}
                 </div>
 
