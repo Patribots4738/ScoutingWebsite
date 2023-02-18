@@ -88,7 +88,7 @@ class Container extends React.Component{
         localStorage.setItem("matchData", JSON.stringify([data]))
       }
 
-      
+      window.location.reload()
     }
   }
 
@@ -105,11 +105,11 @@ class Container extends React.Component{
     let blobURL = window.URL.createObjectURL(file)
 
     const anchor = document.createElement('a');
-    anchor.href = blobURL;
-    anchor.target = "_blank";
-    anchor.download = "matchData.json";
+    anchor.href = blobURL
+    anchor.target = "_blank"
+    anchor.download = "matchData.json"
   
-    anchor.click();
+    anchor.click()
   
     URL.revokeObjectURL(blobURL);
   }
