@@ -9,18 +9,19 @@ class TextBox extends React.Component{
     render(){
 
         return (
-            <div>
-                <div>
+            <div className="widget">
+                <div className="subtitle">
                     {this.title}
                 </div>
             
-                <input
+                <textarea
                     type="text"
-                    className="textbox"
+                    className="text-box widget"
                     onChange={e => {
                         this.props.handleTextBoxChange(this.id, e.target.value)
                     }}
                 />
+
             </div>
         )
     }

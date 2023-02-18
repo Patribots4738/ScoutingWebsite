@@ -12,7 +12,7 @@ class Dropdown extends React.Component{
 
     render(){
         return (
-            <div>
+            <div className="widget">
                 <div
                 className="subtitle"
                 >
@@ -20,6 +20,8 @@ class Dropdown extends React.Component{
                 </div>
                 
                 <select
+                    type="dropown"
+                    className="dropdown"
                     onChange = {this.handleDropdownChange}
                     id = {this.id}
                     value = {this.props.value}
