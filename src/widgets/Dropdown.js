@@ -21,7 +21,7 @@ class Dropdown extends React.Component{
                 
                 <select
                     type="dropown"
-                    className="dropdown"
+                    className="dropdown widget"
                     onChange = {this.handleDropdownChange}
                     id = {this.id}
                     value = {this.props.value}

@@ -19,6 +19,13 @@ class Container extends React.Component{
 
   state = {
     items: [
+	  {
+        id: uuidv4(),
+        title: "Open Scouting",
+        type: "label",
+        value: "",
+        decorator: "title"
+      },
       {
         id: uuidv4(),
         title: "Name",
@@ -47,55 +54,12 @@ class Container extends React.Component{
         type: "label",
         decorator: "label1"
       },
-      
-      // {
-      //   id: uuidv4(),
-      //   title: "Test checkbox 2",
-      //   value: false,
-      //   type: "checkbox",
-      //   decorator: "style1"
-      // },
       {
         id: uuidv4(),
         title: "Upper Cone",
         value: 0,
         type: "counter",
         decorator: "cone"
-      },
-      {
-        id: uuidv4(),
-        title: "Middle Cone",
-        value: 0,
-        type: "counter",
-        decorator: "cone"
-      },
-      {
-        id: uuidv4(),
-        title: "Lower Cone",
-        value: 0,
-        type: "counter",
-        decorator: "cone"
-      },
-      {
-        id: uuidv4(),
-        title: "Upper Cube",
-        value: 0,
-        type: "counter",
-        decorator: "cube"
-      },
-      {
-        id: uuidv4(),
-        title: "Middle Cube",
-        value: 0,
-        type: "counter",
-        decorator: "cube"
-      },
-      {
-        id: uuidv4(),
-        title: "Lower Cube",
-        value: 0,
-        type: "counter",
-        decorator: "cube"
       },
       {
         id: uuidv4(),
@@ -122,7 +86,6 @@ class Container extends React.Component{
         ],
         value: 1,
       },
-      
       {
         id: uuidv4(),
         title: "TELEOP: ",
@@ -135,48 +98,6 @@ class Container extends React.Component{
         value: 0,
         type: "counter",
         decorator: "cone"
-      },
-      {
-        id: uuidv4(),
-        title: "Middle Cone",
-        value: 0,
-        type: "counter",
-        decorator: "cone"
-      },
-      {
-        id: uuidv4(),
-        title: "Lower Cone",
-        value: 0,
-        type: "counter",
-        decorator: "cone"
-      },
-      {
-        id: uuidv4(),
-        title: "Upper Cube",
-        value: 0,
-        type: "counter",
-        decorator: "cube"
-      },
-      {
-        id: uuidv4(),
-        title: "Middle Cube",
-        value: 0,
-        type: "counter",
-        decorator: "cube"
-      },
-      {
-        id: uuidv4(),
-        title: "Lower Cube",
-        value: 0,
-        type: "counter",
-        decorator: "cube"
-      },
-      {
-        id: uuidv4(),
-        title: "Fumble Count",
-        value: 0,
-        type: "counter",
-        decorator: "fumble"
       },
       {
         id: uuidv4(),
@@ -201,7 +122,7 @@ class Container extends React.Component{
       },
       {
         id: uuidv4(),
-        title: "Did They Defend The Majority of The Match?",
+        title: "Did They Defend?",
         value: false,
         type: "checkbox",
         decorator: "checkbox1"
@@ -269,7 +190,6 @@ class Container extends React.Component{
   decreaseCounter = (id) => {
     this.setState({
         items: this.state.items.map(item => {
-          // no go below 0 !
           if (item.id === id && item.value > 0) {
             item.value = item.value - 1
           }
@@ -408,7 +328,7 @@ class Container extends React.Component{
           }
           else if (item.type === "label"){
             return (
-              <div className={'label widget ' + item.decorator}>
+              <div className={'label widget section-title' + item.decorator}>
                 {item.title}
               </div>
             )
