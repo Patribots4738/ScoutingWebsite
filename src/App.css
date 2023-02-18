@@ -229,7 +229,10 @@ body {
 .subtitlecheckbox1 {
   margin-left: 10px;
 }
-
+.text-box, .text-box-long {
+  color: black;
+  font-size: 16;
+}
   
 }
 

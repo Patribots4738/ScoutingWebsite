@@ -29,14 +29,14 @@ class Container extends React.Component{
       
       {
         id: uuidv4(),
-        title: "Match Number: ",
+        title: "Match Number",
         type: "textbox",
         value: "",
         decorator: "matchNumber"
       },
       {
         id: uuidv4(),
-        title: "Team Number: ",
+        title: "Team Number",
         type: "textbox",
         value: "",
         decorator: "teamNumber"
@@ -323,9 +323,9 @@ class Container extends React.Component{
 
     fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
     .catch(err => console.log(err))
-    // window.location.reload();
+    window.location.reload();
   }
-  
+
 
   render () {
     return (
@@ -391,6 +391,7 @@ class Container extends React.Component{
                 decorator={item.decorator}
               />              
             )
+            
           }
           else if (item.type === "dropdown"){
             return (
