@@ -4,14 +4,14 @@ import React from "react";
 class CheckBox extends React.Component{
 
     state ={ 
-        value: false,
+        value: 0,
         id: this.props.id,
         title: this.props.title,
         classNameDecorator: this.props.decorator
     }
 
     handleCheckBoxChange = () => {
-        this.setState({value: (this.state.value) ? false : true})
+        this.setState({value: (this.state.value) ? 0 : 1})
     }
 
     render(){

@@ -40,10 +40,7 @@ class Counter extends React.Component{
                         <button
                             className={"btn dbtn"}
                             onClick={() => this.decreaseCounter()}>
-                            <img
-                                src = {minus}
-                                alt = {notFound}
-                                className="dbtn-ico"/>
+                            -
                         </button>
                         
                         <div className="value" id={this.state.id} value={this.state.value} title={this.state.title}>
@@ -53,11 +50,7 @@ class Counter extends React.Component{
                         <button
                             className={"btn ubtn"}
                             onClick={() => this.increaseCounter()}>
-                            <img
-                                src = {plus}
-                                alt = {notFound}
-                                className="ubtn-ico"/>
-                            
+                            +
                         </button>
                     </span>
                     

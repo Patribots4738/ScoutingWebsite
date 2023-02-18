@@ -20,11 +20,11 @@ class Slider extends React.Component{
                     {this.state.title}
                 </div>
                 
-                <div className="subtitle slider-labek">
+                <div className="subtitle slider-label">
                     0
                 <input
                     type="range"
-                    className="text-box widget"
+                    className="slider widget"
                     onChange={e => {
                         this.handleSliderChange(e.target.value)
                     }}

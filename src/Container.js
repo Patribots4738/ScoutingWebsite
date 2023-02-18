@@ -48,7 +48,12 @@ class Container extends React.Component{
           var value = element.value
           
         }
-       
+        if (value == true || value == false){
+          console.log(value)
+          value = value ? "1" : "0";
+          console.log(value + "\n\n")
+        }
+
         arr.push([element.getAttribute("title"), value])
       }
     }
@@ -312,7 +317,7 @@ class Container extends React.Component{
             <TextBoxLong
               className="text-box-long"
               id={this.assignUUID()}
-              title={"Other notes"}
+              title={"Additional comments"}
               value={""}
             />
           </div>
