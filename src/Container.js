@@ -87,8 +87,12 @@ class Container extends React.Component{
       } else {
         localStorage.setItem("matchData", JSON.stringify([data]))
       }
-
-      window.location.reload()
+      
+      
+      window.scrollTo(0, 0);
+      setTimeout(() => {
+        document.location.reload();
+      }, 1000);
     }
   }
 
@@ -323,6 +327,8 @@ class Container extends React.Component{
           </div>
           
         </div>
+
+        
 
         <div className='btn-container'>
           <Submit title="Submit" handleFormSubmit={this.handleFormSubmit}/>
