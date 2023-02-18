@@ -7,10 +7,42 @@ class TextBox extends React.Component{
         value: "",
         id: this.props.id,
         title: this.props.title,
+        required: this.props.required,
     }
 
     handleTextBoxChange = (value) => {
         this.setState({value: value})
+    }
+
+    determineRequired = (required) => {
+        if (required) {
+            return (
+                <input
+                        type="text"
+                        className="text-box widget"
+                        onChange={e => {
+                            this.handleTextBoxChange(e.target.value)
+                        }}
+                        id={this.state.id}
+                        value={this.state.value}
+                        required
+                        title={this.state.title}
+                    />
+            )
+        } else {
+            return (
+                <input
+                        type="text"
+                        className="text-box widget"
+                        onChange={e => {
+                            this.handleTextBoxChange(e.target.value)
+                        }}
+                        id={this.state.id}
+                        value={this.state.value}
+                        title={this.state.title}
+                    />
+            )
+        }
     }
 
     render(){
@@ -19,17 +51,8 @@ class TextBox extends React.Component{
                 <div className="subtitle">
                     {this.state.title}
                 </div>
-            
-                <input
-                    type="text"
-                    className="text-box widget"
-                    onChange={e => {
-                        this.handleTextBoxChange(e.target.value)
-                    }}
-                    id={this.state.id}
-                    value={this.state.value}
-                    title={this.state.title}
-                />
+
+                {this.determineRequired(this.state.required)}
 
             </span>
         )
