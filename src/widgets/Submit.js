@@ -9,10 +9,10 @@ class Submit extends React.Component{
     render(){
         return(
             <button
-                className="submit widget"
+                className="widget submit"
                 onClick={this.props.handleFormSubmit}
             >
-                {this.title}
+                <span className="btn-text">{this.title}</span>
             </button>
         )
     }

@@ -47,12 +47,7 @@ class Container extends React.Component{
 
           var value = element.value
           
-        }
-        if (value == true || value == false){
-          console.log(value)
-          value = value ? "1" : "0";
-          console.log(value + "\n\n")
-        }
+        } 
 
         arr.push([element.getAttribute("title"), value])
       }
@@ -92,7 +87,7 @@ class Container extends React.Component{
       window.scrollTo(0, 0);
       setTimeout(() => {
         document.location.reload();
-      }, 1000);
+      }, 3000);
     }
   }
 
@@ -300,6 +295,15 @@ class Container extends React.Component{
           <div>
             <Slider title="Rate their speed" id={this.assignUUID()}/>
           </div>
+
+          <div>
+            <div>
+            <CheckBox className="defend" title="Did they defend" id={this.assignUUID()} value={false}/>
+            </div>
+            <div>
+            <TextBoxLong className="text-box-long" id={this.assignUUID} title="If they defended, how did they do?" value=""/>
+            </div>
+          </div>
           
           <div>
             <TextBoxLong
@@ -327,8 +331,6 @@ class Container extends React.Component{
           </div>
           
         </div>
-
-        
 
         <div className='btn-container'>
           <Submit title="Submit" handleFormSubmit={this.handleFormSubmit}/>

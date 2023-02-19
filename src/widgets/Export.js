@@ -11,7 +11,7 @@ class Export extends React.Component{
                 className="export widget"
                 onClick={this.props.handleExportData}
             >
-                {this.title}
+                <span className="btn-text">{this.title}</span>
             </button>
         )
     }

@@ -4,7 +4,7 @@ import React from "react";
 class Slider extends React.Component{
 
     state = {
-        value: 0,
+        value: 50,
         id: this.props.id,
         title: this.props.title,
     }
