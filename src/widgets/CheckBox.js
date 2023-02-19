@@ -18,7 +18,7 @@ class CheckBox extends React.Component{
         return (
             <span className={"widget " + this.state.classNameDecorator}>
                 <div
-                className="subtitle"
+                className= {"subtitle" + this.state.classNameDecorator}
                 >
                     {this.state.title}
                 </div>

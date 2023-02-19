@@ -4,9 +4,11 @@ import React from "react";
 class Slider extends React.Component{
 
     state = {
-        value: 50,
+        value: this.props.value,
         id: this.props.id,
         title: this.props.title,
+        decorator: this.props.decorator,
+        minValue: this.props.minValue
     }
 
     handleSliderChange = (value) => {
@@ -16,7 +18,7 @@ class Slider extends React.Component{
     render(){
         return (
             <span className="widget">
-                <div className="subtitle">
+                <div className={"subtitle " + this.state.decorator}>
                     {this.state.title}
                 </div>
                 
@@ -28,9 +30,9 @@ class Slider extends React.Component{
                         this.handleSliderChange(e.target.value)
                     }}
                     id={this.state.id}
-                    value={this.state.value}
+                    value={(this.state.value) ? this.state.value : 50}
                     title={this.state.title}
-                    min="0"
+                    min={(this.state.minValue) ? this.state.minValue : 0}
                     max="100"
                     
                 />
