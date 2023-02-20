@@ -1,0 +1,82 @@
+=AVERAGE (
+    (
+        'Mobility Auto'*F4+F5
+    ),
+    (
+        'Docked Auto'*G4+G5
+    ),
+    (
+        'Engaged Auto'*H4+H5
+    ),
+    (
+        'Cone Upper Auto'*I4+I5
+    ),
+    (
+        'Cone Middle Auto'*J4+J5
+    ),
+    (
+        'Cone Lower Auto'*K4+K5
+    ),
+
+    (
+        'Cone Upper Teleop'*L4+L5
+    ),
+    (
+        'Cone Middle Teleop'*M4+M5
+    ),
+    (
+        'Cone Lower Teleop'*N4+N5
+    ),
+
+    (
+        'Cube Upper Auto'*O4+O5
+    ),
+    (
+        'Cube Middle Auto'*P4+P5
+    ),
+    (
+        'Cube Lower Auto'*Q4+Q5
+    ),
+
+    (
+        'Cube Upper Teleop'*R4+R5
+    ),
+    (
+        'Cube Middle Teleop'*S4+S5
+    ),
+    (
+        'Cube Lower Teleop'*T4+T5
+    ),
+
+    (
+        'Docked Teleop'*U4+U5
+    ),
+    (
+        'Engaged Teleop'*V4+V5
+    ),
+    (
+        'Fumbles'*W4+W5
+    ),
+    (
+        'Rate their driving'*X4+X5
+    ),
+    (
+        'Accuracy'*Y4+Y5
+    ),
+    (
+        'Speed'*Z4+Z5
+    ),
+    (
+        'Temporary Failure'*AA4+AA5
+    ),
+    (
+        'Critical Failure'*AB4+AB5
+    ),
+    (
+        'Did they defend'*AC4+AC5
+    ),
+    (
+        'If they defended, rate their defense'*AD4+AD5
+    )
+
+)

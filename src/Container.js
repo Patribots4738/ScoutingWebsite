@@ -146,11 +146,11 @@ class Container extends React.Component{
     return (
       <ul className="container">
         <h1 className="label">
-          By Continuing to Use our Website You Agree to use cookies
+          By Continuing to Use Our Website You Agree to Use Cookies :)
         </h1>
 
         <h1 className="title">
-          PATRIBOTS SCOUTNG
+          PATRIBOTS SCOUTING
         </h1>
 
 
@@ -187,10 +187,10 @@ class Container extends React.Component{
           <h2 className="subtitle section-title">
             AUTONOMOUS
           </h2>
-          <div>
+          <div ClassName = "style1">
             <CheckBox 
               className="mobility"
-              title="Mobility" 
+              title="Mobility Auto" 
               id={this.assignUUID()} 
               value={false}
               decorator = "autoCheckbox"
@@ -386,13 +386,25 @@ class Container extends React.Component{
             POST-MATCH
           </h2>
           <div>
-            <Slider title="Rate their driving" id={this.assignUUID()}/>
-            <Slider title="Rate their accuracy" id={this.assignUUID()}/>
+            <Slider
+              title="Rate their driving"
+              id={this.assignUUID()}
+              decorator = "slide"
+            />
+            <Slider
+              title="Rate their accuracy" 
+              id={this.assignUUID()}
+              decorator = "slide"
+            />
           </div>
           <div>
-            <Slider title="Rate their speed" id={this.assignUUID()}/>
+            <Slider
+              title="Rate their speed"
+              id={this.assignUUID()}
+              decorator = "slide"
+            />
           </div>
-          <div>
+          <div className="checkboxes">
             <CheckBox
                 className="temporary"
                 title="Temporary Failure"
@@ -426,6 +438,7 @@ class Container extends React.Component{
                 decorator="double-line"
                 minValue={-1}
                 value={-1}
+                
                 />
             </div>
             <div>

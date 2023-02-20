@@ -37,7 +37,7 @@ class Slider extends React.Component{
                     
                 />
                 </div>
-                <div className="subtitle slider-value">
+                <div className={"subtitle slider-value" + this.state.decorator}>
                     {this.state.value}
                 </div>
 

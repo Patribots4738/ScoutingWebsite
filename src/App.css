@@ -37,7 +37,7 @@ div {
 .subtitle, .title, 
 .cube, .cone, 
 .teleopCheckbox, .autoCheckbox {
-  color: rgb(255, 215, 0);
+  color: rgba(255, 217, 0, 0.671);
   padding-top: 10px;
 }
 
@@ -46,7 +46,7 @@ div {
   border-radius: calc(0.5 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
   padding-bottom: 10px;
-  color: rgb(20, 230, 20);
+  color: rgba(0, 255, 0, 0.555);
 }
 
 
@@ -125,12 +125,14 @@ div {
 
 
 .checkbox {
-  padding: 10px;
-  padding-bottom: 100px;
   height: 35px;
   width: 35px;
   background-color: #ccc;
   border-radius: calc(100px);
+  float: center;
+}
+.style1 {
+  height: 1000;
 }
 /* 
 .btn-text {
@@ -163,19 +165,19 @@ div {
 .double-line {
   max-width: 250px;
 }
-
 .slider {
-  width: 100%;
+  width:100%;
   height: 25px;
   background: rgb(47, 49, 45);
   padding: 0;
 }
 
-
-.slider-value {
-  position: relative;
+.slider-valueslide {
+  position: absolute;
+  padding: 0;
+  padding-left: 6.75%;
+  color: rgb(207, 203, 203);
 }
-
 
 
 .cubes {
@@ -191,7 +193,15 @@ div {
   font-size: 15px;
   color: white;
   width: fit-content;
+  padding-left: 2%;
+  
 }
 .temporary, .critical, .defend {
   color: rgb(255, 215, 0);
+}
+.dbtn {
+  padding-bottom: 20px;
+}
+.checkboxes {
+  padding-top: 20px;
 }

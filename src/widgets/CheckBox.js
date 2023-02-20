@@ -22,7 +22,7 @@ class CheckBox extends React.Component{
                 >
                     {this.state.title}
                 </div>
-            
+               
                 <input
                     type="checkbox"
                     className="checkbox"
