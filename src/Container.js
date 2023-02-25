@@ -145,9 +145,12 @@ class Container extends React.Component{
   render () {
     return (
       <ul className="container">
-        <h1 className="label">
+        <button 
+        className="label"
+        decorator = "hide"
+        >
           By Continuing to Use Our Website You Agree to Use Cookies :)
-        </h1>
+        </button>
 
         <h1 className="title">
           PATRIBOTS SCOUTING
