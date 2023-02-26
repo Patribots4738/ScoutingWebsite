@@ -134,14 +134,7 @@ div {
 .style1 {
   height: 1000;
 }
-/* 
-.btn-text {
-  width: fit-content;
-  height: 60px;
-  font-size: 30px;
-  line-height: 60px;
-  color: rgb(56, 4, 20);
-} */
+
 
 .export, .clear-localstorage {
   background-color: #ccc;
@@ -218,4 +211,8 @@ div {
   min-height: 70px;
   max-width: 380px;
   max-height: 200px;
+}
+
+.scouting-guidelines {
+  color: blue;
 }
