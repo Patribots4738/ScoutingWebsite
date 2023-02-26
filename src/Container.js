@@ -100,10 +100,10 @@ class Container extends React.Component{
      
      
       window.scrollTo(0, 0);
-      alert("Data submitted, please wait")
       setTimeout(() => {
         document.location.reload();
-      }, 3000);
+      }, 2750);
+      alert("Data submitted, press ok to continue")
     }
   }
 
@@ -403,7 +403,7 @@ class Container extends React.Component{
           </div>
           <div>
             <Slider
-              title="Rate their speed"
+              title="Cycle Time"
               id={this.assignUUID()}
               decorator = "slide"
             />
