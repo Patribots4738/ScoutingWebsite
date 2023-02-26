@@ -4,56 +4,72 @@ import minus from "/workspaces/ScoutingWebsite/src/images/minus.png"
 import notFound from "/workspaces/ScoutingWebsite/src/images/notFound.png"
 
 
+
+
 class Counter extends React.Component{
 
-    value = this.props.value;
-    id = this.props.id;
-    title = this.props.title;
+
+    state = {
+        value: 0,
+        id: this.props.id,
+        title: this.props.title,
+        upperLimit: this.props.upperLimit,
+        classNameDecorator: this.props.decorator,
+    }
+
+
+    increaseCounter = () => {
+        if (this.state.value !== this.state.upperLimit){
+            this.setState({
+                value: this.state.value + 1
+            })
+        }
+    }
+
+
+    decreaseCounter = () => {
+        if (this.state.value !== 0){
+            this.setState({
+                value: this.state.value - 1
+            })
+        }
+    }
+   
+
 
     render(){
-
         return (
-                <div className="widget">
+                <span className= {"widget"}>
 
-                    <div className="subtitle">
-                        {this.title}
+
+                    <div className= {"subtitle " + this.state.classNameDecorator}>
+                        {this.state.title}
                     </div>
-
-                    
-                    
-                    <div className="btn-container">
-                        
+                   
+                    <span className="btn-container">
+                       
                         <button
                             className={"btn dbtn"}
-                            onClick={() => this.props.decreaseCounter(this.id)}
-                        >
-                            <img
-                                src = {minus}
-                                alt = {notFound}
-                                className="btn-ico"
-                            />
+                            onClick={() => this.decreaseCounter()}>
+                            -
                         </button>
-                        
-                        <div className="value">
-                            {this.props.value}
+                       
+                        <div className="value" id={this.state.id} value={this.state.value} title={this.state.title}>
+                            {this.state.value}
                         </div>    
+
 
                         <button
                             className={"btn ubtn"}
-                            onClick={() => this.props.increaseCounter(this.id)}
-                            src={plus}
-                        >
-                            <img
-                                src = {plus}
-                                alt = {notFound}
-                                className="btn-ico"
-                            />
+                            onClick={() => this.increaseCounter()}>
+                            +
                         </button>
-                    </div>
-                    
-                </div>
+                    </span>
+                   
+                </span>
         )
     }
 }
+
 
 export default Counter;

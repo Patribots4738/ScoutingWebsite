@@ -1,16 +1,19 @@
+
 import React from "react";
 
-class Submit extends React.Component{
+
+class ClearLocalStorage extends React.Component{
+
 
     id = this.props.id;
     title = this.props.title;
-    data = this.props.data;
+
 
     render(){
         return(
             <button
-                className="widget submit"
-                onClick={this.props.handleFormSubmit}
+                className="clear-localstorage widget"
+                onClick={this.props.clearLocalStorage}
             >
                 <span className="btn-text">{this.title}</span>
             </button>
@@ -18,4 +21,5 @@ class Submit extends React.Component{
     }
 }
 
-export default Submit
+
+export default ClearLocalStorage
