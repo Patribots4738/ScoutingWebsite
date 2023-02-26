@@ -145,12 +145,12 @@ class Container extends React.Component{
   render () {
     return (
       <ul className="container">
-        <button 
-        className="label"
+        <span
+        className="label2"
         decorator = "hide"
         >
           By Continuing to Use Our Website You Agree to Use Cookies :)
-        </button>
+        </span>
 
         <h1 className="title">
           PATRIBOTS SCOUTING
@@ -425,15 +425,7 @@ class Container extends React.Component{
           </div>
 
           <div>
-            <div>
-            <CheckBox
-              className="defend"
-              title="Did they defend"
-              id={this.assignUUID()}
-              value={false}
-              decorator = "defend"
-            />
-            </div>
+            
             <div>
               <Slider 
                 title={"If they defended, rate their defense (-1 for no defense)"} 

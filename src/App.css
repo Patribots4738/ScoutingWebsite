@@ -205,3 +205,17 @@ div {
 .checkboxes {
   padding-top: 20px;
 }
+.label2 {
+  background-color:rgb(47, 49, 45);
+  box-shadow: 0 1px 6px 0 var(--box-border-color);
+  border-radius: 15px;
+  color: white;
+  
+}
+.text-box-long {
+  font-size: 16px;
+  min-width: 300px;
+  min-height: 70px;
+  max-width: 380px;
+  max-height: 200px;
+}
