@@ -1,13 +1,6 @@
 import React from "react";
-import plus from "/workspaces/ScoutingWebsite/src/images/plus.png"
-import minus from "/workspaces/ScoutingWebsite/src/images/minus.png"
-import notFound from "/workspaces/ScoutingWebsite/src/images/notFound.png"
-
-
-
 
 class Counter extends React.Component{
-
 
     state = {
         value: 0,
@@ -17,7 +10,6 @@ class Counter extends React.Component{
         classNameDecorator: this.props.decorator,
     }
 
-
     increaseCounter = () => {
         if (this.state.value !== this.state.upperLimit){
             this.setState({
@@ -26,7 +18,6 @@ class Counter extends React.Component{
         }
     }
 
-
     decreaseCounter = () => {
         if (this.state.value !== 0){
             this.setState({
@@ -34,8 +25,6 @@ class Counter extends React.Component{
             })
         }
     }
-   
-
 
     render(){
         return (
@@ -70,6 +59,5 @@ class Counter extends React.Component{
         )
     }
 }
-
 
 export default Counter;
