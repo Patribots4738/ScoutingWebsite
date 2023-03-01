@@ -37,7 +37,7 @@ div {
 .subtitle, .title, 
 .cube, .cone, 
 .teleopCheckbox, .autoCheckbox {
-  color: rgba(255, 217, 0, 0.671);
+  color: rgb(255, 217, 0);
   padding-top: 10px;
 }
 
@@ -111,16 +111,16 @@ div {
 
 
 .cone {
-  height: 100px;
+  height: 75px;
   width: auto;
   padding-right: 30px;
 }
 
 
 .cube {
-  height: 100px;
+  height: 75px;
   width: auto;
-  padding-left: 30px;
+  padding-left: 50px;
 }
 
 
@@ -176,9 +176,7 @@ div {
 .cubes {
   color: rgb(128, 108, 218);
 }
-.cones {
-  color: rgb(173, 171, 27);
-}
+
 .fumbles {
   color: rgb(253, 0, 76)
 }
@@ -198,11 +196,9 @@ div {
 .checkboxes {
   padding-top: 20px;
 }
-.label2 {
-  background-color:rgb(47, 49, 45);
-  box-shadow: 0 1px 6px 0 var(--box-border-color);
-  border-radius: 15px;
-  color: white;
+
+.cookie {
+  padding-top: 10px;
   
 }
 .text-box-long {
@@ -214,5 +210,9 @@ div {
 }
 
 .scouting-guidelines {
-  color: blue;
+  color: rgb(150, 150, 255);
+}
+.text-box-long {
+  text-indent: 4%;
+
 }

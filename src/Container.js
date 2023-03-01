@@ -146,10 +146,7 @@ class Container extends React.Component{
   render () {
     return (
       <ul className="container">
-        <span
-        className="label2"
-        decorator = "hide"
-        >
+        <span className="label cookie">
           By Continuing to Use Our Website You Agree to Use Cookies :)
         </span>
         <a
