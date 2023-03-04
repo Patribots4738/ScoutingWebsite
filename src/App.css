@@ -36,8 +36,7 @@ div {
 
 .subtitle, .title, 
 .cube, .cone, 
-.teleopCheckbox, .autoCheckbox, .subtitleautoDropdown,
- .subtitleteleDropdown  {
+.teleopCheckbox, .autoCheckbox {
   color: rgb(255, 217, 0);
   padding-top: 10px;
 }
@@ -105,17 +104,6 @@ div {
   padding-bottom: 0%;
 }
 
-
-.autoCheckbox {
-  align-items: center;
-  display: inline-block;
-  padding-right: 10px;
-}
-.widgetautoDropdown {
-  margin: 20px;
-  }
-
-
 .value {
   padding: 10px;
   color: rgb(255, 255, 255);
@@ -143,7 +131,9 @@ div {
   border-radius: calc(100px);
   float: center;
 }
-
+.style1 {
+  height: 1000;
+}
 
 
 .export, .clear-localstorage {
@@ -226,8 +216,3 @@ div {
   text-indent: 4%;
 
 }
-.subtitleautoDropdown, .subtitleautoCheckbox {
-  align-items: center;
-  display: inherit;
-}
-

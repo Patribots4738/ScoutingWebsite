@@ -10,14 +10,13 @@ class Dropdown extends React.Component{
     title = this.props.title;
     items = this.props.items;
     handleDropdownChange = this.props.handleDropdownChange;
-    classNameDecorator = this.props.decorator;
     
 
     render(){
         return (
-            <span className={"widget" + this.classNameDecorator}>
+            <div className="widget">
                 <div
-                className= {"subtitle" + this.classNameDecorator}
+                className="subtitle"
                 >
                     {this.title}
                 </div>
@@ -41,7 +40,7 @@ class Dropdown extends React.Component{
                     })}
                 </select>
 
-            </span>
+            </div>
             
         )
     }
