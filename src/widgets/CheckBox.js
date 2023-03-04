@@ -23,15 +23,16 @@ class CheckBox extends React.Component{
                     {this.state.title}
                 </div>
                
-                <input
-                    type="checkbox"
-                    className="checkbox"
-                    value={this.state.value}
-                    onChange={() => this.handleCheckBoxChange()}
-                    id={this.state.id}
-                    title={this.state.title}
-                />
-                
+                <div>
+                    <input
+                        type="checkbox"
+                        className="checkbox"
+                        value={this.state.value}
+                        onChange={() => this.handleCheckBoxChange()}
+                        id={this.state.id}
+                        title={this.state.title}
+                    />
+                </div>
             </span>
         )
     }

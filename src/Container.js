@@ -383,7 +383,7 @@ class Container extends React.Component{
             ClassName = "docked or engaged"
             title = "Docked or Engaged"
             id={this.assignUUID()}
-            decorator = {"teleDropdown"}
+            decorator = {"t"}
             items = {[
               {
                 id: this.assignUUID(),

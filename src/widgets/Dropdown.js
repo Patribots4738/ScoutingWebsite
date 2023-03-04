@@ -15,31 +15,33 @@ class Dropdown extends React.Component{
 
     render(){
         return (
-            <span className={"widget" + this.classNameDecorator}>
-                <div
+            <span className={"widget " + this.classNameDecorator}>
+                <span
                 className= {"subtitle" + this.classNameDecorator}
                 >
                     {this.title}
-                </div>
+                </span>
                 
-                <select
-                    type="dropown"
-                    className="dropdown"
-                    onChange = {this.handleDropdownChange}
-                    id = {this.id}
-                    value = {this.props.value}
-                >
-                    {this.items.map(item => {
-                        return (
-                        <option 
-                            key={item.id} 
-                            value={this.items.indexOf(item)}
-                        >
-                            {item.title}
-                        </option>
-                        );
-                    })}
-                </select>
+                <div className="dropdown_container">
+                    <select
+                        type="dropdown"
+                        className="dropdown "
+                        onChange = {this.handleDropdownChange}
+                        id = {this.id}
+                        value = {this.props.value}
+                    >
+                        {this.items.map(item => {
+                            return (
+                            <option 
+                                key={item.id} 
+                                value={this.items.indexOf(item)}
+                            >
+                                {item.title}
+                            </option>
+                            );
+                        })}
+                    </select>
+                </div>
 
             </span>
             

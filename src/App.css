@@ -2,7 +2,7 @@
 
 :root {
   --box-border-color: rgba(255, 255, 255, 0.38);
-  min-width: 110%;
+  min-width: 110%
 }
 
 
@@ -36,8 +36,8 @@ div {
 
 .subtitle, .title, 
 .cube, .cone, 
-.teleopCheckbox, .autoCheckbox, .subtitleautoDropdown,
- .subtitleteleDropdown  {
+.teleopCheckbox, .autoCheckbox, 
+.subtitleautoDropdown, .subtitleteleDropdown  {
   color: rgb(255, 217, 0);
   padding-top: 10px;
 }
@@ -107,9 +107,8 @@ div {
 
 
 .autoCheckbox {
-  align-items: center;
-  display: inline-block;
   padding-right: 10px;
+  padding-top: 100px;
 }
 .widgetautoDropdown {
   margin: 20px;
@@ -231,3 +230,7 @@ div {
   display: inherit;
 }
 
+.dropdown_container {
+  padding-top: 10px;
+  /* padding-bottom: 10px; */
+}
