@@ -14,6 +14,7 @@ import Export from './widgets/Export';
 import {v4 as uuidv4} from "uuid"
 import React from 'react';
 import ClearLocalStorage from './widgets/ClearLocalStorage';
+import Dropdown from './widgets/Dropdown';
 
 
 
@@ -203,21 +204,29 @@ class Container extends React.Component{
               value={false}
               decorator = "autoCheckbox"
             />
-            <CheckBox 
-              className="docked" 
-              title="Docked Auto"
-              id={this.assignUUID()}
-              value={false}
-              decorator = "autoCheckbox"
-            />    
-            <CheckBox
-              className="engaged"
-              title="Engaged Auto"
-              id={this.assignUUID()}
-              value={false}
-              decorator = "autoCheckbox"
-            />  
+            <Dropdown
+            ClassName = "docked or engaged"
+            title = "Docked or Engaged"
+            decorator = "autoDropdown"
+            id={this.assignUUID()}
+            items = {[
+              {
+                id: this.assignUUID(),
+                title: "None",
+              },
+              {
+                id: this.assignUUID(),
+                title: "Docked",
+              },
+              {
+                id: this.assignUUID(),
+                title: "Engaged",
+              }
+            ]}
+            />
+              
           </div>
+          
           <img src={cone} alt={notFound} className="cone"/>
           <img src={cube} alt={notFound} className="cube"/>
           <div>
@@ -271,7 +280,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cone Lower Auto"}
                 value={0}
-                upperLimit={6}
+                upperLimit={9}
                 decorator = {"cones"}
               />
 
@@ -281,7 +290,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cube Lower Auto"}
                 value={0}
-                upperLimit={3}
+                upperLimit={9}
                 decorator = {"cubes"}
               />
             </span>
@@ -345,7 +354,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cone Lower Teleop"}
                 value={0}
-                upperLimit={6}
+                upperLimit={9}
                 decorator = {"cones"}
               />
 
@@ -355,7 +364,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cube Lower Teleop"}
                 value={0}
-                upperLimit={3}
+                upperLimit={9}
                 decorator = {"cubes"}
               />
             </span>
@@ -370,22 +379,36 @@ class Container extends React.Component{
                 />
           </div>
           <div>
-            <CheckBox 
-              className="docked" 
-              title="Docked Teleop" 
-              id={this.assignUUID()} 
-              value={false}
-              decorator = "teleopCheckbox"
-            />    
-            <CheckBox 
-              className="engaged" 
-              title="Engaged Teleop" 
-              id={this.assignUUID()} 
-              value={false}
-              decorator = "teleopCheckbox"
-            />  
+            <Dropdown
+            ClassName = "docked or engaged"
+            title = "Docked or Engaged"
+            id={this.assignUUID()}
+            decorator = {"teleDropdown"}
+            items = {[
+              {
+                id: this.assignUUID(),
+                title: "None",
+              },
+              {
+                id: this.assignUUID(),
+                title: "Docked",
+              },
+              {
+                id: this.assignUUID(),
+                title: "Engaged",
+              }
+            ]}
+            />
+            
           </div>
-
+          <Counter
+            ClassName ="teammate charge"
+            title = "Total Robots on Alliance Chargepad"
+            id={this.assignUUID()}
+            value = {0}
+            upperLimit = {3}
+            decorator = "robots on alliance charge"
+            />
 
         </div>
        
