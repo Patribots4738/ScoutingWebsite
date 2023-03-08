@@ -271,7 +271,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cone Lower Auto"}
                 value={0}
-                upperLimit={6}
+                upperLimit={9}
                 decorator = {"cones"}
               />
 
@@ -281,7 +281,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cube Lower Auto"}
                 value={0}
-                upperLimit={3}
+                upperLimit={9}
                 decorator = {"cubes"}
               />
             </span>
@@ -345,7 +345,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cone Lower Teleop"}
                 value={0}
-                upperLimit={6}
+                upperLimit={9}
                 decorator = {"cones"}
               />
 
@@ -355,7 +355,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cube Lower Teleop"}
                 value={0}
-                upperLimit={3}
+                upperLimit={9}
                 decorator = {"cubes"}
               />
             </span>
@@ -367,6 +367,14 @@ class Container extends React.Component{
                 title={"Fumbles"}
                 value={0}
                 decorator = {"fumbles"}
+                />
+            <Counter
+                className="counter widget"
+                id={this.assignUUID()}
+                title={"Bots on Chargepad"}
+                value={0}
+                upperLimit = {3}
+                decorator = {"chargeBots"}
                 />
           </div>
           <div>
@@ -384,6 +392,13 @@ class Container extends React.Component{
               value={false}
               decorator = "teleopCheckbox"
             />  
+            <CheckBox 
+              className="isFailure" 
+              title="Chargepad Failure" 
+              id={this.assignUUID()} 
+              value={false}
+              decorator = "dissapointmentCheckbox"
+            />
           </div>
 
 

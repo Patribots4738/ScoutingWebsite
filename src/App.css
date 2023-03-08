@@ -36,7 +36,7 @@ div {
 
 .subtitle, .title, 
 .cube, .cone, 
-.teleopCheckbox, .autoCheckbox {
+.teleopCheckbox, .autoCheckbox, .dissapointmentCheckbox {
   color: rgb(255, 217, 0);
   padding-top: 10px;
 }
