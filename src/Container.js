@@ -66,6 +66,7 @@ class Container extends React.Component{
   handleFormSubmit = (e) => {
     e.preventDefault()
 
+
     var data = this.gatherData()
 
 
@@ -75,33 +76,20 @@ class Container extends React.Component{
 
     if (sendData){
       var formDataObject = new FormData()
-      
+
 
       for (var i = 0; i < data.length; i++){
         formDataObject.append(data[i][0], data[i][1])
       }
 
-      // fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
-      // .catch(err => console.log(err))
+
+      fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
+      .catch(err => console.log(err))
 
 
       let cachedData = JSON.parse(localStorage.getItem("matchData"))
-      let cachedDataCSV = ""
+      console.log(cachedData)
 
-      
-      for (let i = 0; i < cachedData[0].length; i++){
-        // console.log(cachedData[0][i][0])
-        cachedDataCSV += cachedData[0][i][0].replaceAll(",", "") + ","
-      }      
-      cachedDataCSV += "\n"
-      for (let i = 0; i < cachedData.length; i++){
-        for (let e = 0; e < cachedData[i].length; e++){
-          // console.log(cachedData[i][e][0])
-          cachedDataCSV += cachedData[i][e][1] + ","
-        }
-        cachedDataCSV += "\n"
-      }
-      
 
       if (cachedData != null){
         cachedData.push(data)
@@ -173,10 +161,12 @@ class Container extends React.Component{
           PATRIBOTS SCOUTING
         </h1>
 
+
         <div className='identification-container'>
           <h2 className="subtitle section-title">
             IDENTIFICATION
           </h2>
+
 
           <TextBox
             className="textbox name"
