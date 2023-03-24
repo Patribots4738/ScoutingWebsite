@@ -83,8 +83,8 @@ class Container extends React.Component{
       }
 
 
-      fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
-      .catch(err => console.log(err))
+      // fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
+      // .catch(err => console.log(err))
 
 
       let cachedData = JSON.parse(localStorage.getItem("matchData"))
@@ -100,9 +100,9 @@ class Container extends React.Component{
      
      
       window.scrollTo(0, 0);
-      setTimeout(() => {
-        document.location.reload();
-      }, 2750);
+      // setTimeout(() => {
+      //   document.location.reload();
+      // }, 2750);
       alert("Data submitted, press ok to continue")
     }
   }
@@ -125,17 +125,26 @@ class Container extends React.Component{
   }
 
 
-  handleExportData =(e) => {
-    let cachedData = (localStorage.getItem("matchData"))
+  handleExportData =(_) => {
+    let cachedDataJSON = (JSON.parse(localStorage.getItem("matchData")))
+    let cachedDataCSV = ""
 
+    if (cachedDataJSON != null){
+      for (let i = 0; i < cachedDataJSON.length; i++){
+        for (let e = 0; e < cachedDataJSON[i].length; e++){
+          cachedDataCSV += cachedDataJSON[i][e][1] + ","
+        }
+        cachedDataCSV += "\n"
+      }
+    }
 
-    let file = new Blob([cachedData], {type: "text/json"})
+    let file = new Blob([cachedDataCSV], {type: "text/csv"})
     let blobURL = window.URL.createObjectURL(file)
 
     const anchor = document.createElement('a');
     anchor.href = blobURL
     anchor.target = "_blank"
-    anchor.download = "matchData.json"
+    anchor.download = "matchData.csv"
  
     anchor.click()
  
