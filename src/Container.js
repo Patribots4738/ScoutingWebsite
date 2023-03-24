@@ -83,8 +83,8 @@ class Container extends React.Component{
       }
 
 
-      // fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
-      // .catch(err => console.log(err))
+      fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
+      .catch(err => console.log(err))
 
 
       let cachedData = JSON.parse(localStorage.getItem("matchData"))
@@ -100,9 +100,9 @@ class Container extends React.Component{
      
      
       window.scrollTo(0, 0);
-      // setTimeout(() => {
-      //   document.location.reload();
-      // }, 2750);
+      setTimeout(() => {
+        document.location.reload();
+      }, 2750);
       alert("Data submitted, press ok to continue")
     }
   }
