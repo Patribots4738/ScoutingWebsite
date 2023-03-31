@@ -2,12 +2,13 @@
 
 :root {
   --box-border-color: rgba(255, 255, 255, 0.38);
-  min-width: 110%;
+  min-width: 100%;
+  padding-left: 5%;
 }
 
 
 body {
-  background: rgb(47, 49, 45);
+  background: rgb(0, 0, 0);
   justify-content: center;
   display: flex;
 }
@@ -16,6 +17,7 @@ body {
 span {
   display: inline-block;
   text-align: center;
+  font-weight: 500;
 }
 
 
@@ -37,8 +39,24 @@ div {
 .subtitle, .title, 
 .cube, .cone, 
 .teleopCheckbox, .autoCheckbox, .dissapointmentCheckbox {
-  color: rgb(255, 217, 0);
+  color: rgb(219, 186, 0);
   padding-top: 10px;
+}
+
+.title {
+  stroke:white;
+}
+
+.dropdown {
+  color: black;
+  border-radius: calc(0.5 * 100px);
+  box-shadow: 0 1px 6px 0 var(--box-border-color);
+  padding-left: 40px;
+  padding-right: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 20px;
+  background-color: white;
 }
 
 
@@ -60,7 +78,7 @@ div {
 
 
 .text-box-long {
-  border-radius: calc(0.5 * 100px);
+  border-radius: calc(15px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
   height: 75px;
   width: 350px;
@@ -178,7 +196,7 @@ div {
 }
 
 .fumbles {
-  color: rgb(253, 0, 76)
+  color: rgb(232, 0, 0)
 }
 .label {
   font-size: 15px;
