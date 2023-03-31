@@ -5,34 +5,44 @@ import React from "react";
 
 class Dropdown extends React.Component{
 
-    value = this.props.value;
-    id = this.props.id;
-    title = this.props.title;
-    items = this.props.items;
-    handleDropdownChange = this.props.handleDropdownChange;
+    state = {
+        value: 0,
+        id: this.props.id,
+        title: this.props.title,
+        items: this.props.items,
+        handleDropdownChange: this.props.handleDropdownChange,
+        default: 0,
+        className: this.props.className
+    }
     
+    handleDropdownChange = (e) => {
+        this.setState({
+            value: e.target.value
+        })
+    }
 
     render(){
         return (
-            <div className="widget">
+            <span className={"widget"}>
                 <div
                 className="subtitle"
                 >
-                    {this.title}
+                    {this.state.title}
                 </div>
                 
                 <select
                     type="dropown"
                     className="dropdown"
                     onChange = {this.handleDropdownChange}
-                    id = {this.id}
-                    value = {this.props.value}
+                    id = {this.state.id}
+                    value = {this.state.value}
+                    title = {this.state.title}
                 >
-                    {this.items.map(item => {
+                    {this.state.items.map(item => {
                         return (
                         <option 
                             key={item.id} 
-                            value={this.items.indexOf(item)}
+                            value={this.state.items.indexOf(item)}
                         >
                             {item.title}
                         </option>
@@ -40,7 +50,7 @@ class Dropdown extends React.Component{
                     })}
                 </select>
 
-            </div>
+            </span>
             
         )
     }

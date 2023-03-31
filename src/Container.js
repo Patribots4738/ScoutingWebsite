@@ -10,6 +10,7 @@ import Submit from './widgets/Submit'
 import TextBoxLong from './widgets/TextBoxLong'
 import Slider from './widgets/Slider'
 import Export from './widgets/Export';
+import Dropdown from './widgets/Dropdown'
 
 import {v4 as uuidv4} from "uuid"
 import React from 'react';
@@ -69,40 +70,37 @@ class Container extends React.Component{
 
     var data = this.gatherData()
 
-
     var sendData = data[1]
     data = data[0]
 
 
     if (sendData){
       var formDataObject = new FormData()
-
-
+      
       for (var i = 0; i < data.length; i++){
         formDataObject.append(data[i][0], data[i][1])
       }
 
 
-      fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
-      .catch(err => console.log(err))
+      // fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
+      // .catch(err => console.log(err))
 
 
-      let cachedData = JSON.parse(localStorage.getItem("matchData"))
-      console.log(cachedData)
+      // let cachedData = JSON.parse(localStorage.getItem("matchData"))
 
 
-      if (cachedData != null){
-        cachedData.push(data)
-        localStorage.setItem("matchData", JSON.stringify(cachedData))
-      } else {
-        localStorage.setItem("matchData", JSON.stringify([data]))
-      }
+      // if (cachedData != null){
+      //   cachedData.push(data)
+      //   localStorage.setItem("matchData", JSON.stringify(cachedData))
+      // } else {
+      //   localStorage.setItem("matchData", JSON.stringify([data]))
+      // }
      
      
       window.scrollTo(0, 0);
-      setTimeout(() => {
-        document.location.reload();
-      }, 2750);
+      // setTimeout(() => {
+      //   document.location.reload();
+      // }, 2750);
       alert("Data submitted, press ok to continue")
     }
   }
@@ -170,34 +168,52 @@ class Container extends React.Component{
           PATRIBOTS SCOUTING
         </h1>
 
-
         <div className='identification-container'>
           <h2 className="subtitle section-title">
             IDENTIFICATION
           </h2>
 
+          <div>
+            <TextBox
+              className="textbox name"
+              id={this.assignUUID()}
+              title={"Name"}
+              value={""}
+              required={ "true" }
+            />
+            <TextBox
+              className="textbox match"
+              id={this.assignUUID()}
+              title={"Match Number"}
+              value={""}
+              required={true}
+            />
+          </div>
+          <div>
+            <TextBox
+              className="textbox team"
+              id={this.assignUUID()}
+              title={"Team Number"}
+              value={""}
+              required={true}
+            />
+            <Dropdown
+              className="dropdown alliance-color"
+              id={this.assignUUID()}
+              title={"Which alliance"}
+              value={""}
+              required={true}
+              items={[
+                {
+                  title: "red"
+                },
+                {
+                  title: "blue"
+                },
 
-          <TextBox
-            className="textbox name"
-            id={this.assignUUID()}
-            title={"Name"}
-            value={""}
-            required={ "true" }
-          />
-          <TextBox
-            className="textbox match"
-            id={this.assignUUID()}
-            title={"Match Number"}
-            value={""}
-            required={true}
-          />
-          <TextBox
-            className="textbox team"
-            id={this.assignUUID()}
-            title={"Team Number"}
-            value={""}
-            required={true}
-          />
+              ]}
+            />
+            </div>
         </div>
        
         <div className="auto-container">
@@ -424,13 +440,6 @@ class Container extends React.Component{
               decorator = "slide"
             />
             <Slider
-              title="Rate their accuracy" 
-              id={this.assignUUID()}
-              decorator = "slide"
-            />
-          </div>
-          <div>
-            <Slider
               title="Cycle Time"
               id={this.assignUUID()}
               decorator = "slide"
@@ -453,28 +462,6 @@ class Container extends React.Component{
             />
           </div>
 
-          <div>
-            
-            <div>
-              <Slider 
-                title={"If they defended, rate their defense (-1 for no defense)"} 
-                id={this.assignUUID()}
-                decorator="double-line"
-                minValue={-1}
-                value={-1}
-                
-                />
-            </div>
-            <div>
-            <TextBoxLong
-              className="text-box-long"
-              id={this.assignUUID()}
-              title={"If they defended, how did they do?"}
-              value={""}
-              />
-            </div>
-          </div>
-         
           <div>
             <TextBoxLong
               className="text-box-long"
@@ -501,10 +488,12 @@ class Container extends React.Component{
           </div>
          
         </div>
+
         <div className= 'submit-container'>
           <Submit title="Submit" handleFormSubmit={this.handleFormSubmit}/>
         </div>
-        <div className='btn-container'>
+
+        <div className='export-container'>
           <Export title="Export Data" handleExportData={this.handleExportData}/>
           <ClearLocalStorage title="Clear match saves" clearLocalStorage={this.clearLocalStorage}/>
         </div>
