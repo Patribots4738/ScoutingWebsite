@@ -200,15 +200,15 @@ class Container extends React.Component{
             <Dropdown
               className="dropdown alliance-color"
               id={this.assignUUID()}
-              title={"Which alliance"}
+              title={"Aliance Color"}
               value={""}
               required={true}
               items={[
                 {
-                  title: "red"
+                  title: "Red"
                 },
                 {
-                  title: "blue"
+                  title: "Blue"
                 },
 
               ]}
