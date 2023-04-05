@@ -48,7 +48,7 @@ class TextBox extends React.Component{
     render(){
         return (
             <span className="widget">
-                <div className="subtitle">
+                <div className={"subtitle " + this.props.className}>
                     {this.state.title}
                 </div>
 
