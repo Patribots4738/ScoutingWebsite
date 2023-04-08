@@ -219,18 +219,48 @@ class Container extends React.Component{
             </div>
           </ul>
         </form>
-
-
-        <div className='team-number-container widget'>
-          <div className="red-team-number-container">
-            <div className="team-number">{this.state.teams[0]}</div>
-            <div className="team-number">{this.state.teams[1]}</div>
-            <div className="team-number">{this.state.teams[2]}</div>
+        <div>
+          <div className="row1">
+            <table
+              className="row1Table"
+              id = "row1Table"
+            />
           </div>
-          <div className="blue-team-number-container">
-            <div className="team-number">{this.state.teams[3]}</div>
-            <div className="team-number">{this.state.teams[4]}</div>
-            <div className="team-number">{this.state.teams[5]}</div>
+        </div>
+        <div>
+          <div className = "resultTable container">
+            <table
+              className="resultTable"
+              id = "resultTable"
+              >
+                <tr>
+                  <th id= "bPercent">B%</th>
+                  <th id= "winnerText">winner</th>
+                  <th id= "rPercent">R%</th>
+                </tr>
+                <tr>
+                  <th id= "b1">b1</th>
+                  <th id= "b1Score">b1Score</th>
+                  <th id= "r1Score">r1Score</th>
+                  <th id= "r1">r1</th>
+                </tr>
+                <tr>
+                  <th id= "b2">b2</th>
+                  <th id= "b2Score">b2Score</th>
+                  <th id= "bTotal">bTotal</th>
+                  <th id= "rTotal">rTotal</th>
+                  <th id= "r2Score">r2Score</th>
+                  <th id= "r2">r2</th>
+                </tr>
+                <tr>
+                  <th id= "b3">b3</th>
+                  <th id= "b3Score">b3Score</th>
+                  <th id= "r3Score">r3Score</th> 
+                  <th id= "r3">r3</th>
+                </tr>
+
+
+            </table>
           </div>
         </div>
       </span>
