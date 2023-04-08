@@ -136,18 +136,18 @@ class Container extends React.Component{
     let redMeans = []
     let blueSTDVs = []
     let blueMeans = []
-    redSTDVs.push(parseInt(response.red1[0]))
-    redSTDVs.push(parseInt(response.red2[0]))
-    redSTDVs.push(parseInt(response.red3[0]))
-    redMeans.push(parseInt(response.red1[1]))
-    redMeans.push(parseInt(response.red2[1]))
-    redMeans.push(parseInt(response.red3[1]))
-    blueSTDVs.push(parseInt(response.blue1[0]))
-    blueSTDVs.push(parseInt(response.blue2[0]))
-    blueSTDVs.push(parseInt(response.blue3[0]))
-    blueMeans.push(parseInt(response.blue1[1]))
-    blueMeans.push(parseInt(response.blue2[1]))
-    blueMeans.push(parseInt(response.blue3[1]))
+    redSTDVs.push(parseInt(response.red1[1]))
+    redSTDVs.push(parseInt(response.red2[1]))
+    redSTDVs.push(parseInt(response.red3[1]))
+    redMeans.push(parseInt(response.red1[2]))
+    redMeans.push(parseInt(response.red2[2]))
+    redMeans.push(parseInt(response.red3[2]))
+    blueSTDVs.push(parseInt(response.blue1[1]))
+    blueSTDVs.push(parseInt(response.blue2[1]))
+    blueSTDVs.push(parseInt(response.blue3[1]))
+    blueMeans.push(parseInt(response.blue1[2]))
+    blueMeans.push(parseInt(response.blue2[2]))
+    blueMeans.push(parseInt(response.blue3[2]))
 
     let combBlue = this.combinedDistribution(blueMeans, blueSTDVs);
     let combRed = this.combinedDistribution(redMeans, redSTDVs);
@@ -156,7 +156,36 @@ class Container extends React.Component{
     // console.log(diffMean + ", " + diffSTDV)
     let prediction = this.areaUnderNormalCurve(0, diffMean, diffSTDV)
     // console.log(prediction)
+    redPoints = {
+      r1: {
+        teamNumber: parseInt(response.red1[0]),
+        points: parseInt(response.red1[2])
+      },
+      r2: {
+        teamNumber: parseInt(response.red2[0]),
+        points: parseInt(response.red2[2])
+      },
+      r3: {
+        teamNumber: parseInt(response.red3[0]),
+        points: parseInt(response.red3[2])
+      }
+    }
+    bluePoints = {
+      b1: {
+        teamNumber: parseInt(response.blue1[0]),
+        points: parseInt(response.blue1[2])
+      },
+      b2: {
+        teamNumber: parseInt(response.blue2[0]),
+        points: parseInt(response.blue2[2])
+      },
+      b3: {
+        teamNumber: parseInt(response.blue3[0]),
+        points: parseInt(response.blue3[2])
+      }
+    }
     
+    return [prediction, redPoints, bluePoints]
 
   }
   
@@ -170,7 +199,7 @@ class Container extends React.Component{
   render () {
     return (
       <span>
-        <form className='container'>
+        <form className='form container'>
           <ul className="container">
             <div className="redContainer">
               <TextBox 
