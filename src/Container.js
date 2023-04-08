@@ -300,29 +300,29 @@ class Container extends React.Component{
               id = "resultTable"
               >
                 <tr>
-                  <th id= "bPercent">B%</th>
-                  <th id= "winnerText">winner</th>
                   <th id= "rPercent">R%</th>
+                  <th id= "winnerText">winner</th>
+                  <th id= "bPercent">B%</th>
                 </tr>
                 <tr>
-                  <th id= "b1">b1</th>
-                  <th id= "b1Score">b1Score</th>
-                  <th id= "r1Score">r1Score</th>
                   <th id= "r1">r1</th>
+                  <th id= "r1Score">r1Score</th>
+                  <th id= "b1Score">b1Score</th>
+                  <th id= "b1">b1</th>
                 </tr>
                 <tr>
-                  <th id= "b2">b2</th>
-                  <th id= "b2Score">b2Score</th>
-                  <th id= "bTotal">bTotal</th>
-                  <th id= "rTotal">rTotal</th>
-                  <th id= "r2Score">r2Score</th>
                   <th id= "r2">r2</th>
+                  <th id= "r2Score">r2Score</th>
+                  <th id= "rTotal">rTotal</th>
+                  <th id= "bTotal">bTotal</th>
+                  <th id= "b2Score">b2Score</th>
+                  <th id= "b2">b2</th>
                 </tr>
                 <tr>
-                  <th id= "b3">b3</th>
-                  <th id= "b3Score">b3Score</th>
-                  <th id= "r3Score">r3Score</th> 
                   <th id= "r3">r3</th>
+                  <th id= "r3Score">r3Score</th>
+                  <th id= "b3Score">b3Score</th> 
+                  <th id= "b3">b3</th>
                 </tr>
 
 
