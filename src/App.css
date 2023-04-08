@@ -96,8 +96,57 @@ div {
 .text-box {
   border-radius: calc(100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
+  text-align: center;
 }
 
 .team-numbers {
   color: white;
+}
+
+.winner-text{
+  color: white;
+  font-size: 20px;
+}
+
+.red-score {
+  color: red;
+}
+
+.blue-score {
+  color: blue;
+}
+
+.result-table {
+  justify-content: center;
+  display: inline-block;
+  padding: 10px 10px 20px 10px;
+  border-radius: calc(0.5 * 100px);
+  box-shadow: 0 1px 6px 0 var(--box-border-color);
+  max-width: fit-content;
+}
+
+.outcome-chance {
+  font-size: 20px;
+}
+
+.benhamin {
+  width: 100px;
+  height: 130px;
+  border-radius: 10px;
+}
+
+.headers {
+  border-radius: calc(0.5 * 100px);
+  border-color:rgb(255, 255, 255);
+  box-shadow: 0 1px 6px 0 var(--box-border-color);
+}
+
+.outcome-chance-red {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.outcome-chance-blue {
+  padding-left: 50px;
+  padding-right: 50px;
 }

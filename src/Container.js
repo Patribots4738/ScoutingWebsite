@@ -1,6 +1,12 @@
 import cone from './images/cone.png'
 import cube from './images/cube.png'
 import notFound from './images/notFound.png'
+import ben from './images/ben.png'
+import dancingGiraffe from './images/dancingGiraffe.gif'
+import bootsGiraffe from './images/bootsGiraffe.gif'
+import runningGiraffe from './images/runningGiraffe.gif'
+import errorGiraffe from './images/errorGiraffe.gif'
+
 import './App.css';
 
 import CheckBox from './widgets/CheckBox';
@@ -11,6 +17,8 @@ import TextBoxLong from './widgets/TextBoxLong'
 import Slider from './widgets/Slider'
 import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown'
+
+import TeamNumberError from './Errors';
 
 import {v4 as uuidv4} from "uuid"
 import React from 'react';
@@ -38,6 +46,12 @@ class Container extends React.Component{
         ]
       ]
   }
+
+  loadingGiraffes = [
+    dancingGiraffe,
+    bootsGiraffe,
+    runningGiraffe
+  ]
   
   combinedDistribution = (means, standardDeviations) => {
     let sum = 0;
@@ -114,6 +128,8 @@ class Container extends React.Component{
     else {
       let fullEndpoint = this.scriptUrl + `?r1=${data[0]}&r2=${data[1]}&r3=${data[2]}&b1=${data[3]}&b2=${data[4]}&b3=${data[5]}` 
       console.log(fullEndpoint)
+      console.log(document.getElementById("benhamin"))
+      document.getElementById("benhamin").src = this.loadingGiraffes[Math.floor(Math.random() * this.loadingGiraffes.length)];
       fetch(fullEndpoint, {
         method: 'GET',
         })
@@ -123,6 +139,20 @@ class Container extends React.Component{
           let predictionPercentage = prediction[0]
           let redPoints = prediction[1]
           let bluePoints = prediction[2]
+          
+          Object.keys(redPoints).forEach((key) => {
+            console.log(redPoints[key], key)
+            if (redPoints[key].points == -1){
+              throw new TeamNumberError(`Invalid team number ${redPoints[key].teamNumber}`)
+            }
+          })
+          Object.keys(bluePoints).forEach((key) => {
+            console.log(bluePoints[key], key)
+            if (bluePoints[key].points == -1){
+              throw new TeamNumberError(`Invalid team number ${bluePoints[key].teamNumber}`)
+            }
+          })
+
           if (redPoints.r1.points + redPoints.r2.points + redPoints.r3.points > bluePoints.b1.points + bluePoints.b2.points + bluePoints.b3.points){
             document.getElementById("winnerText").innerHTML = "Red"
             document.getElementById("winnerText").style.color = "red"
@@ -158,6 +188,12 @@ class Container extends React.Component{
 
           document.getElementById("bTotal").innerHTML = `${bluePoints.b1.points + bluePoints.b2.points + bluePoints.b3.points}`
           document.getElementById("rTotal").innerHTML = `${redPoints.r1.points + redPoints.r2.points + redPoints.r3.points}`
+          document.getElementById("benhamin").src = ben
+        })
+        .catch((TeamNumberError) => {
+          console.error('Error:', TeamNumberError)
+          alert("Invalid team number")
+          document.getElementById("benhamin").src = errorGiraffe
         })
         .catch((error) => {
           console.error('Error:', error)
@@ -285,44 +321,57 @@ class Container extends React.Component{
             </div>
           </ul>
         </form>
+        
         <div>
-          <div className="row1">
+          <div >
             <table
-              className="row1Table"
-              id = "row1Table"
-            />
-          </div>
-        </div>
-        <div>
-          <div className = "resultTable container">
-            <table
-              className="resultTable"
-              id = "resultTable"
+                className="result-table container"
+                id = "resultTable"
               >
-                <tr>
-                  <th id= "rPercent">R%</th>
-                  <th id= "winnerText">winner</th>
-                  <th id= "bPercent">B%</th>
+                <tr className='headers'>
+                  <th className = "gap" id="gap"/>
+                  <th className = "outcome-chance outcome-chance-red red" id= "rPercent"></th>
+                  <th className = "gap" id="gap"/>
+                  <th className = "winner-text" id= "winnerText"></th>
+                  <th className = "gap" id="gap"/>
+                  <th className = "outcome-chance outcome-chance-blue blue" id= "bPercent"></th>
+                  <th className = "gap" id="gap"/>
                 </tr>
                 <tr>
-                  <th id= "r1">r1</th>
-                  <th id= "r1Score">r1Score</th>
-                  <th id= "b1Score">b1Score</th>
-                  <th id= "b1">b1</th>
+                  <th className = "red" id= "r1"></th>
+                  <th className = "red red-score" id= "r1Score"></th>
+                  <th className = "gap" id="gap"/>
+                  <th className = "gap" id="gap"/>
+                  <th className = "gap" id="gap"/>
+                  <th className = "blue blue-score" id= "b1Score"></th>
+                  <th className = "blue" id= "b1"></th>
                 </tr>
                 <tr>
-                  <th id= "r2">r2</th>
-                  <th id= "r2Score">r2Score</th>
-                  <th id= "rTotal">rTotal</th>
-                  <th id= "bTotal">bTotal</th>
-                  <th id= "b2Score">b2Score</th>
-                  <th id= "b2">b2</th>
+                  <th className = "red" id= "r2"></th>
+                  <th className = "red" id= "r2Score"></th>
+                  <th className = "gap" id="gap"/>
+                  <th className = 'ben' id="ben"> <img className = "benhamin" id="benhamin" src={ben} alt="This is where our ben would go, IF WE HAD ONE" /> </th>
+                  <th className = "gap" id="gap"/>
+                  <th className = "blue" id= "b2Score"></th>
+                  <th className = "blue" id= "b2"></th>
                 </tr>
                 <tr>
-                  <th id= "r3">r3</th>
-                  <th id= "r3Score">r3Score</th>
-                  <th id= "b3Score">b3Score</th> 
-                  <th id= "b3">b3</th>
+                  <th className = "red" id= "r3"></th>
+                  <th className = "red" id= "r3Score"></th>
+                  <th className = "gap" id="gap"/>
+                  <th className = "gap" id="gap"/>
+                  <th className = "gap" id="gap"/>
+                  <th className = "blue" id= "b3Score"></th> 
+                  <th className = "blue" id= "b3"></th>
+                </tr>
+                <tr>
+                  <th className = "gap" id="gap"/>
+                  <th className = "red red-total" id= "rTotal"></th>
+                  <th className = "gap" id="gap"/>
+                  <th className = "gap" id="gap"/>
+                  <th className = "gap" id="gap"/>
+                  <th className = "blue blue-total" id= "bTotal"></th>
+                  <th className = "gap" id="gap"/>
                 </tr>
 
 
