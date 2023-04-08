@@ -61,9 +61,11 @@ div {
   border-color: black;
 }
 
-.value {
+.team-number-container{
   padding: 10px;
   color: rgb(255, 255, 255);
+  border-radius: calc(0.5 * 100px);
+  box-shadow: 0 1px 6px 0 var(--box-border-color);
 }
 
 .submit {
