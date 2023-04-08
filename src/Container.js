@@ -119,8 +119,45 @@ class Container extends React.Component{
         })
         .then(data=>{return data.text()})
         .then(res=>{
-          let predictionPercentage = this.predictMatches(JSON.parse(res))
-          let matchScores = this.predictMatchScores(JSON.parse(res))
+          let prediction = this.predictMatches(JSON.parse(res))
+          let predictionPercentage = prediction[0]
+          let redPoints = prediction[1]
+          let bluePoints = prediction[2]
+          if (redPoints.r1.points + redPoints.r2.points + redPoints.r3.points > bluePoints.b1.points + bluePoints.b2.points + bluePoints.b3.points){
+            document.getElementById("winnerText").innerHTML = "Red"
+            document.getElementById("winnerText").style.color = "red"
+            document.getElementById("bPercent").innerHTML = `${(100-predictionPercentage*100).toFixed(2)}%`
+            document.getElementById("rPercent").innerHTML = `${(predictionPercentage*100).toFixed(2)}%`
+          }
+          else if (bluePoints.b1.points + bluePoints.b2.points + bluePoints.b3.points > redPoints.r1.points + redPoints.r2.points + redPoints.r3.points){
+            document.getElementById("winnerText").innerHTML = "Blue"
+            document.getElementById("winnerText").style.color = "blue"
+            document.getElementById("bPercent").innerHTML = `${(predictionPercentage*100).toFixed(2)}%`
+            document.getElementById("rPercent").innerHTML = `${(100-predictionPercentage*100).toFixed(2)}%`
+          }
+          else {
+            prediction = "Tie"
+            document.getElementById("winnerText").innerHTML = "Tie"
+            document.getElementById("winnerText").style.color = "black"
+            document.getElementById("bPercent").innerHTML = `${(predictionPercentage*100).toFixed(2)}%`
+            document.getElementById("rPercent").innerHTML = `${(predictionPercentage*100).toFixed(2)}%`
+          }
+          document.getElementById("b1").innerHTML = `${bluePoints.b1.teamNumber}`
+          document.getElementById("b2").innerHTML = `${bluePoints.b2.teamNumber}`
+          document.getElementById("b3").innerHTML = `${bluePoints.b3.teamNumber}`
+          document.getElementById("r1").innerHTML = `${redPoints.r1.teamNumber}`
+          document.getElementById("r2").innerHTML = `${redPoints.r2.teamNumber}`
+          document.getElementById("r3").innerHTML = `${redPoints.r3.teamNumber}`
+
+          document.getElementById("b1Score").innerHTML = `${bluePoints.b1.points}`
+          document.getElementById("b2Score").innerHTML = `${bluePoints.b2.points}`
+          document.getElementById("b3Score").innerHTML = `${bluePoints.b3.points}`
+          document.getElementById("r1Score").innerHTML = `${redPoints.r1.points}`
+          document.getElementById("r2Score").innerHTML = `${redPoints.r2.points}`
+          document.getElementById("r3Score").innerHTML = `${redPoints.r3.points}`
+
+          document.getElementById("bTotal").innerHTML = `${bluePoints.b1.points + bluePoints.b2.points + bluePoints.b3.points}`
+          document.getElementById("rTotal").innerHTML = `${redPoints.r1.points + redPoints.r2.points + redPoints.r3.points}`
         })
         .catch((error) => {
           console.error('Error:', error)
@@ -156,7 +193,7 @@ class Container extends React.Component{
     // console.log(diffMean + ", " + diffSTDV)
     let prediction = this.areaUnderNormalCurve(0, diffMean, diffSTDV)
     // console.log(prediction)
-    redPoints = {
+    let redPoints = {
       r1: {
         teamNumber: parseInt(response.red1[0]),
         points: parseInt(response.red1[2])
@@ -170,7 +207,7 @@ class Container extends React.Component{
         points: parseInt(response.red3[2])
       }
     }
-    bluePoints = {
+    let bluePoints = {
       b1: {
         teamNumber: parseInt(response.blue1[0]),
         points: parseInt(response.blue1[2])
