@@ -396,10 +396,10 @@ class Container extends React.Component{
             <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Bots on Chargepad"}
+                title={"Supercharged Pieces"}
                 value={0}
-                upperLimit = {3}
-                decorator = {"chargeBots"}
+                upperLimit = {12}
+                decorator = {"supercharged"}
                 />
           </div>
           <div>
