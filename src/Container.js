@@ -20,12 +20,11 @@ import ClearLocalStorage from './widgets/ClearLocalStorage';
 
 class Container extends React.Component{
 
-  scriptUrl = "https://script.google.com/macros/s/AKfycbz1Q-xLuk8w2mi7Edy06wgCHmsskpAkMMLso09RboigvgdegC7LOf0uNQAPYtvz-jNH/exec"
+  scriptUrl = "https://script.google.com/macros/s/AKfycbz7hdELAhAZDZP2XlLzwdOtyO-Xo10KLsbTw5skSf1R0wDRgOimbqA928yt8Q088s3M/exec"
  
   state = {
     items: [],
   }
-
 
   gatherData = () => {
     var arr = []
@@ -63,16 +62,13 @@ class Container extends React.Component{
     return [arr, true]
   }
 
-
   handleFormSubmit = (e) => {
     e.preventDefault()
-
 
     var data = this.gatherData()
 
     var sendData = data[1]
     data = data[0]
-
 
     if (sendData){
       var formDataObject = new FormData()
@@ -83,11 +79,11 @@ class Container extends React.Component{
 
 
       fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
+      .then(response => console.log(response.json()))
       .catch(err => console.log(err))
 
 
       let cachedData = JSON.parse(localStorage.getItem("matchData"))
-
 
       if (cachedData != null){
         cachedData.push(data)
@@ -96,11 +92,11 @@ class Container extends React.Component{
         localStorage.setItem("matchData", JSON.stringify([data]))
       }
      
-     
+      console.log(JSON.stringify(data))
       window.scrollTo(0, 0);
-      setTimeout(() => {
-        document.location.reload();
-      }, 2750);
+      // setTimeout(() => {
+      //   document.location.reload();
+      // }, 2750);
       alert("Data submitted, press ok to continue")
     }
   }
@@ -123,7 +119,7 @@ class Container extends React.Component{
   }
 
 
-  handleExportData =(_) => {
+  handleExportData = (_) => {
     let cachedDataJSON = (JSON.parse(localStorage.getItem("matchData")))
     let cachedDataCSV = ""
 
@@ -149,6 +145,32 @@ class Container extends React.Component{
     URL.revokeObjectURL(blobURL);
   }
 
+  submitAllData = () => {
+    if (!window.confirm("Only press OK if your scouting lead has told you specifically to do this.")) {return}
+
+    let data = localStorage.getItem("matchData")
+
+    let formDataObject = new FormData()
+    let fails = 0
+    
+    for (let i = 0; i < data.length; i++){
+      formDataObject.append(data[i], data[i])
+    }
+
+    for (let i = 0; i < data.length; i++){
+      for (let e = 0; e < data[i].length; e++){
+        formDataObject.append(data[i][e][0], data[i][e][1])
+      }
+      fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
+      .catch(err => {console.log(err); fails++})
+      formDataObject = new FormData();
+    }
+
+    if (fails) {alert("Failed to submit " + fails + " matches, please talk to your scouting lead.")}
+    
+    else {alert("All data exported")}
+  }
+  
 
   render () {
     return (
@@ -220,7 +242,7 @@ class Container extends React.Component{
           <h2 className="subtitle section-title">
             AUTONOMOUS
           </h2>
-          <div ClassName = "style1">
+          <div className = "style1">
             <CheckBox 
               className="mobility"
               title="Mobility Auto" 
@@ -496,6 +518,7 @@ class Container extends React.Component{
         <div className='export-container'>
           <Export title="Export Data" handleExportData={this.handleExportData}/>
           <ClearLocalStorage title="Clear match saves" clearLocalStorage={this.clearLocalStorage}/>
+          {/* <Export title="Export All Data" handleExportData={this.submitAllData}/> */}
         </div>
       </ul>
     );
