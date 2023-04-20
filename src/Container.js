@@ -20,7 +20,7 @@ import ClearLocalStorage from './widgets/ClearLocalStorage';
 
 class Container extends React.Component{
 
-  scriptUrl = "https://script.google.com/macros/s/AKfycbz1Q-xLuk8w2mi7Edy06wgCHmsskpAkMMLso09RboigvgdegC7LOf0uNQAPYtvz-jNH/exec"
+  scriptUrl = "https://script.google.com/macros/s/AKfycbz7hdELAhAZDZP2XlLzwdOtyO-Xo10KLsbTw5skSf1R0wDRgOimbqA928yt8Q088s3M/exec"
  
   state = {
     items: [],
