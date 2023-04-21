@@ -100,7 +100,7 @@ class Container extends React.Component{
       window.scrollTo(0, 0);
       setTimeout(() => {
         document.location.reload();
-      }, 2750);
+      }, 3500);
       alert("Data submitted, press ok to continue")
     }
   }
