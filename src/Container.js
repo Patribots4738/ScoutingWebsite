@@ -17,7 +17,6 @@ import React from 'react';
 import ClearLocalStorage from './widgets/ClearLocalStorage';
 
 
-
 class Container extends React.Component{
 
   scriptUrl = "https://script.google.com/macros/s/AKfycbz7hdELAhAZDZP2XlLzwdOtyO-Xo10KLsbTw5skSf1R0wDRgOimbqA928yt8Q088s3M/exec"
@@ -222,29 +221,29 @@ class Container extends React.Component{
           </h2>
           <div ClassName = "style1">
             <CheckBox 
-              className="mobility"
-              title="Mobility Auto" 
+              className="firstCheckbox"
+              title="PlaceHolder"
               id={this.assignUUID()} 
               value={false}
               decorator = "autoCheckbox"
             />
             <CheckBox 
-              className="docked" 
-              title="Docked Auto"
+              className="secondCheckbox"
+              title="PlaceHolder"
               id={this.assignUUID()}
               value={false}
               decorator = "autoCheckbox"
             />    
             <CheckBox
-              className="engaged"
-              title="Engaged Auto"
+              className="thirdCheckbox"
+              title="PlaceHolder"
               id={this.assignUUID()}
               value={false}
               decorator = "autoCheckbox"
             />  
           </div>
-          <img src={cone} alt={notFound} className="cone"/>
-          <img src={cube} alt={notFound} className="cube"/>
+              <img src={notFound} alt={notFound} className="cone"/>
+              <img src={notFound} alt={notFound} className="cube"/>
           <div>
             <span className="upper">
               <Counter

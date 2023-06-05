@@ -1,15 +1,17 @@
 
-
+/*
+  outside border
+*/
 :root {
-  --box-border-color: rgba(255, 255, 255, 0.38);
-  min-width: 100%;
+  --box-border-color: rgba(214, 232, 101, 0.4);
+  min-width: 10%;
   padding-left: 5%;
 }
 
 
 body {
   background: rgb(0, 0, 0);
-  justify-content: center;
+  justify-content: left;
   display: flex;
 }
 
