@@ -1,25 +1,23 @@
 
 /*
-  outside border
+  color of outside border
 */
 :root {
   --box-border-color: rgba(214, 232, 101, 0.4);
-  min-width: 10%;
-  padding-left: 5%;
+  min-width: 100%;
 }
 
-
+/* color of whole page */
 body {
   background: rgb(0, 0, 0);
-  justify-content: left;
+  justify-content: center;
   display: flex;
 }
 
-
+/* font boldness and display pattern */
 span {
   display: inline-block;
-  text-align: center;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 
@@ -27,7 +25,7 @@ div {
   text-align: center;
 }
 
-
+/* overall container, makes border, shadow, and slight padding on all sides*/
 .container {
   justify-content: center;
   display: grid;
@@ -37,18 +35,20 @@ div {
   max-width: fit-content;
 }
 
+/* puts spacing between everything */
+.widget {
+  padding: 10px;
+}
 
+/* color for each title and slight padding for a lot of other things */
 .subtitle, .title, 
-.cube, .cone, 
-.teleopCheckbox, .autoCheckbox, .dissapointmentCheckbox {
+.image1, .image2,
+.teleopCheckbox, .autoCheckbox, .disappointmentCheckbox {
   color: rgb(219, 186, 0);
   padding-top: 10px;
 }
 
-.title {
-  stroke:white;
-}
-
+/* the single dropdown (alliance selection) */
 .dropdown {
   color: black;
   border-radius: calc(0.5 * 100px);
@@ -61,7 +61,7 @@ div {
   background-color: white;
 }
 
-
+/* Identification, Autonomous, Teleop, and Post-Match titles */
 .section-title {
   border-radius: calc(0.5 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
@@ -69,7 +69,7 @@ div {
   color: rgba(0, 255, 0, 0.555);
 }
 
-
+/* textboxes in identification */
 .text-box {
   border-radius: calc(0.5 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
@@ -78,7 +78,7 @@ div {
   font-size: 25px;
 }
 
-
+/*textboxes in post-match */
 .text-box-long {
   border-radius: calc(15px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
@@ -88,24 +88,21 @@ div {
 }
 
 
-.widget {
-  padding: 10px;
-}
 
-
+/* All mini-containters inside the big container */
 .identification-container, .auto-container, .teleop-container, .post-match-container {
   padding: 10px 10px 20px 10px;
   border-radius: calc(0.5 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
 }
 
-
+/* basically juts makes the buttons side by side */
 .btn-container {
   display: flex;
   justify-content: center;
 }
 
-
+/* makes the counters look nice */
 .btn {
   height: 70px;
   width: 55px;
@@ -124,26 +121,27 @@ div {
   padding-bottom: 0%;
 }
 
+/* Numbers above the counter buttons */
 .value {
   padding: 10px;
   color: rgb(255, 255, 255);
 }
 
-
-.cone {
+/* image on the left (used to be cone) */
+.image1 {
   height: 75px;
   width: auto;
   padding-right: 30px;
 }
 
-
-.cube {
+/* image on the right (used to be cube) */
+.image2 {
   height: 75px;
   width: auto;
   padding-left: 50px;
 }
 
-
+/* makes the checkboxes look nice */
 .checkbox {
   height: 35px;
   width: 35px;
@@ -151,11 +149,10 @@ div {
   border-radius: calc(100px);
   float: center;
 }
-.style1 {
-  height: 1000;
-}
 
 
+
+/* buttons under submit */
 .export, .clear-localstorage {
   background-color: #ccc;
   border-radius: calc(100px);
@@ -164,6 +161,7 @@ div {
   padding-top: 2%;
 }
 
+/* submit button */
 .submit {
   padding: 10px;
   background-color: #ccc;
@@ -175,9 +173,12 @@ div {
   width: 200px;
 }
 
-.double-line {
+/* idk why this is here but i'll comment it juts in case something breaks
   max-width: 250px;
 }
+*/
+
+/* makes the sliders look nice */
 .slider {
   width:100%;
   height: 25px;
@@ -185,10 +186,11 @@ div {
   padding: 0;
 }
 
+/* Stops the sliders from moving */
 .slider-valueslide {
   position: absolute;
   padding: 0;
-  padding-left: 6.75%;
+  padding-left: 3.2%;
   color: rgb(207, 203, 203);
 }
 

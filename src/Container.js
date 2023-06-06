@@ -242,8 +242,8 @@ class Container extends React.Component{
               decorator = "autoCheckbox"
             />  
           </div>
-              <img src={notFound} alt={notFound} className="cone"/>
-              <img src={notFound} alt={notFound} className="cube"/>
+              <img src={notFound} alt={notFound} className="image1"/>
+              <img src={notFound} alt={notFound} className="image2"/>
           <div>
             <span className="upper">
               <Counter
@@ -251,7 +251,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cone Upper Auto"}
                 value={0}
-                upperLimit={6}
+
                 decorator = {"cones"}
               />
 
@@ -261,7 +261,8 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cube Upper Auto"}
                 value={0}
-                upperLimit={3}
+
+
                 decorator = {"cubes"}
               />
             </span>
@@ -273,7 +274,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cone Middle Auto"}
                 value={0}
-                upperLimit={6}
+
                 decorator = {"cones"}
               />
 
@@ -283,7 +284,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cube Middle Auto"}
                 value={0}
-                upperLimit={3}
+
                 decorator = {"cubes"}
               />
             </span>
@@ -295,7 +296,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cone Lower Auto"}
                 value={0}
-                upperLimit={9}
+
                 decorator = {"cones"}
               />
 
@@ -305,7 +306,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cube Lower Auto"}
                 value={0}
-                upperLimit={9}
+
                 decorator = {"cubes"}
               />
             </span>
@@ -316,8 +317,8 @@ class Container extends React.Component{
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <img src={cone} alt={notFound} className="cone"/>
-          <img src={cube} alt={notFound} className="cube"/>
+          <img src={notFound} alt={notFound} className="image1"/>
+          <img src={notFound} alt={notFound} className="image2"/>
           <div>
             <span className="uppers">
               <Counter
@@ -325,7 +326,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cone Upper Teleop"}
                 value={0}
-                upperLimit={6}
+
                 decorator = {"cones"}
               />
 
@@ -335,8 +336,8 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cube Upper Teleop"}
                 value={0}
-                upperLimit={3}
-                decorator = {"cubes"}
+
+                decorator = {""}
               />
             </span>
           </div>
@@ -347,7 +348,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cone Middle Teleop"}
                 value={0}
-                upperLimit={6}
+
                 decorator = {"cones"}
               />
 
@@ -357,8 +358,8 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cube Middle Teleop"}
                 value={0}
-                upperLimit={3}
-                decorator = {"cubes"}
+
+                decorator = {""}
               />
             </span>
           </div>
@@ -369,8 +370,8 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cone Lower Teleop"}
                 value={0}
-                upperLimit={9}
-                decorator = {"cones"}
+
+                decorator = {""}
               />
 
 
@@ -379,8 +380,8 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Cube Lower Teleop"}
                 value={0}
-                upperLimit={9}
-                decorator = {"cubes"}
+
+                decorator = {""}
               />
             </span>
           </div>
@@ -397,8 +398,8 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Supercharged Pieces"}
                 value={0}
-                upperLimit = {12}
-                decorator = {"supercharged"}
+
+                decorator = {""}
                 />
           </div>
           <div>
