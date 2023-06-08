@@ -219,100 +219,67 @@ class Container extends React.Component{
           <h2 className="subtitle section-title">
             AUTONOMOUS
           </h2>
-          <div ClassName = "style1">
-            <CheckBox 
-              className="firstCheckbox"
-              title="PlaceHolder"
-              id={this.assignUUID()} 
-              value={false}
-              decorator = "autoCheckbox"
-            />
-            <CheckBox 
-              className="secondCheckbox"
-              title="PlaceHolder"
-              id={this.assignUUID()}
-              value={false}
-              decorator = "autoCheckbox"
-            />    
-            <CheckBox
-              className="thirdCheckbox"
-              title="PlaceHolder"
-              id={this.assignUUID()}
-              value={false}
-              decorator = "autoCheckbox"
-            />  
+          <div ClassName = "">
+            <Dropdown
+                          className="dropdown tarmac"
+                          id={this.assignUUID()}
+                          title={"Starting Position"}
+                          value={""}
+                          items={[
+                            {
+                              title: "Top (Judge Side)"
+                            },
+                            {
+                              title: "Middle"
+                            },
+                            {
+                              title: "Bottom (Hang Side)"
+                            }
+                          ]}
+                          decorator = {"tarmac"}
+                        />
           </div>
-              <img src={notFound} alt={notFound} className="image1"/>
-              <img src={notFound} alt={notFound} className="image2"/>
+
           <div>
             <span className="upper">
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Cone Upper Auto"}
+                title={"Upper Hub Auto"}
                 value={0}
 
-                decorator = {"cones"}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Upper Auto"}
-                value={0}
-
-
-                decorator = {"cubes"}
+                decorator = {""}
               />
             </span>
-          </div>
-          <div>
-            <span className="mid">
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cone Middle Auto"}
-                value={0}
-
-                decorator = {"cones"}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Middle Auto"}
-                value={0}
-
-                decorator = {"cubes"}
-              />
-            </span>
-          </div>
-          <div>
             <span className="lower">
+                         <Counter
+                            className="counter widget"
+                            id={this.assignUUID()}
+                            title={"Lower Hub Auto"}
+                            value={0}
+
+                            decorator = {""}
+                          />
+
+                        </span>
+          </div>
+          <div>
+
+          </div>
+          <div>
+            <span className="fumbles">
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Cone Lower Auto"}
+                title={"Fumbles Auto"}
                 value={0}
 
-                decorator = {"cones"}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Lower Auto"}
-                value={0}
-
-                decorator = {"cubes"}
+                decorator = {""}
               />
             </span>
           </div>
         </div>
-       
+
         <div className="teleop-container">
           <h2 className="subtitle section-title">
             TELEOP
@@ -403,24 +370,24 @@ class Container extends React.Component{
                 />
           </div>
           <div>
-            <CheckBox 
-              className="docked" 
-              title="Docked Teleop" 
-              id={this.assignUUID()} 
+            <CheckBox
+              className="docked"
+              title="Docked Teleop"
+              id={this.assignUUID()}
               value={false}
               decorator = "teleopCheckbox"
-            />    
-            <CheckBox 
-              className="engaged" 
-              title="Engaged Teleop" 
-              id={this.assignUUID()} 
+            />
+            <CheckBox
+              className="engaged"
+              title="Engaged Teleop"
+              id={this.assignUUID()}
               value={false}
               decorator = "teleopCheckbox"
-            />  
-            <CheckBox 
-              className="isFailure" 
-              title="Chargepad Failure" 
-              id={this.assignUUID()} 
+            />
+            <CheckBox
+              className="isFailure"
+              title="Chargepad Failure"
+              id={this.assignUUID()}
               value={false}
               decorator = "dissapointmentCheckbox"
             />
@@ -428,7 +395,7 @@ class Container extends React.Component{
 
 
         </div>
-       
+
         <div className="post-match-container">
           <h2 className="subtitle section-title">
             POST-MATCH
