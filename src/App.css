@@ -133,6 +133,7 @@ div {
   width: 100px;
   height: 130px;
   border-radius: 10px;
+  animation: App-logo-spin infinite 1000s linear;
 }
 
 .headers {
@@ -149,4 +150,13 @@ div {
 .outcome-chance-blue {
   padding-left: 50px;
   padding-right: 50px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
