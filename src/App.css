@@ -3,7 +3,7 @@
   color of outside border
 */
 :root {
-  --box-border-color: rgba(214, 232, 101, 0.4);
+  --box-border-color: rgba(150, 250, 200, 0.3);
   min-width: 100%;
 }
 

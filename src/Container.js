@@ -221,23 +221,23 @@ class Container extends React.Component{
           </h2>
           <div ClassName = "">
             <Dropdown
-                          className="dropdown tarmac"
-                          id={this.assignUUID()}
-                          title={"Starting Position"}
-                          value={""}
-                          items={[
-                            {
-                              title: "Top (Judge Side)"
-                            },
-                            {
-                              title: "Middle"
-                            },
-                            {
-                              title: "Bottom (Hang Side)"
-                            }
-                          ]}
-                          decorator = {"tarmac"}
-                        />
+                className="dropdown tarmac"
+                id={this.assignUUID()}
+                title={"Starting Position"}
+                value={""}
+                items={[
+                {
+                   title: "Top (Judge Side)"
+                },
+                {
+                   title: "Middle"
+                },
+                {
+                   title: "Bottom (Hang Side)"
+                }
+                ]}
+                decorator = {"tarmac"}
+            />
           </div>
 
           <div>
@@ -284,24 +284,21 @@ class Container extends React.Component{
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <img src={notFound} alt={notFound} className="image1"/>
-          <img src={notFound} alt={notFound} className="image2"/>
+
           <div>
             <span className="uppers">
               <Counter
-                className="counter widget"
+                className="Upper Hub Teleop"
                 id={this.assignUUID()}
-                title={"Cone Upper Teleop"}
+                title={"Upper Hub Teleop"}
                 value={0}
 
-                decorator = {"cones"}
+                decorator = {""}
               />
-
-
               <Counter
-                className="counter widget"
+                className="Lower Hub Teleop"
                 id={this.assignUUID()}
-                title={"Cube Upper Teleop"}
+                title={"Lower Hub Teleop"}
                 value={0}
 
                 decorator = {""}
@@ -311,86 +308,40 @@ class Container extends React.Component{
           <div>
             <span className="mid">
               <Counter
-                className="counter widget"
+                className="Fumbles Teleop"
                 id={this.assignUUID()}
-                title={"Cone Middle Teleop"}
-                value={0}
-
-                decorator = {"cones"}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Middle Teleop"}
+                title={"Fumbles Teleop"}
                 value={0}
 
                 decorator = {""}
               />
+
             </span>
           </div>
+
+
           <div>
-            <span className="lower">
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cone Lower Teleop"}
-                value={0}
-
-                decorator = {""}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Lower Teleop"}
-                value={0}
-
-                decorator = {""}
-              />
-            </span>
-          </div>
-          <div className="fumbles">
-            <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Fumbles"}
-                value={0}
-                decorator = {"fumbles"}
-                />
-            <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Supercharged Pieces"}
-                value={0}
-
-                decorator = {""}
-                />
-          </div>
-          <div>
-            <CheckBox
-              className="docked"
-              title="Docked Teleop"
-              id={this.assignUUID()}
-              value={false}
-              decorator = "teleopCheckbox"
-            />
-            <CheckBox
-              className="engaged"
-              title="Engaged Teleop"
-              id={this.assignUUID()}
-              value={false}
-              decorator = "teleopCheckbox"
-            />
-            <CheckBox
-              className="isFailure"
-              title="Chargepad Failure"
-              id={this.assignUUID()}
-              value={false}
-              decorator = "dissapointmentCheckbox"
-            />
+            <Dropdown
+                            className="dropdown climb"
+                            id={this.assignUUID()}
+                            title={"Climb Level"}
+                            value={""}
+                            items={[
+                            {
+                               title: "None"
+                            },
+                            {
+                               title: "Middle"
+                            },
+                            {
+                               title: "High"
+                            },
+                            {
+                                title: "Traversal"
+                            }
+                            ]}
+                            decorator = {"tarmac"}
+                        />
           </div>
 
 
@@ -403,11 +354,6 @@ class Container extends React.Component{
           <div>
             <Slider
               title="Rate their driving"
-              id={this.assignUUID()}
-              decorator = "slide"
-            />
-            <Slider
-              title="Cycle Time"
               id={this.assignUUID()}
               decorator = "slide"
             />
