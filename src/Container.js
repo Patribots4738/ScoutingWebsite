@@ -16,25 +16,23 @@ import {v4 as uuidv4} from "uuid"
 import React from 'react';
 import ClearLocalStorage from './widgets/ClearLocalStorage';
 
-
+import { set, ref } from "firebase/database";
+import { db } from "./firebaseConfig";
 
 class Container extends React.Component{
-
-  scriptUrl = "https://script.google.com/macros/s/AKfycbz7hdELAhAZDZP2XlLzwdOtyO-Xo10KLsbTw5skSf1R0wDRgOimbqA928yt8Q088s3M/exec"
  
   state = {
-    items: [],
+    scoutingLog: [],
   }
-
 
   gatherData = () => {
     var arr = []
 
 
-    for (var i = 0; i < this.state.items.length; i++){
+    for (var i = 0; i < this.state.scoutingLog.length; i++){
 
 
-      var element = document.getElementById(this.state.items[i]);
+      var element = document.getElementById(this.state.scoutingLog[i]);
 
 
       if (element !== null){
@@ -81,10 +79,34 @@ class Container extends React.Component{
         formDataObject.append(data[i][0], data[i][1])
       }
 
+      var formDataObject = new FormData()
+      
+      for (var i = 0; i < data.length; i++){
+        formDataObject.append(data[i][0], data[i][1])
+      }
 
-      fetch(this.scriptUrl, {method: 'POST', body: formDataObject})
-      .catch(err => console.log(err))
+      let stringify = (form) => {
+        var object = {};
+        form.forEach((value, key) => {
+            // Reflect.has in favor of: object.hasOwnProperty(key)
+            if(!Reflect.has(object, key)){
+                object[key] = value;
+                return;
+            }
+            if(!Array.isArray(object[key])){
+                object[key] = [object[key]];    
+            }
+            object[key].push(value);
+        });
+        var json = object;
+        return json;
+      }
 
+      let formData = new FormData();
+      // remove the first and last element of the array
+      formData.append(data[0][1], JSON.stringify(stringify(formDataObject)));
+
+      set(ref(db, 'match/'+data[1][1]), (stringify(formData)));
 
       let cachedData = JSON.parse(localStorage.getItem("matchData"))
 
@@ -118,7 +140,7 @@ class Container extends React.Component{
 
   assignUUID = () => {
     var id = uuidv4()
-    this.state.items.push(id)
+    this.state.scoutingLog.push(id)
     return id
   }
 
@@ -503,6 +525,5 @@ class Container extends React.Component{
 
 
 }
-
 
 export default Container;

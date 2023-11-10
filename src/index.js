@@ -1,9 +1,13 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Container from './Container'
+import App from './App';
+
+import 'firebase/compat/database';
+import React from 'react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Container />
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
 );
