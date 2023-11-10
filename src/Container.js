@@ -72,13 +72,42 @@ class Container extends React.Component{
     data = data[0]
 
     if (sendData){
-      var formDataObject = new FormData()
       
-      for (var i = 0; i < data.length; i++){
-        formDataObject.append(data[i][0], data[i][1])
+      var jsonData = {
+        "Name": data[0][1],
+        "Match Number": data[1][1],
+        "Team Number": data[2][1],
+        "Alliance Color": data[3][1],
+        "Mobility Auto": data[4][1],
+        "Docked Auto": data[5][1],
+        "Engaged Auto": data[6][1],
+        "Cone Upper Auto": data[7][1],
+        "Cube Upper Auto": data[8][1],
+        "Cone Middle Auto": data[9][1],
+        "Cube Middle Auto": data[10][1],
+        "Cone Lower Auto": data[11][1],
+        "Cube Lower Auto": data[12][1],
+        "Cone Upper Teleop": data[13][1],
+        "Cube Upper Teleop": data[14][1],
+        "Cone Middle Teleop": data[15][1],
+        "Cube Middle Teleop": data[16][1],
+        "Cone Lower Teleop": data[17][1],
+        "Cube Lower Teleop": data[18][1],
+        "Fumbles": data[19][1],
+        "Supercharged Pieces": data[20][1],
+        "Docked Teleop": data[21][1],
+        "Engaged Teleop": data[22][1],
+        "Chargepad Failure": data[23][1],
+        "Rate their driving": data[24][1],
+        "Cycle Time": data[25][1],
+        "Temporary Failure": data[26][1],
+        "Critical Failure": data[27][1],
+        "What they did well": data[28][1],
+        "What they didn't do well": data[29][1],
+        "Additional comments": data[30][1],
       }
-      
-      set(ref(db, 'match/'+ data[1][1] +"/"+data[0][1]), JSON.stringify(formDataObject));
+
+      set(ref(db, 'match/'+ data[1][1] +"/"+data[0][1]), jsonData);
 
       let cachedData = JSON.parse(localStorage.getItem("matchData"))
 
