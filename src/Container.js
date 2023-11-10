@@ -71,42 +71,14 @@ class Container extends React.Component{
     var sendData = data[1]
     data = data[0]
 
-
     if (sendData){
       var formDataObject = new FormData()
       
       for (var i = 0; i < data.length; i++){
         formDataObject.append(data[i][0], data[i][1])
       }
-
-      var formDataObject = new FormData()
       
-      for (var i = 0; i < data.length; i++){
-        formDataObject.append(data[i][0], data[i][1])
-      }
-
-      let stringify = (form) => {
-        var object = {};
-        form.forEach((value, key) => {
-            // Reflect.has in favor of: object.hasOwnProperty(key)
-            if(!Reflect.has(object, key)){
-                object[key] = value;
-                return;
-            }
-            if(!Array.isArray(object[key])){
-                object[key] = [object[key]];    
-            }
-            object[key].push(value);
-        });
-        var json = object;
-        return json;
-      }
-
-      let formData = new FormData();
-      // remove the first and last element of the array
-      formData.append(data[0][1], JSON.stringify(stringify(formDataObject)));
-
-      set(ref(db, 'match/'+data[1][1]), (stringify(formData)));
+      set(ref(db, 'match/'+ data[1][1] +"/"+data[0][1]), JSON.stringify(formDataObject));
 
       let cachedData = JSON.parse(localStorage.getItem("matchData"))
 
