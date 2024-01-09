@@ -104,7 +104,7 @@ class Container extends React.Component{
             "Engaged Auto": data[6][1],
             "Engaged Teleop": data[22][1],
             "Fumbles": data[19][1],
-            "Mobility Auto": data[4][1],
+            "Leave in Auto": data[4][1],
             "Temporary Failure": data[26][1],
           };
 
@@ -247,94 +247,43 @@ class Container extends React.Component{
           </h2>
           <div ClassName = "style1">
             <CheckBox 
-              className="mobility"
-              title="Mobility Auto" 
+              className="leave"
+              title="Leave in Auto" 
               id={this.assignUUID()} 
               value={false}
               decorator = "autoCheckbox"
             />
-            <CheckBox 
-              className="docked" 
-              title="Docked Auto"
-              id={this.assignUUID()}
-              value={false}
-              decorator = "autoCheckbox"
-            />    
-            <CheckBox
-              className="engaged"
-              title="Engaged Auto"
-              id={this.assignUUID()}
-              value={false}
-              decorator = "autoCheckbox"
-            />  
-          </div>
-          <img src={cone} alt={notFound} className="cone"/>
-          <img src={cube} alt={notFound} className="cube"/>
-          <div>
+            <div
+            />
             <span className="upper">
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Cone Upper Auto"}
+                title={"Amps Auto"}
                 value={0}
-                upperLimit={6}
-                decorator = {"cones"}
+                upperLimit={4}
+                decorator = {"amp"}
               />
 
 
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Cube Upper Auto"}
+                title={"Speaker Auto"}
                 value={0}
-                upperLimit={3}
-                decorator = {"cubes"}
+                upperLimit={4}
+                decorator = {"speaker"}
               />
+              
             </span>
-          </div>
-          <div>
-            <span className="mid">
-              <Counter
-                className="counter widget"
+            <div>
+              <TextBoxLong
+                className="text-box"
                 id={this.assignUUID()}
-                title={"Cone Middle Auto"}
-                value={0}
-                upperLimit={6}
-                decorator = {"cones"}
+                title={"Describe Auto Path"}
+                value={""}
               />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Middle Auto"}
-                value={0}
-                upperLimit={3}
-                decorator = {"cubes"}
-              />
-            </span>
-          </div>
-          <div>
-            <span className="lower">
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cone Lower Auto"}
-                value={0}
-                upperLimit={9}
-                decorator = {"cones"}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Lower Auto"}
-                value={0}
-                upperLimit={9}
-                decorator = {"cubes"}
-              />
-            </span>
+            </div>
           </div>
         </div>
        
@@ -342,71 +291,25 @@ class Container extends React.Component{
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <img src={cone} alt={notFound} className="cone"/>
-          <img src={cube} alt={notFound} className="cube"/>
           <div>
             <span className="uppers">
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Cone Upper Teleop"}
+                title={"Speaker Teleop"}
                 value={0}
-                upperLimit={6}
-                decorator = {"cones"}
+                upperLimit={107}
+                decorator = {"speaker"}
               />
 
 
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Cube Upper Teleop"}
+                title={"Amp Teleop"}
                 value={0}
-                upperLimit={3}
-                decorator = {"cubes"}
-              />
-            </span>
-          </div>
-          <div>
-            <span className="mid">
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cone Middle Teleop"}
-                value={0}
-                upperLimit={6}
-                decorator = {"cones"}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Middle Teleop"}
-                value={0}
-                upperLimit={3}
-                decorator = {"cubes"}
-              />
-            </span>
-          </div>
-          <div>
-            <span className="lower">
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cone Lower Teleop"}
-                value={0}
-                upperLimit={9}
-                decorator = {"cones"}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Lower Teleop"}
-                value={0}
-                upperLimit={9}
-                decorator = {"cubes"}
+                upperLimit={107}
+                decorator = {"amp"}
               />
             </span>
           </div>
@@ -421,30 +324,37 @@ class Container extends React.Component{
             <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Supercharged Pieces"}
+                title={"Amplified Speaker"}
                 value={0}
                 upperLimit = {12}
-                decorator = {"supercharged"}
+                decorator = {"amped"}
                 />
           </div>
-          <div>
+          <div className = "checkboxes1">
             <CheckBox 
               className="docked" 
-              title="Docked Teleop" 
+              title="End Park" 
               id={this.assignUUID()} 
               value={false}
               decorator = "teleopCheckbox"
             />    
             <CheckBox 
+              className="onstage" 
+              title="End Onstage" 
+              id={this.assignUUID()} 
+              value={false}
+              decorator = "onstage"
+            />
+            <CheckBox 
               className="engaged" 
-              title="Engaged Teleop" 
+              title="Stage Trap" 
               id={this.assignUUID()} 
               value={false}
               decorator = "teleopCheckbox"
-            />  
+            /> 
             <CheckBox 
               className="isFailure" 
-              title="Chargepad Failure" 
+              title="Climb Failure" 
               id={this.assignUUID()} 
               value={false}
               decorator = "dissapointmentCheckbox"
@@ -460,7 +370,7 @@ class Container extends React.Component{
           </h2>
           <div>
             <Slider
-              title="Rate their driving"
+              title="Human Player"
               id={this.assignUUID()}
               decorator = "slide"
             />

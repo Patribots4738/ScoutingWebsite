@@ -95,6 +95,7 @@ div {
   padding: 10px 10px 20px 10px;
   border-radius: calc(0.5 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
+  
 }
 
 
@@ -205,8 +206,9 @@ div {
   padding-left: 2%;
   
 }
-.temporary, .critical, .defend {
+.temporary, .critical, .defend, .subtitleonstage {
   color: rgb(255, 215, 0);
+  
 }
 .dbtn {
   padding-bottom: 20px;
@@ -233,4 +235,12 @@ div {
 .text-box-long {
   text-indent: 4%;
 
+}
+
+.checkboxes1 {
+  display: grid;
+  grid-template-columns: 150px 150px;
+  align-items: center;
+  width: 75%;
+  margin: 0 auto;
 }
