@@ -72,33 +72,34 @@ class Container extends React.Component{
 
     if (sendData){
       
-        let commentData = {
-            "What they did well": data[20][1],
-            "What they did bad": data[21][1],
-            "Additional Comments": data[22][1],
-            "Auto Description": data[7][1]
-        }
-        let jsonData = {
-            "Human Player": data[16][1],
-            "Cycle Time": data[17][1],
-            "Amp Auto": data[5][1],
-            "Speaker Auto": data[6][1],
-            "Speaker Teleop": data[8][1],
-            "Amp Teleop": data[9][1],
-            "Amped Speaker": data[10][1],
-            "Trap": data[11][1],
-            "Fumbles": data[12][1],
-            "Leave in Auto": this.convertCheckBox(data[4][1]),
-            "Temp Failure": this.convertCheckBox(data[18][1]),
-            "Critical Failure": this.convertCheckBox(data[19][1]),
-            "End Park": this.convertCheckBox(data[13][1]),
-            "End Onstage": this.convertCheckBox(data[14][1]),
-            "Climb Failure": this.convertCheckBox(data[15][1])
-          };
+      let commentData = {
+        "Name": data[0][1],
+        "What they did well": data[20][1],
+        "What they did bad": data[21][1],
+        "Additional Comments": data[22][1],
+        "Auto Description": data[7][1]
+      }
+      let jsonData = {
+        "Human Player": data[16][1],
+        "Cycle Time": data[17][1],
+        "Amp Auto": data[5][1],
+        "Speaker Auto": data[6][1],
+        "Speaker Teleop": data[8][1],
+        "Amp Teleop": data[9][1],
+        "Amped Speaker": data[10][1],
+        "Trap": data[11][1],
+        "Fumbles": data[12][1],
+        "Leave in Auto": this.convertCheckBox(data[4][1]),
+        "Temp Failure": this.convertCheckBox(data[18][1]),
+        "Critical Failure": this.convertCheckBox(data[19][1]),
+        "End Park": this.convertCheckBox(data[13][1]),
+        "End Onstage": this.convertCheckBox(data[14][1]),
+        "Climb Failure": this.convertCheckBox(data[15][1])
+      };
       let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
       //                      event             match #                      position and team #          name       
-      set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/'+data[0][1]+'/data/'), jsonData);
-      set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/'+data[0][1]+'/comments/'), commentData);
+      set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/data/'), jsonData);
+      set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/comments/'), commentData);
 
       let cachedData = JSON.parse(localStorage.getItem("matchData"))
 
@@ -165,7 +166,6 @@ class Container extends React.Component{
  
     URL.revokeObjectURL(blobURL);
   }
-
 
   render () {
     return (
