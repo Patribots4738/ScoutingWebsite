@@ -1,6 +1,3 @@
-import cone from './images/cone.png'
-import cube from './images/cube.png'
-import notFound from './images/notFound.png'
 import './App.css';
 
 import CheckBox from './widgets/CheckBox';
@@ -37,13 +34,13 @@ class Container extends React.Component{
 
       if (element !== null){
 
-
+        var value;
         if (element.getAttribute("value") !== null && element.getAttribute("value") !== undefined){
          
-          var value = (element.getAttribute("value"))
+          value = (element.getAttribute("value"))
 
 
-          if (element.required && value == "") {
+          if (element.required && value === "") {
 
             alert("Required field " + element.getAttribute("title") + " is blank.")
             return [[], false]
@@ -51,7 +48,7 @@ class Container extends React.Component{
           }
         } else {  
 
-          var value = element.value
+          value = element.value
          
         }
 
@@ -68,51 +65,42 @@ class Container extends React.Component{
 
     var data = this.gatherData()
 
-    var sendData = data[1]
-    data = data[0]
+    var sendData = data[1];
+    data = data[0];
 
-    const eventID = '2022cabb';
+    const eventID = '2024Testing';
 
     if (sendData){
       
         var commentData = {
-            "Additional comments": data[30][1],
-            "Cycle Time": data[25][1],
-            "Rate their driving": data[24][1],
-            "Supercharged Pieces": data[20][1],
-            "What they did well": data[28][1],
-            "What they didn't do well": data[29][1]
+            "Human Player": data[16][1],
+            "Cycle Time": data[17][1],
+            "Temp Failure": data[18][1],
+            "Critical Failure": data[19][1],
+            "What they did well": data[20][1],
+            "What they did bad": data[21][1],
+            "Additional Comments": data[22][1]
         }
         var jsonData = {
-            "Chargepad Failure": data[23][1],
-            "Critical Failure": data[27][1],
-            "Cube Lower Auto": data[12][1],
-            "Cube Lower Teleop": data[18][1],
-            "Cube Middle Auto": data[10][1],
-            "Cube Middle Teleop": data[16][1],
-            "Cube Upper Auto": data[8][1],
-            "Cube Upper Teleop": data[14][1],
-            "Cone Lower Auto": data[11][1],
-            "Cone Lower Teleop": data[17][1],
-            "Cone Middle Auto": data[9][1],
-            "Cone Middle Teleop": data[15][1],
-            "Cone Upper Auto": data[7][1],
-            "Cone Upper Teleop": data[13][1],
-            "Critical Failure": data[27][1],
-            "Docked Auto": data[5][1],
-            "Docked Teleop": data[21][1],
-            "Engaged Auto": data[6][1],
-            "Engaged Teleop": data[22][1],
-            "Fumbles": data[19][1],
+            "Team Number": data[2][1],
             "Leave in Auto": data[4][1],
-            "Temporary Failure": data[26][1],
+            "Amp Auto": data[5][1],
+            "Speaker Auto": data[6][1],
+            "Auto Description": data[7][1],
+            "Speaker Teleop": data[8][1],
+            "Amp Teleop": data[9][1],
+            "Amped Speaker": data[10][1],
+            "Trap": data[11][1],
+            "Fumbles": data[12][1],
+            "End Park": data[13][1],
+            "End Onstage": data[14][1],
+            "Climb Failure": data[15][1]
           };
-
-      set(ref(db, 'scouting/'+eventID+'/matchNumber/'+ data[1][1] +'/'+ 'allianceColor/' +data[3][1]+'/'+data[2][1]+'/'+data[0][1]+'/data/'), jsonData);
-      set(ref(db, 'scouting/'+eventID+'/matchNumber/'+ data[1][1] +'/'+ 'allianceColor/' +data[3][1]+'/'+data[2][1]+'/'+data[0][1]+'/comments/'), commentData);
+      //                      event       match #         position         name       
+      set(ref(db, 'scouting/'+eventID+'/'+data[1][1]+'/'+data[3][1]+'/'+data[0][1]+'/data/'), jsonData);
+      set(ref(db, 'scouting/'+eventID+'/'+data[1][1]+'/'+data[3][1]+'/'+data[0][1]+'/comments/'), commentData);
 
       let cachedData = JSON.parse(localStorage.getItem("matchData"))
-
 
       if (cachedData != null){
         cachedData.push(data)
@@ -225,17 +213,28 @@ class Container extends React.Component{
             <Dropdown
               className="dropdown alliance-color"
               id={this.assignUUID()}
-              title={"Aliance Color"}
+              title={"Position"}
               value={""}
               required={true}
               items={[
                 {
-                  title: "Red"
+                  title: "r1"
                 },
                 {
-                  title: "Blue"
+                  title: "r2"
                 },
-
+                {
+                  title: "r3"
+                },
+                {
+                  title: "b1"
+                },
+                {
+                  title: "b2"
+                },
+                {
+                  title: "b3"
+                }
               ]}
             />
             </div>
@@ -313,22 +312,32 @@ class Container extends React.Component{
               />
             </span>
           </div>
-          <div className="fumbles">
-            <Counter
+          <div>
+              <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Fumbles"}
+                title={"Amped Speaker"}
                 value={0}
-                decorator = {"fumbles"}
-                />
-            <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Amplified Speaker"}
-                value={0}
-                upperLimit = {12}
+                upperLimit = {107}
                 decorator = {"amped"}
                 />
+            <Counter
+                className="counter widget"
+                id={this.assignUUID()}
+                title={"Trap"}
+                value={0}
+                upperLimit = {3}
+                decorator = {"trap"}
+                />
+          </div>
+          <div>
+            <Counter
+              className="counter widget"
+              id={this.assignUUID()}
+              title={"Fumbles"}
+              value={0}
+              decorator = {"fumbles"}
+              />
           </div>
           <div className = "checkboxes1">
             <CheckBox 
@@ -345,13 +354,8 @@ class Container extends React.Component{
               value={false}
               decorator = "onstage"
             />
-            <CheckBox 
-              className="engaged" 
-              title="Stage Trap" 
-              id={this.assignUUID()} 
-              value={false}
-              decorator = "teleopCheckbox"
-            /> 
+          </div>
+          <div>
             <CheckBox 
               className="isFailure" 
               title="Climb Failure" 
@@ -360,7 +364,6 @@ class Container extends React.Component{
               decorator = "dissapointmentCheckbox"
             />
           </div>
-
 
         </div>
        
