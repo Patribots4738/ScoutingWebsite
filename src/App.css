@@ -244,3 +244,31 @@ div {
   width: 75%;
   margin: 0 auto;
 }
+
+.stop-watch {
+  color: white;
+  padding: 10px 10px 20px 10px;
+  border-radius: calc(0.5 * 100px);
+  box-shadow: 0 1px 6px 0 var(--box-border-color);
+}
+
+.stopwatch-btn {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  border: none;
+  background-color: gray;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.timer {
+  font-size: 30px;
+}
+
+.average-time {
+  font-size: 15px;
+}
