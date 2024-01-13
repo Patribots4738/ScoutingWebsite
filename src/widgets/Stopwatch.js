@@ -17,14 +17,16 @@ class Stopwatch extends React.Component {
     // Adds current time displayed on timer to total time, and sets value to the total / number of times
     // increments count
     handleSplit = () => {
-        var total = this.state.total + this.state.time;
-        var count = this.state.count + 1;
-        this.setState({
-            total: total,
-            count: count,
-            value: ((total / count) / 1000).toFixed(2) + "s",
-            time: 0
-        });
+        if (this.state.isActive) {
+            var total = this.state.total + this.state.time;
+            var count = this.state.count + 1;
+            this.setState({
+                total: total,
+                count: count,
+                value: ((total / count) / 1000).toFixed(2) + "s",
+                time: 0
+            });
+        }
     }
 
     // starts timer and starts time incrementing function on 10ms interval
@@ -46,7 +48,7 @@ class Stopwatch extends React.Component {
         if (this.state.isActive) {
             this.setState({
                 isActive: false
-            })
+            });
             clearInterval(this.state.interval);
         }
     }
@@ -56,7 +58,7 @@ class Stopwatch extends React.Component {
         this.setState({
             isActive: false,
             time: 0
-        })
+        });
         clearInterval(this.state.interval);
     }
 

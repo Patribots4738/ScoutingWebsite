@@ -250,6 +250,7 @@ div {
   padding: 10px 10px 20px 10px;
   border-radius: calc(0.5 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
+  margin-top: 5px;
 }
 
 .stopwatch-btn {
@@ -263,6 +264,10 @@ div {
   background-color: gray;
   font-weight: bold;
   font-size: 20px;
+}
+
+.stopwatch-btn:active {
+  background-color: rgba(255, 255, 255, 0.38);
 }
 
 .timer {
