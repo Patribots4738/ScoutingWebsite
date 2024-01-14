@@ -1,6 +1,3 @@
-import cone from './images/cone.png'
-import cube from './images/cube.png'
-import notFound from './images/notFound.png'
 import './App.css';
 
 import CheckBox from './widgets/CheckBox';
@@ -11,6 +8,7 @@ import TextBoxLong from './widgets/TextBoxLong'
 import Slider from './widgets/Slider'
 import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown'
+import Stopwatch from './widgets/Stopwatch';
 
 import {v4 as uuidv4} from "uuid"
 import React from 'react';
@@ -34,24 +32,22 @@ class Container extends React.Component{
 
       var element = document.getElementById(this.state.scoutingLog[i]);
 
-
       if (element !== null){
 
-
+        var value;
         if (element.getAttribute("value") !== null && element.getAttribute("value") !== undefined){
          
-          var value = (element.getAttribute("value"))
+          value = (element.getAttribute("value"))
 
 
-          if (element.required && value == "") {
+          if (element.required && value === "") {
 
             alert("Required field " + element.getAttribute("title") + " is blank.")
             return [[], false]
 
           }
         } else {  
-
-          var value = element.value
+          value = element.value
          
         }
 
@@ -68,57 +64,51 @@ class Container extends React.Component{
 
     var data = this.gatherData()
 
-    var sendData = data[1]
-    data = data[0]
+    var sendData = data[1];
+    data = data[0];
 
-    const eventID = '2022cabb';
+    const eventID = '2024Testing';
 
     if (sendData){
       
-        var commentData = {
-            "Additional comments": data[30][1],
-            "Cycle Time": data[25][1],
-            "Rate their driving": data[24][1],
-            "Supercharged Pieces": data[20][1],
-            "What they did well": data[28][1],
-            "What they didn't do well": data[29][1]
-        }
-        var jsonData = {
-            "Chargepad Failure": data[23][1],
-            "Critical Failure": data[27][1],
-            "Cube Lower Auto": data[12][1],
-            "Cube Lower Teleop": data[18][1],
-            "Cube Middle Auto": data[10][1],
-            "Cube Middle Teleop": data[16][1],
-            "Cube Upper Auto": data[8][1],
-            "Cube Upper Teleop": data[14][1],
-            "Cone Lower Auto": data[11][1],
-            "Cone Lower Teleop": data[17][1],
-            "Cone Middle Auto": data[9][1],
-            "Cone Middle Teleop": data[15][1],
-            "Cone Upper Auto": data[7][1],
-            "Cone Upper Teleop": data[13][1],
-            "Critical Failure": data[27][1],
-            "Docked Auto": data[5][1],
-            "Docked Teleop": data[21][1],
-            "Engaged Auto": data[6][1],
-            "Engaged Teleop": data[22][1],
-            "Fumbles": data[19][1],
-            "Mobility Auto": data[4][1],
-            "Temporary Failure": data[26][1],
-          };
-
-      set(ref(db, 'scouting/'+eventID+'/matchNumber/'+ data[1][1] +'/'+ 'allianceColor/' +data[3][1]+'/'+data[2][1]+'/'+data[0][1]+'/data/'), jsonData);
-      set(ref(db, 'scouting/'+eventID+'/matchNumber/'+ data[1][1] +'/'+ 'allianceColor/' +data[3][1]+'/'+data[2][1]+'/'+data[0][1]+'/comments/'), commentData);
+      let commentData = {
+        "Name": data[0][1],
+        "What they did well": data[21][1],
+        "What they did bad": data[22][1],
+        "Additional Comments": data[23][1],
+        "Auto Description": data[7][1]
+      }
+      let jsonData = {
+        "Human Player": data[17][1],
+        "Driving": data[18][1],
+        "Amp Auto": data[5][1],
+        "Speaker Auto": data[6][1],
+        "Speaker Teleop": data[8][1],
+        "Amp Teleop": data[9][1],
+        "Amped Speaker": data[10][1],
+        "Trap": data[11][1],
+        "Fumbles": data[12][1],
+        "Average Cycle Time": data[13][1],
+        "Match Number": data[1][1],
+        "Leave in Auto": this.convertCheckBox(data[4][1]),
+        "Temp Failure": this.convertCheckBox(data[19][1]),
+        "Critical Failure": this.convertCheckBox(data[20][1]),
+        "End Park": this.convertCheckBox(data[14][1]),
+        "End Onstage": this.convertCheckBox(data[15][1]),
+        "Climb Failure": this.convertCheckBox(data[16][1])
+      };
+      let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
+      //                      event             match #                      position and team #          name       
+      set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/data/'), jsonData);
+      set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/comments/'), commentData);
 
       let cachedData = JSON.parse(localStorage.getItem("matchData"))
 
-
       if (cachedData != null){
-        cachedData.push(data)
-        localStorage.setItem("matchData", JSON.stringify(cachedData))
+        cachedData.push(data);
+        localStorage.setItem("matchData", JSON.stringify(cachedData));
       } else {
-        localStorage.setItem("matchData", JSON.stringify([data]))
+        localStorage.setItem("matchData", JSON.stringify([data]));
       }
      
      
@@ -126,31 +116,35 @@ class Container extends React.Component{
       setTimeout(() => {
         document.location.reload();
       }, 3500);
-      alert("Data submitted, press ok to continue")
+      alert("Data submitted, press ok to continue");
     }
   }
 
+  // convert checkbox value to true/false
+  convertCheckBox = (data) => {
+    return (data === "1") ? true : false;
+  }
 
   clearLocalStorage = () => {
-    var response = window.confirm("Are you sure you want to clear all saved matches?")
+    var response = window.confirm("Are you sure you want to clear all saved matches?");
     if (!response){alert("Aborted wiping local storage"); return;}
-    response = window.confirm("Are you sure you're sure?")
+    response = window.confirm("Are you sure you're sure?");
     if (!response){alert("Aborted wiping local storage"); return;}
-    localStorage.clear()
+    localStorage.clear();
     alert("Cleared all match data.")
   }
 
 
   assignUUID = () => {
-    var id = uuidv4()
-    this.state.scoutingLog.push(id)
-    return id
+    var id = uuidv4();
+    this.state.scoutingLog.push(id);
+    return id;
   }
 
 
   handleExportData =(_) => {
-    let cachedDataJSON = (JSON.parse(localStorage.getItem("matchData")))
-    let cachedDataCSV = ""
+    let cachedDataJSON = (JSON.parse(localStorage.getItem("matchData")));
+    let cachedDataCSV = "";
 
     if (cachedDataJSON != null){
       for (let i = 0; i < cachedDataJSON.length; i++){
@@ -174,7 +168,6 @@ class Container extends React.Component{
     URL.revokeObjectURL(blobURL);
   }
 
-
   render () {
     return (
       <ul className="container">
@@ -182,9 +175,10 @@ class Container extends React.Component{
           By Continuing to Use Our Website You Agree to Use Cookies :)
         </span>
         <a
-        className="scouting-guidelines widget"
-        href="https://docs.google.com/document/d/1Ia6xii1MCRcM0T9CLcPGnI98FGZ5JFwIAK3yKLTfOWg"
-        target="_blank"
+          className="scouting-guidelines widget"
+          href="https://docs.google.com/document/d/1Ia6xii1MCRcM0T9CLcPGnI98FGZ5JFwIAK3yKLTfOWg"
+          target="_blank"
+          rel="noreferrer"
         >
           Scouting Guidelines
         </a>
@@ -225,17 +219,28 @@ class Container extends React.Component{
             <Dropdown
               className="dropdown alliance-color"
               id={this.assignUUID()}
-              title={"Aliance Color"}
+              title={"Position"}
               value={""}
               required={true}
               items={[
                 {
-                  title: "Red"
+                  title: "r1"
                 },
                 {
-                  title: "Blue"
+                  title: "r2"
                 },
-
+                {
+                  title: "r3"
+                },
+                {
+                  title: "b1"
+                },
+                {
+                  title: "b2"
+                },
+                {
+                  title: "b3"
+                }
               ]}
             />
             </div>
@@ -247,94 +252,43 @@ class Container extends React.Component{
           </h2>
           <div ClassName = "style1">
             <CheckBox 
-              className="mobility"
-              title="Mobility Auto" 
+              className="leave"
+              title="Leave in Auto" 
               id={this.assignUUID()} 
               value={false}
               decorator = "autoCheckbox"
             />
-            <CheckBox 
-              className="docked" 
-              title="Docked Auto"
-              id={this.assignUUID()}
-              value={false}
-              decorator = "autoCheckbox"
-            />    
-            <CheckBox
-              className="engaged"
-              title="Engaged Auto"
-              id={this.assignUUID()}
-              value={false}
-              decorator = "autoCheckbox"
-            />  
-          </div>
-          <img src={cone} alt={notFound} className="cone"/>
-          <img src={cube} alt={notFound} className="cube"/>
-          <div>
+            <div
+            />
             <span className="upper">
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Cone Upper Auto"}
+                title={"Amps Auto"}
                 value={0}
-                upperLimit={6}
-                decorator = {"cones"}
+                upperLimit={4}
+                decorator = {"amp"}
               />
 
 
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Cube Upper Auto"}
+                title={"Speaker Auto"}
                 value={0}
-                upperLimit={3}
-                decorator = {"cubes"}
+                upperLimit={4}
+                decorator = {"speaker"}
               />
+              
             </span>
-          </div>
-          <div>
-            <span className="mid">
-              <Counter
-                className="counter widget"
+            <div>
+              <TextBoxLong
+                className="text-box"
                 id={this.assignUUID()}
-                title={"Cone Middle Auto"}
-                value={0}
-                upperLimit={6}
-                decorator = {"cones"}
+                title={"Describe Auto Path"}
+                value={""}
               />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Middle Auto"}
-                value={0}
-                upperLimit={3}
-                decorator = {"cubes"}
-              />
-            </span>
-          </div>
-          <div>
-            <span className="lower">
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cone Lower Auto"}
-                value={0}
-                upperLimit={9}
-                decorator = {"cones"}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Lower Auto"}
-                value={0}
-                upperLimit={9}
-                decorator = {"cubes"}
-              />
-            </span>
+            </div>
           </div>
         </div>
        
@@ -342,115 +296,87 @@ class Container extends React.Component{
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <img src={cone} alt={notFound} className="cone"/>
-          <img src={cube} alt={notFound} className="cube"/>
           <div>
             <span className="uppers">
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Cone Upper Teleop"}
+                title={"Speaker Teleop"}
                 value={0}
-                upperLimit={6}
-                decorator = {"cones"}
+                upperLimit={107}
+                decorator = {"speaker"}
               />
 
 
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Cube Upper Teleop"}
+                title={"Amp Teleop"}
                 value={0}
-                upperLimit={3}
-                decorator = {"cubes"}
+                upperLimit={107}
+                decorator = {"amp"}
               />
             </span>
           </div>
           <div>
-            <span className="mid">
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Cone Middle Teleop"}
+                title={"Amped Speaker"}
                 value={0}
-                upperLimit={6}
-                decorator = {"cones"}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Middle Teleop"}
-                value={0}
-                upperLimit={3}
-                decorator = {"cubes"}
-              />
-            </span>
-          </div>
-          <div>
-            <span className="lower">
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cone Lower Teleop"}
-                value={0}
-                upperLimit={9}
-                decorator = {"cones"}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Cube Lower Teleop"}
-                value={0}
-                upperLimit={9}
-                decorator = {"cubes"}
-              />
-            </span>
-          </div>
-          <div className="fumbles">
-            <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Fumbles"}
-                value={0}
-                decorator = {"fumbles"}
+                upperLimit = {107}
+                decorator = {"amped"}
                 />
             <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Supercharged Pieces"}
+                title={"Trap"}
                 value={0}
-                upperLimit = {12}
-                decorator = {"supercharged"}
+                upperLimit = {3}
+                decorator = {"trap"}
                 />
           </div>
           <div>
+            <Counter
+              className="counter widget"
+              id={this.assignUUID()}
+              title={"Fumbles"}
+              value={0}
+              decorator = {"fumbles"}
+              />
+          </div>
+          <Stopwatch
+            className="stop-watch"
+            value="0.00s"
+            id={this.assignUUID()}
+            title="Cycle Timer"
+            decorator={"stopwatch"}
+          />
+          <div className = "checkboxes1">
             <CheckBox 
               className="docked" 
-              title="Docked Teleop" 
+              title="End Park" 
               id={this.assignUUID()} 
               value={false}
               decorator = "teleopCheckbox"
             />    
             <CheckBox 
-              className="engaged" 
-              title="Engaged Teleop" 
+              className="onstage" 
+              title="End Onstage" 
               id={this.assignUUID()} 
               value={false}
-              decorator = "teleopCheckbox"
-            />  
+              decorator = "onstage"
+            />
+          </div>
+          <div>
             <CheckBox 
               className="isFailure" 
-              title="Chargepad Failure" 
+              title="Climb Failure" 
               id={this.assignUUID()} 
               value={false}
               decorator = "dissapointmentCheckbox"
             />
           </div>
-
 
         </div>
        
@@ -460,12 +386,12 @@ class Container extends React.Component{
           </h2>
           <div>
             <Slider
-              title="Rate their driving"
+              title="Human Player"
               id={this.assignUUID()}
               decorator = "slide"
             />
             <Slider
-              title="Cycle Time"
+              title="Driving"
               id={this.assignUUID()}
               decorator = "slide"
             />
