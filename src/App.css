@@ -3,7 +3,7 @@
 :root {
   --box-border-color: rgba(255, 255, 255, 0.38);
   min-width: 100%;
-  padding-left: 5%;
+  
 }
 
 
@@ -28,6 +28,7 @@ div {
 
 .container {
   justify-content: center;
+  background-color: rgb(49, 49, 48);
   display: grid;
   padding: 10px 10px 20px 10px;
   border-radius: calc(0.5 * 100px);
@@ -39,12 +40,12 @@ div {
 .subtitle, .title, 
 .cube, .cone, 
 .teleopCheckbox, .autoCheckbox, .dissapointmentCheckbox {
-  color: rgb(219, 186, 0);
+  color: rgb(68, 155, 255);
   padding-top: 10px;
 }
 
 .title {
-  stroke:white;
+  stroke:rgb(5, 215, 235);
 }
 
 .dropdown {
@@ -60,6 +61,7 @@ div {
 }
 
 
+
 .section-title {
   border-radius: calc(0.5 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
@@ -69,7 +71,7 @@ div {
 
 
 .text-box {
-  border-radius: calc(0.5 * 100px);
+  border-radius: calc(0.9 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
   height: 30px;
   width: 100px;
@@ -95,6 +97,7 @@ div {
   padding: 10px 10px 20px 10px;
   border-radius: calc(0.5 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
+  
 }
 
 
@@ -110,11 +113,11 @@ div {
   font-size: 50px;
   text-align: center;
   display: inline-block;
-  color: black;
-  background-color: gray;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 18, 123);
   border-radius: 15px;
   border-radius: 30px;
-  border-color: black;
+  border-color: rgb(0, 149, 255);
   padding-top: 0%;
   padding: 0%;
   padding-left: 0%;
@@ -124,7 +127,7 @@ div {
 
 .value {
   padding: 10px;
-  color: rgb(255, 255, 255);
+  color: rgb(255, 0, 238);
 }
 
 
@@ -205,8 +208,9 @@ div {
   padding-left: 2%;
   
 }
-.temporary, .critical, .defend {
+.temporary, .critical, .defend, .subtitleonstage {
   color: rgb(255, 215, 0);
+  
 }
 .dbtn {
   padding-bottom: 20px;
@@ -233,4 +237,45 @@ div {
 .text-box-long {
   text-indent: 4%;
 
+}
+
+.checkboxes1 {
+  display: grid;
+  grid-template-columns: 150px 150px;
+  align-items: center;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.stop-watch {
+  color: white;
+  padding: 10px 10px 20px 10px;
+  border-radius: calc(0.5 * 100px);
+  box-shadow: 0 1px 6px 0 var(--box-border-color);
+  margin-top: 5px;
+}
+
+.stopwatch-btn {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  border: none;
+  background-color: gray;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.stopwatch-btn:active {
+  background-color: rgba(255, 255, 255, 0.38);
+}
+
+.timer {
+  font-size: 30px;
+}
+
+.average-time {
+  font-size: 15px;
 }
