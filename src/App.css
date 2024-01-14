@@ -230,7 +230,7 @@ div {
 }
 
 .scouting-guidelines {
-  color: rgb(150, 150, 255);
+  color: rgb(0, 0, 0);
 }
 .text-box-long {
   text-indent: 4%;
@@ -262,8 +262,9 @@ div {
   border-radius: 35px;
   border: none;
   background-color: gray;
-  font-weight: bold;
-  font-size: 20px;
+  align-items: center;
+  text-align: center;
+
 }
 
 .stopwatch-btn:active {
@@ -276,4 +277,19 @@ div {
 
 .average-time {
   font-size: 15px;
+}
+
+.stopwatch-btn-text {
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+  width: 20px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  display: flex;
+}
+
+.btn-text {
+  color: black;
 }
