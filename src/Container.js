@@ -89,6 +89,7 @@ class Container extends React.Component{
         "Trap": data[11][1],
         "Fumbles": data[12][1],
         "Average Cycle Time": data[13][1],
+        "Match Number": data[1][1],
         "Leave in Auto": this.convertCheckBox(data[4][1]),
         "Temp Failure": this.convertCheckBox(data[19][1]),
         "Critical Failure": this.convertCheckBox(data[20][1]),
