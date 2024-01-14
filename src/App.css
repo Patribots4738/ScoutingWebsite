@@ -28,6 +28,7 @@ div {
 
 .container {
   justify-content: center;
+  background-color: rgb(49, 49, 48);
   display: grid;
   padding: 10px 10px 20px 10px;
   border-radius: calc(0.5 * 100px);
@@ -39,12 +40,12 @@ div {
 .subtitle, .title, 
 .cube, .cone, 
 .teleopCheckbox, .autoCheckbox, .dissapointmentCheckbox {
-  color: rgb(219, 186, 0);
+  color: rgb(68, 155, 255);
   padding-top: 10px;
 }
 
 .title {
-  stroke:white;
+  stroke:rgb(5, 215, 235);
 }
 
 .dropdown {
@@ -60,6 +61,7 @@ div {
 }
 
 
+
 .section-title {
   border-radius: calc(0.5 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
@@ -69,7 +71,7 @@ div {
 
 
 .text-box {
-  border-radius: calc(0.5 * 100px);
+  border-radius: calc(0.9 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
   height: 30px;
   width: 100px;
@@ -111,11 +113,11 @@ div {
   font-size: 50px;
   text-align: center;
   display: inline-block;
-  color: black;
-  background-color: gray;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 18, 123);
   border-radius: 15px;
   border-radius: 30px;
-  border-color: black;
+  border-color: rgb(0, 149, 255);
   padding-top: 0%;
   padding: 0%;
   padding-left: 0%;
@@ -125,7 +127,7 @@ div {
 
 .value {
   padding: 10px;
-  color: rgb(255, 255, 255);
+  color: rgb(255, 0, 238);
 }
 
 

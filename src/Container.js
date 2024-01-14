@@ -10,6 +10,7 @@ import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown'
 import Stopwatch from './widgets/Stopwatch';
 
+
 import {v4 as uuidv4} from "uuid"
 import React from 'react';
 import ClearLocalStorage from './widgets/ClearLocalStorage';
@@ -89,7 +90,7 @@ class Container extends React.Component{
         "Trap": data[11][1],
         "Fumbles": data[12][1],
         "Average Cycle Time": data[13][1],
-        "Leave in Auto": this.convertCheckBox(data[4][1]),
+        "Taxi in Auto": this.convertCheckBox(data[4][1]),
         "Temp Failure": this.convertCheckBox(data[19][1]),
         "Critical Failure": this.convertCheckBox(data[20][1]),
         "End Park": this.convertCheckBox(data[14][1]),
@@ -171,7 +172,7 @@ class Container extends React.Component{
     return (
       <ul className="container">
         <span className="label cookie">
-          By Continuing to Use Our Website You Agree to Use Cookies :)
+          By continuing to Use Our Website You Agree to Use Cookies :)
         </span>
         <a
           className="scouting-guidelines widget"
@@ -195,7 +196,7 @@ class Container extends React.Component{
             <TextBox
               className="textbox name"
               id={this.assignUUID()}
-              title={"Name"}
+              title= {"Title"}
               value={""}
               required={ "true" }
             />
@@ -244,7 +245,7 @@ class Container extends React.Component{
             />
             </div>
         </div>
-       
+      
         <div className="auto-container">
           <h2 className="subtitle section-title">
             AUTONOMOUS
@@ -252,7 +253,7 @@ class Container extends React.Component{
           <div ClassName = "style1">
             <CheckBox 
               className="leave"
-              title="Leave in Auto" 
+              title="Taxi" 
               id={this.assignUUID()} 
               value={false}
               decorator = "autoCheckbox"
@@ -263,34 +264,35 @@ class Container extends React.Component{
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Amps Auto"}
+                title={"Lower Hub Auto"}
                 value={0}
                 upperLimit={4}
                 decorator = {"amp"}
               />
 
-
+              
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Speaker Auto"}
+                title={"Upper Hub Auto"}
                 value={0}
                 upperLimit={4}
                 decorator = {"speaker"}
               />
               
             </span>
-            <div>
-              <TextBoxLong
-                className="text-box"
-                id={this.assignUUID()}
-                title={"Describe Auto Path"}
-                value={""}
-              />
+          <div>
+            <TextBox
+              className="textbox textbox box"
+              id={this.assignUUID()}
+              title={"Describe Auto Path"}
+              value={""}
+              required={true}
+            />
             </div>
           </div>
         </div>
-       
+
         <div className="teleop-container">
           <h2 className="subtitle section-title">
             TELEOP
@@ -300,7 +302,7 @@ class Container extends React.Component{
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Speaker Teleop"}
+                title={"Lower Hub Teleop"}
                 value={0}
                 upperLimit={107}
                 decorator = {"speaker"}
@@ -310,7 +312,7 @@ class Container extends React.Component{
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Amp Teleop"}
+                title={"Upper Hub Teleop"}
                 value={0}
                 upperLimit={107}
                 decorator = {"amp"}
@@ -318,7 +320,7 @@ class Container extends React.Component{
             </span>
           </div>
           <div>
-              <Counter
+              {/* <Counter
                 className="counter widget"
                 id={this.assignUUID()}
                 title={"Amped Speaker"}
@@ -333,7 +335,7 @@ class Container extends React.Component{
                 value={0}
                 upperLimit = {3}
                 decorator = {"trap"}
-                />
+                /> */}
           </div>
           <div>
             <Counter
@@ -344,6 +346,8 @@ class Container extends React.Component{
               decorator = {"fumbles"}
               />
           </div>
+      
+  
           <Stopwatch
             className="stop-watch"
             value="0.00s"
@@ -351,17 +355,17 @@ class Container extends React.Component{
             title="Cycle Timer"
             decorator={"stopwatch"}
           />
-          <div className = "checkboxes1">
+          {/* <div className = "checkboxes1">
             <CheckBox 
               className="docked" 
               title="End Park" 
               id={this.assignUUID()} 
               value={false}
               decorator = "teleopCheckbox"
-            />    
+            />
             <CheckBox 
               className="onstage" 
-              title="End Onstage" 
+              title="Park" 
               id={this.assignUUID()} 
               value={false}
               decorator = "onstage"
@@ -375,7 +379,30 @@ class Container extends React.Component{
               value={false}
               decorator = "dissapointmentCheckbox"
             />
-          </div>
+          </div> */}
+          <div>
+          <Dropdown
+              className="dropdown alliance-color"
+              id={this.assignUUID()}
+              title={"Rungs Climbed"}
+              value={""}
+              required={true}
+              items={[
+                {
+                  title: "Park"
+                },
+                {
+                  title: "Low"
+                },
+                {
+                  title: "Medium"
+                },
+                {
+                  title: "High"
+                }
+              ]}
+            />
+            </div>
 
         </div>
        
@@ -389,11 +416,13 @@ class Container extends React.Component{
               id={this.assignUUID()}
               decorator = "slide"
             />
+          <div>
             <Slider
               title="Driving"
               id={this.assignUUID()}
               decorator = "slide"
             />
+          </div>
           </div>
           <div className="checkboxes">
             <CheckBox
