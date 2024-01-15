@@ -3,7 +3,7 @@ import React from "react";
 class Counter extends React.Component{
 
     state = {
-        value: 0,
+        value: this.props.value,
         id: this.props.id,
         title: this.props.title,
         upperLimit: this.props.upperLimit,

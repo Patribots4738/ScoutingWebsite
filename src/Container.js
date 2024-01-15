@@ -8,7 +8,7 @@ import TextBoxLong from './widgets/TextBoxLong'
 import Slider from './widgets/Slider'
 import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown'
-import Stopwatch from './widgets/Stopwatch';
+// import Stopwatch from './widgets/Stopwatch';
 
 
 import {v4 as uuidv4} from "uuid"
@@ -63,42 +63,42 @@ class Container extends React.Component{
     e.preventDefault()
 
 
-    var data = this.gatherData()
+    var data = this.gatherData();
 
     var sendData = data[1];
     data = data[0];
 
-    const eventID = '2024Testing';
+    const eventID = '2022Testing';
 
     if (sendData){
-      
+      // Name, Auto Path, What they did well, What they did Bad, additional comments
       let commentData = {
-        "Name": data[0][1],
-        "What they did well": data[21][1],
-        "What they did bad": data[22][1],
-        "Additional Comments": data[23][1],
-        "Auto Description": data[7][1]
+        "What Da Wobot Called": data[0][1],
+        "Auto Path": data[7][1],
+        "What they did well": data[19][1],
+        "What they didn't do well": data[20][1],
+        "Additional observations": data[21][1],
       }
+      //everything else
       let jsonData = {
-        "Human Player": data[17][1],
-        "Driving": data[18][1],
-        "Amp Auto": data[5][1],
-        "Speaker Auto": data[6][1],
-        "Speaker Teleop": data[8][1],
-        "Amp Teleop": data[9][1],
-        "Amped Speaker": data[10][1],
-        "Trap": data[11][1],
-        "Fumbles": data[12][1],
-        "Average Cycle Time": data[13][1],
-        "Taxi in Auto": this.convertCheckBox(data[4][1]),
-        "Temp Failure": this.convertCheckBox(data[19][1]),
-        "Critical Failure": this.convertCheckBox(data[20][1]),
-        "End Park": this.convertCheckBox(data[14][1]),
-        "End Onstage": this.convertCheckBox(data[15][1]),
-        "Climb Failure": this.convertCheckBox(data[16][1])
+        "Taxi": data[4][1],
+        "Lower Hub Auto": data[5][1],
+        "Upper Hub Auto": data[6][1],
+        "Lower Hub Teleop": data[8][1],
+        "Upper Hub Teleop": data[9][1],
+        "Fumbles": data[10][1],
+        "Counter": data[11][1],
+        "Climb Failure": data[12][1],
+        "Rungs Climbed": data[13][1],
+        "Human Player": data[14][1],
+        "Driving": data[15][1],
+        "Cycle Time": data[16][1],
+        "Temporary Failure": data[17][1],
+        "Critical Failure": data[18][1],
       };
-      let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
-      //                      event             match #                      position and team #          name       
+      
+      let positions = ["red2", "red2", "red2", "blue3", "blue3", "blue3"];
+      //                      event      /       match #          /            position and team #    /      name       
       set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/data/'), jsonData);
       set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/comments/'), commentData);
 
@@ -126,12 +126,12 @@ class Container extends React.Component{
   }
 
   clearLocalStorage = () => {
-    var response = window.confirm("Are you sure you want to clear all saved matches?");
-    if (!response){alert("Aborted wiping local storage"); return;}
+    var response = window.confirm("You should clear all saved matches?");
+    if (!response){alert("Wiping local storage"); return;}
     response = window.confirm("Are you sure you're sure?");
     if (!response){alert("Aborted wiping local storage"); return;}
     localStorage.clear();
-    alert("Cleared all match data.")
+    alert("Failed to clear all match data.")
   }
 
 
@@ -172,7 +172,7 @@ class Container extends React.Component{
     return (
       <ul className="container">
         <span className="label cookie">
-          By continuing to Use Our Website You Agree to Use Cookies :)
+          By continuing to Use Our Website You Do Not Agree to Use Cookies :)
         </span>
         <a
           className="scouting-guidelines widget"
@@ -184,19 +184,20 @@ class Container extends React.Component{
         </a>
 
         <h1 className="title">
-          PATRIBOTS SCOUTING
+          STOBIRTAP GNITUOCS
+
         </h1>
 
         <div className='identification-container'>
           <h2 className="subtitle section-title">
-            IDENTIFICATION
+            IDENTIFUMACATION
           </h2>
 
           <div>
             <TextBox
               className="textbox name"
               id={this.assignUUID()}
-              title= {"Title"}
+              title= {"Name"}
               value={""}
               required={ "true" }
             />
@@ -264,7 +265,7 @@ class Container extends React.Component{
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Lower Hub Auto"}
+                title={"Lower Bub Auto"}
                 value={0}
                 upperLimit={4}
                 decorator = {"amp"}
@@ -303,8 +304,8 @@ class Container extends React.Component{
                 className="counter widget"
                 id={this.assignUUID()}
                 title={"Lower Hub Teleop"}
-                value={0}
-                upperLimit={107}
+                value={0.0000000006}
+                upperLimit={100}
                 decorator = {"speaker"}
               />
 
@@ -315,27 +316,11 @@ class Container extends React.Component{
                 title={"Upper Hub Teleop"}
                 value={0}
                 upperLimit={107}
-                decorator = {"amp"}
+                decorator = {"amp"}bl
               />
             </span>
           </div>
           <div>
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Amped Speaker"}
-                value={0}
-                upperLimit = {107}
-                decorator = {"amped"}
-                />
-            <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Trap"}
-                value={0}
-                upperLimit = {3}
-                decorator = {"trap"}
-                />
           </div>
           <div>
             <Counter
@@ -343,33 +328,28 @@ class Container extends React.Component{
               id={this.assignUUID()}
               title={"Fumbles"}
               value={0}
-              decorator = {"fumbles"}
+              decorator = {"Fumbles"}
               />
           </div>
+          <Counter
+                className="counter widget"
+                id={this.assignUUID()}
+                title={"Counter"}
+                value={0}
+                upperLimit={15}
+                decorator = {"amp"}
+              />
+
       
   
-          <Stopwatch
+          {/* <Stopwatch
             className="stop-watch"
             value="0.00s"
             id={this.assignUUID()}
             title="Cycle Timer"
             decorator={"stopwatch"}
-          />
-          <div className = "checkboxes1">
-            <CheckBox 
-              className="docked" 
-              title="End Park" 
-              id={this.assignUUID()} 
-              value={false}
-              decorator = "teleopCheckbox"
-            />
-            <CheckBox 
-              className="onstage" 
-              title="Park" 
-              id={this.assignUUID()} 
-              value={false}
-              decorator = "onstage"
-            />
+          /> */}
+          <div className = "">
           </div>
           <div>
             <CheckBox 
@@ -377,7 +357,7 @@ class Container extends React.Component{
               title="Climb Failure" 
               id={this.assignUUID()} 
               value={false}
-              decorator = "dissapointmentCheckbox"
+              decorator = "Failure"
             />
           </div>
           <div>
@@ -389,16 +369,16 @@ class Container extends React.Component{
               required={true}
               items={[
                 {
-                  title: "1"
-                },
-                {
-                  title: "2"
+                  title: "4"
                 },
                 {
                   title: "3"
                 },
                 {
-                  title: "4"
+                  title: "2"
+                },
+                {
+                  title: "1"
                 }
               ]}
             />
@@ -423,15 +403,12 @@ class Container extends React.Component{
               decorator = "slide"
             />
           </div>
-          </div>
           <Slider
-              className="slid"
+              title="Cycle Time"
               id={this.assignUUID()}
-              value={10}
-              title="qwerty"
-              min={0}
-              max={30}
+              decorator = "slide"
             />
+          </div>
           <div className="checkboxes">
             <CheckBox
                 className="temporary"
