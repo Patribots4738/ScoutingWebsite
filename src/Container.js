@@ -9,6 +9,7 @@ import Slider from './widgets/Slider'
 import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown'
 import Stopwatch from './widgets/Stopwatch';
+import AutoPieces from './widgets/AutoPieces';
 
 import {v4 as uuidv4} from "uuid"
 import React from 'react';
@@ -73,30 +74,31 @@ class Container extends React.Component{
       
       let commentData = {
         "Name": data[0][1],
-        "What they did well": data[22][1],
-        "What they did bad": data[23][1],
-        "Additional Comments": data[24][1],
-        "Auto Description": data[7][1]
+        "What they did well": data[23][1],
+        "What they did bad": data[24][1],
+        "Additional Comments": data[25][1],
+        "Auto Description": data[8][1],
+        "Auto Pieces": data[7][1]
       }
       let jsonData = {
-        "Human Player": data[18][1],
-        "Driving": data[19][1],
+        "Human Player": data[19][1],
+        "Driving": data[20][1],
         "Amp Auto": data[5][1],
         "Speaker Auto": data[6][1],
-        "Speaker Teleop": data[8][1],
-        "Amp Teleop": data[9][1],
-        "Amped Speaker": data[10][1],
-        "Trap": data[11][1],
-        "Fumbles": data[12][1],
-        "Average Cycle Time": data[13][1],
+        "Speaker Teleop": data[9][1],
+        "Amp Teleop": data[10][1],
+        "Amped Speaker": data[11][1],
+        "Trap": data[12][1],
+        "Fumbles": data[13][1],
+        "Average Cycle Time": data[14][1],
         "Match Number": data[1][1],
         "Leave in Auto": this.convertCheckBox(data[4][1]),
-        "Temp Failure": this.convertCheckBox(data[20][1]),
-        "Critical Failure": this.convertCheckBox(data[21][1]),
-        "End Park": this.convertCheckBox(data[14][1]),
-        "End Onstage": this.convertCheckBox(data[15][1]),
-        "Climb Failure": this.convertCheckBox(data[16][1]),
-        "Coopertition": this.convertCheckBox(data[17][1])
+        "Temp Failure": this.convertCheckBox(data[21][1]),
+        "Critical Failure": this.convertCheckBox(data[22][1]),
+        "End Park": this.convertCheckBox(data[15][1]),
+        "End Onstage": this.convertCheckBox(data[16][1]),
+        "Climb Failure": this.convertCheckBox(data[17][1]),
+        "Coopertition": this.convertCheckBox(data[18][1])
       };
       let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
       //                      event             match #                      position and team #          name       
@@ -283,6 +285,14 @@ class Container extends React.Component{
               
             </span>
             <div>
+              <AutoPieces
+                value={[]}
+                id={this.assignUUID()}
+                title="Auto Pieces"
+                decorator="auto-pieces"
+              />
+            </div>
+            <div>
               <TextBoxLong
                 className="text-box"
                 id={this.assignUUID()}
@@ -348,7 +358,7 @@ class Container extends React.Component{
           </div>
           <Stopwatch
             className="stop-watch"
-            value="0.00s"
+            value="0.00"
             id={this.assignUUID()}
             title="Cycle Timer"
             decorator={"stopwatch"}

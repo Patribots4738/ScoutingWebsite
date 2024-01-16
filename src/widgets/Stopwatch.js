@@ -23,7 +23,7 @@ class Stopwatch extends React.Component {
             this.setState({
                 total: total,
                 count: count,
-                value: ((total / count) / 1000).toFixed(2) + "s",
+                value: ((total / count) / 1000).toFixed(2),
                 time: 0
             });
         }
@@ -81,7 +81,7 @@ class Stopwatch extends React.Component {
                         </span>
                     </div>
                     <div className="average-time" id={this.state.id} value={this.state.value} title={this.state.title}>
-                        Current Time Average: {this.state.value}
+                        Current Time Average: {this.state.value}s
                     </div>
                     <div className="control-buttons">
                         <button className="stopwatch-btn" onClick={() => this.handleStart()}>

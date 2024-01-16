@@ -25,6 +25,9 @@ div {
   text-align: center;
 }
 
+link {
+  color: white;
+}
 
 .container {
   justify-content: center;
@@ -229,9 +232,6 @@ div {
   max-height: 200px;
 }
 
-.scouting-guidelines {
-  color: rgb(0, 0, 0);
-}
 .text-box-long {
   text-indent: 4%;
 
@@ -292,4 +292,57 @@ div {
 
 .btn-text {
   color: black;
+}
+
+.val-display {
+  color: white;
+  font-size: 25px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auto-pieces-body {
+  color: white;
+  border-radius: calc(0.5 * 100px);
+  box-shadow: 0 1px 6px 0 var(--box-border-color);
+  padding-bottom: 10px;
+  width: 380px;
+  align-content: space-evenly;
+}
+
+.auto-buttons {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auto-dropdowns {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auto-dropdown {
+  width: 100px;
+  height: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 20px;
+  text-align: center;
+  border: none;
+  border-radius: 25px;
+}
+
+.auto-button {
+  width: 70px;
+  height: 35px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border: none;
+  border-radius: 18px;
+
 }
