@@ -77,10 +77,10 @@ class AutoPieces extends React.Component {
                     </div>
                     <div className="auto-buttons">
                         <button onClick={this.handleAdd} className="auto-button">
-                            Add
+                            <div className="auto-btn-text">Add</div>
                         </button>
                         <button onClick={this.handleRemove} className="auto-button">
-                            Remove
+                            <div className="auto-btn-text">Remove</div>
                         </button>
                     </div>
                 </div>

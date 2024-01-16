@@ -282,7 +282,7 @@ link {
   font-weight: bold;
   font-size: 20px;
   color: black;
-  width: 60px;
+  width: 70px;
   padding: 0;
   margin: 0;
 }
@@ -338,10 +338,26 @@ link {
 .auto-button {
   width: 100px;
   height: 50px;
-  font-size: 20px;
   margin-left: 20px;
   margin-right: 20px;
   border: none;
   border-radius: 50px;
+  background-color: gray;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auto-button:active {
+  background-color: rgba(255, 255, 255, 0.38);
+}
+
+.auto-btn-text {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
   color: black;
+  width: 100px;
+  padding: 0;
+  margin: 0;
 }
