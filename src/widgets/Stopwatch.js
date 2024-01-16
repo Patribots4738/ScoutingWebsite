@@ -85,16 +85,16 @@ class Stopwatch extends React.Component {
                     </div>
                     <div className="control-buttons">
                         <button className="stopwatch-btn" onClick={() => this.handleStart()}>
-                            <span className="stopwatch-btn-text">Start</span>
+                            <div className="stopwatch-btn-text">Start</div>
                         </button>
                         <button className="stopwatch-btn" onClick={() => this.handleStop()}>
-                            <span className="stopwatch-btn-text">Stop</span>
+                            <div className="stopwatch-btn-text">Stop</div>
                         </button>
                         <button className="stopwatch-btn" onClick={() => this.handleSplit()}>
-                            <span className="stopwatch-btn-text">Split</span>
+                            <div className="stopwatch-btn-text">Split</div>
                         </button>
                         <button className="stopwatch-btn" onClick={() => this.handleReset()}>
-                            <span className="stopwatch-btn-text">Reset</span>
+                            <div className="stopwatch-btn-text">Reset</div>
                         </button>
                     </div>
                 </div>
