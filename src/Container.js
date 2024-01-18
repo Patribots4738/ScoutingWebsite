@@ -290,6 +290,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title="Auto Pieces"
                 decorator="auto-pieces"
+                upperLimit={7}
               />
             </div>
             <div>

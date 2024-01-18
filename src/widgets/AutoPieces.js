@@ -4,6 +4,7 @@ class AutoPieces extends React.Component {
 
     state = {
         value: [],
+        upperLimit: this.props.upperLimit,
         title: this.props.title,
         id: this.props.id,
         classNameDecorator: this.props.decorator,
@@ -12,7 +13,7 @@ class AutoPieces extends React.Component {
     }
 
     handleAdd = () => {
-        if (this.state.value.length < 5 && !this.findPiece()) {
+        if (this.state.value.length < this.state.upperLimit && !this.findPiece()) {
             this.setState({
                 value: [...this.state.value, this.state.piece + this.state.location]
             });
@@ -63,11 +64,11 @@ class AutoPieces extends React.Component {
                             <option value="W1">W1</option>
                             <option value="W2">W2</option>
                             <option value="W3">W3</option>
-                            <option value="M1">M1</option>
-                            <option value="M2">M2</option>
-                            <option value="M3">M3</option>
-                            <option value="M4">M4</option>
-                            <option value="M5">M5</option>
+                            <option value="C1">C1</option>
+                            <option value="C2">C2</option>
+                            <option value="C3">C3</option>
+                            <option value="C4">C4</option>
+                            <option value="C5">C5</option>
                         </select>
                         <select className="auto-dropdown" onChange={this.handleLocationChange}>
                             <option value="F">F</option>
