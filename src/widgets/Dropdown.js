@@ -29,7 +29,7 @@ class Dropdown extends React.Component{
                 </div>
                 
                 <select
-                    type="dropown"
+                    type="dropdown"
                     className="dropdown"
                     onChange = {this.handleDropdownChange}
                     id = {this.state.id}

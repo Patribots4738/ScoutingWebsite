@@ -25,6 +25,9 @@ div {
   text-align: center;
 }
 
+link {
+  color: white;
+}
 
 .container {
   justify-content: center;
@@ -229,9 +232,6 @@ div {
   max-height: 200px;
 }
 
-.scouting-guidelines {
-  color: rgb(0, 0, 0);
-}
 .text-box-long {
   text-indent: 4%;
 
@@ -262,10 +262,9 @@ div {
   border-radius: 35px;
   border: none;
   background-color: gray;
+  display: inline-flex;
   align-items: center;
-  text-align: center;
-
-}
+} 
 
 .stopwatch-btn:active {
   background-color: rgba(255, 255, 255, 0.38);
@@ -283,13 +282,82 @@ div {
   font-weight: bold;
   font-size: 20px;
   color: black;
-  width: 20px;
+  width: 70px;
   padding: 0;
   margin: 0;
-  text-align: center;
-  display: flex;
 }
 
 .btn-text {
   color: black;
+}
+
+.val-display {
+  color: white;
+  font-size: 19px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auto-pieces-body {
+  color: white;
+  border-radius: calc(0.5 * 100px);
+  box-shadow: 0 1px 6px 0 var(--box-border-color);
+  padding-bottom: 10px;
+  width: 380px;
+  align-content: space-evenly;
+}
+
+.auto-buttons {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auto-dropdowns {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auto-dropdown {
+  width: 100px;
+  height: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 20px;
+  text-align: center;
+  border: none;
+  border-radius: 25px;
+  color: black;
+}
+
+.auto-button {
+  width: 100px;
+  height: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border: none;
+  border-radius: 50px;
+  background-color: gray;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auto-button:active {
+  background-color: rgba(255, 255, 255, 0.38);
+}
+
+.auto-btn-text {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+  width: 100px;
+  padding: 0;
+  margin: 0;
 }
