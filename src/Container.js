@@ -71,57 +71,70 @@ class Container extends React.Component{
     const eventID = '2024Testing';
 
     if (sendData){
+      let validMatch = true;
+      if (this.badMatchNumber(data[1][1])) {
+        validMatch = window.confirm("Are you sure your match and team numbers are correct?");
+      }
+      if (validMatch) {
+        let commentData = {
+          "Name": data[0][1],
+          "What they did well": data[23][1],
+          "What they did bad": data[24][1],
+          "Additional Comments": data[25][1],
+          "Auto Description": data[8][1],
+          "Auto Pieces": data[7][1]
+        }
+        let jsonData = {
+          "Human Player": data[19][1],
+          "Driving": data[20][1],
+          "Amp Auto": data[5][1],
+          "Speaker Auto": data[6][1],
+          "Speaker Teleop": data[9][1],
+          "Amp Teleop": data[10][1],
+          "Amped Speaker": data[11][1],
+          "Trap": data[12][1],
+          "Fumbles": data[13][1],
+          "Average Cycle Time": data[14][1],
+          "Match Number": data[1][1],
+          "Leave in Auto": this.convertCheckBox(data[4][1]),
+          "Temp Failure": this.convertCheckBox(data[21][1]),
+          "Critical Failure": this.convertCheckBox(data[22][1]),
+          "End Park": this.convertCheckBox(data[15][1]),
+          "End Onstage": this.convertCheckBox(data[16][1]),
+          "Climb Failure": this.convertCheckBox(data[17][1]),
+          "Coopertition": this.convertCheckBox(data[18][1])
+        };
+        let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
+        //                      event             match #                      position and team #          name       
+        set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/data/'), jsonData);
+        set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/comments/'), commentData);
+
+        let cachedData = JSON.parse(localStorage.getItem("matchData"))
+
+        if (cachedData != null){
+          cachedData.push(data);
+          localStorage.setItem("matchData", JSON.stringify(cachedData));
+        } else {
+          localStorage.setItem("matchData", JSON.stringify([data]));
+        }
       
-      let commentData = {
-        "Name": data[0][1],
-        "What they did well": data[23][1],
-        "What they did bad": data[24][1],
-        "Additional Comments": data[25][1],
-        "Auto Description": data[8][1],
-        "Auto Pieces": data[7][1]
+      
+        window.scrollTo(0, 0);
+        setTimeout(() => {
+          document.location.reload();
+        }, 3500);
+        alert("Data submitted, press ok to continue");
       }
-      let jsonData = {
-        "Human Player": data[19][1],
-        "Driving": data[20][1],
-        "Amp Auto": data[5][1],
-        "Speaker Auto": data[6][1],
-        "Speaker Teleop": data[9][1],
-        "Amp Teleop": data[10][1],
-        "Amped Speaker": data[11][1],
-        "Trap": data[12][1],
-        "Fumbles": data[13][1],
-        "Average Cycle Time": data[14][1],
-        "Match Number": data[1][1],
-        "Leave in Auto": this.convertCheckBox(data[4][1]),
-        "Temp Failure": this.convertCheckBox(data[21][1]),
-        "Critical Failure": this.convertCheckBox(data[22][1]),
-        "End Park": this.convertCheckBox(data[15][1]),
-        "End Onstage": this.convertCheckBox(data[16][1]),
-        "Climb Failure": this.convertCheckBox(data[17][1]),
-        "Coopertition": this.convertCheckBox(data[18][1])
-      };
-      let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
-      //                      event             match #                      position and team #          name       
-      set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/data/'), jsonData);
-      set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/comments/'), commentData);
-
-      let cachedData = JSON.parse(localStorage.getItem("matchData"))
-
-      if (cachedData != null){
-        cachedData.push(data);
-        localStorage.setItem("matchData", JSON.stringify(cachedData));
-      } else {
-        localStorage.setItem("matchData", JSON.stringify([data]));
-      }
-     
-     
-      window.scrollTo(0, 0);
-      setTimeout(() => {
-        document.location.reload();
-      }, 3500);
-      alert("Data submitted, press ok to continue");
     }
   }
+
+  badMatchNumber = (val) => {
+    if (toString(val).length > 2) {
+      return true;
+    }
+    return false;
+  }
+
 
   // convert checkbox value to true/false
   convertCheckBox = (data) => {
@@ -202,6 +215,7 @@ class Container extends React.Component{
               title={"Name"}
               value={""}
               required={ "true" }
+              numeric={false}
             />
             <TextBox
               className="textbox match"
@@ -209,6 +223,7 @@ class Container extends React.Component{
               title={"Match Number"}
               value={""}
               required={true}
+              numeric={true}
             />
           </div>
           <div>
@@ -218,6 +233,7 @@ class Container extends React.Component{
               title={"Team Number"}
               value={""}
               required={true}
+              numeric={true}
             />
             <Dropdown
               className="dropdown alliance-color"
@@ -299,6 +315,7 @@ class Container extends React.Component{
                 id={this.assignUUID()}
                 title={"Describe Auto Path"}
                 value={""}
+                numeric={false}
               />
             </div>
           </div>
@@ -438,6 +455,7 @@ class Container extends React.Component{
               id={this.assignUUID()}
               title={"What they did well"}
               value={""}
+              numeric={false}
             />
           </div>
           <div>
@@ -446,6 +464,7 @@ class Container extends React.Component{
               id={this.assignUUID()}
               title={"What they didn't do well"}
               value={""}
+              numeric={false}
             />
           </div>
           <div>
@@ -454,6 +473,7 @@ class Container extends React.Component{
               id={this.assignUUID()}
               title={"Additional comments"}
               value={""}
+              numeric={false}
             />
           </div>
          

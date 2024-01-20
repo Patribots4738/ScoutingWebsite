@@ -8,10 +8,13 @@ class TextBox extends React.Component{
         id: this.props.id,
         title: this.props.title,
         required: this.props.required,
+        numeric: this.props.numeric
     }
 
     handleTextBoxChange = (value) => {
-        this.setState({value: value})
+        if (!(this.state.numeric && isNaN(value))) {
+            this.setState({value: value});
+        }
     }
 
     determineRequired = (required) => {
