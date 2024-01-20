@@ -202,6 +202,7 @@ class Container extends React.Component{
               title={"Name"}
               value={""}
               required={ "true" }
+              numeric={false}
             />
             <TextBox
               className="textbox match"
@@ -209,6 +210,7 @@ class Container extends React.Component{
               title={"Match Number"}
               value={""}
               required={true}
+              numeric={true}
             />
           </div>
           <div>
@@ -218,6 +220,7 @@ class Container extends React.Component{
               title={"Team Number"}
               value={""}
               required={true}
+              numeric={true}
             />
             <Dropdown
               className="dropdown alliance-color"
