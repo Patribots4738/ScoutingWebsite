@@ -29,15 +29,16 @@ class Stopwatch extends React.Component {
         }
     }
 
-    // starts timer and starts time incrementing function on 10ms interval
+    // starts timer and starts time incrementing function on 1000ms interval
     handleStart = () => {
         if (!this.state.isActive) {
+            clearInterval(this.state.interval);
             this.setState({
                 interval: setInterval(() => {
                     this.setState({
-                        time: this.state.time + 10
+                        time: this.state.time + 1000
                     })
-                }, 10),
+                }, 1000),
                 isActive: true
             });
         }
@@ -74,10 +75,7 @@ class Stopwatch extends React.Component {
                             {("0" + Math.floor((this.state.time / 60000) % 60)).slice(-2)}:
                         </span>
                         <span className="digits">
-                            {("0" + Math.floor((this.state.time / 1000) % 60)).slice(-2)}.
-                        </span>
-                        <span className="digits mili-sec">
-                            {("0" + ((this.state.time / 10) % 100)).slice(-2)}
+                            {("0" + Math.floor((this.state.time / 1000) % 60)).slice(-2)}
                         </span>
                     </div>
                     <div className="average-time" id={this.state.id} value={this.state.value} title={this.state.title}>
