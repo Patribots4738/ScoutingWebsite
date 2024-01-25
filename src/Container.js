@@ -129,10 +129,7 @@ class Container extends React.Component{
   }
 
   badMatchNumber = (val) => {
-    if (toString(val).length > 2) {
-      return true;
-    }
-    return false;
+    return (val.toString().length > 2)
   }
 
 
