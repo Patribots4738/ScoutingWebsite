@@ -70,6 +70,9 @@ class Stopwatch extends React.Component {
                     {this.state.title}
                 </div>
                 <div className="stop-watch">
+                    <div className="indicator" style={{color: this.state.isActive ? "green" : "red"}}>
+                        {this.state.isActive ? "Active" : "Stopped"}
+                    </div>
                     <div className="timer">
                         <span className="digits">
                             {("0" + Math.floor((this.state.time / 60000) % 60)).slice(-2)}:
