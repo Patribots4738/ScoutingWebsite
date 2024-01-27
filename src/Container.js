@@ -96,13 +96,13 @@ class Container extends React.Component{
           "Fumbles": data[13][1],
           "Average Cycle Time": data[14][1],
           "Match Number": data[1][1],
-          "Leave in Auto": this.convertCheckBox(data[4][1]),
-          "Temp Failure": this.convertCheckBox(data[21][1]),
-          "Critical Failure": this.convertCheckBox(data[22][1]),
-          "End Park": this.convertCheckBox(data[15][1]),
-          "End Onstage": this.convertCheckBox(data[16][1]),
-          "Climb Failure": this.convertCheckBox(data[17][1]),
-          "Coopertition": this.convertCheckBox(data[18][1])
+          "Leave in Auto": data[4][1],
+          "Temp Failure": data[21][1],
+          "Critical Failure": data[22][1],
+          "End Park": data[15][1],
+          "End Onstage": data[16][1],
+          "Climb Failure": data[17][1],
+          "Coopertition": data[18][1]
         };
         let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
         //                      event             match #                      position and team #          name       
@@ -130,12 +130,6 @@ class Container extends React.Component{
 
   badMatchNumber = (val) => {
     return (val.toString().length > 2)
-  }
-
-
-  // convert checkbox value to true/false
-  convertCheckBox = (data) => {
-    return (data === "1") ? true : false;
   }
 
   clearLocalStorage = () => {

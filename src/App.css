@@ -251,6 +251,7 @@ link {
   border-radius: calc(0.5 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
   margin-top: 5px;
+  position: relative;
 }
 
 .stopwatch-btn {
@@ -360,4 +361,13 @@ link {
   width: 100px;
   padding: 0;
   margin: 0;
+}
+
+.indicator {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 12px;
+  width: 50px;
+  text-align: center;
 }
