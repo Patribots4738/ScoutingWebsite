@@ -181,19 +181,30 @@ link {
   max-width: 250px;
 }
 .slider {
-  width:100%;
+  width: 200px;
   height: 25px;
   background: rgb(47, 49, 45);
   padding: 0;
+  position: center;
 }
 
-.slider-valueslide {
-  position: absolute;
+ .slider-valueslide {
+  position: center;
   padding: 0;
-  padding-left: 6.75%;
+  padding-left: 0;
   color: rgb(207, 203, 203);
 }
 
+.slider-nums {
+  padding-bottom:0;
+  color: white;
+}
+
+.slider-reference {
+  padding: 0;
+  font-size: small;
+  color: rgb(184, 184, 184);
+}
 
 .cubes {
   color: rgb(128, 108, 218);

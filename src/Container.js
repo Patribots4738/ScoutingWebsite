@@ -11,15 +11,15 @@ import Dropdown from './widgets/Dropdown'
 import Stopwatch from './widgets/Stopwatch';
 import AutoPieces from './widgets/AutoPieces';
 
-import {v4 as uuidv4} from "uuid"
+import { v4 as uuidv4 } from "uuid"
 import React from 'react';
 import ClearLocalStorage from './widgets/ClearLocalStorage';
 
 import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
 
-class Container extends React.Component{
- 
+class Container extends React.Component {
+  
   state = {
     scoutingLog: [],
   }
@@ -28,16 +28,16 @@ class Container extends React.Component{
     var arr = []
 
 
-    for (var i = 0; i < this.state.scoutingLog.length; i++){
+    for (var i = 0; i < this.state.scoutingLog.length; i++) {
 
 
       var element = document.getElementById(this.state.scoutingLog[i]);
 
-      if (element !== null){
+      if (element !== null) {
 
         var value;
-        if (element.getAttribute("value") !== null && element.getAttribute("value") !== undefined){
-         
+        if (element.getAttribute("value") !== null && element.getAttribute("value") !== undefined) {
+
           value = (element.getAttribute("value"))
 
 
@@ -47,9 +47,9 @@ class Container extends React.Component{
             return [[], false]
 
           }
-        } else {  
+        } else {
           value = element.value
-         
+
         }
 
         arr.push([element.getAttribute("title"), value])
@@ -70,7 +70,7 @@ class Container extends React.Component{
 
     const eventID = '2024Testing';
 
-    if (sendData){
+    if (sendData) {
       let validMatch = true;
       if (this.badMatchNumber(data[1][1])) {
         validMatch = window.confirm("Are you sure your match and team numbers are correct?");
@@ -106,19 +106,19 @@ class Container extends React.Component{
         };
         let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
         //                      event             match #                      position and team #          name       
-        set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/data/'), jsonData);
-        set(ref(db, 'scouting/'+eventID+'/match-'+data[1][1]+'/'+positions[data[3][1]]+'-'+data[2][1]+'/comments/'), commentData);
+        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + positions[data[3][1]] + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + positions[data[3][1]] + '-' + data[2][1] + '/comments/'), commentData);
 
         let cachedData = JSON.parse(localStorage.getItem("matchData"))
 
-        if (cachedData != null){
+        if (cachedData != null) {
           cachedData.push(data);
           localStorage.setItem("matchData", JSON.stringify(cachedData));
         } else {
           localStorage.setItem("matchData", JSON.stringify([data]));
         }
-      
-      
+
+
         window.scrollTo(0, 0);
         setTimeout(() => {
           document.location.reload();
@@ -140,9 +140,9 @@ class Container extends React.Component{
 
   clearLocalStorage = () => {
     var response = window.confirm("Are you sure you want to clear all saved matches?");
-    if (!response){alert("Aborted wiping local storage"); return;}
+    if (!response) { alert("Aborted wiping local storage"); return; }
     response = window.confirm("Are you sure you're sure?");
-    if (!response){alert("Aborted wiping local storage"); return;}
+    if (!response) { alert("Aborted wiping local storage"); return; }
     localStorage.clear();
     alert("Cleared all match data.")
   }
@@ -155,33 +155,37 @@ class Container extends React.Component{
   }
 
 
-  handleExportData =(_) => {
+  handleExportData = (_) => {
     let cachedDataJSON = (JSON.parse(localStorage.getItem("matchData")));
     let cachedDataCSV = "";
 
-    if (cachedDataJSON != null){
-      for (let i = 0; i < cachedDataJSON.length; i++){
-        for (let e = 0; e < cachedDataJSON[i].length; e++){
+    if (cachedDataJSON != null) {
+      for (let i = 0; i < cachedDataJSON.length; i++) {
+        for (let e = 0; e < cachedDataJSON[i].length; e++) {
           cachedDataCSV += cachedDataJSON[i][e][1] + ","
         }
         cachedDataCSV += "\n"
       }
     }
 
-    let file = new Blob([cachedDataCSV], {type: "text/csv"})
+    let file = new Blob([cachedDataCSV], { type: "text/csv" })
     let blobURL = window.URL.createObjectURL(file)
 
     const anchor = document.createElement('a');
     anchor.href = blobURL
     anchor.target = "_blank"
     anchor.download = "matchData.csv"
- 
+
     anchor.click()
- 
+
     URL.revokeObjectURL(blobURL);
   }
 
-  render () {
+  sliderNumbers = () => {
+    return "1 ‎ ‎ ‎ ‎ ‎ ‎ ‎ 2 ‎ ‎ ‎ ‎ ‎ ‎ ‎ 3 ‎ ‎ ‎ ‎ ‎ ‎ ‎ 4 ‎ ‎ ‎ ‎ ‎ ‎ ‎ 5";
+  }
+
+  render() {
     return (
       <ul className="container">
         <span className="label cookie">
@@ -211,7 +215,7 @@ class Container extends React.Component{
               id={this.assignUUID()}
               title={"Name"}
               value={""}
-              required={ "true" }
+              required={"true"}
               numeric={false}
             />
             <TextBox
@@ -259,20 +263,20 @@ class Container extends React.Component{
                 }
               ]}
             />
-            </div>
+          </div>
         </div>
-       
+
         <div className="auto-container">
           <h2 className="subtitle section-title">
             AUTONOMOUS
           </h2>
-          <div ClassName = "style1">
-            <CheckBox 
+          <div ClassName="style1">
+            <CheckBox
               className="leave"
-              title="Leave in Auto" 
-              id={this.assignUUID()} 
+              title="Leave in Auto"
+              id={this.assignUUID()}
               value={false}
-              decorator = "autoCheckbox"
+              decorator="autoCheckbox"
             />
             <div
             />
@@ -283,7 +287,7 @@ class Container extends React.Component{
                 title={"Amps Auto"}
                 value={0}
                 upperLimit={4}
-                decorator = {"amp"}
+                decorator={"amp"}
               />
 
 
@@ -293,9 +297,9 @@ class Container extends React.Component{
                 title={"Speaker Auto"}
                 value={0}
                 upperLimit={4}
-                decorator = {"speaker"}
+                decorator={"speaker"}
               />
-              
+
             </span>
             <div>
               <AutoPieces
@@ -317,7 +321,7 @@ class Container extends React.Component{
             </div>
           </div>
         </div>
-       
+
         <div className="teleop-container">
           <h2 className="subtitle section-title">
             TELEOP
@@ -330,7 +334,7 @@ class Container extends React.Component{
                 title={"Speaker Teleop"}
                 value={0}
                 upperLimit={107}
-                decorator = {"speaker"}
+                decorator={"speaker"}
               />
 
 
@@ -340,27 +344,27 @@ class Container extends React.Component{
                 title={"Amp Teleop"}
                 value={0}
                 upperLimit={107}
-                decorator = {"amp"}
+                decorator={"amp"}
               />
             </span>
           </div>
           <div>
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Amped Speaker"}
-                value={0}
-                upperLimit = {107}
-                decorator = {"amped"}
-                />
             <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Trap"}
-                value={0}
-                upperLimit = {3}
-                decorator = {"trap"}
-                />
+              className="counter widget"
+              id={this.assignUUID()}
+              title={"Amped Speaker"}
+              value={0}
+              upperLimit={107}
+              decorator={"amped"}
+            />
+            <Counter
+              className="counter widget"
+              id={this.assignUUID()}
+              title={"Trap"}
+              value={0}
+              upperLimit={3}
+              decorator={"trap"}
+            />
           </div>
           <div>
             <Counter
@@ -368,8 +372,8 @@ class Container extends React.Component{
               id={this.assignUUID()}
               title={"Fumbles"}
               value={0}
-              decorator = {"fumbles"}
-              />
+              decorator={"fumbles"}
+            />
           </div>
           <Stopwatch
             className="stop-watch"
@@ -378,71 +382,79 @@ class Container extends React.Component{
             title="Cycle Timer"
             decorator={"stopwatch"}
           />
-          <div className = "checkboxes1">
-            <CheckBox 
-              className="docked" 
-              title="End Park" 
-              id={this.assignUUID()} 
+          <div className="checkboxes1">
+            <CheckBox
+              className="docked"
+              title="End Park"
+              id={this.assignUUID()}
               value={false}
-              decorator = "teleopCheckbox"
-            />    
-            <CheckBox 
-              className="onstage" 
-              title="End Onstage" 
-              id={this.assignUUID()} 
+              decorator="teleopCheckbox"
+            />
+            <CheckBox
+              className="onstage"
+              title="End Onstage"
+              id={this.assignUUID()}
               value={false}
-              decorator = "onstage"
+              decorator="onstage"
             />
           </div>
           <div className="checkboxes1">
-            <CheckBox 
-              className="isFailure" 
-              title="Climb Failure" 
-              id={this.assignUUID()} 
+            <CheckBox
+              className="isFailure"
+              title="Climb Failure"
+              id={this.assignUUID()}
               value={false}
-              decorator = "dissapointmentCheckbox"
+              decorator="dissapointmentCheckbox"
             />
-            <CheckBox 
-              className="coopertition" 
-              title="Coopertition" 
-              id={this.assignUUID()} 
+            <CheckBox
+              className="coopertition"
+              title="Coopertition"
+              id={this.assignUUID()}
               value={false}
-              decorator = "dissapointmentCheckbox"
+              decorator="dissapointmentCheckbox"
             />
           </div>
 
         </div>
-       
+
         <div className="post-match-container">
           <h2 className="subtitle section-title">
             POST-MATCH
           </h2>
           <div>
+            <new className="slider-reference">‎ ‎ ‎ ‎ ‎ Terrible</new>
             <Slider
               title="Human Player"
               id={this.assignUUID()}
-              decorator = "slide"
+              decorator="slide"
             />
+            <new className="slider-reference">Incredible</new>
+            <div className="slider-nums">{this.sliderNumbers()}</div>
+          </div>
+          <div>
+            <new className="slider-reference">‎ ‎ ‎ ‎ ‎ Terrible</new>
             <Slider
               title="Driving"
               id={this.assignUUID()}
-              decorator = "slide"
+              decorator="slide"
             />
+            <new className="slider-reference">Incredible</new>
+            <div className="slider-nums">{this.sliderNumbers()}</div>
           </div>
           <div className="checkboxes">
             <CheckBox
-                className="temporary"
-                title="Temporary Failure"
-                id={this.assignUUID()}
-                value={false}
-                decorator = {"temporary"}
-              />
+              className="temporary"
+              title="Temporary Failure"
+              id={this.assignUUID()}
+              value={false}
+              decorator={"temporary"}
+            />
             <CheckBox
               className="critical"
               title="Critical Failure"
               id={this.assignUUID()}
               value={false}
-              decorator = {"critical"}
+              decorator={"critical"}
             />
           </div>
 
@@ -473,16 +485,16 @@ class Container extends React.Component{
               numeric={false}
             />
           </div>
-         
+
         </div>
 
-        <div className= 'submit-container'>
-          <Submit title="Submit" handleFormSubmit={this.handleFormSubmit}/>
+        <div className='submit-container'>
+          <Submit title="Submit" handleFormSubmit={this.handleFormSubmit} />
         </div>
 
         <div className='export-container'>
-          <Export title="Export Data" handleExportData={this.handleExportData}/>
-          <ClearLocalStorage title="Clear match saves" clearLocalStorage={this.clearLocalStorage}/>
+          <Export title="Export Data" handleExportData={this.handleExportData} />
+          <ClearLocalStorage title="Clear match saves" clearLocalStorage={this.clearLocalStorage} />
         </div>
       </ul>
     );
