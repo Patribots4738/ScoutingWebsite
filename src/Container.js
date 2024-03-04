@@ -68,7 +68,7 @@ class Container extends React.Component {
     var sendData = data[1];
     data = data[0];
 
-    const eventID = '2024Testing';
+    const eventID = '2024cave';
 
     if (sendData) {
       let validMatch = true;
@@ -301,7 +301,7 @@ class Container extends React.Component {
                 id={this.assignUUID()}
                 title="Auto Pieces"
                 decorator="auto-pieces"
-                upperLimit={7}
+                upperLimit={8}
               />
             </div>
             <div>
