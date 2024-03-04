@@ -78,31 +78,32 @@ class Container extends React.Component {
       if (validMatch) {
         let commentData = {
           "Name": data[0][1],
-          "What they did well": data[23][1],
-          "What they did bad": data[24][1],
-          "Additional Comments": data[25][1],
+          "What they did well": data[24][1],
+          "What they did bad": data[25][1],
+          "Additional Comments": data[26][1],
           "Auto Description": data[8][1],
           "Auto Pieces": data[7][1]
         }
         let jsonData = {
-          "Human Player": data[19][1],
-          "Driving": data[20][1],
+          "Human Player": data[20][1],
+          "Driving": data[21][1],
           "Amp Auto": data[5][1],
           "Speaker Auto": data[6][1],
           "Speaker Teleop": data[9][1],
           "Amp Teleop": data[10][1],
           "Amped Speaker": data[11][1],
           "Trap": data[12][1],
-          "Fumbles": data[13][1],
-          "Average Cycle Time": data[14][1],
+          "Fumbles Speaker": data[13][1],
+          "Fumbles Amp": data[14][1],
+          "Average Cycle Time": data[15][1],
           "Match Number": data[1][1],
           "Leave in Auto": data[4][1],
-          "Temp Failure": data[21][1],
-          "Critical Failure": data[22][1],
-          "End Park": data[15][1],
-          "End Onstage": data[16][1],
-          "Climb Failure": data[17][1],
-          "Coopertition": data[18][1]
+          "Temp Failure": data[22][1],
+          "Critical Failure": data[23][1],
+          "End Park": data[16][1],
+          "End Onstage": data[17][1],
+          "Climb Failure": data[18][1],
+          "Coopertition": data[19][1]
         };
         let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
         //                      event             match #                      position and team #          name       
@@ -364,7 +365,14 @@ class Container extends React.Component {
             <Counter
               className="counter widget"
               id={this.assignUUID()}
-              title={"Fumbles"}
+              title={"Fumbles Speaker"}
+              value={0}
+              decorator={"fumbles"}
+            />
+            <Counter
+              className="counter widget"
+              id={this.assignUUID()}
+              title={"Fumbles Amp"}
               value={0}
               decorator={"fumbles"}
             />
