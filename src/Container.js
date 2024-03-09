@@ -103,7 +103,7 @@ class Container extends React.Component {
           "End Park": data[16][1],
           "End Onstage": data[17][1],
           "Climb Failure": data[18][1],
-          "Coopertition": data[19][1]
+          "Co-Op": data[19][1]
         };
         let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
         //                      event             match #                      position and team #          name       
