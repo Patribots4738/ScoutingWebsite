@@ -281,7 +281,7 @@ class Container extends React.Component {
                 id={this.assignUUID()}
                 title={"Amps Auto"}
                 value={0}
-                upperLimit={4}
+                upperLimit={14}
                 decorator={"amp"}
               />
 
@@ -291,7 +291,7 @@ class Container extends React.Component {
                 id={this.assignUUID()}
                 title={"Speaker Auto"}
                 value={0}
-                upperLimit={4}
+                upperLimit={14}
                 decorator={"speaker"}
               />
 
