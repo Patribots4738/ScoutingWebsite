@@ -4,15 +4,14 @@ import React from "react";
 class TextBox extends React.Component{
 
     state = {
-        value: "",
+        value: this.props.value,
         id: this.props.id,
         title: this.props.title,
         required: this.props.required,
-        numeric: this.props.numeric
     }
 
     handleTextBoxChange = (value) => {
-        if (!(this.state.numeric && isNaN(value))) {
+        if (!(this.props.numeric && isNaN(value))) {
             this.setState({value: value});
         }
     }

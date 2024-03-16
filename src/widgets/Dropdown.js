@@ -4,12 +4,12 @@ import React from "react";
 class Dropdown extends React.Component{
 
     state = {
-        value: 0,
+        value: this.props.value,
         id: this.props.id,
         title: this.props.title,
         items: this.props.items,
         handleDropdownChange: this.props.handleDropdownChange,
-        default: 0,
+        selected: this.props.selected,
         className: this.props.className
     }
     

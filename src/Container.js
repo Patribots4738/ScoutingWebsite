@@ -1,14 +1,13 @@
 import './App.css';
 
 import CheckBox from './widgets/CheckBox';
-import TextBox from './widgets/TextBox'
-import Counter from './widgets/Counter'
-import Submit from './widgets/Submit'
-import TextBoxLong from './widgets/TextBoxLong'
-import Slider from './widgets/Slider'
+import TextBox from './widgets/TextBox';
+import Counter from './widgets/Counter';
+import Submit from './widgets/Submit';
+import TextBoxLong from './widgets/TextBoxLong';
+import Slider from './widgets/Slider';
 import Export from './widgets/Export';
-import Dropdown from './widgets/Dropdown'
-import Stopwatch from './widgets/Stopwatch';
+import Dropdown from './widgets/Dropdown';
 import AutoPieces from './widgets/AutoPieces';
 
 import { v4 as uuidv4 } from "uuid"
@@ -76,17 +75,20 @@ class Container extends React.Component {
         validMatch = window.confirm("Are you sure your match and team numbers are correct?");
       }
       if (validMatch) {
+        let name = data[0][1];
+        let matchNumber = data[1][1];
+        let position = data[3][1];
         let commentData = {
-          "Name": data[0][1],
-          "What they did well": data[24][1],
-          "What they did bad": data[25][1],
-          "Additional Comments": data[26][1],
+          "Name": name,
+          "What they did well": data[23][1],
+          "What they did bad": data[24][1],
+          "Additional Comments": data[25][1],
           "Auto Description": data[8][1],
           "Auto Pieces": data[7][1]
         }
         let jsonData = {
-          "Human Player": data[20][1],
-          "Driving": data[21][1],
+          "Human Player": data[19][1],
+          "Driving": data[20][1],
           "Amp Auto": data[6][1],
           "Speaker Auto": data[5][1],
           "Speaker Teleop": data[9][1],
@@ -95,20 +97,24 @@ class Container extends React.Component {
           "Trap": data[12][1],
           "Fumbles Speaker": data[13][1],
           "Fumbles Amp": data[14][1],
-          "Average Cycle Time": data[15][1],
-          "Match Number": data[1][1],
+          "Match Number": matchNumber,
           "Leave in Auto": data[4][1],
-          "Temp Failure": data[22][1],
-          "Critical Failure": data[23][1],
-          "End Park": data[16][1],
-          "End Onstage": data[17][1],
-          "Climb Failure": data[18][1],
-          "Co-Op": data[19][1]
+          "Temp Failure": data[21][1],
+          "Critical Failure": data[22][1],
+          "End Park": data[15][1],
+          "End Onstage": data[16][1],
+          "Climb Failure": data[17][1],
+          "Co-Op": data[18][1]
         };
+
         let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
         //                      event             match #                      position and team #          name       
-        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + positions[data[3][1]] + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + positions[data[3][1]] + '-' + data[2][1] + '/comments/'), commentData);
+        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + positions[position] + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + positions[position] + '-' + data[2][1] + '/comments/'), commentData);
+
+        localStorage.setItem("name", name);
+        localStorage.setItem("matchNumber", matchNumber);
+        localStorage.setItem("position", position);
 
         let cachedData = JSON.parse(localStorage.getItem("matchData"))
 
@@ -118,6 +124,8 @@ class Container extends React.Component {
         } else {
           localStorage.setItem("matchData", JSON.stringify([data]));
         }
+
+        console.log(localStorage.getItem("matchData"));
 
 
         window.scrollTo(0, 0);
@@ -209,7 +217,7 @@ class Container extends React.Component {
               className="textbox name"
               id={this.assignUUID()}
               title={"Name"}
-              value={""}
+              value={localStorage.getItem("name")}
               required={"true"}
               numeric={false}
             />
@@ -217,7 +225,7 @@ class Container extends React.Component {
               className="textbox match"
               id={this.assignUUID()}
               title={"Match Number"}
-              value={""}
+              value={+localStorage.getItem("matchNumber") + 1}
               required={true}
               numeric={true}
             />
@@ -235,7 +243,8 @@ class Container extends React.Component {
               className="dropdown alliance-color"
               id={this.assignUUID()}
               title={"Position"}
-              value={""}
+              value={localStorage.getItem("position")}
+              selected={localStorage.getItem("position")}
               required={true}
               items={[
                 {
@@ -282,7 +291,7 @@ class Container extends React.Component {
                 title={"Speaker Auto"}
                 value={0}
                 upperLimit={14}
-                decorator={"amp"}
+                decorator={"speaker"}
               />
 
 
@@ -292,7 +301,7 @@ class Container extends React.Component {
                 title={"Amp Auto"}
                 value={0}
                 upperLimit={14}
-                decorator={"speaker"}
+                decorator={"amp"}
               />
 
             </span>
