@@ -377,13 +377,6 @@ class Container extends React.Component {
               decorator={"fumbles"}
             />
           </div>
-          <Stopwatch
-            className="stop-watch"
-            value="0.00"
-            id={this.assignUUID()}
-            title="Cycle Timer"
-            decorator={"stopwatch"}
-          />
           <div className="checkboxes1">
             <CheckBox
               className="docked"
