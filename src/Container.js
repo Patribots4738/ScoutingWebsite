@@ -68,7 +68,7 @@ class Container extends React.Component {
     var sendData = data[1];
     data = data[0];
 
-    const eventID = '2024cave';
+    const eventID = '2024casd';
 
     if (sendData) {
       let validMatch = true;
@@ -87,8 +87,8 @@ class Container extends React.Component {
         let jsonData = {
           "Human Player": data[20][1],
           "Driving": data[21][1],
-          "Amp Auto": data[5][1],
-          "Speaker Auto": data[6][1],
+          "Amp Auto": data[6][1],
+          "Speaker Auto": data[5][1],
           "Speaker Teleop": data[9][1],
           "Amp Teleop": data[10][1],
           "Amped Speaker": data[11][1],
@@ -279,7 +279,7 @@ class Container extends React.Component {
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Amps Auto"}
+                title={"Speaker Auto"}
                 value={0}
                 upperLimit={14}
                 decorator={"amp"}
@@ -289,7 +289,7 @@ class Container extends React.Component {
               <Counter
                 className="counter widget"
                 id={this.assignUUID()}
-                title={"Speaker Auto"}
+                title={"Amp Auto"}
                 value={0}
                 upperLimit={14}
                 decorator={"speaker"}
@@ -302,7 +302,7 @@ class Container extends React.Component {
                 id={this.assignUUID()}
                 title="Auto Pieces"
                 decorator="auto-pieces"
-                upperLimit={8}
+                upperLimit={10}
               />
             </div>
             <div>
