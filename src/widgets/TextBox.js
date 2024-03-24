@@ -11,9 +11,18 @@ class TextBox extends React.Component{
     }
 
     handleTextBoxChange = (value) => {
-        if (!(this.props.numeric && isNaN(value))) {
+        if (!(this.props.numeric && isNaN(value)) && this.validInput(value)) {
             this.setState({value: value});
         }
+    }
+
+    validInput = (value) => {
+        return (
+            !value.includes("/") && 
+            !value.includes("__.*__") && 
+            !value.includes("..") && 
+            value !== '.'
+        );
     }
 
     determineRequired = (required) => {

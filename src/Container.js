@@ -108,9 +108,9 @@ class Container extends React.Component {
         };
 
         let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
-        //                      event             match #                      position and team #          name       
-        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + positions[position] + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + positions[position] + '-' + data[2][1] + '/comments/'), commentData);
+        //                      event             match #                                Name|Position-Team#               
+        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + positions[position] + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + positions[position] + '-' + data[2][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name);
         localStorage.setItem("matchNumber", matchNumber);

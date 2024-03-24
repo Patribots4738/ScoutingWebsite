@@ -10,7 +10,18 @@ class TextBoxLong extends React.Component{
     }
 
     handleTextBoxChange = (value) => {
-        this.setState({value: value})
+        if (this.validInput(value)) {
+            this.setState({value: value});
+        }
+    }
+
+    validInput = (value) => {
+        return (
+            !value.includes("/") && 
+            !value.includes("__.*__") && 
+            !value.includes("..") && 
+            value !== '.'
+        );
     }
 
     render(){

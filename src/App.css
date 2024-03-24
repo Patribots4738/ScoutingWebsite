@@ -382,3 +382,7 @@ link {
   width: 50px;
   text-align: center;
 }
+
+.slider-label {
+  margin-bottom: 0px;
+}
