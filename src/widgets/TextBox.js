@@ -19,9 +19,12 @@ class TextBox extends React.Component{
     validInput = (value) => {
         return (
             !value.includes("/") && 
+            !value.includes("-") && 
+            !value.includes(" ") && 
             !value.includes("__.*__") && 
             !value.includes("..") && 
-            value !== '.'
+            value !== '.' &&
+            value.length < 30
         );
     }
 

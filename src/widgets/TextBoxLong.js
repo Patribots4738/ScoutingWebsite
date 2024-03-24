@@ -20,7 +20,8 @@ class TextBoxLong extends React.Component{
             !value.includes("/") && 
             !value.includes("__.*__") && 
             !value.includes("..") && 
-            value !== '.'
+            value !== '.' &&
+            value.length < 1000
         );
     }
 
