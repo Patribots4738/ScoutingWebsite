@@ -67,7 +67,7 @@ class Container extends React.Component {
     var sendData = data[1];
     data = data[0];
 
-    const eventID = '2024casd';
+    const eventID = '2024test';
 
     if (sendData) {
       let validMatch = true;
@@ -109,19 +109,30 @@ class Container extends React.Component {
 
         let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
 
-        const sendInputsToData = (eventID, matchNumber, name, position, teamNumber, data, isComments) => {
-            set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + teamNumber + (isComments ? '/comments/' : '/data/')), data)
-                .then(() => {
-                  console.log("Data sent to database");
-                })
-                .catch(() => {
-                  console.log("Error sending data to database");
-                  sendInputsToData(eventID, matchNumber, name, position, teamNumber, data, isComments);
-                })
+        const sendInputsToData = async (eventID, matchNumber, name, position, teamNumber, jsonData, commentData) => {
+            set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + teamNumber + '/data/'), jsonData);
+            set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + teamNumber + '/comments/'), commentData);
         }
-          
-        sendInputsToData(eventID, data[1][1], data[0][1], positions[data[3][1]], data[2][1], jsonData, isComments = false);
-        sendInputsToData(eventID, data[1][1], data[0][1], positions[data[3][1]], data[2][1], commentData, isComments = true);
+            
+        const sendBothInputs = async (eventID, matchNumber, name, position, teamNumber, jsonData, commentData) => {
+            sendInputsToData(eventID, matchNumber, name, position, teamNumber, jsonData, commentData)
+                .then(() => {
+                    console.log("Data sent to database");
+                }).catch((error) => {
+                    console.error("Error sending data to database: ", error);
+                    sendBothInputs(eventID, matchNumber, name, position, teamNumber, jsonData, commentData);
+                });
+        }
+            
+        sendBothInputs(
+            eventID,
+            data[1][1],
+            data[0][1],
+            positions[data[3][1]],
+            data[2][1],
+            jsonData,
+            commentData
+        );
 
         localStorage.setItem("name", name);
         localStorage.setItem("matchNumber", matchNumber);
