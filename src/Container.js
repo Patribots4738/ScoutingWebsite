@@ -108,9 +108,20 @@ class Container extends React.Component {
         };
 
         let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
-        //                      event             match #                                Name|Position-Team#               
-        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + positions[position] + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + positions[position] + '-' + data[2][1] + '/comments/'), commentData);
+
+        const sendInputsToData = (eventID, matchNumber, name, position, teamNumber, data, isComments) => {
+            set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + teamNumber + (isComments ? '/comments/' : '/data/')), data)
+                .then(() => {
+                  console.log("Data sent to database");
+                })
+                .catch(() => {
+                  console.log("Error sending data to database");
+                  sendInputsToData(eventID, matchNumber, name, position, teamNumber, data, isComments);
+                })
+        }
+          
+        sendInputsToData(eventID, data[1][1], data[0][1], positions[data[3][1]], data[2][1], jsonData, isComments = false);
+        sendInputsToData(eventID, data[1][1], data[0][1], positions[data[3][1]], data[2][1], commentData, isComments = true);
 
         localStorage.setItem("name", name);
         localStorage.setItem("matchNumber", matchNumber);
