@@ -23,7 +23,7 @@ class TextBox extends React.Component{
             !value.includes(" ") && 
             !value.includes("__.*__") && 
             !value.includes("..") && 
-            value !== '.' &&
+            !value.includes(".") &&
             value.length < 30
         );
     }
