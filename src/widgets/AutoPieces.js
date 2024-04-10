@@ -1,4 +1,7 @@
 import React from "react";
+import note from "../images/note.png";
+import speaker from "../images/speaker.png";
+import undo from "../images/undo.png";
 
 class AutoPieces extends React.Component {
 
@@ -13,16 +16,16 @@ class AutoPieces extends React.Component {
     }
 
     handleAdd = () => {
-        if (this.state.value.length < this.state.upperLimit && !this.findPiece()) {
+        if (this.state.value.length < this.state.upperLimit && !this.findPiece(this.state.piece)) {
             this.setState({
                 value: [...this.state.value, this.state.piece + this.state.location]
             });
         }
     }
 
-    findPiece = () => {
+    findPiece = (piece) => {
         for (let i = 0; i < this.state.value.length; i++) {
-            if (this.state.piece === this.state.value[i].substr(0, this.state.value[i].length - 1)) 
+            if (piece === this.state.value[i].substr(0, this.state.value[i].length - 1)) 
                 return true;
         }
         return false;
@@ -36,16 +39,19 @@ class AutoPieces extends React.Component {
         }
     }
 
-    handlePieceChange = (e) => {    
-        this.setState({
-            piece: e.target.value
-        });
+    handlePieceChange = (value, e) => {
+        if (!this.findPiece(value)) {
+            this.setState({
+                piece: value
+            });
+        }
     }
 
-    handleLocationChange = (e) => {
-        this.setState({
-            location: e.target.value
-        });
+    handleLocationChange = (value) => {
+        this.setState(
+            {location: value}, 
+            () => {this.handleAdd();}
+        )
     }
 
     render() {
@@ -54,35 +60,99 @@ class AutoPieces extends React.Component {
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>
-                <div className="auto-pieces-body">
-                    <div className="val-display" id={this.state.id} value={this.state.value} title={this.state.title}>
-                        {(this.state.value.length > 0) ? this.state.value.join(" - ") : "-"}
-                    </div>
-                    <div className="auto-dropdowns">
-                        <select className="auto-dropdown" onChange={this.handlePieceChange}>
-                            <option value="P">P</option>
-                            <option value="W1">W1</option>
-                            <option value="W2">W2</option>
-                            <option value="W3">W3</option>
-                            <option value="C1">C1</option>
-                            <option value="C2">C2</option>
-                            <option value="C3">C3</option>
-                            <option value="C4">C4</option>
-                            <option value="C5">C5</option>
-                        </select>
-                        <select className="auto-dropdown" onChange={this.handleLocationChange}>
-                            <option value="F">F</option>
-                            <option value="S">S</option>
-                            <option value="A">A</option>
-                        </select>
-                    </div>
-                    <div className="auto-buttons">
-                        <button onClick={this.handleAdd} className="auto-button">
-                            <div className="auto-btn-text">Add</div>
-                        </button>
-                        <button onClick={this.handleRemove} className="auto-button">
-                            <div className="auto-btn-text">Remove</div>
-                        </button>
+                <div className="val-display" id={this.state.id} value={this.state.value} title={this.state.title}>
+                    {(this.state.value.length > 0) ? this.state.value.join(" - ") : "-"}
+                </div>
+                <div className="selector">
+                    <div className="field-map">
+                        <div className="scoring">
+                            <div className="amp" onClick={() => this.handleLocationChange("A")}>
+                                <div className="amp-graphic"></div>
+                                <div className="amp-text">AMP</div>
+                            </div>
+                            <div className="speaker" onClick={() => this.handleLocationChange("S")}>
+                                <img src={speaker} alt="" className="speaker-img"/>
+                                <div className="speaker-text">SPEAKER</div>
+                            </div>
+                            <div className="fail" onClick={() => this.handleLocationChange("F")}>
+                                <div className="fail-button">
+                                    <div className="fail-text">
+                                        FAIL
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="wing">
+                            <div className="note" onClick={() => this.handlePieceChange("W1")}>
+                                <div className="note-text">
+                                    W1
+                                </div>
+                                <img src={note} alt="" className="note-img"/>
+                            </div>
+                            <div className="note" onClick={() => this.handlePieceChange("W2")}>
+                                <div className="note-text">
+                                    W2
+                                </div>
+                                <img src={note} alt="" className="note-img"/>
+                            </div> 
+                            <div className="note" onClick={() => this.handlePieceChange("W3")}>
+                                <div className="note-text">
+                                    W3
+                                </div>
+                                <img src={note} alt="" className="note-img"/>
+                            </div>
+                        </div>
+                        <div className="center">
+                            <div className="note" onClick={() => this.handlePieceChange("C1")}>
+                                <div className="note-text">
+                                    C1
+                                </div>
+                                <img src={note} alt="" className="note-img"/>
+                            </div> 
+                            <div className="note" onClick={() => this.handlePieceChange("C2")}>
+                                <div className="note-text">
+                                    C2
+                                </div>
+                                <img src={note} alt="" className="note-img"/>
+                            </div> 
+                            <div className="note" onClick={() => this.handlePieceChange("C3")}>
+                                <div className="note-text">
+                                    C3
+                                </div>
+                                <img src={note} alt="" className="note-img"/>
+                            </div> 
+                            <div className="note" onClick={() => this.handlePieceChange("C4")}>
+                                <div className="note-text">
+                                    C4
+                                </div>
+                                <img src={note} alt="" className="note-img"/>
+                            </div> 
+                            <div className="note" onClick={() => this.handlePieceChange("C5")}>
+                                <div className="note-text">
+                                    C5
+                                </div>
+                                <img src={note} alt="" className="note-img"/>
+                            </div> 
+                        </div>
+                        <div className="misc">
+                            <div className="value-display">
+                                <div className="value-text">
+                                    {this.state.piece + this.state.location}
+                                </div>
+                            </div>
+                            <div className="auto-button" onClick={() => this.handleRemove()}>
+                                <div className="auto-button-text">
+                                    <img src={undo} alt="UNDO" className="undo-img"/>
+                                </div>
+                            </div>
+                            <div></div>
+                            <div className="note" onClick={() => this.handlePieceChange("P")}>
+                                <div className="note-text">
+                                    P
+                                </div>
+                                <img src={note} alt="" className="note-img"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </span>

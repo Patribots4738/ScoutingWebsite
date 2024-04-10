@@ -67,7 +67,7 @@ class Container extends React.Component {
     var sendData = data[1];
     data = data[0];
 
-    const eventID = '2024lake';
+    const eventID = '2024test';
 
     if (sendData) {
       let validMatch = true;
@@ -78,33 +78,35 @@ class Container extends React.Component {
         let name = data[0][1];
         let matchNumber = data[1][1];
         let position = data[3][1];
+        let autoPieces = data[5][1];
+        let autoPieceCounts = this.autoPieceCount(autoPieces);
         let commentData = {
           "Name": name,
-          "What they did well": data[23][1],
-          "What they did bad": data[24][1],
-          "Additional Comments": data[25][1],
-          "Auto Description": data[8][1],
-          "Auto Pieces": data[7][1]
+          "What they did well": data[21][1],
+          "What they did bad": data[22][1],
+          "Additional Comments": data[23][1],
+          "Auto Description": data[6][1],
+          "Auto Pieces": autoPieces
         }
         let jsonData = {
-          "Human Player": data[19][1],
-          "Driving": data[20][1],
-          "Amp Auto": data[6][1],
-          "Speaker Auto": data[5][1],
-          "Speaker Teleop": data[9][1],
-          "Amp Teleop": data[10][1],
-          "Amped Speaker": data[11][1],
-          "Trap": data[12][1],
-          "Fumbles Speaker": data[13][1],
-          "Fumbles Amp": data[14][1],
+          "Human Player": data[17][1],
+          "Driving": data[18][1],
+          "Amp Auto": autoPieceCounts[1],
+          "Speaker Auto": autoPieceCounts[0],
+          "Speaker Teleop": data[7][1],
+          "Amp Teleop": data[8][1],
+          "Amped Speaker": data[9][1],
+          "Trap": data[10][1],
+          "Fumbles Speaker": data[11][1],
+          "Fumbles Amp": data[12][1],
           "Match Number": matchNumber,
           "Leave in Auto": data[4][1],
-          "Temp Failure": data[21][1],
-          "Critical Failure": data[22][1],
-          "End Park": data[15][1],
-          "End Onstage": data[16][1],
-          "Climb Failure": data[17][1],
-          "Co-Op": data[18][1]
+          "Temp Failure": data[19][1],
+          "Critical Failure": data[20][1],
+          "End Park": data[13][1],
+          "End Onstage": data[14][1],
+          "Climb Failure": data[15][1],
+          "Co-Op": data[16][1]
         };
 
         let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
@@ -139,6 +141,25 @@ class Container extends React.Component {
 
   badMatchNumber = (val) => {
     return (val.toString().length > 2)
+  }
+
+  // takes value from AutoPieces widget 
+  // index 0 is speaker auto 
+  // index 1 is amp auto
+  autoPieceCount = (arr) => {
+    let pieceCounts = [0, 0];
+    for (let i = 0; i < arr.length; i++) {
+      let loc = arr[i].substring(arr[i].length - 1);
+      switch (loc) {
+        case "S":
+          pieceCounts[0]++;
+          break;
+        case "A":
+          pieceCounts[1]++;
+          break;
+      }
+    }
+    return pieceCounts;
   }
 
   clearLocalStorage = () => {
@@ -284,27 +305,6 @@ class Container extends React.Component {
             />
             <div
             />
-            <span className="upper">
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Speaker Auto"}
-                value={0}
-                upperLimit={14}
-                decorator={"speaker"}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Amp Auto"}
-                value={0}
-                upperLimit={14}
-                decorator={"amp"}
-              />
-
-            </span>
             <div>
               <AutoPieces
                 value={[]}
@@ -338,7 +338,7 @@ class Container extends React.Component {
                 title={"Speaker Teleop"}
                 value={0}
                 upperLimit={107}
-                decorator={"speaker"}
+                decorator={"speaker-teleop"}
               />
 
 
@@ -348,7 +348,7 @@ class Container extends React.Component {
                 title={"Amp Teleop"}
                 value={0}
                 upperLimit={107}
-                decorator={"amp"}
+                decorator={"amp-teleop"}
               />
             </span>
           </div>

@@ -310,6 +310,7 @@ link {
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 400px;
 }
 
 .auto-pieces-body {
@@ -319,13 +320,6 @@ link {
   padding-bottom: 10px;
   width: 380px;
   align-content: space-evenly;
-}
-
-.auto-buttons {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .auto-dropdowns {
@@ -345,23 +339,6 @@ link {
   border: none;
   border-radius: 25px;
   color: black;
-}
-
-.auto-button {
-  width: 100px;
-  height: 50px;
-  margin-left: 20px;
-  margin-right: 20px;
-  border: none;
-  border-radius: 50px;
-  background-color: gray;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.auto-button:active {
-  background-color: rgba(255, 255, 255, 0.38);
 }
 
 .auto-btn-text {
@@ -385,4 +362,121 @@ link {
 
 .slider-label {
   margin-bottom: 0px;
+}
+
+.field-map {
+  user-select: none;
+  background-color: rgb(54, 54, 54);
+  width: 400px;
+  height: 250px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  text-align: center;
+}
+
+.scoring {
+  display: grid;
+  grid-template-rows: 25% 50% 25%;
+}
+
+.speaker {
+  display: flex;
+  align-items: center;
+}
+
+.amp-text {
+  color: white;
+  margin-top: 3px;
+}
+
+.speaker-text {
+  margin-left: 10px;
+  color: white;
+  writing-mode: vertical-rl;
+}
+
+.amp-graphic {
+  margin: 0 auto;
+  width: 60px;
+  height: 30px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: red;
+  border-top: none;
+}
+
+.wing {
+  display: grid;
+  grid-template-rows: 33% 33% 33%;
+}
+
+.center {
+  display: grid;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+.note {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+}
+
+.note-img {
+  height: 40px;
+  width: 40px;
+  margin: 0 auto;
+}
+
+.note-text {
+  color: white;
+  position: absolute;
+}
+
+.speaker-img {
+  height: 100px;
+}
+
+.fail-button {
+  background-color: red;
+  height: 100%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  border-radius: 0px 20px 0px 20px;
+}
+
+.fail-text, 
+.value-text, 
+.auto-button-text {
+  margin: 0 auto;
+}
+
+.value-text, 
+.auto-button-text {
+  color: white;
+}
+
+.misc {
+  display: grid;
+  grid-template-rows: 25% 25% 25% 25%;
+}
+
+.value-display {
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+}
+
+.auto-button {
+  display: flex;
+  align-items: center;
+}
+
+.undo-img {
+  height: 40px;
+  color: white;
 }
