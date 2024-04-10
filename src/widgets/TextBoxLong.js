@@ -6,7 +6,7 @@ class TextBoxLong extends React.Component{
     state = {
         value: "",
         id: this.props.id,
-        title: this.props.title,
+        title: this.props.title
     }
 
     handleTextBoxChange = (value) => {
@@ -41,6 +41,7 @@ class TextBoxLong extends React.Component{
                     id={this.state.id}
                     value={this.state.value}
                     title={this.state.title}
+                    placeholder={this.props.placeholder}
                 />
 
             </span>

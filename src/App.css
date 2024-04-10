@@ -368,7 +368,7 @@ link {
   user-select: none;
   background-color: rgb(54, 54, 54);
   width: 400px;
-  height: 250px;
+  height: 300px;
   border-radius: 20px;
   margin-bottom: 10px;
   display: grid;
@@ -378,7 +378,7 @@ link {
 
 .scoring {
   display: grid;
-  grid-template-rows: 25% 50% 25%;
+  grid-template-rows: 20% 50% 30%;
 }
 
 .speaker {
@@ -440,13 +440,20 @@ link {
   height: 100px;
 }
 
+.fail {
+  display: grid;
+  grid-template-rows: 50% 50%;
+  border-radius: 0px 20px 0px 0px;
+  padding: 5px;
+}
+
 .fail-button {
   background-color: red;
-  height: 100%;
-  width: 80%;
   display: flex;
   align-items: center;
-  border-radius: 0px 20px 0px 20px;
+  margin-top: 5px;
+  width: 90%;
+  border-radius: 20px;
 }
 
 .fail-text, 

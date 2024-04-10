@@ -12,11 +12,11 @@ class AutoPieces extends React.Component {
         id: this.props.id,
         classNameDecorator: this.props.decorator,
         piece: "P",
-        location: "F"
+        location: "FS"
     }
 
     handleAdd = () => {
-        if (this.state.value.length < this.state.upperLimit && !this.findPiece(this.state.piece)) {
+        if (this.state.value.length < this.state.upperLimit) {
             this.setState({
                 value: [...this.state.value, this.state.piece + this.state.location]
             });
@@ -25,10 +25,10 @@ class AutoPieces extends React.Component {
 
     findPiece = (piece) => {
         for (let i = 0; i < this.state.value.length; i++) {
-            if (piece === this.state.value[i].substr(0, this.state.value[i].length - 1)) 
-                return true;
+            if ((piece === this.state.value[i].substring(0, 1)) ^ (piece === this.state.value[i].substring(0, 2)))
+                return i;
         }
-        return false;
+        return -1;
     }
 
     handleRemove = () => {
@@ -39,19 +39,33 @@ class AutoPieces extends React.Component {
         }
     }
 
-    handlePieceChange = (value, e) => {
-        if (!this.findPiece(value)) {
-            this.setState({
-                piece: value
-            });
-        }
+    handlePieceChange = (value) => {
+        this.setState({
+            piece: value
+        });
     }
 
     handleLocationChange = (value) => {
-        this.setState(
-            {location: value}, 
-            () => {this.handleAdd();}
-        )
+        let index = this.findPiece(this.state.piece);
+        if (index === -1) {
+            this.setState(
+                {location: value}, 
+                () => {this.handleAdd();}
+            )
+        } 
+        else {
+            const valueCopy = [...this.state.value];
+            let element = valueCopy[index];
+            let piece = 
+                element.substring(0, 1) === "P" 
+                    ? element.substring(0, 1) 
+                    : element.substring(0, 2)
+            valueCopy[index] = piece + value;
+            this.setState({
+                location: value,
+                value: valueCopy
+            })
+        }
     }
 
     render() {
@@ -74,10 +88,15 @@ class AutoPieces extends React.Component {
                                 <img src={speaker} alt="" className="speaker-img"/>
                                 <div className="speaker-text">SPEAKER</div>
                             </div>
-                            <div className="fail" onClick={() => this.handleLocationChange("F")}>
-                                <div className="fail-button">
+                            <div className="fail">
+                                <div className="fail-button" onClick={() => this.handleLocationChange("FI")}>
                                     <div className="fail-text">
-                                        FAIL
+                                        F INTAKE
+                                    </div>
+                                </div>
+                                <div className="fail-button" onClick={() => this.handleLocationChange("FS")}>
+                                    <div className="fail-text">
+                                        F SHOT
                                     </div>
                                 </div>
                             </div>

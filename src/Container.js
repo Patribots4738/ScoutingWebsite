@@ -91,11 +91,14 @@ class Container extends React.Component {
         let jsonData = {
           "Human Player": data[17][1],
           "Driving": data[18][1],
-          "Amp Auto": autoPieceCounts[1],
-          "Speaker Auto": autoPieceCounts[0],
+          "Amp Auto": autoPieceCounts["amp"],
+          "Speaker Auto": autoPieceCounts["speaker"],
+          "Center Intakes Auto": autoPieceCounts["centerIntakes"],
+          "Failed Intakes Auto": autoPieceCounts["failedIntakes"],
+          "Failed Shots Auto": autoPieceCounts["failedShots"],
           "Speaker Teleop": data[7][1],
           "Amp Teleop": data[8][1],
-          "Amped Speaker": data[9][1],
+          "Pass": data[9][1],
           "Trap": data[10][1],
           "Fumbles Speaker": data[11][1],
           "Fumbles Amp": data[12][1],
@@ -144,19 +147,37 @@ class Container extends React.Component {
   }
 
   // takes value from AutoPieces widget 
-  // index 0 is speaker auto 
-  // index 1 is amp auto
   autoPieceCount = (arr) => {
-    let pieceCounts = [0, 0];
+    let pieceCounts = {
+      speaker: 0,
+      amp: 0,
+      failedShots: 0,
+      failedIntakes: 0,
+      centerIntakes: 0
+    };
     for (let i = 0; i < arr.length; i++) {
-      let loc = arr[i].substring(arr[i].length - 1);
+      let loc;
+      if (arr[i].includes("F")) {
+        loc = arr[i].substring(arr[i].length - 2);
+      } else {
+        loc = arr[i].substring(arr[i].length - 1);
+      }
       switch (loc) {
         case "S":
-          pieceCounts[0]++;
+          pieceCounts["speaker"]++
           break;
         case "A":
-          pieceCounts[1]++;
+          pieceCounts["amp"]++
           break;
+        case "FS":
+          pieceCounts["failedShots"]++
+          break;
+        case "FI":
+          pieceCounts["failedIntakes"]++
+          break;
+      }
+      if (arr[i].substring(0, 1)) {
+        pieceCounts["centerIntakes"]++;
       }
     }
     return pieceCounts;
@@ -469,6 +490,7 @@ class Container extends React.Component {
               title={"What they did well"}
               value={""}
               numeric={false}
+              placeholder=""
             />
           </div>
           <div>
@@ -478,6 +500,7 @@ class Container extends React.Component {
               title={"What they didn't do well"}
               value={""}
               numeric={false}
+              placeholder=""
             />
           </div>
           <div>
@@ -487,6 +510,7 @@ class Container extends React.Component {
               title={"Additional comments"}
               value={""}
               numeric={false}
+              placeholder=""
             />
           </div>
 
