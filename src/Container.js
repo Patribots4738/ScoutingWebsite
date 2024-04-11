@@ -5,7 +5,6 @@ import TextBox from './widgets/TextBox';
 import Counter from './widgets/Counter';
 import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
-import Slider from './widgets/Slider';
 import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown';
 import AutoPieces from './widgets/AutoPieces';
@@ -78,44 +77,40 @@ class Container extends React.Component {
         let name = data[0][1];
         let matchNumber = data[1][1];
         let position = data[3][1];
-        let autoPieces = data[5][1];
+        let autoPieces = data[6][1];
         let autoPieceCounts = this.autoPieceCount(autoPieces);
         let commentData = {
           "Name": name,
-          "What they did well": data[21][1],
-          "What they did bad": data[22][1],
-          "Additional Comments": data[23][1],
-          "Auto Description": data[6][1],
-          "Auto Pieces": autoPieces
+          "What they did well": data[19][1],
+          "What they did bad": data[20][1],
+          "Additional Comments": data[21][1],
+          "Auto Description": data[7][1],
+          "Auto Pieces": autoPieces,
+          "Auto Start": data[4][1]
         }
         let jsonData = {
-          "Human Player": data[17][1],
-          "Driving": data[18][1],
           "Amp Auto": autoPieceCounts["amp"],
           "Speaker Auto": autoPieceCounts["speaker"],
           "Center Intakes Auto": autoPieceCounts["centerIntakes"],
           "Failed Intakes Auto": autoPieceCounts["failedIntakes"],
           "Failed Shots Auto": autoPieceCounts["failedShots"],
-          "Speaker Teleop": data[7][1],
-          "Amp Teleop": data[8][1],
-          "Pass": data[9][1],
-          "Trap": data[10][1],
-          "Fumbles Speaker": data[11][1],
-          "Fumbles Amp": data[12][1],
+          "Speaker Teleop": data[8][1],
+          "Amp Teleop": data[9][1],
+          "Passes": data[10][1],
+          "Trap": data[11][1],
+          "Fumbles Speaker": data[12][1],
+          "Fumbles Amp": data[13][1],
           "Match Number": matchNumber,
-          "Leave in Auto": data[4][1],
-          "Temp Failure": data[19][1],
-          "Critical Failure": data[20][1],
-          "End Park": data[13][1],
-          "End Onstage": data[14][1],
-          "Climb Failure": data[15][1],
-          "Co-Op": data[16][1]
+          "Leave in Auto": data[5][1],
+          "Temp Failure": data[17][1],
+          "Critical Failure": data[18][1],
+          "End Park": data[14][1],
+          "End Onstage": data[15][1],
+          "Climb Failure": data[16][1],
         };
-
-        let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
         //                      event             match #                                Name|Position-Team#               
-        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + positions[position] + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + positions[position] + '-' + data[2][1] + '/comments/'), commentData);
+        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name);
         localStorage.setItem("matchNumber", matchNumber);
@@ -290,22 +285,28 @@ class Container extends React.Component {
               required={true}
               items={[
                 {
-                  title: "r1"
+                  title: "r1",
+                  value: "r1"
                 },
                 {
-                  title: "r2"
+                  title: "r2",
+                  value: "r2"
                 },
                 {
-                  title: "r3"
+                  title: "r3",
+                  value: "r3"
                 },
                 {
-                  title: "b1"
+                  title: "b1",
+                  value: "b1"
                 },
                 {
-                  title: "b2"
+                  title: "b2",
+                  value: "b2"
                 },
                 {
-                  title: "b3"
+                  title: "b3",
+                  value: "b3"
                 }
               ]}
             />
@@ -316,16 +317,38 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             AUTONOMOUS
           </h2>
-          <div ClassName="style1">
-            <CheckBox
-              className="leave"
-              title="Leave in Auto"
-              id={this.assignUUID()}
-              value={false}
-              decorator="autoCheckbox"
-            />
-            <div
-            />
+          <div className="style1">
+          <span>
+            <Dropdown
+                className="dropdown alliance-color"
+                id={this.assignUUID()}
+                title={"Starting Side"}
+                value={localStorage.getItem("position")}
+                selected={localStorage.getItem("position")}
+                required={true}
+                items={[
+                  {
+                    title: "Amp",
+                    value: "Amp"
+                  },
+                  {
+                    title: "Middle",
+                    value: "Middle"
+                  },
+                  {
+                    title: "Source",
+                    value: "Source"
+                  }
+                ]}
+              />
+              <CheckBox
+                className="leave"
+                title="Leave in Auto"
+                id={this.assignUUID()}
+                value={false}
+                decorator="autoCheckbox"
+              />
+            </span>
             <div>
               <AutoPieces
                 value={[]}
@@ -377,10 +400,10 @@ class Container extends React.Component {
             <Counter
               className="counter widget"
               id={this.assignUUID()}
-              title={"Amped Speaker"}
+              title={"Passes"}
               value={0}
               upperLimit={107}
-              decorator={"amped"}
+              decorator={"passes"}
             />
             <Counter
               className="counter widget"
@@ -407,6 +430,12 @@ class Container extends React.Component {
               decorator={"fumbles"}
             />
           </div>
+        </div>
+
+        <div className="post-match-container">
+          <h2 className="subtitle section-title">
+            POST-MATCH
+          </h2>
           <div className="checkboxes1">
             <CheckBox
               className="docked"
@@ -423,49 +452,13 @@ class Container extends React.Component {
               decorator="onstage"
             />
           </div>
-          <div className="checkboxes1">
-            <CheckBox
-              className="isFailure"
-              title="Climb Failure"
-              id={this.assignUUID()}
-              value={false}
-              decorator="dissapointmentCheckbox"
-            />
-            <CheckBox
-              className="coopertition"
-              title="Coopertition"
-              id={this.assignUUID()}
-              value={false}
-              decorator="dissapointmentCheckbox"
-            />
-          </div>
-
-        </div>
-
-        <div className="post-match-container">
-          <h2 className="subtitle section-title">
-            POST-MATCH
-          </h2>
-          <div>
-            <new className="slider-reference">‎ ‎ ‎ ‎ ‎ Terrible</new>
-            <Slider
-              title="Human Player"
-              id={this.assignUUID()}
-              decorator="slide"
-            />
-            <new className="slider-reference">Incredible</new>
-            <div className="slider-nums">{this.sliderNumbers()}</div>
-          </div>
-          <div>
-            <new className="slider-reference">‎ ‎ ‎ ‎ ‎ Terrible</new>
-            <Slider
-              title="Driving"
-              id={this.assignUUID()}
-              decorator="slide"
-            />
-            <new className="slider-reference">Incredible</new>
-            <div className="slider-nums">{this.sliderNumbers()}</div>
-          </div>
+          <CheckBox
+            className="isFailure"
+            title="Climb Failure"
+            id={this.assignUUID()}
+            value={false}
+            decorator="dissapointmentCheckbox"
+          />
           <div className="checkboxes">
             <CheckBox
               className="temporary"

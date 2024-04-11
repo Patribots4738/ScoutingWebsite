@@ -22,9 +22,7 @@ class Dropdown extends React.Component{
     render(){
         return (
             <span className={"widget"}>
-                <div
-                className="subtitle"
-                >
+                <div className={"subtitle"}>
                     {this.state.title}
                 </div>
                 
@@ -40,7 +38,7 @@ class Dropdown extends React.Component{
                         return (
                         <option 
                             key={item.id} 
-                            value={this.state.items.indexOf(item)}
+                            value={item.value}
                         >
                             {item.title}
                         </option>

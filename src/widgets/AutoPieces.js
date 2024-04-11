@@ -154,17 +154,16 @@ class AutoPieces extends React.Component {
                             </div> 
                         </div>
                         <div className="misc">
-                            <div className="value-display">
-                                <div className="value-text">
-                                    {this.state.piece + this.state.location}
-                                </div>
-                            </div>
                             <div className="auto-button" onClick={() => this.handleRemove()}>
                                 <div className="auto-button-text">
                                     <img src={undo} alt="UNDO" className="undo-img"/>
                                 </div>
                             </div>
-                            <div></div>
+                            <div className="value-display">
+                                <div className="value-text">
+                                    {this.state.piece + this.state.location}
+                                </div>
+                            </div>
                             <div className="note" onClick={() => this.handlePieceChange("P")}>
                                 <div className="note-text">
                                     P
