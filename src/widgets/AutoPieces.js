@@ -68,6 +68,17 @@ class AutoPieces extends React.Component {
         }
     }
 
+    gamePiece = (name) => {
+        return(
+            <div className="note" onClick={() => this.handlePieceChange(name)}>
+                <div className="note-text">
+                    {name}
+                </div>
+                <img src={note} alt="" className="note-img"/>
+            </div>
+        )
+    }
+
     render() {
         return (
             <span className={"widget-" + this.state.classNameDecorator}>
@@ -102,56 +113,16 @@ class AutoPieces extends React.Component {
                             </div>
                         </div>
                         <div className="wing">
-                            <div className="note" onClick={() => this.handlePieceChange("W1")}>
-                                <div className="note-text">
-                                    W1
-                                </div>
-                                <img src={note} alt="" className="note-img"/>
-                            </div>
-                            <div className="note" onClick={() => this.handlePieceChange("W2")}>
-                                <div className="note-text">
-                                    W2
-                                </div>
-                                <img src={note} alt="" className="note-img"/>
-                            </div> 
-                            <div className="note" onClick={() => this.handlePieceChange("W3")}>
-                                <div className="note-text">
-                                    W3
-                                </div>
-                                <img src={note} alt="" className="note-img"/>
-                            </div>
+                            {this.gamePiece("W1")}
+                            {this.gamePiece("W2")}
+                            {this.gamePiece("W3")}
                         </div>
                         <div className="center">
-                            <div className="note" onClick={() => this.handlePieceChange("C1")}>
-                                <div className="note-text">
-                                    C1
-                                </div>
-                                <img src={note} alt="" className="note-img"/>
-                            </div> 
-                            <div className="note" onClick={() => this.handlePieceChange("C2")}>
-                                <div className="note-text">
-                                    C2
-                                </div>
-                                <img src={note} alt="" className="note-img"/>
-                            </div> 
-                            <div className="note" onClick={() => this.handlePieceChange("C3")}>
-                                <div className="note-text">
-                                    C3
-                                </div>
-                                <img src={note} alt="" className="note-img"/>
-                            </div> 
-                            <div className="note" onClick={() => this.handlePieceChange("C4")}>
-                                <div className="note-text">
-                                    C4
-                                </div>
-                                <img src={note} alt="" className="note-img"/>
-                            </div> 
-                            <div className="note" onClick={() => this.handlePieceChange("C5")}>
-                                <div className="note-text">
-                                    C5
-                                </div>
-                                <img src={note} alt="" className="note-img"/>
-                            </div> 
+                            {this.gamePiece("C1")}
+                            {this.gamePiece("C2")}
+                            {this.gamePiece("C3")}
+                            {this.gamePiece("C4")}
+                            {this.gamePiece("C5")}
                         </div>
                         <div className="misc">
                             <div className="auto-button" onClick={() => this.handleRemove()}>
@@ -164,12 +135,7 @@ class AutoPieces extends React.Component {
                                     {this.state.piece + this.state.location}
                                 </div>
                             </div>
-                            <div className="note" onClick={() => this.handlePieceChange("P")}>
-                                <div className="note-text">
-                                    P
-                                </div>
-                                <img src={note} alt="" className="note-img"/>
-                            </div>
+                            {this.gamePiece("P")}
                         </div>
                     </div>
                 </div>
