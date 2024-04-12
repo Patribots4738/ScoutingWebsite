@@ -3,7 +3,7 @@ import './App.css';
 import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox';
 import Counter from './widgets/Counter';
-import TeleopCounter from './widgets/TeleopCounter'
+import TeleopCounter from './widgets/TeleopCounter';
 import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
@@ -31,9 +31,7 @@ class Container extends React.Component {
 
 
       var element = document.getElementById(this.state.scoutingLog[i]);
-
       if (element !== null) {
-
         var value;
         if (element.getAttribute("value") !== null && element.getAttribute("value") !== undefined) {
 
@@ -75,12 +73,14 @@ class Container extends React.Component {
         validMatch = window.confirm("Are you sure your match and team numbers are correct?");
       }
       if (validMatch) {
+        
         let name = data[0][1];
         let matchNumber = data[1][1];
         let position = data[3][1];
-        let autoPieces = data[5][1];
+        let autoPieces = data[5][1].split(",");
         let autoPieceCounts = this.autoPieceCount(autoPieces);
-        let teleopPieceCounts = data[7][1];
+        let teleopPieceCounts = JSON.parse(data[7][1]);
+
         let commentData = {
           "Name": name,
           "What they did well": data[13][1],
@@ -116,9 +116,9 @@ class Container extends React.Component {
           "Fumbles Amp Wing Cycles": teleopPieceCounts["fumbleAmp"]["wing"],
           "Fumbles Amp Center Cycles": teleopPieceCounts["fumbleAmp"]["center"],
           "Fumbles Amp Full Cycles": teleopPieceCounts["fumbleAmp"]["source"],
-          "Wing Cycles": this.sumCycles("wing"),
-          "Center Cycles": this.sumCycles("center"),
-          "Full Cycles": this.sumCycles("source"),
+          "Wing Cycles": this.sumCycles(teleopPieceCounts, "wing"),
+          "Center Cycles": this.sumCycles(teleopPieceCounts, "center"),
+          "Full Cycles": this.sumCycles(teleopPieceCounts, "source"),
           "Match Number": matchNumber,
           "Temp Failure": data[11][1],
           "Critical Failure": data[12][1],
@@ -127,34 +127,29 @@ class Container extends React.Component {
           "Trap": data[10][1]
         };
         //                      event             match #                                Name|Position-Team#               
-        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
+        set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name);
         localStorage.setItem("matchNumber", matchNumber);
         localStorage.setItem("position", position);
 
-        let cachedData = JSON.parse(localStorage.getItem("matchData"))
+        let cachedData = JSON.parse(localStorage.getItem("matchData"));
+        let matchPath = `match-${matchNumber}`;
+        let botPath = `${name}|${position}-${data[2][1]}`;
+
+        let newData = {};
+        newData[matchPath] = {};
+        newData[matchPath][botPath] = { data: jsonData, comments: commentData };
+        
+        newData = JSON.stringify(newData, null, "\t");
 
         if (cachedData != null) {
-          cachedData.push(
-            {
-              data: jsonData,
-              comments: commentData
-            }
-          );
+          cachedData.push(newData);
           localStorage.setItem("matchData", cachedData);
         } else {
-          localStorage.setItem("matchData", [
-            {
-              data: jsonData,
-              comments: commentData
-            }
-          ]);
+          localStorage.setItem("matchData", [newData]);
         }
-
-        console.log(localStorage.getItem("matchData"));
-
 
         window.scrollTo(0, 0);
         setTimeout(() => {
@@ -170,7 +165,7 @@ class Container extends React.Component {
   }
 
   sumCycles = (data, location) => {
-    return data["speaker"][location] + data["amp"][location] + data["pass"][location] + data["fumbleSpeaker"][location] + data["fumbleAmp"][location];
+    return data["speaker"][location] + data["amp"][location] + data["pass"][location];
   }
 
   badMatchNumber = (val) => {
@@ -193,6 +188,7 @@ class Container extends React.Component {
       } else {
         loc = arr[i].substring(arr[i].length - 1);
       }
+      console.log(loc);
       switch (loc) {
         case "S":
           pieceCounts["speaker"]++
@@ -203,11 +199,11 @@ class Container extends React.Component {
         case "FS":
           pieceCounts["failedShots"]++
           break;
-        case "FI":
+        default:
           pieceCounts["failedIntakes"]++
           break;
       }
-      if (arr[i].substring(0, 1)) {
+      if (arr[i].substring(0, 1) === "C" && loc !== "FI") {
         pieceCounts["centerIntakes"]++;
       }
     }
@@ -232,29 +228,22 @@ class Container extends React.Component {
 
 
   handleExportData = (_) => {
-    let cachedDataJSON = (JSON.parse(localStorage.getItem("matchData")));
-    let cachedDataCSV = "";
+    let cachedDataJSON = localStorage.getItem("matchData");
 
     if (cachedDataJSON != null) {
-      for (let i = 0; i < cachedDataJSON.length; i++) {
-        for (let e = 0; e < cachedDataJSON[i].length; e++) {
-          cachedDataCSV += cachedDataJSON[i][e][1] + ","
-        }
-        cachedDataCSV += "\n"
-      }
+      let file = new Blob([cachedDataJSON], { type: "text/json" })
+
+      let blobURL = window.URL.createObjectURL(file)
+
+      const anchor = document.createElement('a');
+      anchor.href = blobURL
+      anchor.target = "_blank"
+      anchor.download = "matchData.json"
+
+      anchor.click()
+
+      URL.revokeObjectURL(blobURL);
     }
-
-    let file = new Blob([cachedDataCSV], { type: "text/csv" })
-    let blobURL = window.URL.createObjectURL(file)
-
-    const anchor = document.createElement('a');
-    anchor.href = blobURL
-    anchor.target = "_blank"
-    anchor.download = "matchData.csv"
-
-    anchor.click()
-
-    URL.revokeObjectURL(blobURL);
   }
 
   render() {
@@ -399,14 +388,12 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <div>
-            <TeleopCounter
-              title="Piece Counter"
-              id={this.assignUUID()}
-              className="teleop-counter"
-              value={{}}
-              />
-          </div>
+          <TeleopCounter
+            value={{}}
+            id={this.assignUUID()}
+            title="Piece Counter"
+            className="teleop-counter"
+          />
           <div className="checkboxes1">
             <CheckBox
               className="onstage"
@@ -492,7 +479,7 @@ class Container extends React.Component {
 
         <div className='export-container'>
           <Export title="Export Data" handleExportData={this.handleExportData} />
-          <ClearLocalStorage title="Clear match saves" clearLocalStorage={this.clearLocalStorage} />
+          <ClearLocalStorage title="Clear local data" clearLocalStorage={this.clearLocalStorage} />
         </div>
       </ul>
     );

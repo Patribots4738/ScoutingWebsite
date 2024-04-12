@@ -7,7 +7,7 @@ class TeleopCounter extends React.Component {
     state = {
         title: this.props.title,
         id: this.props.id,
-        classNameDecorator: this.props.decorator,
+        classNameDecorator: this.props.className,
         value: {
             speaker: {
                 wing: 0,
@@ -58,7 +58,7 @@ class TeleopCounter extends React.Component {
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>
-                <div className="field-map">
+                <div className="field-map" id={this.state.id} value={JSON.stringify(this.state.value)}>
                     <div className="scoring">
                         <div className="amp" onClick={() => this.handleScore("amp")}>
                             <div className="amp-graphic"></div>
@@ -136,7 +136,7 @@ class TeleopCounter extends React.Component {
                     </div>
                 </div>
             </span>
-        );
+        )
     }
 
 }
