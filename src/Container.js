@@ -96,10 +96,6 @@ class Container extends React.Component {
           "Center Intakes Auto": autoPieceCounts["centerIntakes"],
           "Failed Intakes Auto": autoPieceCounts["failedIntakes"],
           "Failed Shots Auto": autoPieceCounts["failedShots"],
-          "Speaker Teleop": this.sumTeleopScore(teleopPieceCounts, "speaker"),
-          "Amp Teleop": this.sumTeleopScore(teleopPieceCounts, "amp"),
-          "Fumbles Speaker": this.sumTeleopScore(teleopPieceCounts, "fumbleSpeaker"),
-          "Fumbles Amp": this.sumTeleopScore(teleopPieceCounts, "fumbleAmp"),
           "Speaker Wing Cycles": teleopPieceCounts["speaker"]["wing"],
           "Speaker Center Cycles": teleopPieceCounts["speaker"]["center"],
           "Speaker Source Cycles": teleopPieceCounts["speaker"]["source"],
@@ -115,9 +111,6 @@ class Container extends React.Component {
           "Fumbles Amp Wing Cycles": teleopPieceCounts["fumbleAmp"]["wing"],
           "Fumbles Amp Center Cycles": teleopPieceCounts["fumbleAmp"]["center"],
           "Fumbles Amp Full Cycles": teleopPieceCounts["fumbleAmp"]["source"],
-          "Wing Cycles": this.sumCycles(teleopPieceCounts, "wing"),
-          "Center Cycles": this.sumCycles(teleopPieceCounts, "center"),
-          "Full Cycles": this.sumCycles(teleopPieceCounts, "source"),
           "Match Number": matchNumber,
           "Temp Failure": data[11][1],
           "Critical Failure": data[12][1],
@@ -160,14 +153,6 @@ class Container extends React.Component {
         alert("Data submitted, press ok to continue");
       }
     }
-  }
-
-  sumTeleopScore = (data, location) => {
-    return data[location]["wing"] + data[location]["center"] + data[location]["source"]
-  }
-
-  sumCycles = (data, location) => {
-    return data["speaker"][location] + data["amp"][location] + data["pass"][location];
   }
 
   badMatchNumber = (val) => {
