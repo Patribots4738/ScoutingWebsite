@@ -426,6 +426,21 @@ link {
   border: none;
 }
 
+.note-clickable {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 90%;
+  border-radius: 10px;
+  transition: 0.12s;
+}
+
+.auto-button-text:active,
+.note-clickable:active {
+  background-color: rgb(45, 45, 45);
+}
+
 .note-img {
   height: 40px;
   width: 40px;
@@ -456,6 +471,20 @@ link {
   width: 90%;
   border-radius: 20px;
   font-size: 14px;
+  transition: 0.12s;
+}
+
+.fail-button:active {
+  background: maroon;
+}
+
+.auto-button-text {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 90%;
+  border-radius: 20px;
+  transition: 0.12s;
 }
 
 .fail-text, 
@@ -483,11 +512,14 @@ link {
 .auto-button {
   display: flex;
   align-items: center;
+  border-radius: 20px;
+  transition: .12s;
 }
 
 .undo-img {
   height: 40px;
   color: white;
+  margin: 0 auto;
 }
 
 .section-container-teleop {
@@ -503,6 +535,7 @@ link {
   background-color: rgb(45, 45, 45);
   height: 90%;
   width: 90%;
+  transition: 0.12s;
 }
 
 .field-section-text {
@@ -535,6 +568,15 @@ link {
   width: 90%;
   height: 90%;
   border-radius: 20px;
+  transition: 0.12s
+}
+
+.pass-button:active {
+  background-color: green;
+}
+
+.field-section:active {
+  background-color: rgb(35, 35, 35);
 }
 
 .pass-text {

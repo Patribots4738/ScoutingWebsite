@@ -1,6 +1,6 @@
 import React from "react";
-import speaker from "../images/speaker.png";
 import note from "../images/note.png";
+import ScoringSection from "./ScoringSection";
 
 class TeleopCounter extends React.Component {
 
@@ -52,6 +52,21 @@ class TeleopCounter extends React.Component {
         });
     }
 
+    fieldSection = (location, text) => {
+        return (
+            <div className="section-container-teleop">
+                <div className="field-section" onClick={() => this.handleLocationChange(location)}>
+                    <div className="inner-flex">
+                        <div className="field-section-text">
+                            {text}
+                        </div>
+                        <img className="note-img" alt="" src={note}/>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     render() {
         return (
             <span className={"widget"+this.state.classNameDecorator}>
@@ -59,28 +74,15 @@ class TeleopCounter extends React.Component {
                     {this.state.title}
                 </div>
                 <div className="field-map" id={this.state.id} value={JSON.stringify(this.state.value)}>
-                    <div className="scoring">
-                        <div className="amp" onClick={() => this.handleScore("amp")}>
-                            <div className="amp-graphic"></div>
-                            <div className="amp-text">AMP</div>
-                        </div>
-                        <div className="speaker" onClick={() => this.handleScore("speaker")}>
-                            <img src={speaker} alt="" className="speaker-img"/>
-                            <div className="speaker-text">SPEAKER</div>
-                        </div>
-                        <div className="fail">
-                            <div className="fail-button" onClick={() => this.handleScore("fumbleAmp")}>
-                                <div className="fail-text">
-                                    F AMP
-                                </div>
-                            </div>
-                            <div className="fail-button" onClick={() => this.handleScore("fumbleSpeaker")}>
-                                <div className="fail-text">
-                                    F SPEAKER
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <ScoringSection
+                        speaker="speaker"
+                        amp="amp"
+                        fail1="fumbleAmp"
+                        fail2="fumbleSpeaker"
+                        failText1="F AMP"
+                        failText2="F SPEAKER"
+                        handleScore={this.handleScore}
+                    />
                     <div className="field-column">
                         <div className="upper-section">
                             <div className="pass-button" onClick={() => this.handleScore("pass")}>
@@ -89,33 +91,15 @@ class TeleopCounter extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="section-container-teleop">
-                                <div className="field-section" onClick={() => this.handleLocationChange("wing")}>
-                                    <div className="inner-flex">
-                                        <div className="field-section-text">
-                                            WING
-                                        </div>
-                                        <img className="note-img" alt="" src={note}/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {this.fieldSection("wing", "WING")}
+                    </div>
                     <div className="field-column">
                         <div className="upper-section">
                             <div className="intake-text">
                                 INTAKE FROM:
                             </div>
                         </div>
-                        <div className="section-container-teleop">
-                            <div className="field-section" onClick={() => this.handleLocationChange("center")}>
-                                <div className="inner-flex">
-                                    <div className="field-section-text">
-                                        CENTER
-                                    </div>
-                                    <img className="note-img" alt="" src={note}/>
-                                </div>
-                            </div>
-                        </div>
+                        {this.fieldSection("center", "CENTER")}
                     </div>
                     <div className="field-column">
                         <div className="upper-section">
@@ -123,22 +107,12 @@ class TeleopCounter extends React.Component {
                                 {this.state.intakeLocation.toUpperCase()}
                             </div>
                         </div>
-                        <div className="section-container-teleop">
-                            <div className="field-section" onClick={() => this.handleLocationChange("source")}>
-                                <div className="inner-flex">
-                                    <div className="field-section-text">
-                                        OPP WING
-                                    </div>
-                                    <img className="note-img" alt="" src={note}/>
-                                </div>
-                            </div>
-                        </div>
+                        {this.fieldSection("source", "OPP WING")}
                     </div>
                 </div>
             </span>
         )
     }
-
 }
 
-export default TeleopCounter
+export default TeleopCounter;

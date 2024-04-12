@@ -1,7 +1,7 @@
 import React from "react";
 import note from "../images/note.png";
-import speaker from "../images/speaker.png";
 import undo from "../images/undo.png";
+import ScoringSection from "./ScoringSection";
 
 class AutoPieces extends React.Component {
 
@@ -80,11 +80,13 @@ class AutoPieces extends React.Component {
 
     gamePiece = (name) => {
         return(
-            <div className="note" onClick={() => this.handlePieceChange(name)}>
-                <div className="note-text">
-                    {name}
+            <div className="note">
+                <div className="note-clickable" onClick={() => this.handlePieceChange(name)}>
+                    <div className="note-text">
+                        {name}
+                    </div>
+                    <img src={note} alt="" className="note-img"/>
                 </div>
-                <img src={note} alt="" className="note-img"/>
             </div>
         )
     }
@@ -100,28 +102,15 @@ class AutoPieces extends React.Component {
                 </div>
                 <div className="selector">
                     <div className="field-map">
-                        <div className="scoring">
-                            <div className="amp" onClick={() => this.handleLocationChange("A")}>
-                                <div className="amp-graphic"></div>
-                                <div className="amp-text">AMP</div>
-                            </div>
-                            <div className="speaker" onClick={() => this.handleLocationChange("S")}>
-                                <img src={speaker} alt="" className="speaker-img"/>
-                                <div className="speaker-text">SPEAKER</div>
-                            </div>
-                            <div className="fail">
-                                <div className="fail-button" onClick={() => this.handleLocationChange("FI")}>
-                                    <div className="fail-text">
-                                        F INTAKE
-                                    </div>
-                                </div>
-                                <div className="fail-button" onClick={() => this.handleLocationChange("FS")}>
-                                    <div className="fail-text">
-                                        F SHOT
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <ScoringSection
+                            speaker="S"
+                            amp="A"
+                            fail1="FI"
+                            fail2="FS"
+                            failText1="F INTAKE"
+                            failText2="F SHOT"
+                            handleScore={this.handleLocationChange}
+                        />
                         <div className="wing">
                             {this.gamePiece("W1")}
                             {this.gamePiece("W2")}
