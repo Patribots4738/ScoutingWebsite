@@ -77,8 +77,8 @@ class Container extends React.Component {
         let name = data[0][1];
         let matchNumber = data[1][1];
         let position = data[3][1];
-        let autoPieces = data[5][1].split(",");
-        let autoPieceCounts = this.autoPieceCount(autoPieces);
+        let autoPieces = data[5][1];
+        let autoPieceCounts = this.autoPieceCount(autoPieces.split("-"));
         let teleopPieceCounts = JSON.parse(data[7][1]);
 
         let commentData = {
@@ -98,7 +98,6 @@ class Container extends React.Component {
           "Failed Shots Auto": autoPieceCounts["failedShots"],
           "Speaker Teleop": this.sumTeleopScore(teleopPieceCounts, "speaker"),
           "Amp Teleop": this.sumTeleopScore(teleopPieceCounts, "amp"),
-          "Passes": this.sumTeleopScore(teleopPieceCounts, "pass"),
           "Fumbles Speaker": this.sumTeleopScore(teleopPieceCounts, "fumbleSpeaker"),
           "Fumbles Amp": this.sumTeleopScore(teleopPieceCounts, "fumbleAmp"),
           "Speaker Wing Cycles": teleopPieceCounts["speaker"]["wing"],

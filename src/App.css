@@ -438,7 +438,7 @@ link {
 
 .auto-button-text:active,
 .note-clickable:active {
-  background-color: rgb(45, 45, 45);
+  background-color: rgb(40, 40, 40);
 }
 
 .note-img {
@@ -576,7 +576,7 @@ link {
 }
 
 .field-section:active {
-  background-color: rgb(35, 35, 35);
+  background-color: rgb(32, 32, 32);
 }
 
 .pass-text {

@@ -97,7 +97,7 @@ class AutoPieces extends React.Component {
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>
-                <div className="val-display" id={this.state.id} value={this.state.value} title={this.state.title}>
+                <div className="val-display" id={this.state.id} value={this.state.value.join("-")} title={this.state.title}>
                     {(this.state.value.length > 0) ? this.state.value.join(" - ") : "-"}
                 </div>
                 <div className="selector">
