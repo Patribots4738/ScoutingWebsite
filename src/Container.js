@@ -3,6 +3,7 @@ import './App.css';
 import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox';
 import Counter from './widgets/Counter';
+import TeleopCounter from './widgets/TeleopCounter'
 import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
@@ -77,14 +78,15 @@ class Container extends React.Component {
         let name = data[0][1];
         let matchNumber = data[1][1];
         let position = data[3][1];
-        let autoPieces = data[6][1];
+        let autoPieces = data[5][1];
         let autoPieceCounts = this.autoPieceCount(autoPieces);
+        let teleopPieceCounts = data[7][1];
         let commentData = {
           "Name": name,
-          "What they did well": data[19][1],
-          "What they did bad": data[20][1],
-          "Additional Comments": data[21][1],
-          "Auto Description": data[7][1],
+          "What they did well": data[13][1],
+          "What they did bad": data[14][1],
+          "Additional Comments": data[15][1],
+          "Auto Description": data[6][1],
           "Auto Pieces": autoPieces,
           "Auto Start": data[4][1]
         }
@@ -94,19 +96,35 @@ class Container extends React.Component {
           "Center Intakes Auto": autoPieceCounts["centerIntakes"],
           "Failed Intakes Auto": autoPieceCounts["failedIntakes"],
           "Failed Shots Auto": autoPieceCounts["failedShots"],
-          "Speaker Teleop": data[8][1],
-          "Amp Teleop": data[9][1],
-          "Passes": data[10][1],
-          "Trap": data[11][1],
-          "Fumbles Speaker": data[12][1],
-          "Fumbles Amp": data[13][1],
+          "Speaker Teleop": this.sumTeleopScore(teleopPieceCounts, "speaker"),
+          "Amp Teleop": this.sumTeleopScore(teleopPieceCounts, "amp"),
+          "Passes": this.sumTeleopScore(teleopPieceCounts, "pass"),
+          "Fumbles Speaker": this.sumTeleopScore(teleopPieceCounts, "fumbleSpeaker"),
+          "Fumbles Amp": this.sumTeleopScore(teleopPieceCounts, "fumbleAmp"),
+          "Speaker Wing Cycles": teleopPieceCounts["speaker"]["wing"],
+          "Speaker Center Cycles": teleopPieceCounts["speaker"]["center"],
+          "Speaker Source Cycles": teleopPieceCounts["speaker"]["source"],
+          "Amp Wing Cycles": teleopPieceCounts["amp"]["wing"],
+          "Amp Center Cycles": teleopPieceCounts["amp"]["center"],
+          "Amp Full Cycles": teleopPieceCounts["amp"]["source"],
+          "Pass Wing Cycles": teleopPieceCounts["pass"]["wing"],
+          "Pass Center Cycles": teleopPieceCounts["pass"]["center"],
+          "Pass Full Cycles": teleopPieceCounts["pass"]["source"],
+          "Fumbles Speaker Wing Cycles": teleopPieceCounts["fumbleSpeaker"]["wing"],
+          "Fumbles Speaker Center Cycles": teleopPieceCounts["fumbleSpeaker"]["center"],
+          "Fumbles Speaker Full Cycles": teleopPieceCounts["fumbleSpeaker"]["source"],
+          "Fumbles Amp Wing Cycles": teleopPieceCounts["fumbleAmp"]["wing"],
+          "Fumbles Amp Center Cycles": teleopPieceCounts["fumbleAmp"]["center"],
+          "Fumbles Amp Full Cycles": teleopPieceCounts["fumbleAmp"]["source"],
+          "Wing Cycles": this.sumCycles("wing"),
+          "Center Cycles": this.sumCycles("center"),
+          "Full Cycles": this.sumCycles("source"),
           "Match Number": matchNumber,
-          "Leave in Auto": data[5][1],
-          "Temp Failure": data[17][1],
-          "Critical Failure": data[18][1],
-          "End Park": data[14][1],
-          "End Onstage": data[15][1],
-          "Climb Failure": data[16][1],
+          "Temp Failure": data[11][1],
+          "Critical Failure": data[12][1],
+          "End Onstage": data[8][1],
+          "Climb Failure": data[9][1],
+          "Trap": data[10][1]
         };
         //                      event             match #                                Name|Position-Team#               
         set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
@@ -119,10 +137,20 @@ class Container extends React.Component {
         let cachedData = JSON.parse(localStorage.getItem("matchData"))
 
         if (cachedData != null) {
-          cachedData.push(data);
-          localStorage.setItem("matchData", JSON.stringify(cachedData));
+          cachedData.push(
+            {
+              data: jsonData,
+              comments: commentData
+            }
+          );
+          localStorage.setItem("matchData", cachedData);
         } else {
-          localStorage.setItem("matchData", JSON.stringify([data]));
+          localStorage.setItem("matchData", [
+            {
+              data: jsonData,
+              comments: commentData
+            }
+          ]);
         }
 
         console.log(localStorage.getItem("matchData"));
@@ -135,6 +163,14 @@ class Container extends React.Component {
         alert("Data submitted, press ok to continue");
       }
     }
+  }
+
+  sumTeleopScore = (data, location) => {
+    return data[location]["wing"] + data[location]["center"] + data[location]["source"]
+  }
+
+  sumCycles = (data, location) => {
+    return data["speaker"][location] + data["amp"][location] + data["pass"][location] + data["fumbleSpeaker"][location] + data["fumbleAmp"][location];
   }
 
   badMatchNumber = (val) => {
@@ -219,10 +255,6 @@ class Container extends React.Component {
     anchor.click()
 
     URL.revokeObjectURL(blobURL);
-  }
-
-  sliderNumbers = () => {
-    return "1 ‎ ‎ ‎ ‎ ‎ ‎ ‎ 2 ‎ ‎ ‎ ‎ ‎ ‎ ‎ 3 ‎ ‎ ‎ ‎ ‎ ‎ ‎ 4 ‎ ‎ ‎ ‎ ‎ ‎ ‎ 5";
   }
 
   render() {
@@ -341,13 +373,6 @@ class Container extends React.Component {
                   }
                 ]}
               />
-              <CheckBox
-                className="leave"
-                title="Leave in Auto"
-                id={this.assignUUID()}
-                value={false}
-                decorator="autoCheckbox"
-              />
             </span>
             <div>
               <AutoPieces
@@ -375,61 +400,37 @@ class Container extends React.Component {
             TELEOP
           </h2>
           <div>
-            <span className="uppers">
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Speaker Teleop"}
-                value={0}
-                upperLimit={107}
-                decorator={"speaker-teleop"}
+            <TeleopCounter
+              title="Piece Counter"
+              id={this.assignUUID()}
+              className="teleop-counter"
+              value={{}}
               />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Amp Teleop"}
-                value={0}
-                upperLimit={107}
-                decorator={"amp-teleop"}
-              />
-            </span>
           </div>
-          <div>
-            <Counter
-              className="counter widget"
+          <div className="checkboxes1">
+            <CheckBox
+              className="onstage"
+              title="End Onstage"
               id={this.assignUUID()}
-              title={"Passes"}
-              value={0}
-              upperLimit={107}
-              decorator={"passes"}
+              value={false}
+              decorator="onstage"
             />
-            <Counter
-              className="counter widget"
+            <CheckBox
+              className="isFailure"
+              title="Climb Failure"
               id={this.assignUUID()}
-              title={"Trap"}
-              value={0}
-              upperLimit={3}
-              decorator={"trap"}
+              value={false}
+              decorator="dissapointmentCheckbox"
             />
           </div>
-          <div>
-            <Counter
-              className="counter widget"
-              id={this.assignUUID()}
-              title={"Fumbles Speaker"}
-              value={0}
-              decorator={"fumbles"}
-            />
-            <Counter
-              className="counter widget"
-              id={this.assignUUID()}
-              title={"Fumbles Amp"}
-              value={0}
-              decorator={"fumbles"}
-            />
-          </div>
+          <Counter
+            className="counter widget"
+            id={this.assignUUID()}
+            title={"Trap"}
+            value={0}
+            upperLimit={3}
+            decorator={"trap"}
+          />
         </div>
 
         <div className="post-match-container">
@@ -438,31 +439,8 @@ class Container extends React.Component {
           </h2>
           <div className="checkboxes1">
             <CheckBox
-              className="docked"
-              title="End Park"
-              id={this.assignUUID()}
-              value={false}
-              decorator="teleopCheckbox"
-            />
-            <CheckBox
-              className="onstage"
-              title="End Onstage"
-              id={this.assignUUID()}
-              value={false}
-              decorator="onstage"
-            />
-          </div>
-          <CheckBox
-            className="isFailure"
-            title="Climb Failure"
-            id={this.assignUUID()}
-            value={false}
-            decorator="dissapointmentCheckbox"
-          />
-          <div className="checkboxes">
-            <CheckBox
               className="temporary"
-              title="Temporary Failure"
+              title="Temp. Failure"
               id={this.assignUUID()}
               value={false}
               decorator={"temporary"}
@@ -475,7 +453,6 @@ class Container extends React.Component {
               decorator={"critical"}
             />
           </div>
-
           <div>
             <TextBoxLong
               className="text-box-long"

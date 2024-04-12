@@ -488,3 +488,65 @@ link {
   height: 40px;
   color: white;
 }
+
+.section-container-teleop {
+  display: flex;
+  align-items: center;
+}
+
+.field-section {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  background-color: rgb(45, 45, 45);
+  height: 90%;
+  width: 90%;
+}
+
+.field-section-text {
+  color: white;
+  margin: 0 auto;
+}
+
+.inner-flex {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.field-column {
+  display: grid;
+  grid-template-rows: 20% 80%;
+}
+
+.upper-section {
+  display: flex;
+  align-items: center;
+}
+
+.pass-button {
+  margin: 0 auto;
+  background-color: rgb(7, 242, 35);
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 90%;
+  border-radius: 20px;
+}
+
+.pass-text {
+  margin: 0 auto;
+  color: black;
+}
+
+.intake-text,
+.intake-value-text {
+  margin: 0 auto;
+  color: white;
+}
+
+.intake-value-text {
+  font-size: 25px;
+}

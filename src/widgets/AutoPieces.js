@@ -47,13 +47,22 @@ class AutoPieces extends React.Component {
 
     handleLocationChange = (value) => {
         let index = this.findPiece(this.state.piece);
+
         if (index === -1) {
+            /**
+             * If the currently selected piece isn't found
+             * we change the selected location and add the 
+             * piece with its location to the list
+             */
             this.setState(
                 {location: value}, 
                 () => {this.handleAdd();}
             )
-        } 
-        else {
+        } else {
+            /**
+             * If the piece is found, change its location
+             * in the list to the newly selected location
+             */
             const valueCopy = [...this.state.value];
             let element = valueCopy[index];
             let piece = 
@@ -61,6 +70,7 @@ class AutoPieces extends React.Component {
                     ? element.substring(0, 1) 
                     : element.substring(0, 2)
             valueCopy[index] = piece + value;
+
             this.setState({
                 location: value,
                 value: valueCopy
@@ -125,8 +135,8 @@ class AutoPieces extends React.Component {
                             {this.gamePiece("C5")}
                         </div>
                         <div className="misc">
-                            <div className="auto-button" onClick={() => this.handleRemove()}>
-                                <div className="auto-button-text">
+                            <div className="auto-button">
+                                <div className="auto-button-text" onClick={() => this.handleRemove()}>
                                     <img src={undo} alt="UNDO" className="undo-img"/>
                                 </div>
                             </div>
