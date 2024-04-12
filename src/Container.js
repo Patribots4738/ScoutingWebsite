@@ -135,21 +135,24 @@ class Container extends React.Component {
         localStorage.setItem("position", position);
 
         let cachedData = JSON.parse(localStorage.getItem("matchData"));
+        
+        if (cachedData === null) {
+          cachedData = {};
+        }
+
         let matchPath = `match-${matchNumber}`;
         let botPath = `${name}|${position}-${data[2][1]}`;
 
-        let newData = {};
-        newData[matchPath] = {};
-        newData[matchPath][botPath] = { data: jsonData, comments: commentData };
-        
-        newData = JSON.stringify(newData, null, "\t");
-
-        if (cachedData != null) {
-          cachedData.push(newData);
-          localStorage.setItem("matchData", cachedData);
+        if (cachedData[matchPath] === undefined) {
+          cachedData[matchPath] = {};
+          cachedData[matchPath][botPath] = { data: jsonData, comments: commentData };
         } else {
-          localStorage.setItem("matchData", [newData]);
+          cachedData[matchPath][botPath] = { data: jsonData, comments: commentData };
         }
+        
+        cachedData = JSON.stringify(cachedData, null, "\t");
+
+        localStorage.setItem("matchData", cachedData);
 
         window.scrollTo(0, 0);
         setTimeout(() => {
