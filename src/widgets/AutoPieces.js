@@ -1,4 +1,7 @@
 import React from "react";
+import note from "../images/note.png";
+import undo from "../images/undo.png";
+import ScoringSection from "./ScoringSection";
 
 class AutoPieces extends React.Component {
 
@@ -9,23 +12,23 @@ class AutoPieces extends React.Component {
         id: this.props.id,
         classNameDecorator: this.props.decorator,
         piece: "P",
-        location: "F"
+        location: "FS"
     }
 
     handleAdd = () => {
-        if (this.state.value.length < this.state.upperLimit && !this.findPiece()) {
+        if (this.state.value.length < this.state.upperLimit) {
             this.setState({
                 value: [...this.state.value, this.state.piece + this.state.location]
             });
         }
     }
 
-    findPiece = () => {
+    findPiece = (piece) => {
         for (let i = 0; i < this.state.value.length; i++) {
-            if (this.state.piece === this.state.value[i].substr(0, this.state.value[i].length - 1)) 
-                return true;
+            if ((piece === this.state.value[i].substring(0, 1)) ^ (piece === this.state.value[i].substring(0, 2)))
+                return i;
         }
-        return false;
+        return -1;
     }
 
     handleRemove = () => {
@@ -36,16 +39,56 @@ class AutoPieces extends React.Component {
         }
     }
 
-    handlePieceChange = (e) => {    
+    handlePieceChange = (value) => {
         this.setState({
-            piece: e.target.value
+            piece: value
         });
     }
 
-    handleLocationChange = (e) => {
-        this.setState({
-            location: e.target.value
-        });
+    handleLocationChange = (value) => {
+        let index = this.findPiece(this.state.piece);
+
+        if (index === -1) {
+            /**
+             * If the currently selected piece isn't found
+             * we change the selected location and add the 
+             * piece with its location to the list
+             */
+            this.setState(
+                {location: value}, 
+                () => {this.handleAdd();}
+            )
+        } else {
+            /**
+             * If the piece is found, change its location
+             * in the list to the newly selected location
+             */
+            const valueCopy = [...this.state.value];
+            let element = valueCopy[index];
+            let piece = 
+                element.substring(0, 1) === "P" 
+                    ? element.substring(0, 1) 
+                    : element.substring(0, 2)
+            valueCopy[index] = piece + value;
+
+            this.setState({
+                location: value,
+                value: valueCopy
+            })
+        }
+    }
+
+    gamePiece = (name) => {
+        return(
+            <div className="note">
+                <div className="note-clickable" onClick={() => this.handlePieceChange(name)}>
+                    <div className="note-text">
+                        {name}
+                    </div>
+                    <img src={note} alt="" className="note-img"/>
+                </div>
+            </div>
+        )
     }
 
     render() {
@@ -54,35 +97,45 @@ class AutoPieces extends React.Component {
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>
-                <div className="auto-pieces-body">
-                    <div className="val-display" id={this.state.id} value={this.state.value} title={this.state.title}>
-                        {(this.state.value.length > 0) ? this.state.value.join(" - ") : "-"}
-                    </div>
-                    <div className="auto-dropdowns">
-                        <select className="auto-dropdown" onChange={this.handlePieceChange}>
-                            <option value="P">P</option>
-                            <option value="W1">W1</option>
-                            <option value="W2">W2</option>
-                            <option value="W3">W3</option>
-                            <option value="C1">C1</option>
-                            <option value="C2">C2</option>
-                            <option value="C3">C3</option>
-                            <option value="C4">C4</option>
-                            <option value="C5">C5</option>
-                        </select>
-                        <select className="auto-dropdown" onChange={this.handleLocationChange}>
-                            <option value="F">F</option>
-                            <option value="S">S</option>
-                            <option value="A">A</option>
-                        </select>
-                    </div>
-                    <div className="auto-buttons">
-                        <button onClick={this.handleAdd} className="auto-button">
-                            <div className="auto-btn-text">Add</div>
-                        </button>
-                        <button onClick={this.handleRemove} className="auto-button">
-                            <div className="auto-btn-text">Remove</div>
-                        </button>
+                <div className="val-display" id={this.state.id} value={this.state.value.join("-")} title={this.state.title}>
+                    {(this.state.value.length > 0) ? this.state.value.join(" - ") : "-"}
+                </div>
+                <div className="selector">
+                    <div className="field-map">
+                        <ScoringSection
+                            speaker="S"
+                            amp="A"
+                            fail1="FI"
+                            fail2="FS"
+                            failText1="F INTAKE"
+                            failText2="F SHOT"
+                            handleScore={this.handleLocationChange}
+                        />
+                        <div className="wing">
+                            {this.gamePiece("W1")}
+                            {this.gamePiece("W2")}
+                            {this.gamePiece("W3")}
+                        </div>
+                        <div className="center">
+                            {this.gamePiece("C1")}
+                            {this.gamePiece("C2")}
+                            {this.gamePiece("C3")}
+                            {this.gamePiece("C4")}
+                            {this.gamePiece("C5")}
+                        </div>
+                        <div className="misc">
+                            <div className="auto-button">
+                                <div className="auto-button-text" onClick={() => this.handleRemove()}>
+                                    <img src={undo} alt="UNDO" className="undo-img"/>
+                                </div>
+                            </div>
+                            <div className="value-display">
+                                <div className="value-text">
+                                    {this.state.piece + this.state.location}
+                                </div>
+                            </div>
+                            {this.gamePiece("P")}
+                        </div>
                     </div>
                 </div>
             </span>

@@ -3,9 +3,9 @@ import './App.css';
 import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox';
 import Counter from './widgets/Counter';
+import TeleopCounter from './widgets/TeleopCounter';
 import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
-import Slider from './widgets/Slider';
 import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown';
 import AutoPieces from './widgets/AutoPieces';
@@ -31,9 +31,7 @@ class Container extends React.Component {
 
 
       var element = document.getElementById(this.state.scoutingLog[i]);
-
       if (element !== null) {
-
         var value;
         if (element.getAttribute("value") !== null && element.getAttribute("value") !== undefined) {
 
@@ -67,7 +65,7 @@ class Container extends React.Component {
     var sendData = data[1];
     data = data[0];
 
-    const eventID = '2024lake';
+    const eventID = '2024test';
 
     if (sendData) {
       let validMatch = true;
@@ -75,58 +73,78 @@ class Container extends React.Component {
         validMatch = window.confirm("Are you sure your match and team numbers are correct?");
       }
       if (validMatch) {
+        
         let name = data[0][1];
         let matchNumber = data[1][1];
         let position = data[3][1];
+        let autoPieces = data[5][1];
+        let autoPieceCounts = this.autoPieceCount(autoPieces.split("-"));
+        let teleopPieceCounts = JSON.parse(data[7][1]);
+
         let commentData = {
           "Name": name,
-          "What they did well": data[23][1],
-          "What they did bad": data[24][1],
-          "Additional Comments": data[25][1],
-          "Auto Description": data[8][1],
-          "Auto Pieces": data[7][1]
+          "What they did well": data[13][1],
+          "What they did bad": data[14][1],
+          "Additional Comments": data[15][1],
+          "Auto Description": data[6][1],
+          "Auto Pieces": autoPieces,
+          "Auto Start": data[4][1]
         }
         let jsonData = {
-          "Human Player": data[19][1],
-          "Driving": data[20][1],
-          "Amp Auto": data[6][1],
-          "Speaker Auto": data[5][1],
-          "Speaker Teleop": data[9][1],
-          "Amp Teleop": data[10][1],
-          "Amped Speaker": data[11][1],
-          "Trap": data[12][1],
-          "Fumbles Speaker": data[13][1],
-          "Fumbles Amp": data[14][1],
+          "Amp Auto": autoPieceCounts["amp"],
+          "Speaker Auto": autoPieceCounts["speaker"],
+          "Center Intakes Auto": autoPieceCounts["centerIntakes"],
+          "Failed Intakes Auto": autoPieceCounts["failedIntakes"],
+          "Failed Shots Auto": autoPieceCounts["failedShots"],
+          "Speaker Wing Cycles": teleopPieceCounts["speaker"]["wing"],
+          "Speaker Center Cycles": teleopPieceCounts["speaker"]["center"],
+          "Speaker Source Cycles": teleopPieceCounts["speaker"]["source"],
+          "Amp Wing Cycles": teleopPieceCounts["amp"]["wing"],
+          "Amp Center Cycles": teleopPieceCounts["amp"]["center"],
+          "Amp Full Cycles": teleopPieceCounts["amp"]["source"],
+          "Pass Wing Cycles": teleopPieceCounts["pass"]["wing"],
+          "Pass Center Cycles": teleopPieceCounts["pass"]["center"],
+          "Pass Full Cycles": teleopPieceCounts["pass"]["source"],
+          "Fumbles Speaker Wing Cycles": teleopPieceCounts["fumbleSpeaker"]["wing"],
+          "Fumbles Speaker Center Cycles": teleopPieceCounts["fumbleSpeaker"]["center"],
+          "Fumbles Speaker Full Cycles": teleopPieceCounts["fumbleSpeaker"]["source"],
+          "Fumbles Amp Wing Cycles": teleopPieceCounts["fumbleAmp"]["wing"],
+          "Fumbles Amp Center Cycles": teleopPieceCounts["fumbleAmp"]["center"],
+          "Fumbles Amp Full Cycles": teleopPieceCounts["fumbleAmp"]["source"],
           "Match Number": matchNumber,
-          "Leave in Auto": data[4][1],
-          "Temp Failure": data[21][1],
-          "Critical Failure": data[22][1],
-          "End Park": data[15][1],
-          "End Onstage": data[16][1],
-          "Climb Failure": data[17][1],
-          "Co-Op": data[18][1]
+          "Temp Failure": data[11][1],
+          "Critical Failure": data[12][1],
+          "End Onstage": data[8][1],
+          "Climb Failure": data[9][1],
+          "Trap": data[10][1]
         };
-
-        let positions = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
         //                      event             match #                                Name|Position-Team#               
-        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + positions[position] + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, 'scouting/' + eventID + '/match-' + data[1][1] + '/' + name + '|' + positions[position] + '-' + data[2][1] + '/comments/'), commentData);
+        set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name);
         localStorage.setItem("matchNumber", matchNumber);
         localStorage.setItem("position", position);
 
-        let cachedData = JSON.parse(localStorage.getItem("matchData"))
-
-        if (cachedData != null) {
-          cachedData.push(data);
-          localStorage.setItem("matchData", JSON.stringify(cachedData));
-        } else {
-          localStorage.setItem("matchData", JSON.stringify([data]));
+        let cachedData = JSON.parse(localStorage.getItem("matchData"));
+        
+        if (cachedData === null) {
+          cachedData = {};
         }
 
-        console.log(localStorage.getItem("matchData"));
+        let matchPath = `match-${matchNumber}`;
+        let botPath = `${name}|${position}-${data[2][1]}`;
 
+        if (cachedData[matchPath] === undefined) {
+          cachedData[matchPath] = {};
+          cachedData[matchPath][botPath] = { data: jsonData, comments: commentData };
+        } else {
+          cachedData[matchPath][botPath] = { data: jsonData, comments: commentData };
+        }
+        
+        cachedData = JSON.stringify(cachedData, null, "\t");
+
+        localStorage.setItem("matchData", cachedData);
 
         window.scrollTo(0, 0);
         setTimeout(() => {
@@ -139,6 +157,44 @@ class Container extends React.Component {
 
   badMatchNumber = (val) => {
     return (val.toString().length > 2)
+  }
+
+  // takes value from AutoPieces widget 
+  autoPieceCount = (arr) => {
+    let pieceCounts = {
+      speaker: 0,
+      amp: 0,
+      failedShots: 0,
+      failedIntakes: 0,
+      centerIntakes: 0
+    };
+    for (let i = 0; i < arr.length; i++) {
+      let loc;
+      if (arr[i].includes("F")) {
+        loc = arr[i].substring(arr[i].length - 2);
+      } else {
+        loc = arr[i].substring(arr[i].length - 1);
+      }
+      console.log(loc);
+      switch (loc) {
+        case "S":
+          pieceCounts["speaker"]++
+          break;
+        case "A":
+          pieceCounts["amp"]++
+          break;
+        case "FS":
+          pieceCounts["failedShots"]++
+          break;
+        default:
+          pieceCounts["failedIntakes"]++
+          break;
+      }
+      if (arr[i].substring(0, 1) === "C" && loc !== "FI") {
+        pieceCounts["centerIntakes"]++;
+      }
+    }
+    return pieceCounts;
   }
 
   clearLocalStorage = () => {
@@ -159,33 +215,22 @@ class Container extends React.Component {
 
 
   handleExportData = (_) => {
-    let cachedDataJSON = (JSON.parse(localStorage.getItem("matchData")));
-    let cachedDataCSV = "";
+    let cachedDataJSON = localStorage.getItem("matchData");
 
     if (cachedDataJSON != null) {
-      for (let i = 0; i < cachedDataJSON.length; i++) {
-        for (let e = 0; e < cachedDataJSON[i].length; e++) {
-          cachedDataCSV += cachedDataJSON[i][e][1] + ","
-        }
-        cachedDataCSV += "\n"
-      }
+      let file = new Blob([cachedDataJSON], { type: "text/json" })
+
+      let blobURL = window.URL.createObjectURL(file)
+
+      const anchor = document.createElement('a');
+      anchor.href = blobURL
+      anchor.target = "_blank"
+      anchor.download = "matchData.json"
+
+      anchor.click()
+
+      URL.revokeObjectURL(blobURL);
     }
-
-    let file = new Blob([cachedDataCSV], { type: "text/csv" })
-    let blobURL = window.URL.createObjectURL(file)
-
-    const anchor = document.createElement('a');
-    anchor.href = blobURL
-    anchor.target = "_blank"
-    anchor.download = "matchData.csv"
-
-    anchor.click()
-
-    URL.revokeObjectURL(blobURL);
-  }
-
-  sliderNumbers = () => {
-    return "1 ‎ ‎ ‎ ‎ ‎ ‎ ‎ 2 ‎ ‎ ‎ ‎ ‎ ‎ ‎ 3 ‎ ‎ ‎ ‎ ‎ ‎ ‎ 4 ‎ ‎ ‎ ‎ ‎ ‎ ‎ 5";
   }
 
   render() {
@@ -248,22 +293,28 @@ class Container extends React.Component {
               required={true}
               items={[
                 {
-                  title: "r1"
+                  title: "r1",
+                  value: "r1"
                 },
                 {
-                  title: "r2"
+                  title: "r2",
+                  value: "r2"
                 },
                 {
-                  title: "r3"
+                  title: "r3",
+                  value: "r3"
                 },
                 {
-                  title: "b1"
+                  title: "b1",
+                  value: "b1"
                 },
                 {
-                  title: "b2"
+                  title: "b2",
+                  value: "b2"
                 },
                 {
-                  title: "b3"
+                  title: "b3",
+                  value: "b3"
                 }
               ]}
             />
@@ -274,36 +325,30 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             AUTONOMOUS
           </h2>
-          <div ClassName="style1">
-            <CheckBox
-              className="leave"
-              title="Leave in Auto"
-              id={this.assignUUID()}
-              value={false}
-              decorator="autoCheckbox"
-            />
-            <div
-            />
-            <span className="upper">
-              <Counter
-                className="counter widget"
+          <div className="style1">
+          <span>
+            <Dropdown
+                className="dropdown alliance-color"
                 id={this.assignUUID()}
-                title={"Speaker Auto"}
-                value={0}
-                upperLimit={14}
-                decorator={"speaker"}
+                title={"Starting Side"}
+                value={localStorage.getItem("position")}
+                selected={localStorage.getItem("position")}
+                required={true}
+                items={[
+                  {
+                    title: "Amp",
+                    value: "Amp"
+                  },
+                  {
+                    title: "Middle",
+                    value: "Middle"
+                  },
+                  {
+                    title: "Source",
+                    value: "Source"
+                  }
+                ]}
               />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Amp Auto"}
-                value={0}
-                upperLimit={14}
-                decorator={"amp"}
-              />
-
             </span>
             <div>
               <AutoPieces
@@ -330,70 +375,13 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <div>
-            <span className="uppers">
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Speaker Teleop"}
-                value={0}
-                upperLimit={107}
-                decorator={"speaker"}
-              />
-
-
-              <Counter
-                className="counter widget"
-                id={this.assignUUID()}
-                title={"Amp Teleop"}
-                value={0}
-                upperLimit={107}
-                decorator={"amp"}
-              />
-            </span>
-          </div>
-          <div>
-            <Counter
-              className="counter widget"
-              id={this.assignUUID()}
-              title={"Amped Speaker"}
-              value={0}
-              upperLimit={107}
-              decorator={"amped"}
-            />
-            <Counter
-              className="counter widget"
-              id={this.assignUUID()}
-              title={"Trap"}
-              value={0}
-              upperLimit={3}
-              decorator={"trap"}
-            />
-          </div>
-          <div>
-            <Counter
-              className="counter widget"
-              id={this.assignUUID()}
-              title={"Fumbles Speaker"}
-              value={0}
-              decorator={"fumbles"}
-            />
-            <Counter
-              className="counter widget"
-              id={this.assignUUID()}
-              title={"Fumbles Amp"}
-              value={0}
-              decorator={"fumbles"}
-            />
-          </div>
+          <TeleopCounter
+            value={{}}
+            id={this.assignUUID()}
+            title="Piece Counter"
+            className="teleop-counter"
+          />
           <div className="checkboxes1">
-            <CheckBox
-              className="docked"
-              title="End Park"
-              id={this.assignUUID()}
-              value={false}
-              decorator="teleopCheckbox"
-            />
             <CheckBox
               className="onstage"
               title="End Onstage"
@@ -401,8 +389,6 @@ class Container extends React.Component {
               value={false}
               decorator="onstage"
             />
-          </div>
-          <div className="checkboxes1">
             <CheckBox
               className="isFailure"
               title="Climb Failure"
@@ -410,45 +396,25 @@ class Container extends React.Component {
               value={false}
               decorator="dissapointmentCheckbox"
             />
-            <CheckBox
-              className="coopertition"
-              title="Coopertition"
-              id={this.assignUUID()}
-              value={false}
-              decorator="dissapointmentCheckbox"
-            />
           </div>
-
+          <Counter
+            className="counter widget"
+            id={this.assignUUID()}
+            title={"Trap"}
+            value={0}
+            upperLimit={3}
+            decorator={"trap"}
+          />
         </div>
 
         <div className="post-match-container">
           <h2 className="subtitle section-title">
             POST-MATCH
           </h2>
-          <div>
-            <new className="slider-reference">‎ ‎ ‎ ‎ ‎ Terrible</new>
-            <Slider
-              title="Human Player"
-              id={this.assignUUID()}
-              decorator="slide"
-            />
-            <new className="slider-reference">Incredible</new>
-            <div className="slider-nums">{this.sliderNumbers()}</div>
-          </div>
-          <div>
-            <new className="slider-reference">‎ ‎ ‎ ‎ ‎ Terrible</new>
-            <Slider
-              title="Driving"
-              id={this.assignUUID()}
-              decorator="slide"
-            />
-            <new className="slider-reference">Incredible</new>
-            <div className="slider-nums">{this.sliderNumbers()}</div>
-          </div>
-          <div className="checkboxes">
+          <div className="checkboxes1">
             <CheckBox
               className="temporary"
-              title="Temporary Failure"
+              title="Temp. Failure"
               id={this.assignUUID()}
               value={false}
               decorator={"temporary"}
@@ -461,7 +427,6 @@ class Container extends React.Component {
               decorator={"critical"}
             />
           </div>
-
           <div>
             <TextBoxLong
               className="text-box-long"
@@ -469,6 +434,7 @@ class Container extends React.Component {
               title={"What they did well"}
               value={""}
               numeric={false}
+              placeholder=""
             />
           </div>
           <div>
@@ -478,6 +444,7 @@ class Container extends React.Component {
               title={"What they didn't do well"}
               value={""}
               numeric={false}
+              placeholder=""
             />
           </div>
           <div>
@@ -487,6 +454,7 @@ class Container extends React.Component {
               title={"Additional comments"}
               value={""}
               numeric={false}
+              placeholder=""
             />
           </div>
 
@@ -498,7 +466,7 @@ class Container extends React.Component {
 
         <div className='export-container'>
           <Export title="Export Data" handleExportData={this.handleExportData} />
-          <ClearLocalStorage title="Clear match saves" clearLocalStorage={this.clearLocalStorage} />
+          <ClearLocalStorage title="Clear local data" clearLocalStorage={this.clearLocalStorage} />
         </div>
       </ul>
     );

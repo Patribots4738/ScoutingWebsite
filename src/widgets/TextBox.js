@@ -32,16 +32,16 @@ class TextBox extends React.Component{
         if (required) {
             return (
                 <input
-                        type="text"
-                        className="text-box widget"
-                        onChange={e => {
-                            this.handleTextBoxChange(e.target.value)
-                        }}
-                        id={this.state.id}
-                        value={this.state.value}
-                        required
-                        title={this.state.title}
-                    />
+                    type="text"
+                    className="text-box widget"
+                    onChange={e => {
+                        this.handleTextBoxChange(e.target.value)
+                    }}
+                    id={this.state.id}
+                    value={this.state.value}
+                    required
+                    title={this.state.title}
+                />
             )
         } else {
             return (
