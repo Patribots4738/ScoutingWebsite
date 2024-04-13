@@ -98,7 +98,7 @@ class Container extends React.Component {
           "Failed Shots Auto": autoPieceCounts["failedShots"],
           "Speaker Wing Cycles": teleopPieceCounts["speaker"]["wing"],
           "Speaker Center Cycles": teleopPieceCounts["speaker"]["center"],
-          "Speaker Source Cycles": teleopPieceCounts["speaker"]["source"],
+          "Speaker Full Cycles": teleopPieceCounts["speaker"]["source"],
           "Amp Wing Cycles": teleopPieceCounts["amp"]["wing"],
           "Amp Center Cycles": teleopPieceCounts["amp"]["center"],
           "Amp Full Cycles": teleopPieceCounts["amp"]["source"],
