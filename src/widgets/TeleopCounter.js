@@ -77,7 +77,7 @@ class TeleopCounter extends React.Component {
                 <div className="score-cell" key={i}>
                     <div className="score-cell-text">
                         <div className="cell-text">
-                            {this.state.scoreLog[i][0].toUpperCase()} TO {this.state.scoreLog[i][1].toUpperCase()}
+                            {this.state.scoreLog[i][0].toUpperCase()} TO {this.getScoreResult(this.state.scoreLog[i][1].toUpperCase())}
                         </div>
                     </div>
                     <div className="score-cell-remove" onClick={() => this.handleRemove(this.state.scoreLog[i], i)}>
@@ -89,6 +89,13 @@ class TeleopCounter extends React.Component {
             )
         }
         return UIList;
+    }
+
+    getScoreResult = (result) => {
+        if (result.substring(0, 6) === "FUMBLE") {
+            return result.substring(0, 6) + " " + result.substring(6);
+        }
+        return result;
     }
 
     handleRemove = (logElement, index) => {
