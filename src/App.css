@@ -29,6 +29,23 @@ link {
   color: white;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #282828;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .container {
   justify-content: center;
   display: grid;
@@ -312,6 +329,7 @@ link {
   align-items: center;
   justify-content: center;
   max-width: 400px;
+  overflow-x: auto;
 }
 
 .auto-pieces-body {
