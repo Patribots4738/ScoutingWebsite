@@ -80,7 +80,7 @@ class AutoPieces extends React.Component {
 
     gamePiece = (name) => {
         return(
-            <div className="note">
+            <div className="note" key={name}>
                 <div className="note-clickable" onClick={() => this.handlePieceChange(name)}>
                     <div className="note-text">
                         {name}
@@ -89,6 +89,22 @@ class AutoPieces extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    pieceLine = (amount, firstChar) => {
+        let pieces = [];
+        for (let i = 1; i <= amount; i++) {
+            pieces.push(this.gamePiece(firstChar + i));
+        }
+        return pieces;
+    }
+
+    wingPieces = () => {
+        return this.pieceLine(3, "W");
+    }
+
+    centerPieces = () => {
+        return this.pieceLine(5, "C");
     }
 
     render() {
@@ -112,16 +128,10 @@ class AutoPieces extends React.Component {
                             handleScore={this.handleLocationChange}
                         />
                         <div className="wing">
-                            {this.gamePiece("W1")}
-                            {this.gamePiece("W2")}
-                            {this.gamePiece("W3")}
+                            {this.wingPieces()}
                         </div>
                         <div className="center">
-                            {this.gamePiece("C1")}
-                            {this.gamePiece("C2")}
-                            {this.gamePiece("C3")}
-                            {this.gamePiece("C4")}
-                            {this.gamePiece("C5")}
+                            {this.centerPieces()}
                         </div>
                         <div className="misc">
                             <div className="auto-button">
