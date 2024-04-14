@@ -11,8 +11,10 @@ class ScoringSection extends React.Component {
                     <div className="amp-text">AMP</div>
                 </div>
                 <div className="speaker" onClick={() => this.props.handleScore(this.props.speaker)}>
-                    <img src={speaker} alt="" className="speaker-img"/>
-                    <div className="speaker-text">SPEAKER</div>
+                    <div className="speaker-inner">
+                        <img src={speaker} alt="" className="speaker-img"/>
+                        <div className="speaker-text">SPEAKER</div>
+                    </div>
                 </div>
                 <div className="fail">
                     <div className="fail-button" onClick={() => this.props.handleScore(this.props.fail1)}>

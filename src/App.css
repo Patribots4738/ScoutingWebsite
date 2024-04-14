@@ -405,6 +405,26 @@ link {
   align-items: center;
 }
 
+.speaker-inner {
+  display: flex;
+  align-items: center;
+  height: 80%;
+  width: 80%;
+  border-radius: 0px 20px 20px 0px;
+}
+
+.speaker-inner:active {
+  background-color: rgb(40, 40, 40);
+}
+
+.amp {
+  border-radius: 20px 0px 20px 0px;
+}
+
+.amp:active {
+  background-color: rgb(40, 40, 40);
+}
+
 .amp-text {
   color: white;
   margin-top: 3px;
@@ -421,7 +441,7 @@ link {
   width: 60px;
   height: 30px;
   border-style: solid;
-  border-width: 2px;
+  border-width: 4px;
   border-color: red;
   border-top: none;
 }
