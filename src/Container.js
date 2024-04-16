@@ -21,6 +21,7 @@ class Container extends React.Component {
   
   state = {
     scoutingLog: [],
+    flippedMaps: localStorage.getItem("flippedMaps")
   }
 
   gatherData = () => {
@@ -36,7 +37,6 @@ class Container extends React.Component {
         if (element.getAttribute("value") !== null && element.getAttribute("value") !== undefined) {
 
           value = (element.getAttribute("value"))
-
 
           if (element.required && value === "") {
 
@@ -357,6 +357,7 @@ class Container extends React.Component {
                 title="Auto Pieces"
                 decorator="auto-pieces"
                 upperLimit={10}
+                reverse={this.state.flippedMaps}
               />
             </div>
             <div>
@@ -380,6 +381,7 @@ class Container extends React.Component {
             id={this.assignUUID()}
             title="Piece Counter"
             className="teleop-counter"
+            reverse={this.state.flippedMaps}
           />
           <div className="checkboxes1">
             <CheckBox

@@ -105,11 +105,74 @@ class TeleopCounter extends React.Component {
         let newLog = [...this.state.scoreLog];
         newValue[resultLoc][intakeLoc]--;
         newLog.splice(index, 1);
-        console.log(newValue);
         this.setState({
             value: newValue,
             scoreLog: newLog
         });
+    }
+
+    bigUIArray = (reverse) => {
+        let arr = [
+            (<ScoringSection
+                speaker="speaker"
+                amp="amp"
+                fail1="fumbleAmp"
+                fail2="fumbleSpeaker"
+                failText1="F AMP"
+                failText2="F SPEAKER"
+                handleScore={this.handleScore}
+                reverse={reverse}
+                key="0"
+            />),
+            (<div className="field-column" key="1">
+                <div className="upper-section">
+                    <div className="pass-button" onClick={() => this.handleScore("pass")}>
+                        <div className="pass-text">
+                            PASS
+                        </div>
+                    </div>
+                </div>
+                {this.fieldSection("wing", "WING")}
+            </div>),
+            (<div className="field-column" key="2">
+                <div className="upper-section">
+                    {
+                        reverse
+                            ? (
+                                <div className="intake-value-text">
+                                    {this.state.intakeLocation.toUpperCase()}
+                                </div>
+                            )
+                            : (
+                                <div className="intake-text">
+                                    INTAKE FROM:
+                                </div>
+                            )
+                    }
+                </div>
+                {this.fieldSection("center", "CENTER")}
+            </div>),
+            (<div className="field-column" key="3">
+                <div className="upper-section">
+                    {
+                        reverse
+                            ? (
+                                <div className="intake-text">
+                                    INTAKE FROM:
+                                </div>
+                            )
+                            : (
+                                <div className="intake-value-text">
+                                    {this.state.intakeLocation.toUpperCase()}
+                                </div>
+                            )
+                    }
+                </div>
+                {this.fieldSection("source", "OPP WING")}
+            </div>)
+        ]
+
+        return reverse ? arr.reverse() : arr;
     }
 
     render() {
@@ -120,41 +183,7 @@ class TeleopCounter extends React.Component {
                 </div>
                 <div className="teleop-counter-container">
                     <div className="field-map" id={this.state.id} value={JSON.stringify(this.state.value)}>
-                        <ScoringSection
-                            speaker="speaker"
-                            amp="amp"
-                            fail1="fumbleAmp"
-                            fail2="fumbleSpeaker"
-                            failText1="F AMP"
-                            failText2="F SPEAKER"
-                            handleScore={this.handleScore}
-                        />
-                        <div className="field-column">
-                            <div className="upper-section">
-                                <div className="pass-button" onClick={() => this.handleScore("pass")}>
-                                    <div className="pass-text">
-                                        PASS
-                                    </div>
-                                </div>
-                            </div>
-                            {this.fieldSection("wing", "WING")}
-                        </div>
-                        <div className="field-column">
-                            <div className="upper-section">
-                                <div className="intake-text">
-                                    INTAKE FROM:
-                                </div>
-                            </div>
-                            {this.fieldSection("center", "CENTER")}
-                        </div>
-                        <div className="field-column">
-                            <div className="upper-section">
-                                <div className="intake-value-text">
-                                    {this.state.intakeLocation.toUpperCase()}
-                                </div>
-                            </div>
-                            {this.fieldSection("source", "OPP WING")}
-                        </div>
+                        {this.bigUIArray(this.props.reverse)}
                     </div>
                     <div className= {"subtitle"}>
                         Score Log 

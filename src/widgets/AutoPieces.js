@@ -107,6 +107,43 @@ class AutoPieces extends React.Component {
         return this.pieceLine(5, "C");
     }
 
+    bigUIArray = (reverse) => {
+        let arr = [
+            (<ScoringSection
+                speaker="S"
+                amp="A"
+                fail1="FI"
+                fail2="FS"
+                failText1="F INTAKE"
+                failText2="F SHOT"
+                handleScore={this.handleLocationChange}
+                key="0"
+                reverse={reverse}
+            />),
+            (<div className="wing" key="1">
+                {this.wingPieces()}
+            </div>),
+            (<div className="center" key="2">
+                {this.centerPieces()}
+            </div>),
+            (<div className="misc" key="3">
+                <div className="auto-button">
+                    <div className="auto-button-text" onClick={() => this.handleRemove()}>
+                        <img src={undo} alt="UNDO" className="undo-img"/>
+                    </div>
+                </div>
+                <div className="value-display">
+                    <div className="value-text">
+                        {this.state.piece + this.state.location}
+                    </div>
+                </div>
+                {this.gamePiece("P")}
+            </div>)
+        ]
+
+        return reverse ? arr.reverse() : arr;
+    }
+
     render() {
         return (
             <span className={"widget-" + this.state.classNameDecorator}>
@@ -118,34 +155,7 @@ class AutoPieces extends React.Component {
                 </div>
                 <div className="selector">
                     <div className="field-map">
-                        <ScoringSection
-                            speaker="S"
-                            amp="A"
-                            fail1="FI"
-                            fail2="FS"
-                            failText1="F INTAKE"
-                            failText2="F SHOT"
-                            handleScore={this.handleLocationChange}
-                        />
-                        <div className="wing">
-                            {this.wingPieces()}
-                        </div>
-                        <div className="center">
-                            {this.centerPieces()}
-                        </div>
-                        <div className="misc">
-                            <div className="auto-button">
-                                <div className="auto-button-text" onClick={() => this.handleRemove()}>
-                                    <img src={undo} alt="UNDO" className="undo-img"/>
-                                </div>
-                            </div>
-                            <div className="value-display">
-                                <div className="value-text">
-                                    {this.state.piece + this.state.location}
-                                </div>
-                            </div>
-                            {this.gamePiece("P")}
-                        </div>
+                        {this.bigUIArray(this.props.reverse)}
                     </div>
                 </div>
             </span>

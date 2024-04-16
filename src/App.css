@@ -413,15 +413,32 @@ link {
   border-radius: 0px 20px 20px 0px;
 }
 
-.speaker-inner:active {
+.speaker-inner-reverse {
+  display: flex;
+  align-items: center;
+  height: 80%;
+  width: 80%;
+  border-radius: 20px 0px 0px 20px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.speaker-inner:active,
+.speaker-inner-reverse:active {
   background-color: rgb(40, 40, 40);
 }
+
 
 .amp {
   border-radius: 20px 0px 20px 0px;
 }
 
-.amp:active {
+.amp-reverse {
+  border-radius: 0px 20px 0px 20px;
+}s
+
+.amp:active,
+.amp-reverse:active {
   background-color: rgb(40, 40, 40);
 }
 
@@ -434,6 +451,13 @@ link {
   margin-left: 10px;
   color: white;
   writing-mode: vertical-rl;
+}
+
+.speaker-text-reverse {
+  margin-left: 10px;
+  color: white;
+  writing-mode: vertical-rl;
+  transform: scale(-1);
 }
 
 .amp-graphic {
@@ -465,6 +489,7 @@ link {
 }
 
 .note-clickable {
+  margin: 0 auto;
   text-align: center;
   display: flex;
   align-items: center;
@@ -492,6 +517,13 @@ link {
 
 .speaker-img {
   height: 100px;
+}
+
+.speaker-img-reverse {
+  height: 100px;
+  transform: scaleX(-1);
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .fail {
