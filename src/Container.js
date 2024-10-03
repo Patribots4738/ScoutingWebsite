@@ -65,7 +65,7 @@ class Container extends React.Component {
     var sendData = data[1];
     data = data[0];
 
-    const eventID = '2024arc';
+    const eventID = '2024cabb';
 
     if (sendData) {
       let validMatch = true;
@@ -175,7 +175,6 @@ class Container extends React.Component {
       } else {
         loc = arr[i].substring(arr[i].length - 1);
       }
-      console.log(loc);
       switch (loc) {
         case "S":
           pieceCounts["speaker"]++
