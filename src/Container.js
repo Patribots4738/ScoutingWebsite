@@ -373,16 +373,16 @@ class Container extends React.Component {
                 required={true}
                 items={[
                   {
-                    title: "Amp",
-                    value: "Amp"
+                    title: "Processor",
+                    value: "Processor"
                   },
                   {
                     title: "Middle",
                     value: "Middle"
                   },
                   {
-                    title: "Source",
-                    value: "Source"
+                    title: "Non-Processor",
+                    value: "Non-Processor"
                   }
                 ]}
               />
@@ -421,9 +421,12 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             POST-MATCH
           </h2>
-          <div className="checkboxes1">
+          <div className="checkboxes">
             <CheckBox
-              c
+              type="Critical Failure"
+              className="Critical Failure"
+              value="false"
+              id={this.assignUUID}
             />
 
             <Counter

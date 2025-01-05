@@ -80,7 +80,7 @@ class TeleopCounter extends React.Component {
                 </div>
                 <div className="teleop-counter-container">
                     <div className="score-btn-container">
-                        <button className="tele-btn"> L1 </button>
+                        <button className="tele-btn" > L1 </button>
                         <button className="tele-btn"> L2 </button>
                         <button className="tele-btn"> L3 </button>
                         <button className="tele-btn"> L4 </button>
