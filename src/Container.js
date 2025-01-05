@@ -90,6 +90,17 @@ class Container extends React.Component {
           "Auto Pieces": autoPieces,
           "Auto Start": data[4][1]
         }
+
+        /**
+        DataPoints 2025:
+        Auto:
+            L1 Piece count
+            L2 Piece count
+            L3 Piece count
+            L4 Piece count
+            Processor Piece count
+
+         */
         let jsonData = {
           "Amp Auto": autoPieceCounts["amp"],
           "Speaker Auto": autoPieceCounts["speaker"],
@@ -160,34 +171,61 @@ class Container extends React.Component {
   }
 
   // takes value from AutoPieces widget 
+  // We want 
+  // L1 - L4 is height for coralpieces
+  // N is Algae scored in Net
+  // P is Algae scored in Processor
+  // FC is failed coral
+  // FN is failed net shot
+  // FP is failed processor
   autoPieceCount = (arr) => {
     let pieceCounts = {
-      speaker: 0,
-      amp: 0,
-      failedShots: 0,
-      failedIntakes: 0,
-      centerIntakes: 0
+      L1: 0,
+      L2: 0,
+      L3: 0,
+      L4: 0,
+      Net: 0,
+      Processor: 0,
+      FailedCoral: 0,
+      FailedNet: 0,
+      FailedProcessor: 0
     };
     for (let i = 0; i < arr.length; i++) {
       let loc;
+      // needs to be changed to get what we want when strings are finalized
       if (arr[i].includes("F")) {
         loc = arr[i].substring(arr[i].length - 2);
       } else {
         loc = arr[i].substring(arr[i].length - 1);
       }
       switch (loc) {
-        case "S":
-          pieceCounts["speaker"]++
-          break;
-        case "A":
-          pieceCounts["amp"]++
-          break;
-        case "FS":
-          pieceCounts["failedShots"]++
-          break;
-        default:
-          pieceCounts["failedIntakes"]++
-          break;
+        case "L1":
+            pieceCounts["L1"]++
+            break;
+        case "L2":
+            pieceCounts["L2"]++
+            break;
+        case "L3":
+            pieceCounts["L3"]++
+            break;
+        case "L4":
+            pieceCounts["L4"]++
+            break;
+        case "N":
+            pieceCounts["Net"]++
+            break;
+        case "P":
+            pieceCounts["Processor"]++
+            break;
+        case "FC":
+            pieceCounts["FailedCoral"]++
+            break;
+        case "FN":
+            pieceCounts["FailedNet"]++
+            break;
+        case "FP":
+            pieceCounts["FailedProcessor"]++
+            break;
       }
       if (arr[i].substring(0, 1) === "C" && loc !== "FI") {
         pieceCounts["centerIntakes"]++;
@@ -375,57 +413,24 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <TeleopCounter
-            value={{}}
-            id={this.assignUUID()}
-            title="Piece Counter"
-            className="teleop-counter"
-            reverse={this.state.flippedMaps}
-          />
-          <div className="checkboxes1">
-            <CheckBox
-              className="onstage"
-              title="End Onstage"
-              id={this.assignUUID()}
-              value={false}
-              decorator="onstage"
-            />
-            <CheckBox
-              className="isFailure"
-              title="Climb Failure"
-              id={this.assignUUID()}
-              value={false}
-              decorator="dissapointmentCheckbox"
-            />
-          </div>
-          <Counter
-            className="counter widget"
-            id={this.assignUUID()}
-            title={"Trap"}
-            value={0}
-            upperLimit={3}
-            decorator={"trap"}
-          />
+          <span className = "teleopCounters">
+            <TeleopCounter/>  
+          </span>
         </div>
-
         <div className="post-match-container">
           <h2 className="subtitle section-title">
             POST-MATCH
           </h2>
           <div className="checkboxes1">
             <CheckBox
-              className="temporary"
-              title="Temp. Failure"
-              id={this.assignUUID()}
-              value={false}
-              decorator={"temporary"}
+              c
             />
-            <CheckBox
-              className="critical"
-              title="Critical Failure"
+
+            <Counter
+              className="coralCounter"
+              title="countertEST"
               id={this.assignUUID()}
-              value={false}
-              decorator={"critical"}
+              value={0}
             />
           </div>
           <div>

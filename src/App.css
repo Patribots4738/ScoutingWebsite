@@ -688,6 +688,14 @@ link {
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 300px;;
+}
+
+.score-btn-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
 }
 
 .log-container {
@@ -723,4 +731,15 @@ link {
 
 .cell-text {
   margin: 0 auto;
+}
+
+.teleopCounters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tele-btn {
+    width: 100px;
+    height: 30px;
 }

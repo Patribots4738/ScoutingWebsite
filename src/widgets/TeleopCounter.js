@@ -9,64 +9,26 @@ class TeleopCounter extends React.Component {
         id: this.props.id,
         classNameDecorator: this.props.className,
         value: {
-            speaker: {
-                wing: 0,
-                center: 0,
-                source: 0
-            },
-            amp: {
-                wing: 0,
-                center: 0,
-                source: 0
-            },
-            pass: {
-                wing: 0,
-                center: 0,
-                source: 0
-            },
-            fumbleSpeaker: {
-                wing: 0,
-                center: 0,
-                source: 0
-            },
-            fumbleAmp: {
-                wing: 0,
-                center: 0,
-                source: 0
-            }
+            "L1": 0,
+            "L2": 0,
+            "L3": 0,
+            "L4": 0,
+            "PA": 0,
+            "NA": 0,
+            "CF": 0,
+            "NF": 0,
+            "PF": 0
         },
-        intakeLocation: "wing",
         scoreLog: []
-    }
-
-    handleLocationChange = (location) => {
-        this.setState({
-            intakeLocation: location
-        });
     }
 
     handleScore = (location) => {
         let newValue = {...this.state.value};
-        newValue[location][this.state.intakeLocation]++;
+        newValue[location]++;
         this.setState({
             value: newValue,
-            scoreLog: [...this.state.scoreLog, [this.state.intakeLocation, location]]
+            scoreLog: [...this.state.scoreLog, location]
         });
-    }
-
-    fieldSection = (location, text) => {
-        return (
-            <div className="section-container-teleop">
-                <div className="field-section" onClick={() => this.handleLocationChange(location)}>
-                    <div className="inner-flex">
-                        <div className="field-section-text">
-                            {text}
-                        </div>
-                        <img className="note-img" alt="" src={note}/>
-                    </div>
-                </div>
-            </div>
-        )
     }
 
     scoreLogUI = () => {
@@ -76,7 +38,7 @@ class TeleopCounter extends React.Component {
                 <div className="score-cell" key={i}>
                     <div className="score-cell-text">
                         <div className="cell-text">
-                            {this.state.scoreLog[i][0].toUpperCase()} TO {this.getScoreResult(this.state.scoreLog[i][1].toUpperCase())}
+                            {this.state.scoreLog[i].toUpperCase()}
                         </div>
                     </div>
                     <div className="score-cell-remove" onClick={() => this.handleRemove(this.state.scoreLog[i], i)}>
@@ -110,70 +72,6 @@ class TeleopCounter extends React.Component {
         });
     }
 
-    bigUIArray = (reverse) => {
-        let arr = [
-            (<ScoringSection
-                speaker="speaker"
-                amp="amp"
-                fail1="fumbleAmp"
-                fail2="fumbleSpeaker"
-                failText1="F AMP"
-                failText2="F SPEAKER"
-                handleScore={this.handleScore}
-                reverse={reverse}
-                key="0"
-            />),
-            (<div className="field-column" key="1">
-                <div className="upper-section">
-                    <div className="pass-button" onClick={() => this.handleScore("pass")}>
-                        <div className="pass-text">
-                            PASS
-                        </div>
-                    </div>
-                </div>
-                {this.fieldSection("wing", "WING")}
-            </div>),
-            (<div className="field-column" key="2">
-                <div className="upper-section">
-                    {
-                        reverse
-                            ? (
-                                <div className="intake-value-text">
-                                    {this.state.intakeLocation.toUpperCase()}
-                                </div>
-                            )
-                            : (
-                                <div className="intake-text">
-                                    INTAKE FROM:
-                                </div>
-                            )
-                    }
-                </div>
-                {this.fieldSection("center", "CENTER")}
-            </div>),
-            (<div className="field-column" key="3">
-                <div className="upper-section">
-                    {
-                        reverse
-                            ? (
-                                <div className="intake-text">
-                                    INTAKE FROM:
-                                </div>
-                            )
-                            : (
-                                <div className="intake-value-text">
-                                    {this.state.intakeLocation.toUpperCase()}
-                                </div>
-                            )
-                    }
-                </div>
-                {this.fieldSection("source", "OPP WING")}
-            </div>)
-        ]
-
-        return reverse ? arr.reverse() : arr;
-    }
-
     render() {
         return (
             <span className={"widget"+this.state.classNameDecorator}>
@@ -181,10 +79,18 @@ class TeleopCounter extends React.Component {
                     {this.state.title}
                 </div>
                 <div className="teleop-counter-container">
-                    <div className="field-map" id={this.state.id} value={JSON.stringify(this.state.value)}>
-                        {this.bigUIArray(this.props.reverse)}
+                    <div className="score-btn-container">
+                        <button className="tele-btn"> L1 </button>
+                        <button className="tele-btn"> L2 </button>
+                        <button className="tele-btn"> L3 </button>
+                        <button className="tele-btn"> L4 </button>
+                        <button className="tele-btn"> Processor </button>
+                        <button className="tele-btn"> Net </button>
+                        <button className="tele-btn"> Coral F </button>
+                        <button className="tele-btn"> Net F </button>
+                        <button className="tele-btn"> Processor F </button>
                     </div>
-                    <div className= {"subtitle"}>
+                    <div>
                         Score Log 
                     </div>
                     <div className="log-container">
@@ -194,7 +100,7 @@ class TeleopCounter extends React.Component {
                     </div>
                 </div>
             </span>
-        )
+        );
     }
 }
 
