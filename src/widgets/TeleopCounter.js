@@ -23,16 +23,6 @@ class TeleopCounter extends React.Component {
         scoreLog: []
     }
 
-    // handleScore = (location) => {
-    //     let newValue = {...this.state.value};
-    //     newValue[location]++;
-    //     this.setState({
-    //         value: newValue,
-    //         scoreLog: [...this.state.scoreLog, location]
-    //     });
-    // }
-
-    // fix coral fumble
     handleScore = (confirmed) => {
         let newValue = {...this.state.value};
         if (confirmed) {
