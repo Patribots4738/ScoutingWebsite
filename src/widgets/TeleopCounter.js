@@ -13,23 +13,62 @@ class TeleopCounter extends React.Component {
             "L2": 0,
             "L3": 0,
             "L4": 0,
-            "PA": 0,
-            "NA": 0,
+            "P": 0,
+            "N": 0,
             "CF": 0,
             "NF": 0,
             "PF": 0
         },
+        scoreLocation: "L4",
         scoreLog: []
     }
 
-    handleScore = (location) => {
+    // handleScore = (location) => {
+    //     let newValue = {...this.state.value};
+    //     newValue[location]++;
+    //     this.setState({
+    //         value: newValue,
+    //         scoreLog: [...this.state.scoreLog, location]
+    //     });
+    // }
+
+    handleScore = (confirmed) => {
         let newValue = {...this.state.value};
-        newValue[location]++;
+        if (confirmed) {
+            newValue[this.state.scoreLocation] ++;
+            this.setState({
+                scoreLog: [...this.state.scoreLog, this.state.scoreLocation]
+            })
+            console.log(newValue[this.state.scoreLocation]);
+        }
+        // else if (confirmed && this.state.scoreLocation.slice(0, 1) === "L") {
+        //     newValue[this.state.scoreLocation + "F"]++;
+        //     this.setState({
+        //         scoreLog: [...this.state.scoreLog, "CF"]
+        //     })
+        //     console.log(this.state.value[this.state.scoreLocation]);
+        //     this.setState({
+        //         value: newValue
+        //     })
+        // }
+        else {
+            newValue[this.state.scoreLocation + "F"] --;
+            this.setState({
+                scoreLog: [...this.state.scoreLog, this.state.scoreLocation + "F"]
+            })
+            console.log(newValue[this.state.scoreLocation]);
+        }
         this.setState({
-            value: newValue,
-            scoreLog: [...this.state.scoreLog, location]
-        });
+            value: newValue
+        })
     }
+
+    handleScoreLocation = (location) => {
+        this.setState({
+            scoreLocation: location
+        })
+    }
+
 
     scoreLogUI = () => {
         let UIList = [];
@@ -52,24 +91,16 @@ class TeleopCounter extends React.Component {
         return UIList;
     }
 
-    getScoreResult = (result) => {
-        if (result.substring(0, 6) === "FUMBLE") {
-            return result.substring(0, 6) + " " + result.substring(6);
-        }
-        return result;
-    }
-
     handleRemove = (logElement, index) => {
-        let intakeLoc = logElement[0];
-        let resultLoc = logElement[1];
         let newValue = {...this.state.value};
         let newLog = [...this.state.scoreLog];
-        newValue[resultLoc][intakeLoc]--;
+        newValue[logElement]--;
         newLog.splice(index, 1);
         this.setState({
             value: newValue,
             scoreLog: newLog
         });
+        console.log(this.state.value[logElement]);
     }
 
     render() {
@@ -80,15 +111,14 @@ class TeleopCounter extends React.Component {
                 </div>
                 <div className="teleop-counter-container">
                     <div className="score-btn-container">
-                        <button className="tele-btn" > L1 </button>
-                        <button className="tele-btn"> L2 </button>
-                        <button className="tele-btn"> L3 </button>
-                        <button className="tele-btn"> L4 </button>
-                        <button className="tele-btn"> Processor </button>
-                        <button className="tele-btn"> Net </button>
-                        <button className="tele-btn"> Coral F </button>
-                        <button className="tele-btn"> Net F </button>
-                        <button className="tele-btn"> Processor F </button>
+                        <button className="tele-btn" onClick={() => this.handleScoreLocation("L1")}> L1 </button>
+                        <button className="tele-btn" onClick={() => this.handleScoreLocation("L2")}> L2 </button>
+                        <button className="tele-btn" onClick={() => this.handleScoreLocation("L3")}> L3 </button>
+                        <button className="tele-btn" onClick={() => this.handleScoreLocation("L4")}> L4 </button>
+                        <button className="tele-btn" onClick={() => this.handleScoreLocation("P")}> Processor </button>
+                        <button className="tele-btn" onClick={() => this.handleScoreLocation("N")}> Net </button>
+                        <button className="tele-btn" onClick={() => this.handleScore(true)}> Score </button>
+                        <button className="tele-btn" onClick={() => this.handleScore(false)}> Fumble </button>
                     </div>
                     <div>
                         Score Log 
