@@ -32,6 +32,7 @@ class TeleopCounter extends React.Component {
     //     });
     // }
 
+    // fix coral fumble
     handleScore = (confirmed) => {
         let newValue = {...this.state.value};
         if (confirmed) {
@@ -39,24 +40,20 @@ class TeleopCounter extends React.Component {
             this.setState({
                 scoreLog: [...this.state.scoreLog, this.state.scoreLocation]
             })
-            console.log(newValue[this.state.scoreLocation]);
         }
-        // else if (confirmed && this.state.scoreLocation.slice(0, 1) === "L") {
-        //     newValue[this.state.scoreLocation + "F"]++;
-        //     this.setState({
-        //         scoreLog: [...this.state.scoreLog, "CF"]
-        //     })
-        //     console.log(this.state.value[this.state.scoreLocation]);
-        //     this.setState({
-        //         value: newValue
-        //     })
-        // }
+        else if (this.state.scoreLocation.slice(0, 1) === "L") {
+            newValue["CF"]++;
+            this.setState({
+                scoreLog: [...this.state.scoreLog, "CF"],
+                value: newValue
+
+            })
+        }
         else {
             newValue[this.state.scoreLocation + "F"] --;
             this.setState({
                 scoreLog: [...this.state.scoreLog, this.state.scoreLocation + "F"]
             })
-            console.log(newValue[this.state.scoreLocation]);
         }
         this.setState({
             value: newValue
@@ -67,6 +64,20 @@ class TeleopCounter extends React.Component {
         this.setState({
             scoreLocation: location
         })
+    }
+
+    checkScore = () => {
+        // console.log(this.state.value);
+        console.log("L1:" + this.state.value["L1"]);
+        console.log("L2:" + this.state.value["L2"]);
+        console.log("L3:" + this.state.value["L3"]);
+        console.log("L4:" + this.state.value["L4"]);
+        console.log("P:" + this.state.value["P"]);
+        console.log("N:" + this.state.value["N"]);
+        console.log("CF:" + this.state.value["CF"]);
+        console.log("NF:" + this.state.value["NF"]);
+        console.log("PF:" + this.state.value["PF"]);
+
     }
 
 
@@ -119,6 +130,7 @@ class TeleopCounter extends React.Component {
                         <button className="tele-btn" onClick={() => this.handleScoreLocation("N")}> Net </button>
                         <button className="tele-btn" onClick={() => this.handleScore(true)}> Score </button>
                         <button className="tele-btn" onClick={() => this.handleScore(false)}> Fumble </button>
+                        <button className="tele-btn" onClick={() => this.checkScore()}> check score </button>
                     </div>
                     <div>
                         Score Log 
