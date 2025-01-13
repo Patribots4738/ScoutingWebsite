@@ -61,7 +61,7 @@ class TeleopCounter extends React.Component {
             this.logScore("CF");
         }
         else {
-            newValue[this.state.scoreLocation + "F"] --;
+            newValue[this.state.scoreLocation + "F"] ++;
             this.logScore(this.state.scoreLocation + "F");
         }
 
