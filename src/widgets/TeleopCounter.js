@@ -23,28 +23,48 @@ class TeleopCounter extends React.Component {
         scoreLog: []
     }
 
+    logScore = (location) => {
+        let newLog;
+        switch (location) {
+            case "P":
+                newLog = [...this.state.scoreLog, "Processor"];
+                break;
+            case "N":
+                newLog = [...this.state.scoreLog, "Net"];
+                break;
+            case "NF":
+                newLog = [...this.state.scoreLog, "Net Fumble"];
+                break;
+            case "PF":
+                newLog = [...this.state.scoreLog, "Processor Fumble"];
+                break;
+            case "CF":
+                newLog = [...this.state.scoreLog, "Coral Fumble"];
+                break;
+            default:
+                newLog = [...this.state.scoreLog, this.state.scoreLocation];
+            }
+            this.setState({
+                scoreLog: newLog
+            })
+    }
+
     handleScore = (confirmed) => {
         let newValue = {...this.state.value};
         if (confirmed) {
             newValue[this.state.scoreLocation] ++;
-            this.setState({
-                scoreLog: [...this.state.scoreLog, this.state.scoreLocation]
-            })
+            this.logScore(this.state.scoreLocation)
+
         }
         else if (this.state.scoreLocation.slice(0, 1) === "L") {
             newValue["CF"]++;
-            this.setState({
-                scoreLog: [...this.state.scoreLog, "CF"],
-                value: newValue
-
-            })
+            this.logScore("CF");
         }
         else {
             newValue[this.state.scoreLocation + "F"] --;
-            this.setState({
-                scoreLog: [...this.state.scoreLog, this.state.scoreLocation + "F"]
-            })
+            this.logScore(this.state.scoreLocation + "F");
         }
+
         this.setState({
             value: newValue
         })
@@ -92,16 +112,34 @@ class TeleopCounter extends React.Component {
         return UIList;
     }
 
+    // TODO: change handle remove to remove elements that are not named the same as their score acronym (ie CORAL FUMBLE)
     handleRemove = (logElement, index) => {
         let newValue = {...this.state.value};
         let newLog = [...this.state.scoreLog];
-        newValue[logElement]--;
+        switch (logElement) {
+            case "Processor":
+                newValue["P"]--;
+                break;
+            case "Net":
+                newValue["N"]--;
+                break;
+            case "Net Fumble":
+                newValue["NF"]--;
+                break;
+            case "Processor Fumble":
+                newValue["PF"]--;
+                break;
+            case "Coral Fumble":
+                newValue["CF"]--;
+                break;
+            default:
+                newValue[logElement]--;
+            }
         newLog.splice(index, 1);
         this.setState({
             value: newValue,
             scoreLog: newLog
         });
-        console.log(this.state.value[logElement]);
     }
 
     render() {
