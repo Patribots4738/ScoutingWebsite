@@ -350,7 +350,7 @@ class Container extends React.Component {
               />
             </span>
             <div>
-              <AutoPieces
+              <AutoPieces 
                 value={[]}
                 id={this.assignUUID()}
                 title="Auto Pieces"
@@ -375,7 +375,7 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <TeleopCounter
+          <TeleopCounter // replace this with counters for ChargedUp pieces
             value={{}}
             id={this.assignUUID()}
             title="Piece Counter"
