@@ -21,7 +21,7 @@ class Container extends React.Component {
   
   state = {
     scoutingLog: [],
-    flippedMaps: localStorage.getItem("flippedMaps")
+    flippedMaps: localStorage.getItem("flippedMaps") //TODO: make this work
   }
 
   gatherData = () => {
@@ -81,7 +81,7 @@ class Container extends React.Component {
         let autoPieceCounts = this.autoPieceCount(autoPieces.split("-"));
         let teleopPieceCounts = JSON.parse(data[7][1]);
 
-        let commentData = {
+        let commentData = { 
           "Name": name,
           "What they did well": data[13][1],
           "What they did bad": data[14][1],
@@ -90,7 +90,7 @@ class Container extends React.Component {
           "Auto Pieces": autoPieces,
           "Auto Start": data[4][1]
         }
-        let jsonData = {
+        let jsonData = {     //change this to 2025 data points
           "Amp Auto": autoPieceCounts["amp"],
           "Speaker Auto": autoPieceCounts["speaker"],
           "Center Intakes Auto": autoPieceCounts["centerIntakes"],
@@ -385,14 +385,14 @@ class Container extends React.Component {
           <div className="checkboxes1">
             <CheckBox
               className="onstage"
-              title="End Onstage"
+              title="Deep Cage"
               id={this.assignUUID()}
               value={false}
               decorator="onstage"
             />
             <CheckBox
               className="isFailure"
-              title="Climb Failure"
+              title="Shallow Cage"
               id={this.assignUUID()}
               value={false}
               decorator="dissapointmentCheckbox"

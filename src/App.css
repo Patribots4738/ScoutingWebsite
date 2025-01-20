@@ -111,6 +111,10 @@ link {
   padding: 10px;
 }
 
+.widgetteleop-counter {
+  width: 100%;
+}
+
 
 .identification-container, .auto-container, .teleop-container, .post-match-container {
   padding: 10px 10px 20px 10px;
@@ -685,17 +689,17 @@ link {
 }
 
 .teleop-counter-container {
-  display: flex;
   align-items: center;
   flex-direction: column;
-  width: 300px;;
+  width: 100%;
 }
 
 .score-btn-container {
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 100%;
+    width: 40%;
+    float: right;
 }
 
 .log-container {
@@ -733,13 +737,19 @@ link {
   margin: 0 auto;
 }
 
+
 .teleopCounters {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tele-btn {
-    width: 100px;
-    height: 30px;
+  width: 100px;
+  height: 30px;
+  margin: 0;
+}
+
+.reef {
+  width: 100px;
 }

@@ -1,6 +1,5 @@
 import React from "react";
-import note from "../images/note.png";
-import ScoringSection from "./ScoringSection";
+import reef from "../images/reef.png";
 
 class TeleopCounter extends React.Component {
 
@@ -142,14 +141,25 @@ class TeleopCounter extends React.Component {
         });
     }
 
+    //make this a grid of divs https://www.tldraw.com/
     render() {
         return (
-            <span className={"widget"+this.state.classNameDecorator}>
+            <span className={"widget" + this.state.classNameDecorator}>
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>
                 <div className="teleop-counter-container">
-                    <div className="score-btn-container">
+                        <img src={reef} alt="reef" className="reef"/>
+                    <div className="score-btn-container"> 
+                        <div className="reef">
+
+                        </div>
+                        <div className="reef-btns">
+
+                        </div>
+                        <div className="misc">
+
+                        </div>
                         <button className="tele-btn" onClick={() => this.handleScoreLocation("L1")}> L1 </button>
                         <button className="tele-btn" onClick={() => this.handleScoreLocation("L2")}> L2 </button>
                         <button className="tele-btn" onClick={() => this.handleScoreLocation("L3")}> L3 </button>
