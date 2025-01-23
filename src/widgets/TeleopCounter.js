@@ -12,11 +12,11 @@ class TeleopCounter extends React.Component {
             "L2": 0,
             "L3": 0,
             "L4": 0,
-            "P": 0,
-            "N": 0,
-            "CF": 0,
-            "NF": 0,
-            "PF": 0
+            "Processor": 0,
+            "Net": 0,
+            "Coral Fumble": 0,
+            "Net Fumble": 0,
+            "Processor Fumble": 0
         },
         scoreLocation: "L4",
         scoreLog: []
@@ -24,44 +24,26 @@ class TeleopCounter extends React.Component {
 
     logScore = (location) => {
         let newLog;
-        switch (location) {
-            case "P":
-                newLog = [...this.state.scoreLog, "Processor"];
-                break;
-            case "N":
-                newLog = [...this.state.scoreLog, "Net"];
-                break;
-            case "NF":
-                newLog = [...this.state.scoreLog, "Net Fumble"];
-                break;
-            case "PF":
-                newLog = [...this.state.scoreLog, "Processor Fumble"];
-                break;
-            case "CF":
-                newLog = [...this.state.scoreLog, "Coral Fumble"];
-                break;
-            default:
-                newLog = [...this.state.scoreLog, this.state.scoreLocation];
-            }
-            this.setState({
-                scoreLog: newLog
-            })
+        newLog = [...this.state.scoreLog, this.state.scoreLocation];
+        this.setState({
+            scoreLog: newLog
+        })
     }
 
     handleScore = (confirmed) => {
         let newValue = {...this.state.value};
         if (confirmed) {
-            newValue[this.state.scoreLocation] ++;
+            newValue[this.state.scoreLocation]++;
             this.logScore(this.state.scoreLocation)
 
         }
         else if (this.state.scoreLocation.slice(0, 1) === "L") {
-            newValue["CF"]++;
-            this.logScore("CF");
+            newValue["Coral Fumble"]++;
+            this.logScore("Coral Fumble");
         }
         else {
-            newValue[this.state.scoreLocation + "F"] ++;
-            this.logScore(this.state.scoreLocation + "F");
+            newValue[this.state.scoreLocation + "Fumble"]++;
+            this.logScore(this.state.scoreLocation + "Fumble");
         }
 
         this.setState({
@@ -115,25 +97,7 @@ class TeleopCounter extends React.Component {
     handleRemove = (logElement, index) => {
         let newValue = {...this.state.value};
         let newLog = [...this.state.scoreLog];
-        switch (logElement) {
-            case "Processor":
-                newValue["P"]--;
-                break;
-            case "Net":
-                newValue["N"]--;
-                break;
-            case "Net Fumble":
-                newValue["NF"]--;
-                break;
-            case "Processor Fumble":
-                newValue["PF"]--;
-                break;
-            case "Coral Fumble":
-                newValue["CF"]--;
-                break;
-            default:
-                newValue[logElement]--;
-            }
+        newValue["Teleop" + logElement]--;
         newLog.splice(index, 1);
         this.setState({
             value: newValue,
@@ -164,8 +128,8 @@ class TeleopCounter extends React.Component {
                         <button className="tele-btn" onClick={() => this.handleScoreLocation("L2")}> L2 </button>
                         <button className="tele-btn" onClick={() => this.handleScoreLocation("L3")}> L3 </button>
                         <button className="tele-btn" onClick={() => this.handleScoreLocation("L4")}> L4 </button>
-                        <button className="tele-btn" onClick={() => this.handleScoreLocation("P")}> Processor </button>
-                        <button className="tele-btn" onClick={() => this.handleScoreLocation("N")}> Net </button>
+                        <button className="tele-btn" onClick={() => this.handleScoreLocation("Processor")}> Processor </button>
+                        <button className="tele-btn" onClick={() => this.handleScoreLocation("Net")}> Net </button>
                         <button className="tele-btn" onClick={() => this.handleScore(true)}> Score </button>
                         <button className="tele-btn" onClick={() => this.handleScore(false)}> Fumble </button>
                         <button className="tele-btn" onClick={() => this.checkScore()}> check score </button>

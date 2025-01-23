@@ -8,7 +8,7 @@ import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown';
-import AutoPieces from './widgets/AutoPieces';
+import AutoCounter from './widgets/AutoCounter';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -73,54 +73,57 @@ class Container extends React.Component {
         validMatch = window.confirm("Are you sure your match and team numbers are correct?");
       }
       if (validMatch) {
-        
+        for (let i = 0; i < 17; i++) {
+          console.log("item " + i + " " + data[i][1])
+        }
         let name = data[0][1];
         let matchNumber = data[1][1];
         let position = data[3][1];
-        let autoPieces = data[5][1];
-        let autoPieceCounts = this.autoPieceCount(autoPieces.split("-"));
+        console.log(data[5][1]);
+        let autoPieceCounts = JSON.parse(data[4][1]);
         let teleopPieceCounts = JSON.parse(data[7][1]);
-
+        for (let i = 0; i < 17; i++) {
+          console.log("item " + i + " " + data[i][1])
+        }
         let commentData = { 
           "Name": name,
-          "What they did well": data[13][1],
-          "What they did bad": data[14][1],
-          "Additional Comments": data[15][1],
+          "What they did well": data[15][1],
+          "What they did bad": data[16][1],
+          "Additional Comments": data[17][1],
           "Auto Description": data[6][1],
-          "Auto Pieces": autoPieces,
           "Auto Start": data[4][1]
         }
         let jsonData = {     //change this to 2025 data points
-          "Amp Auto": autoPieceCounts["amp"],
-          "Speaker Auto": autoPieceCounts["speaker"],
-          "Center Intakes Auto": autoPieceCounts["centerIntakes"],
-          "Failed Intakes Auto": autoPieceCounts["failedIntakes"],
-          "Failed Shots Auto": autoPieceCounts["failedShots"],
-          "Speaker Wing Cycles": teleopPieceCounts["speaker"]["wing"],
-          "Speaker Center Cycles": teleopPieceCounts["speaker"]["center"],
-          "Speaker Full Cycles": teleopPieceCounts["speaker"]["source"],
-          "Amp Wing Cycles": teleopPieceCounts["amp"]["wing"],
-          "Amp Center Cycles": teleopPieceCounts["amp"]["center"],
-          "Amp Full Cycles": teleopPieceCounts["amp"]["source"],
-          "Pass Wing Cycles": teleopPieceCounts["pass"]["wing"],
-          "Pass Center Cycles": teleopPieceCounts["pass"]["center"],
-          "Pass Full Cycles": teleopPieceCounts["pass"]["source"],
-          "Fumbles Speaker Wing Cycles": teleopPieceCounts["fumbleSpeaker"]["wing"],
-          "Fumbles Speaker Center Cycles": teleopPieceCounts["fumbleSpeaker"]["center"],
-          "Fumbles Speaker Full Cycles": teleopPieceCounts["fumbleSpeaker"]["source"],
-          "Fumbles Amp Wing Cycles": teleopPieceCounts["fumbleAmp"]["wing"],
-          "Fumbles Amp Center Cycles": teleopPieceCounts["fumbleAmp"]["center"],
-          "Fumbles Amp Full Cycles": teleopPieceCounts["fumbleAmp"]["source"],
+          "L4 Auto": autoPieceCounts["L4"],
+          "L3 Auto": autoPieceCounts["L3"],
+          "L2 Auto": autoPieceCounts["L2"],
+          "L1 Auto": autoPieceCounts["L1"],
+          "Processor Auto": autoPieceCounts["Processor"],
+          "Net Auto": autoPieceCounts["Net"],
+          "Coral Fumble Auto": autoPieceCounts["Coral Fumble"],
+          "Net Fumble Auto": autoPieceCounts["Net Fumble"],
+          "Processor Fumble Auto": autoPieceCounts["Processor Fumble"],
+          "L4 Teleop": teleopPieceCounts["L4"],
+          "L3 Teleop": teleopPieceCounts["L3"],
+          "L2 Teleop": teleopPieceCounts["L2"],
+          "L1 Teleop": teleopPieceCounts["L1"],
+          "Processor Teleop": teleopPieceCounts["Processor"],
+          "Net Teleop": teleopPieceCounts["Net"],
+          "Coral Fumble Teleop": teleopPieceCounts["Coral Fumble"],
+          "Net Fumble Teleop": teleopPieceCounts["Net Fumble"],
+          "Processor Fumble Teleop": teleopPieceCounts["Processor Fumble"],
           "Match Number": matchNumber,
+          "Deep Cage": data[8][1],
+          "Shallow Cage": data[9][1],
+          "Climb Failure": data[10][1],
+          "Ground Intake": data[13][1],
+          "Station Intake": data[14][1],
           "Temp Failure": data[11][1],
-          "Critical Failure": data[12][1],
-          "End Onstage": data[8][1],
-          "Climb Failure": data[9][1],
-          "Trap": data[10][1]
+          "Critical Failure": data[12][1]
         };
         //                      event             match #                                Name|Position-Team#               
-        set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
+        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name);
         localStorage.setItem("matchNumber", matchNumber);
@@ -160,41 +163,41 @@ class Container extends React.Component {
   }
 
   // takes value from AutoPieces widget 
-  autoPieceCount = (arr) => {
-    let pieceCounts = {
-      speaker: 0,
-      amp: 0,
-      failedShots: 0,
-      failedIntakes: 0,
-      centerIntakes: 0
-    };
-    for (let i = 0; i < arr.length; i++) {
-      let loc;
-      if (arr[i].includes("F")) {
-        loc = arr[i].substring(arr[i].length - 2);
-      } else {
-        loc = arr[i].substring(arr[i].length - 1);
-      }
-      switch (loc) {
-        case "S":
-          pieceCounts["speaker"]++
-          break;
-        case "A":
-          pieceCounts["amp"]++
-          break;
-        case "FS":
-          pieceCounts["failedShots"]++
-          break;
-        default:
-          pieceCounts["failedIntakes"]++
-          break;
-      }
-      if (arr[i].substring(0, 1) === "C" && loc !== "FI") {
-        pieceCounts["centerIntakes"]++;
-      }
-    }
-    return pieceCounts;
-  }
+  // autoPieceCount = (arr) => {
+  //   let pieceCounts = {
+  //     speaker: 0,
+  //     amp: 0,
+  //     failedShots: 0,
+  //     failedIntakes: 0,
+  //     centerIntakes: 0
+  //   };
+  //   for (let i = 0; i < arr.length; i++) {
+  //     let loc;
+  //     if (arr[i].includes("F")) {
+  //       loc = arr[i].substring(arr[i].length - 2);
+  //     } else {
+  //       loc = arr[i].substring(arr[i].length - 1);
+  //     }
+  //     switch (loc) {
+  //       case "S":
+  //         pieceCounts["speaker"]++
+  //         break;
+  //       case "A":
+  //         pieceCounts["amp"]++
+  //         break;
+  //       case "FS":
+  //         pieceCounts["failedShots"]++
+  //         break;
+  //       default:
+  //         pieceCounts["failedIntakes"]++
+  //         break;
+  //     }
+  //     if (arr[i].substring(0, 1) === "C" && loc !== "FI") {
+  //       pieceCounts["centerIntakes"]++;
+  //     }
+  //   }
+  //   return pieceCounts;
+  // }
 
   clearLocalStorage = () => {
     var response = window.confirm("Are you sure you want to clear all saved matches?");
@@ -335,27 +338,26 @@ class Container extends React.Component {
                 required={true}
                 items={[
                   {
-                    title: "Amp",
-                    value: "Amp"
+                    title: "Processor",
+                    value: "Processor"
                   },
                   {
-                    title: "Middle",
-                    value: "Middle"
+                    title: "Center",
+                    value: "Center"
                   },
                   {
-                    title: "Source",
-                    value: "Source"
+                    title: "Not Processor",
+                    value: "Not Processor"
                   }
                 ]}
               />
             </span>
             <div>
-              <AutoPieces
+              <AutoCounter
                 value={[]}
                 id={this.assignUUID()}
-                title="Auto Pieces"
-                decorator="auto-pieces"
-                upperLimit={10}
+                title="Auto Counter"
+                decorator="auto-counter"
                 reverse={this.state.flippedMaps}
               />
             </div>
@@ -380,32 +382,30 @@ class Container extends React.Component {
             id={this.assignUUID()}
             title="Piece Counter"
             className="teleop-counter"
-            reverse={this.state.flippedMaps}
           />
           <div className="checkboxes1">
             <CheckBox
-              className="onstage"
+              className="deep-cage"
               title="Deep Cage"
               id={this.assignUUID()}
               value={false}
               decorator="onstage"
             />
             <CheckBox
-              className="isFailure"
+              className="shallow-cage"
               title="Shallow Cage"
               id={this.assignUUID()}
               value={false}
               decorator="dissapointmentCheckbox"
             />
+            <CheckBox
+              className="isFailure"
+              title="Climb Failure"
+              id={this.assignUUID()}
+              value={false}
+              decorator="dissapointmentCheckbox"
+            />
           </div>
-          <Counter
-            className="counter widget"
-            id={this.assignUUID()}
-            title={"Trap"}
-            value={0}
-            upperLimit={3}
-            decorator={"trap"}
-          />
         </div>
 
         <div className="post-match-container">
@@ -423,6 +423,20 @@ class Container extends React.Component {
             <CheckBox
               className="critical"
               title="Critical Failure"
+              id={this.assignUUID()}
+              value={false}
+              decorator={"critical"}
+            />
+            <CheckBox
+              className="ground-intake"
+              title="Ground Intake"
+              id={this.assignUUID()}
+              value={false}
+              decorator={"critical"}
+            />
+            <CheckBox
+              className="station-intake"
+              title="Station Intake"
               id={this.assignUUID()}
               value={false}
               decorator={"critical"}
