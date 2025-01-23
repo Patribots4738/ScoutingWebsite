@@ -375,24 +375,18 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <TeleopCounter // replace this with counters for ChargedUp pieces
-            value={{}}
-            id={this.assignUUID()}
-            title="Piece Counter"
-            className="teleop-counter"
-            reverse={this.state.flippedMaps}
-          />
+
           <div className="checkboxes1">
             <CheckBox
               className="onstage"
-              title="End Onstage"
+              title="Docked"
               id={this.assignUUID()}
               value={false}
               decorator="onstage"
             />
             <CheckBox
               className="isFailure"
-              title="Climb Failure"
+              title="Engaged"
               id={this.assignUUID()}
               value={false}
               decorator="dissapointmentCheckbox"
@@ -401,9 +395,9 @@ class Container extends React.Component {
           <Counter
             className="counter widget"
             id={this.assignUUID()}
-            title={"Trap"}
+            title={"cones"}
             value={0}
-            upperLimit={3}
+            upperLimit={12}
             decorator={"trap"}
           />
         </div>
