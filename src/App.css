@@ -531,9 +531,9 @@ link {
 }
 
 .fail {
-  display: grid;
-  grid-template-rows: 50% 50%;
-  border-radius: 0px 20px 0px 0px;
+  display: flex;
+  grid-template-rows: 5% 5%;
+  border-radius: 10px 10px 10px 10px;
   padding: 5px;
 }
 
@@ -546,6 +546,7 @@ link {
   border-radius: 20px;
   font-size: 14px;
   transition: 0.12s;
+  border-color: black;
 }
 
 .fail-button:active {

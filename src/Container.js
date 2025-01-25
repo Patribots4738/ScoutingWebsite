@@ -8,7 +8,7 @@ import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown';
-import AutoPieces from './widgets/AutoPieces';
+import AutoCounter from './widgets/AutoCounter';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -77,8 +77,6 @@ class Container extends React.Component {
         let name = data[0][1];
         let matchNumber = data[1][1];
         let position = data[3][1];
-        let autoPieces = data[5][1];
-        let autoPieceCounts = this.autoPieceCount(autoPieces.split("-"));
         let teleopPieceCounts = JSON.parse(data[7][1]);
 
         let commentData = { 
@@ -87,15 +85,9 @@ class Container extends React.Component {
           "What they did bad": data[14][1],
           "Additional Comments": data[15][1],
           "Auto Description": data[6][1],
-          "Auto Pieces": autoPieces,
           "Auto Start": data[4][1]
         }
         let jsonData = {     //change this to 2025 data points
-          "Amp Auto": autoPieceCounts["amp"],
-          "Speaker Auto": autoPieceCounts["speaker"],
-          "Center Intakes Auto": autoPieceCounts["centerIntakes"],
-          "Failed Intakes Auto": autoPieceCounts["failedIntakes"],
-          "Failed Shots Auto": autoPieceCounts["failedShots"],
           "Speaker Wing Cycles": teleopPieceCounts["speaker"]["wing"],
           "Speaker Center Cycles": teleopPieceCounts["speaker"]["center"],
           "Speaker Full Cycles": teleopPieceCounts["speaker"]["source"],
@@ -157,43 +149,6 @@ class Container extends React.Component {
 
   badMatchNumber = (val) => {
     return (val.toString().length > 2)
-  }
-
-  // takes value from AutoPieces widget 
-  autoPieceCount = (arr) => {
-    let pieceCounts = {
-      speaker: 0,
-      amp: 0,
-      failedShots: 0,
-      failedIntakes: 0,
-      centerIntakes: 0
-    };
-    for (let i = 0; i < arr.length; i++) {
-      let loc;
-      if (arr[i].includes("F")) {
-        loc = arr[i].substring(arr[i].length - 2);
-      } else {
-        loc = arr[i].substring(arr[i].length - 1);
-      }
-      switch (loc) {
-        case "S":
-          pieceCounts["speaker"]++
-          break;
-        case "A":
-          pieceCounts["amp"]++
-          break;
-        case "FS":
-          pieceCounts["failedShots"]++
-          break;
-        default:
-          pieceCounts["failedIntakes"]++
-          break;
-      }
-      if (arr[i].substring(0, 1) === "C" && loc !== "FI") {
-        pieceCounts["centerIntakes"]++;
-      }
-    }
-    return pieceCounts;
   }
 
   clearLocalStorage = () => {
@@ -350,7 +305,7 @@ class Container extends React.Component {
               />
             </span>
             <div>
-              <AutoPieces
+              <AutoCounter
                 value={[]}
                 id={this.assignUUID()}
                 title="Auto Pieces"
