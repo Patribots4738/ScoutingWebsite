@@ -4,11 +4,11 @@ import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox';
 import Counter from './widgets/Counter';
 import TeleopCounter from './widgets/TeleopCounter';
+import AutoCounter from './widgets/AutoCounter';
 import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown';
-import AutoCounter from './widgets/AutoCounter';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -32,6 +32,7 @@ class Container extends React.Component {
 
 
       var element = document.getElementById(this.state.scoutingLog[i]);
+      console.log(element);
       if (element !== null) {
         var value;
         if (element.getAttribute("value") !== null && element.getAttribute("value") !== undefined) {
@@ -79,9 +80,9 @@ class Container extends React.Component {
         let name = data[0][1];
         let matchNumber = data[1][1];
         let position = data[3][1];
-        console.log(data[5][1]);
-        let autoPieceCounts = JSON.parse(data[4][1]);
-        let teleopPieceCounts = JSON.parse(data[7][1]);
+        console.log(data[7][1]);
+        let autoPieceCounts = JSON.parse(data[5][1]);
+        let teleopPieceCounts = JSON.parse(data[8][1]);
         for (let i = 0; i < 17; i++) {
           console.log("item " + i + " " + data[i][1])
         }
@@ -91,35 +92,37 @@ class Container extends React.Component {
           "What they did bad": data[16][1],
           "Additional Comments": data[17][1],
           "Auto Description": data[6][1],
-          "Auto Start": data[4][1]
+          "Auto Start": data[4][1],
+          "Auto Path": ""
         }
         let jsonData = {     //change this to 2025 data points
-          "L4 Auto": autoPieceCounts["L4"],
-          "L3 Auto": autoPieceCounts["L3"],
-          "L2 Auto": autoPieceCounts["L2"],
-          "L1 Auto": autoPieceCounts["L1"],
-          "Processor Auto": autoPieceCounts["Processor"],
-          "Net Auto": autoPieceCounts["Net"],
-          "Coral Fumble Auto": autoPieceCounts["Coral Fumble"],
-          "Net Fumble Auto": autoPieceCounts["Net Fumble"],
-          "Processor Fumble Auto": autoPieceCounts["Processor Fumble"],
-          "L4 Teleop": teleopPieceCounts["L4"],
-          "L3 Teleop": teleopPieceCounts["L3"],
-          "L2 Teleop": teleopPieceCounts["L2"],
-          "L1 Teleop": teleopPieceCounts["L1"],
-          "Processor Teleop": teleopPieceCounts["Processor"],
-          "Net Teleop": teleopPieceCounts["Net"],
-          "Coral Fumble Teleop": teleopPieceCounts["Coral Fumble"],
-          "Net Fumble Teleop": teleopPieceCounts["Net Fumble"],
-          "Processor Fumble Teleop": teleopPieceCounts["Processor Fumble"],
+          "L4 Auto": Math.floor(Math.random() * 13),
+          "L3 Auto": Math.floor(Math.random() * 13),
+          "L2 Auto": Math.floor(Math.random() * 13),
+          "L1 Auto": Math.floor(Math.random() * 13),
+          "Processor Auto": Math.floor(Math.random() * 13),
+          "Net Auto": Math.floor(Math.random() * 13),
+          "Coral Fumble Auto": Math.floor(Math.random() * 13),
+          "Net Fumble Auto": Math.floor(Math.random() * 13),
+          "Processor Fumble Auto": Math.floor(Math.random() * 13),
+          "L4 Teleop": Math.floor(Math.random() * 13),
+          "L3 Teleop": Math.floor(Math.random() * 13),
+          "L2 Teleop": Math.floor(Math.random() * 13),
+          "L1 Teleop": Math.floor(Math.random() * 13),
+          "Processor Teleop": Math.floor(Math.random() * 13),
+          "Net Teleop": Math.floor(Math.random() * 13),
+          "Coral Fumble Teleop": Math.floor(Math.random() * 13),
+          "Net Fumble Teleop": Math.floor(Math.random() * 13),
+          "Processor Fumble Teleop": Math.floor(Math.random() * 13),
           "Match Number": matchNumber,
-          "Deep Cage": data[8][1],
-          "Shallow Cage": data[9][1],
-          "Climb Failure": data[10][1],
-          "Ground Intake": data[13][1],
-          "Station Intake": data[14][1],
-          "Temp Failure": data[11][1],
-          "Critical Failure": data[12][1]
+          "Deep Cage": Math.floor(Math.random() * 2),
+          "Shallow Cage": Math.floor(Math.random() * 2),
+          "Climb Failure": Math.floor(Math.random() * 2),
+          "Ground Intake": Math.floor(Math.random() * 2),
+          "Station Intake": Math.floor(Math.random() * 2),
+          "Temp Failure": Math.floor(Math.random() * 2),
+          "Critical Failure": Math.floor(Math.random() * 2),
+          "Auto Leave": Math.floor(Math.random() * 2) 
         };
         //                      event             match #                                Name|Position-Team#               
         set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
@@ -354,12 +357,20 @@ class Container extends React.Component {
             </span>
             <div>
               <AutoCounter
-                value={[]}
+                className="auto-counter"
                 id={this.assignUUID()}
                 title="Auto Counter"
                 decorator="auto-counter"
+                value={{}}
                 reverse={this.state.flippedMaps}
               />
+              <CheckBox
+              className="deep-cage"
+              title="Leave"
+              id={this.assignUUID()}
+              value={false}
+              decorator="onstage"
+            />
             </div>
             <div>
               <TextBoxLong
@@ -378,10 +389,10 @@ class Container extends React.Component {
             TELEOP
           </h2>
           <TeleopCounter
-            value={{}}
+            className="teleop-counter"
             id={this.assignUUID()}
             title="Piece Counter"
-            className="teleop-counter"
+            value={{}}
           />
           <div className="checkboxes1">
             <CheckBox
@@ -489,5 +500,4 @@ class Container extends React.Component {
 
 
 }
-
 export default Container;

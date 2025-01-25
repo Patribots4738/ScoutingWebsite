@@ -42,7 +42,7 @@ class TeleopCounter extends React.Component {
             this.logScore("Coral Fumble");
         }
         else {
-            newValue[this.state.scoreLocation + "Fumble"]++;
+            newValue[this.state.scoreLocation + " Fumble"]++;
             this.logScore(this.state.scoreLocation + "Fumble");
         }
 
@@ -70,7 +70,6 @@ class TeleopCounter extends React.Component {
         console.log("PF:" + this.state.value["PF"]);
 
     }
-
 
     scoreLogUI = () => {
         let UIList = [];
@@ -108,7 +107,7 @@ class TeleopCounter extends React.Component {
     //make this a grid of divs https://www.tldraw.com/
     render() {
         return (
-            <span className={"widget" + this.state.classNameDecorator}>
+            <span className={"widget" + this.state.classNameDecorator} id={this.state.id} value={JSON.stringify(this.state.value)}>
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>
@@ -144,7 +143,7 @@ class TeleopCounter extends React.Component {
                     </div>
                 </div>
             </span>
-        );
+        )
     }
 }
 

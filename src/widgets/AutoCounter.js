@@ -57,6 +57,9 @@ class AutoCounter extends React.Component {
                 newValue["L4"]++;
                 this.addPath(this.state.reefLoc + "L4");
                 break;
+            default:
+                console.log("you just never know");
+                break;
         }
         this.setState({
             value: newValue
@@ -118,7 +121,7 @@ class AutoCounter extends React.Component {
     
     render() {
         return (
-            <div className="auto-counter-container">
+            <div className="auto-counter-container" id={this.state.id} value={JSON.stringify(this.state.value)}>
                 <button className="auto-btn" onClick={() => this.handleReefLoc("A")}> A </button>
                 <button className="auto-btn" onClick={() => this.handleReefLoc("B")}> B </button>
                 <button className="auto-btn" onClick={() => this.handleReefLoc("C")}> C </button>
@@ -139,6 +142,7 @@ class AutoCounter extends React.Component {
             </div>
         )
     }
+
 }
 
 export default AutoCounter;
