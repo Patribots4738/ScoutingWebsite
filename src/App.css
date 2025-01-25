@@ -475,11 +475,15 @@ link {
   border-top: none;
 }
 
-.reef-base-grahpic {
-  margin: 0 auto;
-  border-style:solid;
-  border-width: 4px;
-  border-color: magenta;
+.reef-base {
+  margin-top: 60%;
+}
+
+.reef-base-graphic {
+  height: 170px;
+  width: auto;
+  position: absolute;
+  left: 43%;
 }
 
 .wing {
@@ -572,16 +576,64 @@ link {
   width: 55%;
   border-radius: 20px;
   font-size: 22px;
-  border-color: black;
-  border-width: 30px 30px;
+  font-style: bold;
 }
 
 .place-button:active {
   background: maroon;
 }
 
+.reef-button {
+  background-color: blue;
+  display: flex;
+  height: 40px;
+  width: 40px;
+  font-size: 25px;
+  border-radius: 50%;
+}
+
+.reef-button:active {
+  background-color: darkblue;
+}
+
+.reefA-position {
+  position: absolute;
+  left: 43.2%;
+  top: 106%
+}
+
+.reefB-position {
+  position: absolute;
+  left: 44.7%;
+  top: 111%;
+}
+
+.reefC-position {
+  position: absolute;
+  left: 47.8%;
+  top: 111%;
+}
+
+.reefD-position {
+  position: absolute;
+  left: 49.3%;
+  top: 106%;
+}
+
+.reefE-position {
+  position: absolute;
+  left: 47.8%;
+  top: 101.4%;
+}
+.reefF-position {
+  position: absolute;
+  left: 44.7%;
+  top: 101.4%;
+}
+
 .autolevel-text {
   margin: 30%;
+  color: white;
 }
 
 .auto-button-text {
@@ -591,17 +643,33 @@ link {
   height: 100%;
   border-radius: 40px;
   transition: 0.12s;
-  text-decoration-color: yellowgreen;
+  font-style: bold;
+  color: white;
+}
+
+.reef-base-text {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  width: 50%;
+  height: 100%;
+  border-radius: 40px;
+  transition: 0.12s;
+  font-style: bold;
+  color: white;
 }
 
 .fail-text, 
 .value-text, 
-.auto-button-text {
+.auto-button-text,
+.reef-base-text {
   margin: 0 auto;
 }
 
 .value-text, 
-.auto-button-text {
+.auto-button-text,
+.reef-base-text,
+.fail-text {
   color: white;
 }
 

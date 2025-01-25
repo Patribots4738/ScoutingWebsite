@@ -13,7 +13,7 @@ class AutoCounter extends React.Component {
         id: this.props.id,
         classNameDecorator: this.props.decorator,
         piece: "P",
-        location: "FS"
+        location: "A"
     }
 
     handleAdd = () => {
@@ -100,10 +100,6 @@ class AutoCounter extends React.Component {
         return pieces;
     }
 
-    wingPieces = () => {
-        return this.pieceLine(3, "W");
-    }
-
     centerPieces = () => {
         return this.pieceLine(5, "C");
     }
@@ -124,11 +120,14 @@ class AutoCounter extends React.Component {
                 reverse={reverse}
             />),
             (<ReefSection
-
+                handleReefFace={this.handlePieceChange}
+                faceA="A"
+                faceB="B"
+                faceC="C"
+                faceD="D"
+                faceE="E"
+                faceF="F"
             />),
-            (<div className="center" key="2">
-                {this.centerPieces()}
-            </div>),
             (<div className="misc" key="3">
                 <div className="auto-button">
                     <div className="auto-button-text" onClick={() => this.handleRemove()}>
