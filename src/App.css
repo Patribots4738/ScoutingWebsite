@@ -388,6 +388,8 @@ link {
 }
 
 .field-map {
+  border-style: solid;
+  border-color: yellow;
   user-select: none;
   background-color: rgb(54, 54, 54);
   width: 400px;
@@ -395,14 +397,22 @@ link {
   border-radius: 20px;
   margin-bottom: 10px;
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-columns: auto auto auto;
   text-align: center;
+  align-content: center;
 }
 
 .scoring {
+  border-style: solid;
+  border-color: purple;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  height: 300px;
+  width: 100px;
   display: grid;
-  grid-template-rows: 20% 20% 20%;
-  align-self: center;
+  grid-template-rows: 15% 15% 15% 15% 15% 15%;
+  align-content: center;
+  justify-items: center;
 }
 
 .speaker {
@@ -475,15 +485,48 @@ link {
   border-top: none;
 }
 
-.reef-base {
-  margin-top: 60%;
+.reef-section {
+  border-style: solid;
+  border-color: yellowgreen;
+  display: grid;
+  grid-template-rows: 45px 45px 45px;
+  width: 150px;
+  height: 300px;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
 }
 
 .reef-base-graphic {
+  margin: 0 auto;
   height: 170px;
   width: auto;
   position: absolute;
-  left: 43%;
+  z-index: 0.5;
+}
+
+.reef-top-position {
+  margin: 0 auto;
+  display: grid;
+  gap: 25px;
+  grid-template-columns: auto auto;
+  z-index: 2;
+}
+
+.reef-middle-position {
+  margin: 0 auto;
+  display: grid;
+  gap: 70px;
+  grid-template-columns: auto auto;
+  z-index: 2;
+}
+
+.reef-bottom-position {
+  margin: 0 auto;
+  display: grid;
+  gap: 25px;
+  grid-template-columns: auto auto;
+  z-index: 2;
 }
 
 .wing {
@@ -515,7 +558,7 @@ link {
   transition: 0.12s;
 }
 
-.auto-button-text:active,
+.undo-button-text:active,
 .note-clickable:active {
   background-color: rgb(40, 40, 40);
 }
@@ -550,12 +593,13 @@ link {
 }
 
 .fail-button {
-  background-color: red;
+  background-color: maroon;
   display: flex;
+  margin: 0 auto;
   align-items: center;
-  margin-left: 5px;
+  justify-items: center;
   height: 35px;
-  width: 90%;
+  width: 90px;
   border-radius: 20px;
   font-size: 18px;
   transition: 0.12s;
@@ -563,72 +607,113 @@ link {
 }
 
 .fail-button:active {
-  background: maroon;
+  background: red;
+}
+
+.score-button {
+  background: green;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-items: center;
+  height: 35px;
+  width: 90px;
+  border-radius: 20px;
+  font-size: 18px;
+}
+
+.score-button:active {
+  background: greenyellow;
+}
+
+.score-text {
+  margin: 0 auto;
+  color: white;
 }
 
 .place-button {
-  background-color: red;
+  background-color: blue;
   display: flex;
+  margin: 0 auto;
   align-items: center;
-  margin-left: 20px;
-  margin-bottom: 10px;
+  justify-items: center;
   height: 40px;
   width: 55%;
   border-radius: 20px;
   font-size: 22px;
   font-style: bold;
+  z-index: 2;
 }
 
 .place-button:active {
-  background: maroon;
+  background: darkblue;
 }
 
 .reef-button {
   background-color: blue;
+  margin: 0 auto;
   display: flex;
   height: 40px;
   width: 40px;
   font-size: 25px;
   border-radius: 50%;
+  z-index: 1;
 }
 
 .reef-button:active {
   background-color: darkblue;
 }
 
-.reefA-position {
-  position: absolute;
-  left: 43.2%;
-  top: 106%
+.algae-box {
+  border-style: solid;
+  border-color: green;
+  height: 100px;
+  width: 140px;
+  display: grid;
+  grid-template-rows: auto auto;
+  align-items: center;
+  justify-items: center;
+  align-self: baseline;
 }
 
-.reefB-position {
-  position: absolute;
-  left: 44.7%;
-  top: 111%;
+.proccesser-button {
+  display: flex;
+  background-color: blue;
+  height: 40px;
+  width: 110px;
+  border-radius: 15px;
+  border-width: 20px;
+  border-color: black;
+  font-size: 18px;
+  align-items: center;
 }
 
-.reefC-position {
-  position: absolute;
-  left: 47.8%;
-  top: 111%;
+.proccesser-button:active {
+  background-color: darkblue;
 }
 
-.reefD-position {
-  position: absolute;
-  left: 49.3%;
-  top: 106%;
+.proccesser-text {
+  margin: 0 auto;
+  color: white;
 }
 
-.reefE-position {
-  position: absolute;
-  left: 47.8%;
-  top: 101.4%;
+.net-button {
+  display: flex;
+  background-color: blue;
+  height: 40px;
+  width: 70px;
+  border-radius: 15px;
+  font-size: 18px;
+  align-items: center;
 }
-.reefF-position {
-  position: absolute;
-  left: 44.7%;
-  top: 101.4%;
+
+.net-button:active {
+  background-color: darkblue;
+}
+
+.net-text {
+  margin: 0 auto;
+  color: white;
 }
 
 .autolevel-text {
@@ -636,11 +721,11 @@ link {
   color: white;
 }
 
-.auto-button-text {
+.undo-button-text {
   display: flex;
   align-items: center;
-  width: 50%;
-  height: 100%;
+  width: 55px;
+  height: 60px;
   border-radius: 40px;
   transition: 0.12s;
   font-style: bold;
@@ -661,13 +746,13 @@ link {
 
 .fail-text, 
 .value-text, 
-.auto-button-text,
+.undo-button-text,
 .reef-base-text {
   margin: 0 auto;
 }
 
 .value-text, 
-.auto-button-text,
+.undo-button-text,
 .reef-base-text,
 .fail-text {
   color: white;
@@ -684,7 +769,7 @@ link {
   font-size: 30px;
 }
 
-.auto-button {
+.undo-button {
   display: flex;
   align-items: center;
   border-radius: 20px;

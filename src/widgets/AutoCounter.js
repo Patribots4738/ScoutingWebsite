@@ -7,47 +7,47 @@ import ReefSection from "./ReefSection";
 class AutoCounter extends React.Component {
 
     state = {
-        value: [],
+        scorevalue: [],
         upperLimit: this.props.upperLimit,
         title: this.props.title,
         id: this.props.id,
         classNameDecorator: this.props.decorator,
-        piece: "P",
-        location: "A"
+        reefHeight: "-",
+        reefLocation: "-"
     }
 
     handleAdd = () => {
-        if (this.state.value.length < this.state.upperLimit) {
+        if (this.state.scorevalue.length < this.state.upperLimit) {
             this.setState({
-                value: [...this.state.value, this.state.piece + this.state.location]
+                scorevalue: [...this.state.scorevalue, this.state.reefHeight + this.state.reefLocation]
             });
         }
     }
 
     findPiece = (piece) => {
-        for (let i = 0; i < this.state.value.length; i++) {
-            if ((piece === this.state.value[i].substring(0, 1)) ^ (piece === this.state.value[i].substring(0, 2)))
+        for (let i = 0; i < this.state.scorevalue.length; i++) {
+            if ((piece === this.state.scorevalue[i].substring(0, 1)) ^ (piece === this.state.scorevalue[i].substring(0, 2)))
                 return i;
         }
         return -1;
     }
 
     handleRemove = () => {
-        if (this.state.value.length > 0) {
+        if (this.state.scorevalue.length > 0) {
             this.setState({
-                value: this.state.value.slice(0, this.state.value.length - 1)
+                scorevalue: this.state.scorevalue.slice(0, this.state.scorevalue.length - 1)
             });
         }
     }
 
     handlePieceChange = (value) => {
         this.setState({
-            piece: value
+            reefHeight: value
         });
     }
 
     handleLocationChange = (value) => {
-        let index = this.findPiece(this.state.piece);
+        let index = this.findPiece(this.state.reefHeight);
 
         if (index === -1) {
             /**
@@ -56,52 +56,41 @@ class AutoCounter extends React.Component {
              * piece with its location to the list
              */
             this.setState(
-                {location: value}, 
-                () => {this.handleAdd();}
+                {reefLocation: value}, 
             )
         } else {
             /**
              * If the piece is found, change its location
              * in the list to the newly selected location
              */
-            const valueCopy = [...this.state.value];
+            const valueCopy = [value];
             let element = valueCopy[index];
-            let piece = 
+            let height = 
                 element.substring(0, 1) === "P" 
                     ? element.substring(0, 1) 
                     : element.substring(0, 2)
-            valueCopy[index] = piece + value;
+            valueCopy[index] = height + value;
 
             this.setState({
-                location: value,
-                value: valueCopy
+                reefLocation: value
             })
         }
     }
 
-    gamePiece = (name) => {
+    proccesser = () => {
         return(
-            <div className="note" key={name}>
-                <div className="note-clickable" onClick={() => this.handlePieceChange(name)}>
-                    <div className="note-text">
-                        {name}
-                    </div>
-                    <img src={note} alt="" className="note-img"/>
-                </div>
+            <div className="proccesser-button" onClick={() => this.handleLocationChange("P")}>
+                <div className="proccesser-text">Proccesor</div>
             </div>
-        )
+        );
     }
 
-    pieceLine = (amount, firstChar) => {
-        let pieces = [];
-        for (let i = 1; i <= amount; i++) {
-            pieces.push(this.gamePiece(firstChar + i));
-        }
-        return pieces;
-    }
-
-    centerPieces = () => {
-        return this.pieceLine(5, "C");
+    net = () => {
+        return(
+            <div className="net-button" onClick={() => this.handleLocationChange("N")}>
+                <div className="net-text">Net</div>
+            </div>
+        );
     }
 
     bigUIArray = (reverse) => {
@@ -109,15 +98,14 @@ class AutoCounter extends React.Component {
             (<ScoringSection
                 fail1="FR"
                 fail2="FS"
-                failText1="Fumble"
-                failText2="Fumble Proccesor"
+                failText="Fumble"
+                scoreText="Score"
                 l4Text="L4"
                 l3Text="L3"
                 l2Text="L2"
                 l1Text="L1"
-                handleScore={this.handleLocationChange}
-                key="0"
-                reverse={reverse}
+                handleLevel={this.handleLocationChange}
+                handleScore={this.handleAdd}
             />),
             (<ReefSection
                 handleReefFace={this.handlePieceChange}
@@ -129,17 +117,24 @@ class AutoCounter extends React.Component {
                 faceF="F"
             />),
             (<div className="misc" key="3">
-                <div className="auto-button">
-                    <div className="auto-button-text" onClick={() => this.handleRemove()}>
+                <div className="undo-button">
+                    <div className="undo-button-text" onClick={() => this.handleRemove()}>
                         <img src={undo} alt="UNDO" className="undo-img"/>
                     </div>
                 </div>
                 <div className="value-display">
                     <div className="value-text">
-                        {this.state.piece + this.state.location}
+                        {this.state.reefHeight + this.state.reefLocation}
                     </div>
                 </div>
-                {this.gamePiece("P")}
+                <div className="algae-box">
+                    <div>
+                        {this.proccesser()}
+                    </div>
+                    <div>
+                        {this.net()}
+                    </div>
+                </div>
             </div>)
         ]
 
@@ -152,8 +147,8 @@ class AutoCounter extends React.Component {
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>
-                <div className="val-display" id={this.state.id} value={this.state.value.join("-")} title={this.state.title}>
-                    {(this.state.value.length > 0) ? this.state.value.join(" - ") : "-"}
+                <div className="val-display" id={this.state.id} value={this.state.scorevalue.join("-")} title={this.state.title}>
+                    {(this.state.scorevalue.length > 0) ? [...this.state.scorevalue].join(" - ") : "-"}
                 </div>
                 <div className="selector">
                     <div className="field-map">
