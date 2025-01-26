@@ -61,6 +61,7 @@ link {
 .teleopCheckbox, .autoCheckbox, .dissapointmentCheckbox {
   color: rgb(219, 186, 0);
   padding-top: 10px;
+  font-size: 30px;
 }
 
 .title {
@@ -388,8 +389,6 @@ link {
 }
 
 .field-map {
-  border-style: solid;
-  border-color: yellow;
   user-select: none;
   background-color: rgb(54, 54, 54);
   width: 400px;
@@ -402,11 +401,44 @@ link {
   align-content: center;
 }
 
-.scoring {
+.bluealliance-button {
+  background-color: blue;
+  height: 60px;
+  width: 90px;
   border-style: solid;
-  border-color: purple;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-radius: 20px;
+  border-color: darkblue;
+  border-width: 5px;
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+.bluealliance-button:active {
+  background-color: darkblue;
+}
+
+.redalliance-button {
+  background: red;
+  height: 60px;
+  width: 90px;
+  border-style: solid;
+  border-radius: 20px;
+  border-color: maroon;
+  border-width: 5px;
+  font-size: 22px;
+  margin-left: 10px;
+}
+
+.redalliance-button:active {
+  background-color: maroon;
+}
+
+.alliance-text {
+  color: white;
+  font-weight: 750;
+}
+
+.scoring {
   height: 300px;
   width: 100px;
   display: grid;
@@ -415,79 +447,26 @@ link {
   justify-items: center;
 }
 
-.speaker {
-  display: flex;
-  align-items: center;
-}
-
-.speaker-inner {
-  display: flex;
-  align-items: center;
-  height: 80%;
-  width: 80%;
-  border-radius: 0px 20px 20px 0px;
-}
-
-.speaker-inner-reverse {
-  display: flex;
-  align-items: center;
-  height: 80%;
-  width: 80%;
-  border-radius: 20px 0px 0px 20px;
-  margin-left: auto;
-  margin-right: 0;
-}
-
-.speaker-inner:active,
-.speaker-inner-reverse:active {
-  background-color: rgb(40, 40, 40);
-}
-
-
-.amp {
-  border-radius: 20px 0px 20px 0px;
-}
-
-.amp-reverse {
-  border-radius: 0px 20px 0px 20px;
-}s
-
-.amp:active,
-.amp-reverse:active {
-  background-color: rgb(40, 40, 40);
-}
-
-.amp-text {
-  color: white;
-  margin-top: 3px;
-}
-
-.speaker-text {
-  margin-left: 10px;
-  color: white;
-  writing-mode: vertical-rl;
-}
-
-.speaker-text-reverse {
-  margin-left: 10px;
-  color: white;
-  writing-mode: vertical-rl;
-  transform: scale(-1);
-}
-
-.amp-graphic {
-  margin: 0 auto;
-  width: 60px;
-  height: 30px;
-  border-style: solid;
-  border-width: 4px;
-  border-color: red;
-  border-top: none;
+.scoring-red {
+  height: 300px;
+  width: 100px;
+  display: grid;
+  grid-template-rows: 15% 15% 15% 15% 15% 15%;
+  align-content: center;
+  justify-items: center;
 }
 
 .reef-section {
-  border-style: solid;
-  border-color: yellowgreen;
+  display: grid;
+  grid-template-rows: 45px 45px 45px;
+  width: 150px;
+  height: 300px;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+}
+
+.reef-section-red {
   display: grid;
   grid-template-rows: 45px 45px 45px;
   width: 150px;
@@ -539,50 +518,9 @@ link {
   grid-template-rows: 20% 20% 20% 20% 20%;
 }
 
-.note {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  background: none;
-  border: none;
-}
-
-.note-clickable {
-  margin: 0 auto;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  width: 90%;
-  height: 90%;
-  border-radius: 10px;
-  transition: 0.12s;
-}
-
 .undo-button-text:active,
 .note-clickable:active {
   background-color: rgb(40, 40, 40);
-}
-
-.note-img {
-  height: 40px;
-  width: 40px;
-  margin: 0 auto;
-}
-
-.note-text {
-  color: white;
-  position: absolute;
-}
-
-.speaker-img {
-  height: 100px;
-}
-
-.speaker-img-reverse {
-  height: 100px;
-  transform: scaleX(-1);
-  margin-left: auto;
-  margin-right: 0;
 }
 
 .fail {
@@ -593,7 +531,7 @@ link {
 }
 
 .fail-button {
-  background-color: maroon;
+  background-color: indianred;
   display: flex;
   margin: 0 auto;
   align-items: center;
@@ -607,26 +545,26 @@ link {
 }
 
 .fail-button:active {
-  background: red;
+  background: peachpuff;
 }
 
-.score-button {
+.algae-button {
   background: green;
   display: flex;
   margin: 0 auto;
   align-items: center;
   justify-items: center;
-  height: 35px;
+  height: 55px;
   width: 90px;
   border-radius: 20px;
   font-size: 18px;
 }
 
-.score-button:active {
-  background: greenyellow;
+.algae-button:active {
+  background: darkgreen;
 }
 
-.score-text {
+.algae-text {
   margin: 0 auto;
   color: white;
 }
@@ -642,11 +580,27 @@ link {
   border-radius: 20px;
   font-size: 22px;
   font-style: bold;
-  z-index: 2;
 }
 
 .place-button:active {
   background: darkblue;
+}
+
+.place-button-red {
+  background-color: red;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-items: center;
+  height: 40px;
+  width: 55%;
+  border-radius: 20px;
+  font-size: 22px;
+  font-style: bold;
+}
+
+.place-button-red:active {
+  background: maroon;
 }
 
 .reef-button {
@@ -664,9 +618,22 @@ link {
   background-color: darkblue;
 }
 
+.reef-button-red {
+  background-color: red;
+  margin: 0 auto;
+  display: flex;
+  height: 40px;
+  width: 40px;
+  font-size: 25px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.reef-button-red:active {
+  background: maroon;
+}
+
 .algae-box {
-  border-style: solid;
-  border-color: green;
   height: 100px;
   width: 140px;
   display: grid;
@@ -676,7 +643,7 @@ link {
   align-self: baseline;
 }
 
-.proccesser-button {
+.processor-button {
   display: flex;
   background-color: blue;
   height: 40px;
@@ -688,11 +655,27 @@ link {
   align-items: center;
 }
 
-.proccesser-button:active {
+.processor-button:active {
   background-color: darkblue;
 }
 
-.proccesser-text {
+.processor-button-red {
+  display: flex;
+  background-color: red;
+  height: 40px;
+  width: 110px;
+  border-radius: 15px;
+  border-width: 20px;
+  border-color: black;
+  font-size: 18px;
+  align-items: center;
+}
+
+.processor-button-red:active {
+  background-color: maroon;
+}
+
+.processor-text {
   margin: 0 auto;
   color: white;
 }
@@ -709,6 +692,20 @@ link {
 
 .net-button:active {
   background-color: darkblue;
+}
+
+.net-button-red {
+  display: flex;
+  background-color: red;
+  height: 40px;
+  width: 70px;
+  border-radius: 15px;
+  font-size: 18px;
+  align-items: center;
+}
+
+.net-button-red:active {
+  background-color: maroon;
 }
 
 .net-text {
@@ -765,8 +762,16 @@ link {
 
 .value-display {
   display: flex;
+  align-self: center;
+  justify-self: center;
   align-items: center;
+  width: 80px;
+  height: 50px;
   font-size: 30px;
+  background: black;
+  border-style: inset;
+  border-color: lightgray;
+  border-width: 10px;
 }
 
 .undo-button {

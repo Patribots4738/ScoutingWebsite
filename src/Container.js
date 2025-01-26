@@ -282,27 +282,27 @@ class Container extends React.Component {
           <div className="style1">
           <span>
             <Dropdown
-                className="dropdown alliance-color"
-                id={this.assignUUID()}
-                title={"Starting Side"}
-                value={localStorage.getItem("position")}
-                selected={localStorage.getItem("position")}
-                required={true}
-                items={[
-                  {
-                    title: "Amp",
-                    value: "Amp"
-                  },
-                  {
-                    title: "Middle",
-                    value: "Middle"
-                  },
-                  {
-                    title: "Source",
-                    value: "Source"
-                  }
-                ]}
-              />
+              className="dropdown alliance-color"
+              id={this.assignUUID()}
+              title={"Starting Side"}
+              value={localStorage.getItem("position")}
+              selected={localStorage.getItem("position")}
+              required={true}
+              items={[
+                {
+                  title: "Amp",
+                  value: "Amp"
+                },
+                {
+                  title: "Middle",
+                  value: "Middle"
+                },
+                {
+                  title: "Source",
+                  value: "Source"
+                }
+              ]}
+            />
             </span>
             <div>
               <AutoCounter
@@ -311,7 +311,7 @@ class Container extends React.Component {
                 title="Auto Pieces"
                 decorator="auto-pieces"
                 upperLimit={10}
-                reverse={this.state.flippedMaps}
+                alliance={localStorage.getItem("position")}
               />
             </div>
             <div>
@@ -339,11 +339,11 @@ class Container extends React.Component {
           />
           <div className="checkboxes1">
             <CheckBox
-              className="onstage"
+              className="isFailure"
               title="Deep Cage"
               id={this.assignUUID()}
               value={false}
-              decorator="onstage"
+              decorator="dissapointmentCheckbox"
             />
             <CheckBox
               className="isFailure"
@@ -353,14 +353,6 @@ class Container extends React.Component {
               decorator="dissapointmentCheckbox"
             />
           </div>
-          <Counter
-            className="counter widget"
-            id={this.assignUUID()}
-            title={"Trap"}
-            value={0}
-            upperLimit={3}
-            decorator={"trap"}
-          />
         </div>
 
         <div className="post-match-container">
