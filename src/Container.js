@@ -387,14 +387,6 @@ class Container extends React.Component {
               decorator="dissapointmentCheckbox"
             />
           </div>
-          <Counter
-            className="counter widget"
-            id={this.assignUUID()}
-            title={"Trap"}
-            value={0}
-            upperLimit={3}
-            decorator={"trap"}
-          />
         </div>
 
         <div className="post-match-container">

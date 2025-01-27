@@ -137,8 +137,8 @@ class TeleopCounter extends React.Component {
 
     netbtn = () => {
         return(
-            <div className="net-btn" onClick={() => this.handleScoreLocation("N")}>
-                <div className="net-btn-tex">Net</div>
+            <div className="processor-btn" onClick={() => this.handleScoreLocation("N")}>
+                <div className="processor-btn-text">Net</div>
             </div>
         );
     }
@@ -170,10 +170,14 @@ class TeleopCounter extends React.Component {
                 l4Score="L4"
             />),
             (<div className="teleop-misic">
-                {this.processorbtn()}
-                {this.netbtn()}
-                {this.scorebtn()}
-                {this.fumblebtn()}
+                <div className="teleop-algae-box">
+                    {this.processorbtn()}
+                    {this.netbtn()}
+                </div>
+                <div className="teleop-score-box">
+                    {this.scorebtn()}
+                    {this.fumblebtn()}
+                </div>
             </div>)
         ]
         return arr;
@@ -190,7 +194,7 @@ class TeleopCounter extends React.Component {
                     <div className="reef-map">
                         {this.bigUIArray()}
                     </div>
-                    <div>Score Log</div>
+                    <div className="subtitle">Score Log</div>
                     <div className="log-container">
                         <div className="log-display-teleop">
                             {this.scoreLogUI()}
