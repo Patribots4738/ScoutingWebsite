@@ -115,7 +115,7 @@ class AutoCounter extends React.Component {
                 />),
                 (<ReefSection
                     handleReefFace={this.handlePieceChange}
-                    faceA="A"
+                    faceA="Ag"
                     faceB="B"
                     faceC="C"
                     faceD="D"
@@ -215,7 +215,7 @@ class AutoCounter extends React.Component {
                 </div>
                 <div className="selector">
                     <div className="field-map">
-                        {this.bigUIArray()}
+                        {this.bigUIArray(this.props.reverse)}
                     </div>
                 </div>
             </span>

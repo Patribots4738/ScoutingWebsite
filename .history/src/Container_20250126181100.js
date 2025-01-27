@@ -284,7 +284,7 @@ class Container extends React.Component {
             <Dropdown
               className="dropdown alliance-color"
               id={this.assignUUID()}
-              title={"Starting Location"}
+              title={"Starting Side"}
               value={localStorage.getItem("position")}
               selected={localStorage.getItem("position")}
               required={true}
