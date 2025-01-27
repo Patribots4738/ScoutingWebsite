@@ -689,8 +689,7 @@ link {
 }
 
 .teleop-counter-container {
-  align-items: center;
-  flex-direction: column;
+  display: grid;
   width: 100%;
 }
 
@@ -737,6 +736,12 @@ link {
   margin: 0 auto;
 }
 
+.reef-map {
+  height: 300px;
+  width: 400px;
+  background: rgb(54, 54, 54);
+  border-radius: 10px;
+}
 
 .teleopCounters {
   display: flex;
@@ -744,12 +749,37 @@ link {
   align-items: center;
 }
 
-.tele-btn {
-  width: 100px;
-  height: 30px;
-  margin: 0;
+.teleop-scoring {
+  border-style: solid;
+  border-color: yellowgreen;
+  height: 300px;
+  width: 200px;
 }
 
-.reef {
-  width: 100px;
+.tele-btn {
+  background: red;
+  border-style: solid;
+  border-color: maroon;
+  border-radius: 15px;
+  border-width: 5px;
+  width: 50px;
+  height: 30px;
+  margin: 0 auto;
+  font-size: 20px;
+}
+
+.tele-btn:active {
+  background: maroon;
+}
+
+.tele-btn-text {
+  color: white;
+  font-weight: 700;
+}
+
+.reef-graphic {
+  position: absolute;
+  align-self: center;
+  height: 250px;
+  width: auto;
 }

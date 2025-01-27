@@ -1,5 +1,6 @@
 import React from "react";
 import reef from "../images/reef.png";
+import TeleopReef from "./TeleopReef";
 
 class TeleopCounter extends React.Component {
 
@@ -75,21 +76,6 @@ class TeleopCounter extends React.Component {
         })
     }
 
-    checkScore = () => {
-        // console.log(this.state.value);
-        console.log("L1:" + this.state.value["L1"]);
-        console.log("L2:" + this.state.value["L2"]);
-        console.log("L3:" + this.state.value["L3"]);
-        console.log("L4:" + this.state.value["L4"]);
-        console.log("P:" + this.state.value["P"]);
-        console.log("N:" + this.state.value["N"]);
-        console.log("CF:" + this.state.value["CF"]);
-        console.log("NF:" + this.state.value["NF"]);
-        console.log("PF:" + this.state.value["PF"]);
-
-    }
-
-
     scoreLogUI = () => {
         let UIList = [];
         for (let i = this.state.scoreLog.length - 1; i >= 0; i--) {
@@ -141,38 +127,70 @@ class TeleopCounter extends React.Component {
         });
     }
 
-    //make this a grid of divs https://www.tldraw.com/
+    processorbtn = () => {
+        return(
+            <div className="processor-btn" onClick={() => this.handleScoreLocation("P")}>
+                <div className="processor-btn-text">Processor</div>
+            </div>
+        );
+    }
+
+    netbtn = () => {
+        return(
+            <div className="net-btn" onClick={() => this.handleScoreLocation("N")}>
+                <div className="net-btn-tex">Net</div>
+            </div>
+        );
+    }
+
+    scorebtn = () => {
+        return(
+            <div className="score-btn" onClick={() => this.handleScore(true)}>
+                <div className="score-btn-text">Score</div>
+            </div>
+        );
+    }
+
+    fumblebtn = () => {
+        return(
+            <div className="fumble-btn" onClick={() => this.handleScore(false)}>
+                <div className="fumble-btn-text">Fumble</div>
+            </div>
+        );
+    }
+
+    //this guy is very silly
+    bigUIArray = () => {
+        let arr = [
+            (<TeleopReef
+                handleLocation={this.handleScoreLocation}
+                l1Score="L1"
+                l2Score="L2"
+                l3Score="L3"
+                l4Score="L4"
+            />),
+            (<div className="teleop-misic">
+                {this.processorbtn()}
+                {this.netbtn()}
+                {this.scorebtn()}
+                {this.fumblebtn()}
+            </div>)
+        ]
+        return arr;
+    }
+
+    //this is fine it can be better!!!!!! :)
     render() {
         return (
-            <span className={"widget" + this.state.classNameDecorator}>
+            <span className={"widget-" + this.state.classNameDecorator}>
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>
                 <div className="teleop-counter-container">
-                        <img src={reef} alt="reef" className="reef"/>
-                    <div className="score-btn-container"> 
-                        <div className="reef">
-
-                        </div>
-                        <div className="reef-btns">
-
-                        </div>
-                        <div className="misc">
-
-                        </div>
-                        <button className="tele-btn" onClick={() => this.handleScoreLocation("L1")}> L1 </button>
-                        <button className="tele-btn" onClick={() => this.handleScoreLocation("L2")}> L2 </button>
-                        <button className="tele-btn" onClick={() => this.handleScoreLocation("L3")}> L3 </button>
-                        <button className="tele-btn" onClick={() => this.handleScoreLocation("L4")}> L4 </button>
-                        <button className="tele-btn" onClick={() => this.handleScoreLocation("P")}> Processor </button>
-                        <button className="tele-btn" onClick={() => this.handleScoreLocation("N")}> Net </button>
-                        <button className="tele-btn" onClick={() => this.handleScore(true)}> Score </button>
-                        <button className="tele-btn" onClick={() => this.handleScore(false)}> Fumble </button>
-                        <button className="tele-btn" onClick={() => this.checkScore()}> check score </button>
+                    <div className="reef-map">
+                        {this.bigUIArray()}
                     </div>
-                    <div>
-                        Score Log 
-                    </div>
+                    <div>Score Log</div>
                     <div className="log-container">
                         <div className="log-display-teleop">
                             {this.scoreLogUI()}

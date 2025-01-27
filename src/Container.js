@@ -8,7 +8,6 @@ import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown';
-import AutoPieces from './widgets/AutoPieces';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -349,16 +348,6 @@ class Container extends React.Component {
                 ]}
               />
             </span>
-            <div>
-              <AutoPieces
-                value={[]}
-                id={this.assignUUID()}
-                title="Auto Pieces"
-                decorator="auto-pieces"
-                upperLimit={10}
-                reverse={this.state.flippedMaps}
-              />
-            </div>
             <div>
               <TextBoxLong
                 className="text-box"
