@@ -19,7 +19,7 @@ class TeleopCounter extends React.Component {
             "NF": 0,
             "PF": 0
         },
-        scoreLocation: "L4",
+        scoreLocation: "-",
         scoreLog: []
     }
 
@@ -173,6 +173,11 @@ class TeleopCounter extends React.Component {
                 <div className="teleop-algae-box">
                     {this.processorbtn()}
                     {this.netbtn()}
+                </div>
+                <div className="teleop-display">
+                    <div className="teleop-display-text">
+                        {this.state.scoreLocation}
+                    </div>
                 </div>
                 <div className="teleop-score-box">
                     {this.scorebtn()}

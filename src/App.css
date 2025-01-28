@@ -764,7 +764,7 @@ link {
 
 .teleop-misic {
   display: grid;
-  grid-template-rows: auto 50px auto;
+  grid-template-rows: auto auto auto;
   height: 300px;
   width: 190px;
 }
@@ -773,7 +773,8 @@ link {
   display: grid;
   grid-template-rows: auto auto;
   gap: 2px;
-  height: 125px;
+  height: 120px;
+  width: auto;
   justify-items: center;
   align-items: center;
 }
@@ -802,10 +803,29 @@ link {
   font-weight: 850;
 }
 
+.teleop-display {
+  display: flex;
+  margin: 0 auto;
+  height: 50px;
+  width: 100px;
+  background: black;
+  border-style:inset;
+  border-color: lightgray;
+  border-width: 5px;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.teleop-display-text {
+  color: white;
+  font-weight: 750;
+}
+
 .teleop-score-box {
   display: grid;
   grid-template-rows: auto auto;
-  height: 106px;
+  height: 120px;
   width: auto;
   align-items: center;
   justify-items: center;
