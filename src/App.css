@@ -689,8 +689,7 @@ link {
 }
 
 .teleop-counter-container {
-  align-items: center;
-  flex-direction: column;
+  display: grid;
   width: 100%;
 }
 
@@ -711,6 +710,7 @@ link {
   padding-top: 20px;
   padding-bottom: 20px;
   border-width: 2px;
+  justify-self: center;
 }
 
 .score-cell-text {
@@ -737,6 +737,15 @@ link {
   margin: 0 auto;
 }
 
+.reef-map {
+  display: grid;
+  grid-template-columns: auto auto;
+  height: 300px;
+  width: 400px;
+  background: rgb(54, 54, 54);
+  border-radius: 10px;
+  margin-top: 10px;
+}
 
 .teleopCounters {
   display: flex;
@@ -744,12 +753,160 @@ link {
   align-items: center;
 }
 
-.tele-btn {
-  width: 100px;
-  height: 30px;
-  margin: 0;
+.teleop-scoring {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-items: center;
+  height: 300px;
+  width: 200px;
 }
 
-.reef {
+.teleop-misic {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  height: 300px;
+  width: 190px;
+}
+
+.teleop-algae-box {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 2px;
+  height: 120px;
+  width: auto;
+  justify-items: center;
+  align-items: center;
+}
+
+.processor-btn {
+  display: flex;
+  background-color: rgb(6, 195, 132);
+  border-style: solid;
+  border-color: rgb(0, 108, 72);
+  border-width: 5px;
+  border-radius: 15px;
+  height: 40px;
+  width: 120px;
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.processor-btn:active {
+  background: rgb(0, 108, 72);
+}
+
+.processor-btn-text {
+  color: white;
+  font-weight: 850;
+}
+
+.teleop-display {
+  display: flex;
+  margin: 0 auto;
+  height: 50px;
   width: 100px;
+  background: black;
+  border-style:inset;
+  border-color: lightgray;
+  border-width: 5px;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.teleop-display-text {
+  color: white;
+  font-weight: 750;
+}
+
+.teleop-score-box {
+  display: grid;
+  grid-template-rows: auto auto;
+  height: 120px;
+  width: auto;
+  align-items: center;
+  justify-items: center;
+}
+
+.score-btn {
+  display: flex;
+  background-color: green;
+  height: 35px;
+  width: 100px;
+  font-size: 20px;
+  border-style: solid;
+  border-color: darkgreen;
+  border-width: 5px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.score-btn:active {
+  background-color: darkgreen;
+}
+
+.score-btn-text {
+  color: white;
+  font-weight: 800;
+}
+
+.fumble-btn {
+  display: flex;
+  background-color: red;
+  height: 35px;
+  width: 100px;
+  font-size: 20px;
+  border-style: solid;
+  border-color: maroon;
+  border-width: 5px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.fumble-btn:active {
+  background-color: maroon;
+}
+
+.fumble-btn-text {
+  color: white;
+  font-weight: 800;
+}
+
+.teleop-buttons {
+  height: 280px;
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  gap: 25px;
+}
+
+.tele-btn {
+  background: darkorchid;
+  border-style: solid;
+  border-color: indigo;
+  border-radius: 15px;
+  border-width: 5px;
+  width: 60px;
+  height: 40px;
+  margin: 0 auto;
+  font-size: 24px;
+}
+
+.tele-btn:active {
+  background: purple;
+}
+
+.tele-btn-text {
+  color: white;
+  font-weight: 800;
+}
+
+.reef-graphic {
+  align-self: center;
+  height: 280px;
+  width: auto;
 }

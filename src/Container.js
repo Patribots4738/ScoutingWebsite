@@ -8,7 +8,6 @@ import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown';
-import AutoPieces from './widgets/AutoPieces';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -350,16 +349,6 @@ class Container extends React.Component {
               />
             </span>
             <div>
-              <AutoPieces
-                value={[]}
-                id={this.assignUUID()}
-                title="Auto Pieces"
-                decorator="auto-pieces"
-                upperLimit={10}
-                reverse={this.state.flippedMaps}
-              />
-            </div>
-            <div>
               <TextBoxLong
                 className="text-box"
                 id={this.assignUUID()}
@@ -398,14 +387,6 @@ class Container extends React.Component {
               decorator="dissapointmentCheckbox"
             />
           </div>
-          <Counter
-            className="counter widget"
-            id={this.assignUUID()}
-            title={"Trap"}
-            value={0}
-            upperLimit={3}
-            decorator={"trap"}
-          />
         </div>
 
         <div className="post-match-container">
