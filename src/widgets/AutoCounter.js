@@ -7,33 +7,36 @@ class AutoCounter extends React.Component {
 
     state = {
         scoreValue: [],
-        upperLimit: 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,
         title: "Auto Pieces",
         id: this.props.id,  
         classNameDecorator: this.props.decorator,
-        reefLocation: "",
+        reefLocation: "D",
         reefHeight: "-",
-        alliance: "BLUE"
+        alliance: "BLUE",
+        redAllianceBtn: "inactive-red-button",
+        blueAllianceBtn: "active-blue-button"
     }
 
     handleAllianceRed = () => {
-        this.setState(
-            {alliance: "RED"}
-        )
+        this.setState({
+            alliance: "RED",
+            blueAllianceBtn: "inactive-blue-button",
+            redAllianceBtn: "active-red-button"
+        })
     }
 
     handleAllianceBlue = () => {
-        this.setState(
-            {alliance: "BLUE"}
-        )
+        this.setState({
+            alliance: "BLUE",
+            redAllianceBtn: "inactive-red-button",
+            blueAllianceBtn: "active-blue-button"
+        })
     }
 
     handleAdd = () => {
-        if (this.state.scoreValue.length < this.state.upperLimit) {
-            this.setState({
-                scoreValue: [...this.state.scoreValue, this.state.reefLocation + this.state.reefHeight]
-            });
-        }
+        this.setState({
+            scoreValue: [...this.state.scoreValue, this.state.reefLocation + this.state.reefHeight]
+        });
     }
 
     findPiece = (piece) => {
@@ -57,6 +60,8 @@ class AutoCounter extends React.Component {
             reefLocation: value
         });
     }
+
+
 
     handleLocationChange = (value) => {
         this.setState(
@@ -97,7 +102,11 @@ class AutoCounter extends React.Component {
         }
     }
 
-    bigUIArray = (reverse) => {
+    allianceSelection = () => {
+
+    }
+
+    bigUIArray = () => {
         if (this.state.alliance == "BLUE") {
             let arr = [
                 (<ScoringSection
@@ -136,7 +145,7 @@ class AutoCounter extends React.Component {
                     </div>
                     <div className="algae-box">
                         <div>
-                         {this.proccesser()}
+                            {this.proccesser()}
                         </div>
                         <div>
                             {this.net()}
@@ -200,10 +209,10 @@ class AutoCounter extends React.Component {
         return (
             <span className={"widget-" + this.state.classNameDecorator}>
                 <div>
-                    <button className={"bluealliance-button"} onClick={() => this.handleAllianceBlue()}>
+                    <button className= {this.state.blueAllianceBtn} onClick={() => this.handleAllianceBlue()}>
                         <div className="alliance-text">Blue</div>
                     </button>
-                    <button className="redalliance-button" onClick={() => this.handleAllianceRed()}>
+                    <button className= {this.state.redAllianceBtn} onClick={() => this.handleAllianceRed()}>
                         <div className="alliance-text">Red</div>
                     </button>
                 </div>

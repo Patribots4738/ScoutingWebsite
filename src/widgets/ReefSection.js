@@ -45,6 +45,10 @@ class ReefSection extends React.Component {
                         </div> 
                     </div>
                 </div>
+                <div className="staged-tree" onClick={() => this.props.handleReefFace("S")}>
+                    <div className="algae-graphic"></div>
+                    <div className="coral-graphic"></div>
+                </div>
             </div>
         );
         } else if (this.props.alliance == "RED") {
@@ -86,6 +90,10 @@ class ReefSection extends React.Component {
                                 {this.props.faceB}
                             </div> 
                         </div>
+                    </div>
+                    <div className="staged-tree" onClick={() => this.props.handleReefFace("S")}>
+                        <div className="algae-graphic"></div>
+                        <div className="coral-graphic"></div>
                     </div>
                 </div>
             );

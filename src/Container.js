@@ -167,6 +167,13 @@ class Container extends React.Component {
     return id;
   }
 
+  assignCustomUUID = (id) => {
+    this.state.scoutingLog.push(id);
+    return id;
+  }
+
+  
+
 
   handleExportData = (_) => {
     let cachedDataJSON = localStorage.getItem("matchData");
@@ -310,7 +317,6 @@ class Container extends React.Component {
                 id={this.assignUUID()}
                 title="Auto Pieces"
                 decorator="auto-pieces"
-                upperLimit={10}
                 alliance={localStorage.getItem("position")}
               />
             </div>
