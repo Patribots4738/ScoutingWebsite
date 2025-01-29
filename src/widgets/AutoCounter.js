@@ -89,21 +89,41 @@ class AutoCounter extends React.Component {
     net = () => {
         if (this.state.alliance == "BLUE") {
         return(
-            <div className="net-button" onClick={() => this.handleLocationChange("N")}>
-                <div className="net-text">Net</div>
+            <div className="processor-button" onClick={() => this.handleLocationChange("N")}>
+                <div className="processor-text">Net</div>
             </div>
         );
         } else if (this.state.alliance == "RED") {
             return(
-                <div className="net-button-red" onClick={() => this.handleLocationChange("N")}>
-                    <div className="net-text">Net</div>
+                <div className="processor-button-red" onClick={() => this.handleLocationChange("N")}>
+                    <div className="processor-text">Net</div>
                 </div>
             );
         }
     }
 
-    allianceSelection = () => {
+    fumnleAlgaeProcessor = () => {
+        return(
+            <div className="fumble-algae-button" onClick={() => this.handleLocationChange("FP")}>
+                <div className="fumble-algae-text">Fumble Processor</div>
+            </div>
+        );
+    }
 
+    fumnleAlgaeNet = () => {
+        return(
+            <div className="fumble-algae-button" onClick={() => this.handleLocationChange("FN")}>
+                <div className="fumble-algae-text">Fumble Net</div>
+            </div>
+        );
+    }
+
+    undo = () => {
+        return(
+            <div className="undo-button-text" onClick={() => this.handleRemove()}>
+                <img src={undo} alt="" className="undo-img"/>
+            </div>
+        );
     }
 
     bigUIArray = () => {
@@ -132,11 +152,9 @@ class AutoCounter extends React.Component {
                     faceF="F"
                     alliance={this.state.alliance}
                 />),
-                (<div className="misc" key="3">
+                (<div className="misc">
                     <div className="undo-button">
-                        <div className="undo-button-text" onClick={() => this.handleRemove()}>
-                            <img src={undo} alt="UNDO" className="undo-img"/>
-                        </div>
+                        {this.undo()}
                     </div>
                     <div className="value-display">
                         <div className="value-text">
@@ -148,9 +166,15 @@ class AutoCounter extends React.Component {
                             {this.proccesser()}
                         </div>
                         <div>
+                            {this.fumnleAlgaeProcessor()}
+                        </div>
+                        <div>
                             {this.net()}
                         </div>
-                 </div>
+                        <div>
+                            {this.fumnleAlgaeNet()}
+                        </div>
+                    </div>
                 </div>)
             ]
             return arr;
@@ -158,9 +182,7 @@ class AutoCounter extends React.Component {
             let arr = [
                 (<div className="misc" key="3">
                     <div className="undo-button">
-                        <div className="undo-button-text" onClick={() => this.handleRemove()}>
-                            <img src={undo} alt="UNDO" className="undo-img"/>
-                        </div>
+                        {this.undo()}
                     </div>
                     <div className="value-display">
                         <div className="value-text">
@@ -169,10 +191,16 @@ class AutoCounter extends React.Component {
                     </div>
                     <div className="algae-box">
                         <div>
-                         {this.proccesser()}
+                            {this.proccesser()}
+                        </div>
+                        <div>
+                            {this.fumnleAlgaeProcessor()}
                         </div>
                         <div>
                             {this.net()}
+                        </div>
+                        <div>
+                            {this.fumnleAlgaeNet()}
                         </div>
                  </div>
                 </div>),

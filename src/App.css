@@ -473,50 +473,52 @@ link {
 }
 
 .reef-section {
+  margin-top: 5px;
   display: grid;
   grid-template-rows: 45px 45px 45px auto;
   width: 150px;
   height: 300px;
-  align-items: center;
-  align-content: center;
   justify-items: center;
 }
 
 .reef-section-red {
+  margin-top: 5px;
   display: grid;
   grid-template-rows: 45px 45px 45px auto;
   width: 150px;
   height: 300px;
-  align-items: center;
-  align-content: center;
   justify-items: center;
 }
 
 .reef-base-graphic {
   margin: 0 auto;
+  margin-top: 20px;
   height: 170px;
   width: auto;
   position: absolute;
+  align-self: flex-start;
   z-index: 0.5;
 }
 
 .staged-tree {
-  height: auto;
-  width: auto;
+  border-radius: 10px;
+  height: 100px;
+  width: 70px;
   position: absolute;
   align-self: flex-end;
   justify-items: center;
-  margin-bottom: 5px;
+  align-content: center;
+  margin-bottom: 8px;
+}
+
+.staged-tree:active {
+  background: rgb(40, 40, 40);
 }
 
 .coral-graphic {
   background: lightgray;
   height: 30px;
   width: 20px;
-}
-
-.coral-graphic:active {
-  background: darkgray;
 }
 
 .algae-graphic {
@@ -526,12 +528,9 @@ link {
   border-radius: 50%;
 }
 
-.algae-graphic:active {
-  background: rgb(0, 90, 110);
-}
-
 .reef-top-position {
   margin: 0 auto;
+  margin-top: 40px;
   display: grid;
   gap: 25px;
   grid-template-columns: auto auto;
@@ -540,6 +539,7 @@ link {
 
 .reef-middle-position {
   margin: 0 auto;
+  margin-top: 40px;
   display: grid;
   gap: 70px;
   grid-template-columns: auto auto;
@@ -548,6 +548,7 @@ link {
 
 .reef-bottom-position {
   margin: 0 auto;
+  margin-top: 40px;
   display: grid;
   gap: 25px;
   grid-template-columns: auto auto;
@@ -564,8 +565,7 @@ link {
   grid-template-rows: 20% 20% 20% 20% 20%;
 }
 
-.undo-button-text:active,
-.note-clickable:active {
+.undo-button-text:active {
   background-color: rgb(40, 40, 40);
 }
 
@@ -629,7 +629,7 @@ link {
 }
 
 .place-button:active {
-  background: lightblue;
+  background: blue;
 }
 
 .place-button-red {
@@ -661,7 +661,7 @@ link {
 }
 
 .reef-button:active {
-  background-color: lightblue;
+  background-color: blue;
 }
 
 .reef-button-red {
@@ -680,38 +680,35 @@ link {
 }
 
 .algae-box {
-  height: 100px;
+  height: 150px;
   width: 140px;
   display: grid;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto auto auto auto;
   align-items: center;
   justify-items: center;
-  align-self: baseline;
 }
 
 .processor-button {
   display: flex;
   background-color: navy;
-  height: 40px;
-  width: 110px;
+  height: 30px;
+  width: 100px;
   border-radius: 15px;
-  border-width: 20px;
-  border-color: black;
-  font-size: 18px;
+  font-size: 15px;
   align-items: center;
 }
 
 .processor-button:active {
-  background-color: lightblue;
+  background-color: blue;
 }
 
 .processor-button-red {
   display: flex;
   background-color: maroon;
-  height: 40px;
-  width: 110px;
+  height: 30px;
+  width: 100px;
   border-radius: 15px;
-  font-size: 18px;
+  font-size: 15px;
   align-items: center;
 }
 
@@ -724,36 +721,21 @@ link {
   color: white;
 }
 
-.net-button {
-  display: flex;
-  background-color: navy;
-  height: 40px;
-  width: 70px;
+.fumble-algae-button {
+  background: lightcoral;
+  height: 30px;
+  width: 125px;
   border-radius: 15px;
-  font-size: 18px;
-  align-items: center;
+  align-content: center;
+  justify-items: center;
+  font-size: 14px;
 }
 
-.net-button:active {
-  background-color: lightblue;
+.fumble-algae-button:active {
+  background: darkgoldenrod;
 }
 
-.net-button-red {
-  display: flex;
-  background-color: maroon;
-  height: 40px;
-  width: 70px;
-  border-radius: 15px;
-  font-size: 18px;
-  align-items: center;
-}
-
-.net-button-red:active {
-  background-color: red;
-}
-
-.net-text {
-  margin: 0 auto;
+.fumble-algae-text {
   color: white;
 }
 
@@ -801,28 +783,26 @@ link {
 
 .misc {
   display: grid;
-  grid-template-rows: 33% 33% 33%;
+  grid-template-rows: auto auto auto;
 }
 
 .value-display {
   display: flex;
-  align-self: center;
   justify-self: center;
   align-items: center;
-  width: 80px;
-  height: 50px;
+  width: 60px;
+  height: 40px;
   font-size: 30px;
   background: black;
   border-style: inset;
   border-color: lightgray;
-  border-width: 10px;
+  border-width: 5px;
 }
 
 .undo-button {
   display: flex;
   align-items: center;
   border-radius: 20px;
-  transition: .12s;
 }
 
 .undo-img {
