@@ -17,7 +17,8 @@ class TeleopCounter extends React.Component {
             "Net": 0,
             "Coral Fumble": 0,
             "Net Fumble": 0,
-            "Processor Fumble": 0
+            "Processor Fumble": 0,
+            "Remove Algae": 0
         },
         scoreLocation: "-",
         scoreLog: []
