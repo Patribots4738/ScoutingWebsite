@@ -64,22 +64,34 @@ class AutoCounter extends React.Component {
 
 
     handleLocationChange = (value) => {
+        if (this.state.reefLocation == "S") {
+            
+        } else {
+            this.setState(
+                {reefHeight: value}, 
+                () => {this.handleAdd();}
+            )
+        }
+    }
+
+    handleAlgaeChange = (value) => {
         this.setState(
             {reefHeight: value}, 
             () => {this.handleAdd();}
         )
     }
 
+
     proccesser = () => {
         if (this.state.alliance == "BLUE") {
             return(
-                <div className="processor-button" onClick={() => this.handleLocationChange("P")}>
+                <div className="processor-button" onClick={() => this.handleAlgaeChange("P")}>
                     <div className="processor-text">Processor</div>
                 </div>
             );
         } else if (this.state.alliance == "RED") {
             return(
-                <div className="processor-button-red" onClick={() => this.handleLocationChange("P")}>
+                <div className="processor-button-red" onClick={() => this.handleAlgaeChange("P")}>
                     <div className="processor-text">Processor</div>
                 </div>
             );
@@ -89,13 +101,13 @@ class AutoCounter extends React.Component {
     net = () => {
         if (this.state.alliance == "BLUE") {
         return(
-            <div className="processor-button" onClick={() => this.handleLocationChange("N")}>
+            <div className="processor-button" onClick={() => this.handleAlgaeChange("N")}>
                 <div className="processor-text">Net</div>
             </div>
         );
         } else if (this.state.alliance == "RED") {
             return(
-                <div className="processor-button-red" onClick={() => this.handleLocationChange("N")}>
+                <div className="processor-button-red" onClick={() => this.handleAlgaeChange("N")}>
                     <div className="processor-text">Net</div>
                 </div>
             );
@@ -104,7 +116,7 @@ class AutoCounter extends React.Component {
 
     fumnleAlgaeProcessor = () => {
         return(
-            <div className="fumble-algae-button" onClick={() => this.handleLocationChange("FP")}>
+            <div className="fumble-algae-button" onClick={() => this.handleAlgaeChange("FP")}>
                 <div className="fumble-algae-text">Fumble Processor</div>
             </div>
         );
@@ -112,7 +124,7 @@ class AutoCounter extends React.Component {
 
     fumnleAlgaeNet = () => {
         return(
-            <div className="fumble-algae-button" onClick={() => this.handleLocationChange("FN")}>
+            <div className="fumble-algae-button" onClick={() => this.handleAlgaeChange("FN")}>
                 <div className="fumble-algae-text">Fumble Net</div>
             </div>
         );
@@ -255,6 +267,7 @@ class AutoCounter extends React.Component {
                         {this.bigUIArray()}
                     </div>
                 </div>
+                <div className="processor-location">Processor Side</div>
             </span>
         )
     }

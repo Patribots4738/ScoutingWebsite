@@ -297,16 +297,16 @@ class Container extends React.Component {
               required={true}
               items={[
                 {
-                  title: "Cage 1",
-                  value: "Cage_1"
+                  title: "Blue Barge",
+                  value: "Blue_Barge_Side"
                 },
                 {
-                  title: "Cage 2",
-                  value: "Cage_2"
+                  title: "Middle",
+                  value: "Center"
                 },
                 {
-                  title: "Cage 3",
-                  value: "Cage_3"
+                  title: "Red Barge",
+                  value: "Red_Barge_Side"
                 }
               ]}
             />
