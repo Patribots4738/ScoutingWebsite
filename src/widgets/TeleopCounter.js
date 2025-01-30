@@ -41,6 +41,12 @@ class TeleopCounter extends React.Component {
             case "CF":
                 newLog = [...this.state.scoreLog, "Coral Fumble"];
                 break;
+            case "RA":
+                newLog = [...this.state.scoreLog, "Remove Algae"];
+                break;
+            case "DA":
+                newLog = [...this.state.scoreLog, "Dropped Algae"];
+                break;
             default:
                 newLog = [...this.state.scoreLog, this.state.scoreLocation];
             }
@@ -59,6 +65,10 @@ class TeleopCounter extends React.Component {
         else if (this.state.scoreLocation.slice(0, 1) === "L") {
             newValue["CF"]++;
             this.logScore("CF");
+        }
+        else if (this.state.scoreLocation === "RA") {
+            newValue["DA"]++;
+            this.logScore("DA");
         }
         else {
             newValue[this.state.scoreLocation + "F"] ++;
@@ -168,6 +178,7 @@ class TeleopCounter extends React.Component {
                 l2Score="L2"
                 l3Score="L3"
                 l4Score="L4"
+                removeAlgae="RA"
             />),
             (<div className="teleop-misic">
                 <div className="teleop-algae-box">
@@ -188,7 +199,6 @@ class TeleopCounter extends React.Component {
         return arr;
     }
 
-    //this is fine it can be better!!!!!! :)
     render() {
         return (
             <span className={"widget-" + this.state.classNameDecorator}>
