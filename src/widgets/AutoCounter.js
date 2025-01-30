@@ -6,7 +6,7 @@ import ReefSection from "./ReefSection";
 class AutoCounter extends React.Component {
 
     state = {
-        scoreValue: [],
+        scoreValue: [], // array of the scored pieces (must convert this to values in container)
         title: "Auto Pieces",
         id: this.props.id,  
         classNameDecorator: this.props.decorator,

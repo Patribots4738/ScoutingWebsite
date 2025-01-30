@@ -18,7 +18,7 @@ import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
 
 class Container extends React.Component {
-  
+
   state = {
     scoutingLog: [],
     flippedMaps: localStorage.getItem("flippedMaps") //TODO: make this work
@@ -65,7 +65,7 @@ class Container extends React.Component {
     var sendData = data[1];
     data = data[0];
 
-    const eventID = '2024cabl';
+    const eventID = '2025 testing';
 
     if (sendData) {
       let validMatch = true;
@@ -73,42 +73,53 @@ class Container extends React.Component {
         validMatch = window.confirm("Are you sure your match and team numbers are correct?");
       }
       if (validMatch) {
-        
+
         let name = data[0][1];
         let matchNumber = data[1][1];
         let position = data[3][1];
+        let autoPieces = data[6][1];
+        let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
         let teleopPieceCounts = JSON.parse(data[7][1]);
 
-        let commentData = { 
+        let commentData = {
           "Name": name,
-          "What they did well": data[13][1],
-          "What they did bad": data[14][1],
-          "Additional Comments": data[15][1],
+          "What they did well": data[15][1],
+          "What they did bad": data[16][1],
+          "Additional Comments": data[17][1],
           "Auto Description": data[6][1],
-          "Auto Start": data[4][1]
+          "Auto Start": data[4][1],
+          "Auto Path": ""
         }
         let jsonData = {     //change this to 2025 data points
-          "Speaker Wing Cycles": teleopPieceCounts["speaker"]["wing"],
-          "Speaker Center Cycles": teleopPieceCounts["speaker"]["center"],
-          "Speaker Full Cycles": teleopPieceCounts["speaker"]["source"],
-          "Amp Wing Cycles": teleopPieceCounts["amp"]["wing"],
-          "Amp Center Cycles": teleopPieceCounts["amp"]["center"],
-          "Amp Full Cycles": teleopPieceCounts["amp"]["source"],
-          "Pass Wing Cycles": teleopPieceCounts["pass"]["wing"],
-          "Pass Center Cycles": teleopPieceCounts["pass"]["center"],
-          "Pass Full Cycles": teleopPieceCounts["pass"]["source"],
-          "Fumbles Speaker Wing Cycles": teleopPieceCounts["fumbleSpeaker"]["wing"],
-          "Fumbles Speaker Center Cycles": teleopPieceCounts["fumbleSpeaker"]["center"],
-          "Fumbles Speaker Full Cycles": teleopPieceCounts["fumbleSpeaker"]["source"],
-          "Fumbles Amp Wing Cycles": teleopPieceCounts["fumbleAmp"]["wing"],
-          "Fumbles Amp Center Cycles": teleopPieceCounts["fumbleAmp"]["center"],
-          "Fumbles Amp Full Cycles": teleopPieceCounts["fumbleAmp"]["source"],
+          "L4 Auto": autoPieceCounts["L4"],
+          "L3 Auto": autoPieceCounts["L3"],
+          "L2 Auto": autoPieceCounts["L2"],
+          "L1 Auto": autoPieceCounts["L1"],
+          "Processor Auto": autoPieceCounts["processor"],
+          "Net Auto": autoPieceCounts["net"],
+          "Coral Fumble Auto": autoPieceCounts["coralFumble"],
+          "Net Fumble Auto": autoPieceCounts["netFumble"],
+          "Processor Fumble Auto": autoPieceCounts["processorFumble"],
+          "Algae Removed Auto": autoPieceCounts["algaeRemove"],
+          "L4 Teleop": teleopPieceCounts["L4"],
+          "L3 Teleop": teleopPieceCounts["L3"],
+          "L2 Teleop": teleopPieceCounts["L2"],
+          "L1 Teleop": teleopPieceCounts["L1"],
+          "Processor Teleop": teleopPieceCounts["Processor"],
+          "Net Teleop": teleopPieceCounts["Net"],
+          "Coral Fumble Teleop": teleopPieceCounts["Coral Fumble"],
+          "Net Fumble Teleop": teleopPieceCounts["Net Fumble"],
+          "Processor Fumble Teleop": teleopPieceCounts["Processor Fumble"],
+          "Algae Removed Teleop": teleopPieceCounts[""],
           "Match Number": matchNumber,
-          "Temp Failure": data[11][1],
-          "Critical Failure": data[12][1],
-          "End Onstage": data[8][1],
-          "Climb Failure": data[9][1],
-          "Trap": data[10][1]
+          "Deep Cage": Math.floor(Math.random() * 2),
+          "Shallow Cage": Math.floor(Math.random() * 2),
+          "Climb Failure": Math.floor(Math.random() * 2),
+          "Ground Intake": Math.floor(Math.random() * 2),
+          "Station Intake": Math.floor(Math.random() * 2),
+          "Temp Failure": Math.floor(Math.random() * 2),
+          "Critical Failure": Math.floor(Math.random() * 2),
+          "Auto Leave": Math.floor(Math.random() * 2)
         };
         //                      event             match #                                Name|Position-Team#               
         set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
@@ -119,7 +130,7 @@ class Container extends React.Component {
         localStorage.setItem("position", position);
 
         let cachedData = JSON.parse(localStorage.getItem("matchData"));
-        
+
         if (cachedData === null) {
           cachedData = {};
         }
@@ -133,7 +144,7 @@ class Container extends React.Component {
         } else {
           cachedData[matchPath][botPath] = { data: jsonData, comments: commentData };
         }
-        
+
         cachedData = JSON.stringify(cachedData, null, "\t");
 
         localStorage.setItem("matchData", cachedData);
@@ -172,7 +183,58 @@ class Container extends React.Component {
     return id;
   }
 
-  
+  autoPieceCount  = (arr) => {
+    let pieceCounts = {
+      L4: 0,
+      L3: 0,
+      L2: 0,
+      L1: 0,
+      processor: 0,
+      net: 0,
+      coralFumble: 0,
+      netFumble: 0,
+      processorFumble: 0,
+      algaeRemove: 0
+    };
+
+    for (let i = 0; i < arr.length; i++) {
+      let loc = arr[i].substring(1);
+      // eslint-disable-next-line default-case
+      switch (loc) {
+        case "L1":
+          pieceCounts["L1"]++;
+          break;
+        case "L2": 
+          pieceCounts["L2"]++;
+          break;
+        case "L3":
+          pieceCounts["L3"]++;
+          break;
+        case "L4":
+          pieceCounts["L4"]++;
+          break;
+        case "P":
+          pieceCounts["processor"]++;
+          break;
+        case "N":
+          pieceCounts["net"]++;
+          break;
+        case "FR":
+          pieceCounts["coralFumble"]++;
+          break;
+        case "FP":
+          pieceCounts["processorFumble"]++;
+          break;
+        case "FN":
+          pieceCounts["netFumble"]++;
+          break;
+        case "RG":
+          pieceCounts["algaeRemove"]++;
+          break;
+      }
+    }
+    return pieceCounts;
+  }
 
 
   handleExportData = (_) => {
@@ -287,29 +349,29 @@ class Container extends React.Component {
             AUTONOMOUS
           </h2>
           <div className="style1">
-          <span>
-            <Dropdown
-              className="dropdown alliance-color"
-              id={this.assignUUID()}
-              title={"Starting Location"}
-              value={localStorage.getItem("position")}
-              selected={localStorage.getItem("position")}
-              required={true}
-              items={[
-                {
-                  title: "Blue Barge",
-                  value: "Blue_Barge_Side"
-                },
-                {
-                  title: "Middle",
-                  value: "Center"
-                },
-                {
-                  title: "Red Barge",
-                  value: "Red_Barge_Side"
-                }
-              ]}
-            />
+            <span>
+              <Dropdown
+                className="dropdown alliance-color"
+                id={this.assignUUID()}
+                title={"Starting Location"}
+                value={localStorage.getItem("position")}
+                selected={localStorage.getItem("position")}
+                required={true}
+                items={[
+                  {
+                    title: "Blue Barge",
+                    value: "Blue_Barge_Side"
+                  },
+                  {
+                    title: "Middle",
+                    value: "Center"
+                  },
+                  {
+                    title: "Red Barge",
+                    value: "Red_Barge_Side"
+                  }
+                ]}
+              />
             </span>
             <div>
               <AutoCounter
@@ -346,14 +408,21 @@ class Container extends React.Component {
           <div className="checkboxes1">
             <CheckBox
               className="isFailure"
-              title="Deep Cage"
+              title="Deep Climb"
               id={this.assignUUID()}
               value={false}
               decorator="dissapointmentCheckbox"
             />
             <CheckBox
               className="isFailure"
-              title="Shallow Cage"
+              title="Shallow Climb"
+              id={this.assignUUID()}
+              value={false}
+              decorator="dissapointmentCheckbox"
+            />
+            <CheckBox  //center this
+              className="isFailure"
+              title="Climb Failure"
               id={this.assignUUID()}
               value={false}
               decorator="dissapointmentCheckbox"
@@ -366,6 +435,20 @@ class Container extends React.Component {
             POST-MATCH
           </h2>
           <div className="checkboxes1">
+            <CheckBox
+              className="temporary"
+              title="Station Intake"
+              id={this.assignUUID()}
+              value={false}
+              decorator={"temporary"}
+            />
+            <CheckBox
+              className="temporary"
+              title="Ground Intake"
+              id={this.assignUUID()}
+              value={false}
+              decorator={"temporary"}
+            />
             <CheckBox
               className="temporary"
               title="Temp. Failure"
