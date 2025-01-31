@@ -17,7 +17,9 @@ class TeleopCounter extends React.Component {
             "N": 0,
             "CF": 0,
             "NF": 0,
-            "PF": 0
+            "PF": 0,
+            "RA": 0
+
         },
         scoreLocation: "-",
         scoreLog: []
@@ -44,46 +46,49 @@ class TeleopCounter extends React.Component {
             case "RA":
                 newLog = [...this.state.scoreLog, "Remove Algae"];
                 break;
-            case "DA":
-                newLog = [...this.state.scoreLog, "Dropped Algae"];
-                break;
             default:
                 newLog = [...this.state.scoreLog, this.state.scoreLocation];
             }
             this.setState({
                 scoreLog: newLog
-            })
+            });
     }
 
     handleScore = (confirmed) => {
         let newValue = {...this.state.value};
-        if (confirmed) {
-            newValue[this.state.scoreLocation] ++;
-            this.logScore(this.state.scoreLocation)
-
-        }
-        else if (this.state.scoreLocation.slice(0, 1) === "L") {
-            newValue["CF"]++;
-            this.logScore("CF");
-        }
-        else if (this.state.scoreLocation === "RA") {
-            newValue["DA"]++;
-            this.logScore("DA");
-        }
-        else {
-            newValue[this.state.scoreLocation + "F"] ++;
-            this.logScore(this.state.scoreLocation + "F");
+        if (!this.state.scoreLocation.includes("-") && !this.state.scoreLocation == "RA") { // remove algae is the only button that does not need to be confirmed
+            if (confirmed) {
+                newValue[this.state.scoreLocation] ++;
+                this.logScore(this.state.scoreLocation)
+    
+            }
+            else if (this.state.scoreLocation.slice(0, 1) === "L") {
+                newValue["CF"]++;
+                this.logScore("CF");
+            }
+            else {
+                newValue[this.state.scoreLocation + "F"] ++;
+                this.logScore(this.state.scoreLocation + "F");
+            }
         }
 
         this.setState({
             value: newValue
-        })
+        });
     }
 
     handleScoreLocation = (location) => {
+        if (location == "RA") { // remove algae is the only button that does not need to be confirmed
+            let newValue = {...this.state.value};
+            newValue["RA"]++;
+            this.logScore("RA");
+            this.setState({
+                value: newValue
+            });
+        }
         this.setState({
             scoreLocation: location
-        })
+        });
     }
 
     scoreLogUI = () => {
@@ -126,6 +131,9 @@ class TeleopCounter extends React.Component {
                 break;
             case "Coral Fumble":
                 newValue["CF"]--;
+                break;
+            case "Remove Algae":
+                newValue["RA"]--;
                 break;
             default:
                 newValue[logElement]--;
