@@ -273,6 +273,13 @@ link {
 
 .checkboxes1 {
   display: grid;
+  grid-template-columns: 100px 100px 100px;
+  align-items: center;
+  width: 75%;
+  margin: 0 auto;
+}
+.checkboxes2 {
+  display: grid;
   grid-template-columns: 150px 150px;
   align-items: center;
   width: 75%;

@@ -4,11 +4,11 @@ import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox';
 import Counter from './widgets/Counter';
 import TeleopCounter from './widgets/TeleopCounter';
+import AutoCounter from './widgets/AutoCounter';
 import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
 import Dropdown from './widgets/Dropdown';
-import AutoCounter from './widgets/AutoCounter';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -32,6 +32,7 @@ class Container extends React.Component {
 
 
       var element = document.getElementById(this.state.scoutingLog[i]);
+      console.log(element);
       if (element !== null) {
         var value;
         if (element.getAttribute("value") !== null && element.getAttribute("value") !== undefined) {
@@ -73,46 +74,59 @@ class Container extends React.Component {
         validMatch = window.confirm("Are you sure your match and team numbers are correct?");
       }
       if (validMatch) {
-        
+        for (let i = 0; i < 17; i++) {
+          console.log("item " + i + " " + data[i][1])
+        }
         let name = data[0][1];
         let matchNumber = data[1][1];
         let position = data[3][1];
-        let teleopPieceCounts = JSON.parse(data[7][1]);
-
+        let autoPieces = data[6][1];
+        let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
+        let teleopPieceCounts = JSON.parse(data[10][1]);
+        
         let commentData = { 
           "Name": name,
-          "What they did well": data[13][1],
-          "What they did bad": data[14][1],
-          "Additional Comments": data[15][1],
-          "Auto Description": data[6][1],
-          "Auto Start": data[4][1]
+          "What they did well": data[18][1],
+          "What they did bad": data[19][1],
+          "Additional Comments": data[20][1],
+          "Auto Description": data[9][1],
+          "Auto Start": data[4][1],
+          "Auto Path": ""
         }
-        let jsonData = {     //change this to 2025 data points
-          "Speaker Wing Cycles": teleopPieceCounts["speaker"]["wing"],
-          "Speaker Center Cycles": teleopPieceCounts["speaker"]["center"],
-          "Speaker Full Cycles": teleopPieceCounts["speaker"]["source"],
-          "Amp Wing Cycles": teleopPieceCounts["amp"]["wing"],
-          "Amp Center Cycles": teleopPieceCounts["amp"]["center"],
-          "Amp Full Cycles": teleopPieceCounts["amp"]["source"],
-          "Pass Wing Cycles": teleopPieceCounts["pass"]["wing"],
-          "Pass Center Cycles": teleopPieceCounts["pass"]["center"],
-          "Pass Full Cycles": teleopPieceCounts["pass"]["source"],
-          "Fumbles Speaker Wing Cycles": teleopPieceCounts["fumbleSpeaker"]["wing"],
-          "Fumbles Speaker Center Cycles": teleopPieceCounts["fumbleSpeaker"]["center"],
-          "Fumbles Speaker Full Cycles": teleopPieceCounts["fumbleSpeaker"]["source"],
-          "Fumbles Amp Wing Cycles": teleopPieceCounts["fumbleAmp"]["wing"],
-          "Fumbles Amp Center Cycles": teleopPieceCounts["fumbleAmp"]["center"],
-          "Fumbles Amp Full Cycles": teleopPieceCounts["fumbleAmp"]["source"],
+        let jsonData = {     
+          "L4 Auto": autoPieceCounts["L4"],
+          "L3 Auto": autoPieceCounts["L3"],
+          "L2 Auto": autoPieceCounts["L2"],
+          "L1 Auto": autoPieceCounts["L1"],
+          "Processor Auto": autoPieceCounts["processor"],
+          "Net Auto": autoPieceCounts["net"],
+          "Coral Fumble Auto": autoPieceCounts["coralFumble"],
+          "Net Fumble Auto": autoPieceCounts["netFumble"],
+          "Processor Fumble Auto": autoPieceCounts["processorFumble"],
+          "Algae Removed Auto": autoPieceCounts["algaeRemove"],
+          "L4 Teleop": teleopPieceCounts["L4"],
+          "L3 Teleop": teleopPieceCounts["L3"],
+          "L2 Teleop": teleopPieceCounts["L2"],
+          "L1 Teleop": teleopPieceCounts["L1"],
+          "Processor Teleop": teleopPieceCounts["P"],
+          "Net Teleop": teleopPieceCounts["N"],
+          "Coral Fumble Teleop": teleopPieceCounts["CF"],
+          "Net Fumble Teleop": teleopPieceCounts["NF"],
+          "Processor Fumble Teleop": teleopPieceCounts["PF"],
+          "Algae Removed Teleop": teleopPieceCounts["RA"],
           "Match Number": matchNumber,
-          "Temp Failure": data[11][1],
-          "Critical Failure": data[12][1],
-          "End Onstage": data[8][1],
-          "Climb Failure": data[9][1],
-          "Trap": data[10][1]
+          "Deep Cage": data[11][1],
+          "Shallow Cage": data[12][1],
+          "Climb Failure": data[13][1],
+          "Ground Intake": data[16][1],
+          "Station Intake": data[17][1],
+          "Temp Failure": data[14][1],
+          "Critical Failure": data[15][1],
+          "Auto Leave": data[8][1] 
         };
         //                      event             match #                                Name|Position-Team#               
-        set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, 'scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
+        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name);
         localStorage.setItem("matchNumber", matchNumber);
@@ -151,6 +165,59 @@ class Container extends React.Component {
     return (val.toString().length > 2)
   }
 
+  autoPieceCount  = (arr) => {
+    let pieceCounts = {
+      L4: 0,
+      L3: 0,
+      L2: 0,
+      L1: 0,
+      processor: 0,
+      net: 0,
+      coralFumble: 0,
+      netFumble: 0,
+      processorFumble: 0,
+      algaeRemove: 0
+    };
+
+    for (let i = 0; i < arr.length; i++) {
+      let loc = arr[i].substring(1);
+      // eslint-disable-next-line default-case
+      switch (loc) {
+        case "L1":
+          pieceCounts["L1"]++;
+          break;
+        case "L2": 
+          pieceCounts["L2"]++;
+          break;
+        case "L3":
+          pieceCounts["L3"]++;
+          break;
+        case "L4":
+          pieceCounts["L4"]++;
+          break;
+        case "P":
+          pieceCounts["processor"]++;
+          break;
+        case "N":
+          pieceCounts["net"]++;
+          break;
+        case "FR":
+          pieceCounts["coralFumble"]++;
+          break;
+        case "FP":
+          pieceCounts["processorFumble"]++;
+          break;
+        case "FN":
+          pieceCounts["netFumble"]++;
+          break;
+        case "RG":
+          pieceCounts["algaeRemove"]++;
+          break;
+      }
+    }
+    return pieceCounts;
+  }
+
   clearLocalStorage = () => {
     var response = window.confirm("Are you sure you want to clear all saved matches?");
     if (!response) { alert("Aborted wiping local storage"); return; }
@@ -166,13 +233,6 @@ class Container extends React.Component {
     this.state.scoutingLog.push(id);
     return id;
   }
-
-  assignCustomUUID = (id) => {
-    this.state.scoutingLog.push(id);
-    return id;
-  }
-
-  
 
 
   handleExportData = (_) => {
@@ -289,36 +349,46 @@ class Container extends React.Component {
           <div className="style1">
           <span>
             <Dropdown
-              className="dropdown alliance-color"
-              id={this.assignUUID()}
-              title={"Starting Location"}
-              value={localStorage.getItem("position")}
-              selected={localStorage.getItem("position")}
-              required={true}
-              items={[
-                {
-                  title: "Blue Barge",
-                  value: "Blue_Barge_Side"
-                },
-                {
-                  title: "Middle",
-                  value: "Center"
-                },
-                {
-                  title: "Red Barge",
-                  value: "Red_Barge_Side"
-                }
-              ]}
-            />
+                className="dropdown alliance-color"
+                id={this.assignUUID()}
+                title={"Starting Side"}
+                value={localStorage.getItem("position")}
+                selected={localStorage.getItem("position")}
+                required={true}
+                items={[
+                  {
+                    title: "Processor",
+                    value: "Processor"
+                  },
+                  {
+                    title: "Center",
+                    value: "Center"
+                  },
+                  {
+                    title: "Not Processor",
+                    value: "Not Processor"
+                  }
+                ]}
+              />
             </span>
             <div>
               <AutoCounter
-                value={[]}
+                className="auto-counter"
                 id={this.assignUUID()}
-                title="Auto Pieces"
-                decorator="auto-pieces"
-                alliance={localStorage.getItem("position")}
+                title="Auto Counter"
+                decorator="auto-counter"
+                value={{}}
+                reverse={this.state.flippedMaps}
               />
+              <div>
+                <CheckBox
+                className="deep-cage"
+                title="Leave in Auto"
+                id={this.assignUUID()}
+                value={false}
+                decorator="dissapointmentCheckbox"
+                />
+              </div>
             </div>
             <div>
               <TextBoxLong
@@ -337,26 +407,32 @@ class Container extends React.Component {
             TELEOP
           </h2>
           <TeleopCounter
-            value={{}}
+            className="teleop-counter"
             id={this.assignUUID()}
             title="Piece Counter"
-            className="teleop-counter"
-            reverse={this.state.flippedMaps}
+            value={{}}
           />
           <div className="checkboxes1">
             <CheckBox
-              className="isFailure"
+              className="deep-cage"
               title="Deep Cage"
               id={this.assignUUID()}
               value={false}
-              decorator="dissapointmentCheckbox"
+              decorator="onstage"
             />
             <CheckBox
-              className="isFailure"
+              className="shallow-cage"
               title="Shallow Cage"
               id={this.assignUUID()}
               value={false}
-              decorator="dissapointmentCheckbox"
+              decorator="onstage"
+            />
+            <CheckBox
+              className="isFailure"
+              title="Climb Failure"
+              id={this.assignUUID()}
+              value={false}
+              decorator="onstage"
             />
           </div>
         </div>
@@ -365,7 +441,7 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             POST-MATCH
           </h2>
-          <div className="checkboxes1">
+          <div className="checkboxes2">
             <CheckBox
               className="temporary"
               title="Temp. Failure"
@@ -376,6 +452,20 @@ class Container extends React.Component {
             <CheckBox
               className="critical"
               title="Critical Failure"
+              id={this.assignUUID()}
+              value={false}
+              decorator={"critical"}
+            />
+            <CheckBox
+              className="ground-intake"
+              title="Ground Intake"
+              id={this.assignUUID()}
+              value={false}
+              decorator={"critical"}
+            />
+            <CheckBox
+              className="station-intake"
+              title="Station Intake"
               id={this.assignUUID()}
               value={false}
               decorator={"critical"}
@@ -428,5 +518,4 @@ class Container extends React.Component {
 
 
 }
-
 export default Container;
