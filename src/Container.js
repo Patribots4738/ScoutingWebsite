@@ -2,8 +2,8 @@ import './App.css';
 
 import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox';
-import Counter from './widgets/Counter';
 import TeleopCounter from './widgets/TeleopCounter';
+import Counter from './widgets/Counter';
 import AutoCounter from './widgets/AutoCounter';
 import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
@@ -66,7 +66,7 @@ class Container extends React.Component {
     var sendData = data[1];
     data = data[0];
 
-    const eventID = '2024cabl';
+    const eventID = '2025test';
 
     if (sendData) {
       let validMatch = true;
@@ -75,23 +75,23 @@ class Container extends React.Component {
       }
       if (validMatch) {
         for (let i = 0; i < 17; i++) {
-          console.log("item " + i + " " + data[i][1])
+          console.log("item " + i + " " + data[i][1] + data[i][1].id)
         }
         let name = data[0][1];
         let matchNumber = data[1][1];
         let position = data[3][1];
-        let autoPieces = data[6][1];
+        let autoPieces = data[5][1];
         let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
-        let teleopPieceCounts = JSON.parse(data[10][1]);
+        let teleopPieceCounts = JSON.parse(data[8][1]);
         
         let commentData = { 
           "Name": name,
-          "What they did well": data[18][1],
-          "What they did bad": data[19][1],
-          "Additional Comments": data[20][1],
-          "Auto Description": data[9][1],
+          "What they did well": data[16][1],
+          "What they did bad": data[17][1],
+          "Additional Comments": data[18][1],
+          "Auto Description": data[7][1],
           "Auto Start": data[4][1],
-          "Auto Path": ""
+          "Auto Path": autoPieces
         }
         let jsonData = {     
           "L4 Auto": autoPieceCounts["L4"],
@@ -115,14 +115,14 @@ class Container extends React.Component {
           "Processor Fumble Teleop": teleopPieceCounts["PF"],
           "Algae Removed Teleop": teleopPieceCounts["RA"],
           "Match Number": matchNumber,
-          "Deep Cage": data[11][1],
-          "Shallow Cage": data[12][1],
-          "Climb Failure": data[13][1],
-          "Ground Intake": data[16][1],
-          "Station Intake": data[17][1],
-          "Temp Failure": data[14][1],
-          "Critical Failure": data[15][1],
-          "Auto Leave": data[8][1] 
+          "Deep Cage": data[9][1],
+          "Shallow Cage": data[10][1],
+          "Climb Failure": data[11][1],
+          "Ground Intake": data[14][1],
+          "Station Intake": data[15][1],
+          "Temp Failure": data[12][1],
+          "Critical Failure": data[13][1],
+          "Auto Leave": data[6][1] 
         };
         //                      event             match #                                Name|Position-Team#               
         set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);

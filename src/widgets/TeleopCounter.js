@@ -56,10 +56,10 @@ class TeleopCounter extends React.Component {
 
     handleScore = (confirmed) => {
         let newValue = {...this.state.value};
-        if (!this.state.scoreLocation.includes("-") && !this.state.scoreLocation == "RA") { // remove algae is the only button that does not need to be confirmed
+        if (!this.state.scoreLocation.includes("-") && this.state.scoreLocation !== "RA") { // remove algae is the only button that does not need to be confirmed
             if (confirmed) {
                 newValue[this.state.scoreLocation] ++;
-                this.logScore(this.state.scoreLocation)
+                this.logScore(this.state.scoreLocation);
     
             }
             else if (this.state.scoreLocation.slice(0, 1) === "L") {
@@ -209,7 +209,7 @@ class TeleopCounter extends React.Component {
 
     render() {
         return (
-            <span className={"widget-" + this.state.classNameDecorator}>
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={JSON.stringify(this.state.value)}>
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>

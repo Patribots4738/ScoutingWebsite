@@ -3,7 +3,6 @@ import React from "react";
 class ScoringSection extends React.Component {
 
     render() {
-        console.log("alliance" + this.props.alliance) 
         if (this.props.alliance == "BLUE") {
         return (
             <div className="scoring">

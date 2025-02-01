@@ -247,6 +247,7 @@ link {
   color: rgb(255, 215, 0);
   
 }
+
 .dbtn {
   padding-bottom: 20px;
 }
@@ -273,8 +274,8 @@ link {
 
 .checkboxes1 {
   display: grid;
-  grid-template-columns: 100px 100px 100px;
-  align-items: center;
+  grid-template-columns: auto auto auto;
+  align-items: flex-end;
   width: 75%;
   margin: 0 auto;
 }

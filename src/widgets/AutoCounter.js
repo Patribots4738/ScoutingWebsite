@@ -247,7 +247,7 @@ class AutoCounter extends React.Component {
 
     render() {
         return (
-            <span className={"widget-" + this.state.classNameDecorator}>
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={this.state.scoreValue}>
                 <div>
                     <button className= {this.state.blueAllianceBtn} onClick={() => this.handleAllianceBlue()}>
                         <div className="alliance-text">Blue</div>
