@@ -40,7 +40,7 @@ class ScoringSection extends React.Component {
         );
         } else if (this.props.alliance == "RED") {
             return (
-                <div className="scoring-red">
+                <div className="scoring">
                     <div className="place-button-red" onClick={() => this.props.handleLevel(this.props.l4Text)}>
                         <div className="autolevel-text">
                                 {this.props.l4Text}

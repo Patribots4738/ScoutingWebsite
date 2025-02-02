@@ -471,15 +471,6 @@ link {
   justify-items: center;
 }
 
-.scoring-red {
-  height: 300px;
-  width: 100px;
-  display: grid;
-  grid-template-rows: 15% 15% 15% 15% 15% 15%;
-  align-content: center;
-  justify-items: center;
-}
-
 .reef-section {
   margin-top: 5px;
   display: grid;
@@ -487,15 +478,7 @@ link {
   width: 150px;
   height: 300px;
   justify-items: center;
-}
-
-.reef-section-red {
-  margin-top: 5px;
-  display: grid;
-  grid-template-rows: 45px 45px 45px auto;
-  width: 150px;
-  height: 300px;
-  justify-items: center;
+  justify-content: center;
 }
 
 .reef-base-graphic {
@@ -511,7 +494,7 @@ link {
 .staged-tree {
   border-radius: 10px;
   height: 100px;
-  width: 70px;
+  width: 100px;
   position: absolute;
   align-self: flex-end;
   justify-items: center;
@@ -540,7 +523,6 @@ link {
   margin: 0 auto;
   margin-top: 40px;
   display: grid;
-  gap: 25px;
   grid-template-columns: auto auto;
   z-index: 2;
 }
@@ -549,8 +531,7 @@ link {
   margin: 0 auto;
   margin-top: 40px;
   display: grid;
-  gap: 70px;
-  grid-template-columns: auto auto;
+  grid-template-columns: 100px 100px;
   z-index: 2;
 }
 
@@ -558,7 +539,6 @@ link {
   margin: 0 auto;
   margin-top: 40px;
   display: grid;
-  gap: 25px;
   grid-template-columns: auto auto;
   z-index: 2;
 }
@@ -623,14 +603,30 @@ link {
   color: white;
 }
 
+.reef-button {
+  margin: 0 auto;
+  display: flex;
+  height: auto;
+  width: auto;
+  border-style: none;
+  align-items: center;
+  justify-items: left;
+  border-radius: 5px;
+  background: none;
+}
+
+.reef-button:active {
+  background-color: darkgray;
+}
+
 .place-button {
   background-color: navy;
   display: flex;
   margin: 0 auto;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
   height: 40px;
-  width: 55%;
+  width: 80%;
   border-radius: 20px;
   font-size: 22px;
   font-style: bold;
@@ -645,9 +641,9 @@ link {
   display: flex;
   margin: 0 auto;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
   height: 40px;
-  width: 55%;
+  width: 80%;
   border-radius: 20px;
   font-size: 22px;
   font-style: bold;
@@ -657,7 +653,7 @@ link {
   background: red;
 }
 
-.reef-button {
+.reef-button-display {
   background-color: navy;
   margin: 0 auto;
   display: flex;
@@ -668,11 +664,11 @@ link {
   z-index: 1;
 }
 
-.reef-button:active {
+.reef-button-display:active {
   background-color: blue;
 }
 
-.reef-button-red {
+.reef-button-display-red {
   background-color: maroon;
   margin: 0 auto;
   display: flex;
@@ -683,7 +679,7 @@ link {
   z-index: 1;
 }
 
-.reef-button-red:active {
+.reef-button-display-red:active {
   background: red;
 }
 

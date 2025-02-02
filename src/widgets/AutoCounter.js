@@ -178,13 +178,13 @@ class AutoCounter extends React.Component {
                             {this.proccesser()}
                         </div>
                         <div>
-                            {this.fumnleAlgaeProcessor()}
+                            {this.fumbleAlgaeProcessor()}
                         </div>
                         <div>
                             {this.net()}
                         </div>
                         <div>
-                            {this.fumnleAlgaeNet()}
+                            {this.fumbleAlgaeNet()}
                         </div>
                     </div>
                 </div>)
