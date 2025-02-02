@@ -114,7 +114,7 @@ class AutoCounter extends React.Component {
         }
     }
 
-    fumnleAlgaeProcessor = () => {
+    fumbleAlgaeProcessor = () => {
         return(
             <div className="fumble-algae-button" onClick={() => this.handleAlgaeChange("FP")}>
                 <div className="fumble-algae-text">Fumble Processor</div>
@@ -122,7 +122,7 @@ class AutoCounter extends React.Component {
         );
     }
 
-    fumnleAlgaeNet = () => {
+    fumbleAlgaeNet = () => {
         return(
             <div className="fumble-algae-button" onClick={() => this.handleAlgaeChange("FN")}>
                 <div className="fumble-algae-text">Fumble Net</div>
@@ -206,13 +206,13 @@ class AutoCounter extends React.Component {
                             {this.proccesser()}
                         </div>
                         <div>
-                            {this.fumnleAlgaeProcessor()}
+                            {this.fumbleAlgaeProcessor()}
                         </div>
                         <div>
                             {this.net()}
                         </div>
                         <div>
-                            {this.fumnleAlgaeNet()}
+                            {this.fumbleAlgaeNet()}
                         </div>
                  </div>
                 </div>),
