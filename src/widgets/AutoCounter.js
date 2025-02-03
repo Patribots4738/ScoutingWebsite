@@ -14,7 +14,7 @@ class AutoCounter extends React.Component {
         reefHeight: "-",
         alliance: "BLUE",
         redAllianceBtn: "inactive-red-button",
-        blueAllianceBtn: "active-blue-button"
+        blueAllianceBtn: "active-blue-button",
     }
 
     handleAllianceRed = () => {

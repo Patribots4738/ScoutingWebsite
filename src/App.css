@@ -664,12 +664,34 @@ link {
   z-index: 1;
 }
 
+.reef-button-display-toggle {
+  background-color: goldenrod;
+  margin: 0 auto;
+  display: flex;
+  height: 40px;
+  width: 40px;
+  font-size: 25px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
 .reef-button-display:active {
   background-color: blue;
 }
 
 .reef-button-display-red {
   background-color: maroon;
+  margin: 0 auto;
+  display: flex;
+  height: 40px;
+  width: 40px;
+  font-size: 25px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.reef-button-display-red-toggle {
+  background-color: goldenrod;
   margin: 0 auto;
   display: flex;
   height: 40px;
