@@ -506,6 +506,18 @@ link {
   background: rgb(40, 40, 40);
 }
 
+.staged-tree-on {
+  background: rgb(120, 120, 120);
+  border-radius: 10px;
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  align-self: flex-end;
+  justify-items: center;
+  align-content: center;
+  margin-bottom: 8px;
+}
+
 .algae-graphic {
   background: rgb(0, 140, 100);
   height: 50px;
@@ -664,17 +676,6 @@ link {
   z-index: 1;
 }
 
-.reef-button-display-toggle {
-  background-color: goldenrod;
-  margin: 0 auto;
-  display: flex;
-  height: 40px;
-  width: 40px;
-  font-size: 25px;
-  border-radius: 50%;
-  z-index: 1;
-}
-
 .reef-button-display:active {
   background-color: blue;
 }
@@ -690,8 +691,12 @@ link {
   z-index: 1;
 }
 
-.reef-button-display-red-toggle {
-  background-color: goldenrod;
+.reef-button-display-red:active {
+  background: red;
+}
+
+.reef-button-display-on {
+  background-color: darkorchid;
   margin: 0 auto;
   display: flex;
   height: 40px;
@@ -699,10 +704,6 @@ link {
   font-size: 25px;
   border-radius: 50%;
   z-index: 1;
-}
-
-.reef-button-display-red:active {
-  background: red;
 }
 
 .algae-box {

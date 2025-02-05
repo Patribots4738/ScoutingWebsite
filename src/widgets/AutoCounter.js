@@ -15,6 +15,19 @@ class AutoCounter extends React.Component {
         alliance: "BLUE",
         redAllianceBtn: "inactive-red-button",
         blueAllianceBtn: "active-blue-button",
+        toggleBlueAllianceReefA: "reef-button-display",
+        toggleBlueAllianceReefB: "reef-button-display",
+        toggleBlueAllianceReefC: "reef-button-display",
+        toggleBlueAllianceReefD: "reef-button-display",
+        toggleBlueAllianceReefE: "reef-button-display",
+        toggleBlueAllianceReefF: "reef-button-display",
+        toggleRedAllianceReefA: "reef-button-display-red",
+        toggleRedAllianceReefB: "reef-button-display-red",
+        toggleRedAllianceReefC: "reef-button-display-red",
+        toggleRedAllianceReefD: "reef-button-display-red",
+        toggleRedAllianceReefE: "reef-button-display-red",
+        toggleRedAllianceReefF: "reef-button-display-red",
+        toggleStaged: "staged-tree"
     }
 
     handleAllianceRed = () => {
@@ -59,6 +72,7 @@ class AutoCounter extends React.Component {
         this.setState({
             reefLocation: value
         });
+        this.handleToggleReef(value)
     }
 
 
@@ -138,6 +152,61 @@ class AutoCounter extends React.Component {
         );
     }
 
+    handleToggleReef = (location) => {
+        switch (location) {
+            case "A":
+                return this.checkToggled("Apple")
+            case "B":
+                return this.checkToggled("Banana")
+            case "C":
+                return this.checkToggled("Cranberry")
+            case "D":
+                return this.checkToggled("Durain")
+            case "E":
+                return this.checkToggled("Emu Berry")
+            case "F":
+                return this.checkToggled("Fig")
+            case "S":
+                return this.checkToggled("Salamander")
+            default:
+        }
+    }
+
+    checkToggled = (button) => {
+        this.setState({
+            toggleBlueAllianceReefA: "reef-button-display",
+            toggleBlueAllianceReefB: "reef-button-display",
+            toggleBlueAllianceReefC: "reef-button-display",
+            toggleBlueAllianceReefD: "reef-button-display",
+            toggleBlueAllianceReefE: "reef-button-display",
+            toggleBlueAllianceReefF: "reef-button-display",
+            toggleRedAllianceReefA: "reef-button-display-red",
+            toggleRedAllianceReefB: "reef-button-display-red",
+            toggleRedAllianceReefC: "reef-button-display-red",
+            toggleRedAllianceReefD: "reef-button-display-red",
+            toggleRedAllianceReefE: "reef-button-display-red",
+            toggleRedAllianceReefF: "reef-button-display-red",
+            toggleStaged: "staged-tree"
+        })
+        switch (button) {
+            case "Apple":
+                return this.setState({toggleBlueAllianceReefA: "reef-button-display-on", toggleRedAllianceReefA: "reef-button-display-on"})
+            case "Banana":
+                return this.setState({toggleBlueAllianceReefB: "reef-button-display-on", toggleRedAllianceReefB: "reef-button-display-on"})
+            case "Cranberry":
+                return this.setState({toggleBlueAllianceReefC: "reef-button-display-on", toggleRedAllianceReefC: "reef-button-display-on"})
+            case "Durain":
+                return this.setState({toggleBlueAllianceReefD: "reef-button-display-on", toggleRedAllianceReefD: "reef-button-display-on"})
+            case "Emu Berry":
+                return this.setState({toggleBlueAllianceReefE: "reef-button-display-on", toggleRedAllianceReefE: "reef-button-display-on"})
+            case "Fig":
+                return this.setState({toggleBlueAllianceReefF: "reef-button-display-on", toggleRedAllianceReefF: "reef-button-display-on"})
+            case "Salamander":
+                return this.setState({toggleStaged: "staged-tree-on"})
+            default:
+        }
+    }
+
     bigUIArray = () => {
         if (this.state.alliance == "BLUE") {
             let arr = [
@@ -162,6 +231,19 @@ class AutoCounter extends React.Component {
                     faceD="D"
                     faceE="E"
                     faceF="F"
+                    toggleBlueAllianceReefA={this.state.toggleBlueAllianceReefA}
+                    toggleBlueAllianceReefB={this.state.toggleBlueAllianceReefB}
+                    toggleBlueAllianceReefC={this.state.toggleBlueAllianceReefC}
+                    toggleBlueAllianceReefD={this.state.toggleBlueAllianceReefD}
+                    toggleBlueAllianceReefE={this.state.toggleBlueAllianceReefE}
+                    toggleBlueAllianceReefF={this.state.toggleBlueAllianceReefF}
+                    toggleRedAllianceReefA={this.state.toggleRedAllianceReefA}
+                    toggleRedAllianceReefB={this.state.toggleRedAllianceReefB}
+                    toggleRedAllianceReefC={this.state.toggleRedAllianceReefC}
+                    toggleRedAllianceReefD={this.state.toggleRedAllianceReefD}
+                    toggleRedAllianceReefE={this.state.toggleRedAllianceReefE}
+                    toggleRedAllianceReefF={this.state.toggleRedAllianceReefF}
+                    toggleStaged={this.state.toggleStaged}
                     alliance={this.state.alliance}
                 />),
                 (<div className="misc">
@@ -170,7 +252,7 @@ class AutoCounter extends React.Component {
                     </div>
                     <div className="value-display">
                         <div className="value-text">
-                            {this.state.reefLocation + this.state.reefHeight}
+                            {this.state.reefLocation}
                         </div>
                     </div>
                     <div className="algae-box">
@@ -198,7 +280,7 @@ class AutoCounter extends React.Component {
                     </div>
                     <div className="value-display">
                         <div className="value-text">
-                            {this.state.reefLocation + this.state.reefHeight}
+                            {this.state.reefLocation}
                         </div>
                     </div>
                     <div className="algae-box">
@@ -224,6 +306,19 @@ class AutoCounter extends React.Component {
                     faceD="D"
                     faceE="E"
                     faceF="F"
+                    toggleBlueAllianceReefA={this.state.toggleBlueAllianceReefA}
+                    toggleBlueAllianceReefB={this.state.toggleBlueAllianceReefB}
+                    toggleBlueAllianceReefC={this.state.toggleBlueAllianceReefC}
+                    toggleBlueAllianceReefD={this.state.toggleBlueAllianceReefD}
+                    toggleBlueAllianceReefE={this.state.toggleBlueAllianceReefE}
+                    toggleBlueAllianceReefF={this.state.toggleBlueAllianceReefF}
+                    toggleRedAllianceReefA={this.state.toggleRedAllianceReefA}
+                    toggleRedAllianceReefB={this.state.toggleRedAllianceReefB}
+                    toggleRedAllianceReefC={this.state.toggleRedAllianceReefC}
+                    toggleRedAllianceReefD={this.state.toggleRedAllianceReefD}
+                    toggleRedAllianceReefE={this.state.toggleRedAllianceReefE}
+                    toggleRedAllianceReefF={this.state.toggleRedAllianceReefF}
+                    toggleStaged={this.state.toggleStaged}
                     alliance={this.state.alliance}
                 />),
                 (<ScoringSection
