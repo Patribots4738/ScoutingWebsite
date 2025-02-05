@@ -28,7 +28,7 @@ class Dropdown extends React.Component{
                 
                 <select
                     type="dropdown"
-                    className="dropdown"
+                    className={this.state.className}
                     onChange = {this.handleDropdownChange}
                     id = {this.state.id}
                     value = {this.state.value}

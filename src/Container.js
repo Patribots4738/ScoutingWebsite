@@ -306,7 +306,7 @@ class Container extends React.Component {
               numeric={true}
             />
             <Dropdown
-              className="dropdown alliance-color"
+              className="dropdown"
               id={this.assignUUID()}
               title={"Position"}
               value={localStorage.getItem("position")}
@@ -347,9 +347,9 @@ class Container extends React.Component {
             AUTONOMOUS
           </h2>
           <div className="style1">
-          <span>
-            <Dropdown
-                className="dropdown alliance-color"
+            <span>
+              <Dropdown
+                className="dropdown-auto"
                 id={this.assignUUID()}
                 title={"Starting Side"}
                 value={localStorage.getItem("position")}

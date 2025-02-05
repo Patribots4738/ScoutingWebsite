@@ -68,6 +68,20 @@ link {
   stroke:white;
 }
 
+.dropdown-auto {
+  color: goldenrod;
+  border-radius: calc(0.5 * 100px);
+  border-color: darkgoldenrod;
+  border-width: 2px;
+  padding-left: 40px;
+  padding-right: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 20px;
+  background-color: rgb(0, 70, 0);
+  margin-top: 5px;
+}
+
 .dropdown {
   color: black;
   border-radius: calc(0.5 * 100px);
@@ -80,7 +94,6 @@ link {
   background-color: white;
   margin-top: 5px;
 }
-
 
 .section-title {
   border-radius: calc(0.5 * 100px);
@@ -370,7 +383,7 @@ link {
   text-align: center;
   border: none;
   border-radius: 25px;
-  color: black;
+  color: yellow;
 }
 
 .auto-btn-text {
@@ -518,6 +531,11 @@ link {
   margin-bottom: 8px;
 }
 
+.staged-tree-on:active {
+  background: rgb(40, 40, 40);
+
+}
+
 .algae-graphic {
   background: rgb(0, 140, 100);
   height: 50px;
@@ -578,6 +596,9 @@ link {
 
 .fail-button {
   background-color: indianred;
+  border-style: outset;
+  border-color: darksalmon;
+  border-width: 3px;
   display: flex;
   margin: 0 auto;
   align-items: center;
@@ -592,10 +613,14 @@ link {
 
 .fail-button:active {
   background: peachpuff;
+  border-style: inset;
 }
 
 .algae-button {
   background: green;
+  border-style: outset;
+  border-color: darkolivegreen;
+  border-width: 3px;
   display: flex;
   margin: 0 auto;
   align-items: center;
@@ -608,6 +633,7 @@ link {
 
 .algae-button:active {
   background: darkgreen;
+  border-style: inset;
 }
 
 .algae-text {
@@ -633,11 +659,14 @@ link {
 
 .place-button {
   background-color: navy;
+  border-style: outset;
+  border-color: darkblue;
+  border-width: 3px;
   display: flex;
   margin: 0 auto;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  height: 36px;
   width: 80%;
   border-radius: 20px;
   font-size: 22px;
@@ -646,15 +675,19 @@ link {
 
 .place-button:active {
   background: blue;
+  border-style: inset;
 }
 
 .place-button-red {
   background-color: maroon;
+  border-style: outset;
+  border-color: darkred;
+  border-width: 3px;
   display: flex;
   margin: 0 auto;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  height: 36px;
   width: 80%;
   border-radius: 20px;
   font-size: 22px;
@@ -663,14 +696,18 @@ link {
 
 .place-button-red:active {
   background: red;
+  border-style: inset;
 }
 
 .reef-button-display {
   background-color: navy;
+  border-style: outset;
+  border-color: darkblue;
+  border-width: 3px;
   margin: 0 auto;
   display: flex;
-  height: 40px;
-  width: 40px;
+  height: 38px;
+  width: 38px;
   font-size: 25px;
   border-radius: 50%;
   z-index: 1;
@@ -678,14 +715,18 @@ link {
 
 .reef-button-display:active {
   background-color: blue;
+  border-style: inset;
 }
 
 .reef-button-display-red {
   background-color: maroon;
+  border-style: outset;
+  border-width: 3px;
+  border-color: darkred;
   margin: 0 auto;
   display: flex;
-  height: 40px;
-  width: 40px;
+  height: 38px;
+  width: 38px;
   font-size: 25px;
   border-radius: 50%;
   z-index: 1;
@@ -693,17 +734,26 @@ link {
 
 .reef-button-display-red:active {
   background: red;
+  border-style: inset;
 }
 
 .reef-button-display-on {
   background-color: darkorchid;
+  border-style: outset;
+  border-color: darkmagenta;
+  border-width: 3px;
   margin: 0 auto;
   display: flex;
-  height: 40px;
-  width: 40px;
+  height: 38px;
+  width: 38px;
   font-size: 25px;
   border-radius: 50%;
   z-index: 1;
+}
+
+.reef-button-display-on:active {
+  background: magenta;
+  border-style: inset;
 }
 
 .algae-box {
@@ -718,6 +768,9 @@ link {
 .processor-button {
   display: flex;
   background-color: navy;
+  border-style: outset;
+  border-color: darkblue;
+  border-width: 3px;
   height: 30px;
   width: 100px;
   border-radius: 15px;
@@ -727,11 +780,15 @@ link {
 
 .processor-button:active {
   background-color: blue;
+  border-style: inset;
 }
 
 .processor-button-red {
   display: flex;
   background-color: maroon;
+  border-style: outset;
+  border-width: 3px;
+  border-color: darkred;
   height: 30px;
   width: 100px;
   border-radius: 15px;
@@ -741,6 +798,7 @@ link {
 
 .processor-button-red:active {
   background-color: red;
+  border-style: inset;
 }
 
 .processor-text {
@@ -750,6 +808,9 @@ link {
 
 .fumble-algae-button {
   background: lightcoral;
+  border-style: outset;
+  border-color: darksalmon;
+  border-width: 3px;
   height: 30px;
   width: 125px;
   border-radius: 15px;
@@ -760,6 +821,7 @@ link {
 
 .fumble-algae-button:active {
   background: darkgoldenrod;
+  border-style: inset;
 }
 
 .fumble-algae-text {
@@ -774,7 +836,7 @@ link {
 .undo-button-text {
   display: flex;
   align-items: center;
-  width: 55px;
+  width: 70px;
   height: 60px;
   border-radius: 40px;
   transition: 0.12s;
