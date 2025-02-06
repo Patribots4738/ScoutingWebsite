@@ -261,7 +261,7 @@ class Container extends React.Component {
           By Continuing to Use Our Website You Agree to Use Cookies :)
         </span>
         <a
-          className="scouting-guidelines widget"
+          className="scouting-guidelines"
           href="https://docs.google.com/document/d/1Ia6xii1MCRcM0T9CLcPGnI98FGZ5JFwIAK3yKLTfOWg"
           target="_blank"
           rel="noreferrer"
