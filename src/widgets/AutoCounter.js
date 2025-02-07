@@ -52,14 +52,6 @@ class AutoCounter extends React.Component {
         });
     }
 
-    findPiece = (piece) => {
-        for (let i = 0; i < this.state.scoreValue.length; i++) {
-            if ((piece === this.state.scoreValue[i].substring(0, 1)) ^ (piece === this.state.scoreValue[i].substring(0, 2)))
-                return i;
-        }
-        return -1;
-    }
-
     handleRemove = () => {
         if (this.state.scoreValue.length > 0) {
             this.setState({
@@ -342,7 +334,7 @@ class AutoCounter extends React.Component {
 
     render() {
         return (
-            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={this.state.scoreValue}>
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={this.state.scoreValue.join(" - ")}>
                 <div>
                     <button className= {this.state.blueAllianceBtn} onClick={() => this.handleAllianceBlue()}>
                         <div className="alliance-text">Blue</div>
