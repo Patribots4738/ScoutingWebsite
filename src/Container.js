@@ -304,43 +304,8 @@ class Container extends React.Component {
               required={true}
               numeric={true}
             />
-            <Dropdown
-              className="dropdown"
-              id={this.assignUUID()}
-              title={"Position"}
-              value={localStorage.getItem("position")}
-              selected={localStorage.getItem("position")}
-              required={true}
-              items={[
-                {
-                  title: "r1",
-                  value: "r1"
-                },
-                {
-                  title: "r2",
-                  value: "r2"
-                },
-                {
-                  title: "r3",
-                  value: "r3"
-                },
-                {
-                  title: "b1",
-                  value: "b1"
-                },
-                {
-                  title: "b2",
-                  value: "b2"
-                },
-                {
-                  title: "b3",
-                  value: "b3"
-                }
-              ]}
-            />
           </div>
         </div>
-
         <div className="auto-container">
           <h2 className="subtitle section-title">
             AUTONOMOUS
