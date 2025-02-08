@@ -21,7 +21,6 @@ class Container extends React.Component {
   
   state = {
     scoutingLog: [],
-    flippedMaps: localStorage.getItem("flippedMaps") //TODO: make this work
   }
 
   gatherData = () => {
