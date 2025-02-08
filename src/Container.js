@@ -78,18 +78,17 @@ class Container extends React.Component {
         }
         let name = data[0][1];
         let matchNumber = data[1][1];
-        let position = data[3][1];
-        let autoPieces = data[5][1];
+        let autoPieces = data[4][1];
         let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
-        let teleopPieceCounts = JSON.parse(data[8][1]);
+        let teleopPieceCounts = JSON.parse(data[7][1]);
         
         let commentData = { 
           "Name": name,
-          "What they did well": data[16][1],
-          "What they did bad": data[17][1],
-          "Additional Comments": data[18][1],
-          "Auto Description": data[7][1],
-          "Auto Start": data[4][1],
+          "What they did well": data[15][1],
+          "What they did bad": data[16][1],
+          "Additional Comments": data[17][1],
+          "Auto Description": data[6][1],
+          "Auto Start": data[3][1],
           "Auto Path": autoPieces
         }
         let jsonData = {     
@@ -114,22 +113,21 @@ class Container extends React.Component {
           "Processor Fumble Teleop": teleopPieceCounts["PF"],
           "Algae Removed Teleop": teleopPieceCounts["RA"],
           "Match Number": matchNumber,
-          "Deep Cage": data[9][1],
-          "Shallow Cage": data[10][1],
-          "Climb Failure": data[11][1],
-          "Ground Intake": data[14][1],
-          "Station Intake": data[15][1],
-          "Temp Failure": data[12][1],
-          "Critical Failure": data[13][1],
-          "Auto Leave": data[6][1] 
+          "Deep Cage": data[8][1],
+          "Shallow Cage": data[9][1],
+          "Climb Failure": data[10][1],
+          "Ground Intake": data[13][1],
+          "Station Intake": data[14][1],
+          "Temp Failure": data[11][1],
+          "Critical Failure": data[12][1],
+          "Auto Leave": data[5][1] 
         };
         //                      event             match #                                Name|Position-Team#               
-        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
+        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + '-' + data[2][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name);
         localStorage.setItem("matchNumber", matchNumber);
-        localStorage.setItem("position", position);
 
         let cachedData = JSON.parse(localStorage.getItem("matchData"));
         
@@ -138,7 +136,7 @@ class Container extends React.Component {
         }
 
         let matchPath = `match-${matchNumber}`;
-        let botPath = `${name}|${position}-${data[2][1]}`;
+        let botPath = `${name}|-${data[2][1]}`;
 
         if (cachedData[matchPath] === undefined) {
           cachedData[matchPath] = {};
