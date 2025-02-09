@@ -67,13 +67,6 @@ class ReefSection extends React.Component {
                 <div className="reef-section">
                 <img src={reefbasered} alt="" className="reef-base-graphic"/>
                 <div className="reef-top-position">
-                    <button className="reef-button" onClick={() => this.props.handleReefFace(this.props.faceF)}>
-                        <div className={this.props.toggleRedAllianceReefF}>
-                            <div className="reef-base-text">
-                                {this.props.faceF}
-                            </div> 
-                        </div>
-                    </button>
                     <button className="reef-button" onClick={() => this.props.handleReefFace(this.props.faceE)}>
                         <div className={this.props.toggleRedAllianceReefE}>
                             <div className="reef-base-text">
@@ -81,15 +74,15 @@ class ReefSection extends React.Component {
                             </div> 
                         </div>
                     </button>
-                </div>
-                <div className="reef-middle-position">
-                    <button className="reef-button" onClick={() => this.props.handleReefFace(this.props.faceA)}>
-                        <div className={this.props.toggleRedAllianceReefA}>
+                    <button className="reef-button" onClick={() => this.props.handleReefFace(this.props.faceF)}>
+                        <div className={this.props.toggleRedAllianceReefF}>
                             <div className="reef-base-text">
-                                {this.props.faceA}
+                                {this.props.faceF}
                             </div> 
                         </div>
                     </button>
+                </div>
+                <div className="reef-middle-position">
                     <button className="reef-button" onClick={() => this.props.handleReefFace(this.props.faceD)}>
                         <div className={this.props.toggleRedAllianceReefD}>
                             <div className="reef-base-text">
@@ -97,19 +90,26 @@ class ReefSection extends React.Component {
                             </div> 
                         </div>
                     </button>
-                </div>
-                <div className="reef-bottom-position">
-                    <button className="reef-button" onClick={() => this.props.handleReefFace(this.props.faceB)}>
-                        <div className={this.props.toggleRedAllianceReefB}>
+                    <button className="reef-button" onClick={() => this.props.handleReefFace(this.props.faceA)}>
+                        <div className={this.props.toggleRedAllianceReefA}>
                             <div className="reef-base-text">
-                                {this.props.faceB}
+                                {this.props.faceA}
                             </div> 
                         </div>
                     </button>
+                </div>
+                <div className="reef-bottom-position">
                     <button className="reef-button" onClick={() => this.props.handleReefFace(this.props.faceC)}>
                         <div className={this.props.toggleRedAllianceReefC}>
                             <div className="reef-base-text">
                                 {this.props.faceC}
+                            </div> 
+                        </div>
+                    </button>
+                    <button className="reef-button" onClick={() => this.props.handleReefFace(this.props.faceB)}>
+                        <div className={this.props.toggleRedAllianceReefB}>
+                            <div className="reef-base-text">
+                                {this.props.faceB}
                             </div> 
                         </div>
                     </button>
