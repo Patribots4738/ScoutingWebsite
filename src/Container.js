@@ -344,7 +344,7 @@ class Container extends React.Component {
               />
               <div>
                 <CheckBox
-                className="deep-cage"
+                className="byebye-auto"
                 title="Leave in Auto"
                 id={this.assignUUID()}
                 value={false}
@@ -377,14 +377,14 @@ class Container extends React.Component {
           <div className="checkboxes1">
             <CheckBox
               className="deep-cage"
-              title="Deep Cage"
+              title="Deep Climb"
               id={this.assignUUID()}
               value={false}
               decorator="onstage"
             />
             <CheckBox
               className="shallow-cage"
-              title="Shallow Cage"
+              title="Shallow Climb"
               id={this.assignUUID()}
               value={false}
               decorator="onstage"
