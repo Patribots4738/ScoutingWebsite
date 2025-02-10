@@ -553,6 +553,12 @@ link {
   font-style: oblique;
 }
 
+.processor-location-disabled {
+  font-size: 20px;
+  font-style: oblique;
+  color: transparent;
+}
+
 .reef-top-position {
   margin: 0 auto;
   margin-top: 40px;

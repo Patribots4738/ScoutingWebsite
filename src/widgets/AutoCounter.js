@@ -27,14 +27,18 @@ class AutoCounter extends React.Component {
         toggleRedAllianceReefD: "reef-button-display-red",
         toggleRedAllianceReefE: "reef-button-display-red",
         toggleRedAllianceReefF: "reef-button-display-red",
-        toggleStaged: "staged-tree"
+        toggleStaged: "staged-tree",
+        redProcessor: "processor-location-disabled",
+        blueProcessor: "processor-location"
     }
 
     handleAllianceRed = () => {
         this.setState({
             alliance: "RED",
             blueAllianceBtn: "inactive-blue-button",
-            redAllianceBtn: "active-red-button"
+            redAllianceBtn: "active-red-button",
+            redProcessor: "processor-location",
+            blueProcessor: "processor-location-disabled"
         })
     }
 
@@ -42,7 +46,9 @@ class AutoCounter extends React.Component {
         this.setState({
             alliance: "BLUE",
             redAllianceBtn: "inactive-red-button",
-            blueAllianceBtn: "active-blue-button"
+            blueAllianceBtn: "active-blue-button",
+            blueProcessor: "processor-location",
+            redProcessor: "processor-location-disabled"
         })
     }
 
@@ -349,12 +355,13 @@ class AutoCounter extends React.Component {
                 <div className="val-display" id={this.state.id} value={this.state.scoreValue.join("-")} title={this.state.title}>
                     {(this.state.scoreValue.length > 0) ? [...this.state.scoreValue].join(" - ") : "-"}
                 </div>
+                <div className={this.state.redProcessor}>Processor Side</div>
                 <div className="selector">
                     <div className="field-map">
                         {this.bigUIArray()}
                     </div>
                 </div>
-                <div className="processor-location">Processor Side</div>
+                <div className={this.state.blueProcessor}>Processor Side</div>
             </span>
         )
     }
