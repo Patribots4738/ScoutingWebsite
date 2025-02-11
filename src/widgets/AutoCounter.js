@@ -71,7 +71,7 @@ class AutoCounter extends React.Component {
 
     handleExport = () => {
         this.setState({
-            autoExport: [this.state.scoreValue + this.state.alliance]
+            autoExport: [ this.state.scoreValue.join(" - ") , this.state.alliance]
         })
     }
 
@@ -346,7 +346,7 @@ class AutoCounter extends React.Component {
 
     render() {
         return (
-            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={this.state.autoExport.join(" - ")}>
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={this.state.autoExport.join("  -  ")}>
                 <div>
                     <button className= {this.state.blueAllianceBtn} onClick={() => this.handleAllianceBlue()}>
                         <div className="alliance-text">Blue</div>

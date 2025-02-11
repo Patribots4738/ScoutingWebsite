@@ -27,9 +27,7 @@ class Container extends React.Component {
   gatherData = () => {
     var arr = []
 
-
     for (var i = 0; i < this.state.scoutingLog.length; i++) {
-
 
       var element = document.getElementById(this.state.scoutingLog[i]);
       console.log(element);
@@ -49,7 +47,6 @@ class Container extends React.Component {
           value = element.value
 
         }
-
         arr.push([element.getAttribute("title"), value])
       }
     }
@@ -58,7 +55,7 @@ class Container extends React.Component {
 
   fixPosition = (arr) => {
     return this.setState({
-      currentAlliance: ((arr.length) - 1)
+      currentAlliance: arr[((arr.length) - 1)]
     })
   }
 
@@ -84,10 +81,11 @@ class Container extends React.Component {
         }
         let name = data[0][1];
         let matchNumber = data[1][1];
-        let autoPieces = data[4][1];
-        let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
+        let autoExported = data[4][1].split("  -  ");
+        let autoPieces = autoExported[0];
+        let autoPieceCounts = this.autoPieceCount(autoPieces);
         let teleopPieceCounts = JSON.parse(data[7][1]);
-        let position = this.fixPosition(autoPieces);
+        let position = autoExported[1];
         
         let commentData = { 
           "Name": name,
@@ -183,7 +181,7 @@ class Container extends React.Component {
       algaeRemove: 0
     };
 
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length - 1; i++) {
       let loc = arr[i].substring(1);
       // eslint-disable-next-line default-case
       switch (loc) {
