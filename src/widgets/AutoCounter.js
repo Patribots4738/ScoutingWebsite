@@ -29,7 +29,8 @@ class AutoCounter extends React.Component {
         toggleRedAllianceReefF: "reef-button-display-red",
         toggleStaged: "staged-tree",
         redProcessor: "processor-location-disabled",
-        blueProcessor: "processor-location"
+        blueProcessor: "processor-location",
+        autoExport: []
     }
 
     handleAllianceRed = () => {
@@ -56,6 +57,7 @@ class AutoCounter extends React.Component {
         this.setState({
             scoreValue: [...this.state.scoreValue, this.state.reefLocation + this.state.reefHeight]
         });
+        this.handleExport()
     }
 
     handleRemove = () => {
@@ -64,6 +66,13 @@ class AutoCounter extends React.Component {
                 scoreValue: this.state.scoreValue.slice(0, this.state.scoreValue.length - 1)
             });
         }
+        this.handleExport()
+    }
+
+    handleExport = () => {
+        this.setState({
+            autoExport: [this.state.scoreValue + this.state.alliance]
+        })
     }
 
     handlePieceChange = (value) => {
@@ -72,8 +81,6 @@ class AutoCounter extends React.Component {
         });
         this.handleToggleReef(value)
     }
-
-
 
     handleLocationChange = (value) => {
         if (this.state.reefLocation == "S") {
@@ -339,7 +346,7 @@ class AutoCounter extends React.Component {
 
     render() {
         return (
-            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={this.state.scoreValue.join(" - ")}>
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={this.state.autoExport.join(" - ")}>
                 <div>
                     <button className= {this.state.blueAllianceBtn} onClick={() => this.handleAllianceBlue()}>
                         <div className="alliance-text">Blue</div>

@@ -56,6 +56,11 @@ class Container extends React.Component {
     return [arr, true]
   }
 
+  fixPosition = (arr) => {
+    return this.setState({
+      currentAlliance: ((arr.length) - 1)
+    })
+  }
 
   handleFormSubmit = (e) => {
     e.preventDefault()
@@ -67,7 +72,6 @@ class Container extends React.Component {
     data = data[0];
 
     const eventID = '2025test';
-    const position = this.state.currentAlliance
 
     if (sendData) {
       let validMatch = true;
@@ -83,6 +87,7 @@ class Container extends React.Component {
         let autoPieces = data[4][1];
         let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
         let teleopPieceCounts = JSON.parse(data[7][1]);
+        let position = this.fixPosition(autoPieces);
         
         let commentData = { 
           "Name": name,
@@ -342,7 +347,6 @@ class Container extends React.Component {
                 title="Auto Counter"
                 decorator="auto-counter"
                 value={{}}
-                reverse={this.state.flippedMaps}
                 currentalliance={this.state.currentAlliance}
               />
               <div>
