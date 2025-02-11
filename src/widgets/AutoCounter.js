@@ -12,7 +12,7 @@ class AutoCounter extends React.Component {
         classNameDecorator: this.props.decorator,
         reefLocation: "D",
         reefHeight: "-",
-        alliance: "BLUE",
+        alliance: this.props.currentalliance,
         redAllianceBtn: "inactive-red-button",
         blueAllianceBtn: "active-blue-button",
         toggleBlueAllianceReefA: "reef-button-display",
@@ -335,7 +335,6 @@ class AutoCounter extends React.Component {
             ]
             return arr;
         }
-        
     }
 
     render() {

@@ -21,6 +21,7 @@ class Container extends React.Component {
   
   state = {
     scoutingLog: [],
+    currentAlliance: "BLUE"
   }
 
   gatherData = () => {
@@ -66,6 +67,7 @@ class Container extends React.Component {
     data = data[0];
 
     const eventID = '2025test';
+    const position = this.state.currentAlliance
 
     if (sendData) {
       let validMatch = true;
@@ -123,8 +125,8 @@ class Container extends React.Component {
           "Auto Leave": data[5][1] 
         };
         //                      event             match #                                Name|Position-Team#               
-        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + '-' + data[2][1] + '/comments/'), commentData);
+        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name);
         localStorage.setItem("matchNumber", matchNumber);
@@ -341,6 +343,7 @@ class Container extends React.Component {
                 decorator="auto-counter"
                 value={{}}
                 reverse={this.state.flippedMaps}
+                currentalliance={this.state.currentAlliance}
               />
               <div>
                 <CheckBox
