@@ -262,7 +262,6 @@ link {
 }
 .temporary, .critical, .defend, .subtitleonstage {
   color: rgb(255, 215, 0);
-  
 }
 
 .dbtn {
@@ -293,13 +292,14 @@ link {
   display: grid;
   grid-template-columns: auto auto auto;
   align-items: flex-end;
-  width: 75%;
+  width: 85%;
   margin: 0 auto;
 }
 .checkboxes2 {
   display: grid;
-  grid-template-columns: 150px 150px;
+  grid-template-rows: auto auto auto;
   align-items: center;
+  justify-items: center;
   width: 75%;
   margin: 0 auto;
 }

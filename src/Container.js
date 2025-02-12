@@ -89,9 +89,9 @@ class Container extends React.Component {
         
         let commentData = { 
           "Name": name,
-          "What they did well": data[15][1],
-          "What they did bad": data[16][1],
-          "Additional Comments": data[17][1],
+          "What they did well": data[16][1],
+          "What they did bad": data[17][1],
+          "Additional Comments": data[18][1],
           "Auto Description": data[6][1],
           "Auto Start": data[3][1],
           "Auto Path": autoPieces
@@ -125,7 +125,8 @@ class Container extends React.Component {
           "Station Intake": data[14][1],
           "Temp Failure": data[11][1],
           "Critical Failure": data[12][1],
-          "Auto Leave": data[5][1] 
+          "Auto Leave": data[5][1],
+          "Defense": data[15][1]
         };
         //                      event             match #                                Name|Position-Team#               
         set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
@@ -409,34 +410,47 @@ class Container extends React.Component {
             POST-MATCH
           </h2>
           <div className="checkboxes2">
-            <CheckBox
-              className="temporary"
-              title="Temp. Failure"
-              id={this.assignUUID()}
-              value={false}
-              decorator={"temporary"}
-            />
-            <CheckBox
-              className="critical"
-              title="Critical Failure"
-              id={this.assignUUID()}
-              value={false}
-              decorator={"critical"}
-            />
-            <CheckBox
-              className="ground-intake"
-              title="Ground Intake"
-              id={this.assignUUID()}
-              value={false}
-              decorator={"critical"}
-            />
-            <CheckBox
-              className="station-intake"
-              title="Station Intake"
-              id={this.assignUUID()}
-              value={false}
-              decorator={"critical"}
-            />
+            <div>
+              <CheckBox
+                className="temporary"
+                title="Temp. Failure"
+                id={this.assignUUID()}
+                value={false}
+                decorator={"temporary"}
+              />
+              <CheckBox
+                className="critical"
+                title="Critical Failure"
+                id={this.assignUUID()}
+                value={false}
+                decorator={"critical"}
+              />
+            </div>
+            <div>
+              <CheckBox
+                className="ground-intake"
+                title="Ground Intake"
+                id={this.assignUUID()}
+                value={false}
+                decorator={"critical"}
+              />
+              <CheckBox
+                className="station-intake"
+                title="Station Intake"
+                id={this.assignUUID()}
+                value={false}
+                decorator={"critical"}
+              />
+            </div>
+            <div>
+              <CheckBox
+                className="defense"
+                title="Defense"
+                id={this.assignUUID()}
+                value={false}
+                decorator="onstage"
+              />
+            </div>
           </div>
           <div>
             <TextBoxLong
