@@ -29,8 +29,7 @@ class AutoCounter extends React.Component {
         toggleRedAllianceReefF: "reef-button-display-red",
         toggleStaged: "staged-tree",
         redProcessor: "processor-location-disabled",
-        blueProcessor: "processor-location",
-        autoExport: []
+        blueProcessor: "processor-location"
     }
 
     handleAllianceRed = () => {
