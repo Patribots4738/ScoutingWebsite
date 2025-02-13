@@ -265,7 +265,7 @@ class Container extends React.Component {
         </span>
         <a
           className="scouting-guidelines"
-          href="https://docs.google.com/document/d/1Ia6xii1MCRcM0T9CLcPGnI98FGZ5JFwIAK3yKLTfOWg"
+          href="https://docs.google.com/document/d/1OiVVfB9Mx3mIwIE4ahyO1Sa65VuAJsUcy7czSVyzZJ4/edit?usp=sharing"
           target="_blank"
           rel="noreferrer"
         >
