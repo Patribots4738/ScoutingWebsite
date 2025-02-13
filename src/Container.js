@@ -20,8 +20,7 @@ import { db } from "./firebaseConfig";
 class Container extends React.Component {
   
   state = {
-    scoutingLog: [],
-    currentAlliance: "BLUE"
+    scoutingLog: []
   }
 
   gatherData = () => {
@@ -45,7 +44,6 @@ class Container extends React.Component {
           }
         } else {
           value = element.value
-
         }
         arr.push([element.getAttribute("title"), value])
       }
@@ -53,15 +51,8 @@ class Container extends React.Component {
     return [arr, true]
   }
 
-  fixPosition = (arr) => {
-    return this.setState({
-      currentAlliance: arr[((arr.length) - 1)]
-    })
-  }
-
   handleFormSubmit = (e) => {
     e.preventDefault()
-
 
     var data = this.gatherData()
 
@@ -346,7 +337,6 @@ class Container extends React.Component {
                 title="Auto Counter"
                 decorator="auto-counter"
                 value={{}}
-                currentalliance={this.state.currentAlliance}
               />
               <div>
                 <CheckBox
@@ -448,7 +438,7 @@ class Container extends React.Component {
                 title="Defense"
                 id={this.assignUUID()}
                 value={false}
-                decorator="onstage"
+                decorator={"onstage"}
               />
             </div>
           </div>

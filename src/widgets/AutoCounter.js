@@ -12,7 +12,7 @@ class AutoCounter extends React.Component {
         classNameDecorator: this.props.decorator,
         reefLocation: "D",
         reefHeight: "-",
-        alliance: this.props.currentalliance,
+        alliance: "BLUE",
         redAllianceBtn: "inactive-red-button",
         blueAllianceBtn: "active-blue-button",
         toggleBlueAllianceReefA: "reef-button-display",
@@ -101,7 +101,7 @@ class AutoCounter extends React.Component {
     }
 
 
-    proccesser = () => {
+    processor = () => {
         if (this.state.alliance == "BLUE") {
             return(
                 <div className="processor-button" onClick={() => this.handleAlgaeChange("P")}>
@@ -166,7 +166,7 @@ class AutoCounter extends React.Component {
             case "C":
                 return this.checkToggled("Cranberry")
             case "D":
-                return this.checkToggled("Durain")
+                return this.checkToggled("Durian")
             case "E":
                 return this.checkToggled("Emu Berry")
             case "F":
@@ -200,7 +200,7 @@ class AutoCounter extends React.Component {
                 return this.setState({toggleBlueAllianceReefB: "reef-button-display-on", toggleRedAllianceReefB: "reef-button-display-on"})
             case "Cranberry":
                 return this.setState({toggleBlueAllianceReefC: "reef-button-display-on", toggleRedAllianceReefC: "reef-button-display-on"})
-            case "Durain":
+            case "Durian":
                 return this.setState({toggleBlueAllianceReefD: "reef-button-display-on", toggleRedAllianceReefD: "reef-button-display-on"})
             case "Emu Berry":
                 return this.setState({toggleBlueAllianceReefE: "reef-button-display-on", toggleRedAllianceReefE: "reef-button-display-on"})
@@ -262,7 +262,7 @@ class AutoCounter extends React.Component {
                     </div>
                     <div className="algae-box">
                         <div>
-                            {this.proccesser()}
+                            {this.processor()}
                         </div>
                         <div>
                             {this.fumbleAlgaeProcessor()}
@@ -290,7 +290,7 @@ class AutoCounter extends React.Component {
                     </div>
                     <div className="algae-box">
                         <div>
-                            {this.proccesser()}
+                            {this.processor()}
                         </div>
                         <div>
                             {this.fumbleAlgaeProcessor()}

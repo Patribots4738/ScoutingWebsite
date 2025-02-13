@@ -10,7 +10,7 @@ class TeleopReef extends React.Component {
                     <img src={reef} alt="" className="reef-graphic"/>
                     <div className="teleop-buttons">
                         <div className="tele-btn" onClick={() => this.props.handleLocation(this.props.l4Score)}>
-                         <div className="tele-btn-text">L4</div>
+                            <div className="tele-btn-text">L4</div>
                         </div>
                         <div className="tele-btn" onClick={() => this.props.handleLocation(this.props.l3Score)}>
                             <div className="tele-btn-text">L3</div>

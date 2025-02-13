@@ -1,5 +1,4 @@
 import React from "react";
-import reef from "../images/reef.png";
 import TeleopReef from "./TeleopReef";
 
 class TeleopCounter extends React.Component {
@@ -56,7 +55,7 @@ class TeleopCounter extends React.Component {
 
     handleScore = (confirmed) => {
         let newValue = {...this.state.value};
-        if (!this.state.scoreLocation.includes("-") && this.state.scoreLocation !== "RA") { // remove algae is the only button that does not need to be confirmed
+        if (!this.state.scoreLocation.includes("-") && this.state.scoreLocation !== "RA") { 
             if (confirmed) {
                 newValue[this.state.scoreLocation] ++;
                 this.logScore(this.state.scoreLocation);
@@ -78,7 +77,7 @@ class TeleopCounter extends React.Component {
     }
 
     handleScoreLocation = (location) => {
-        if (location == "RA") { // remove algae is the only button that does not need to be confirmed
+        if (location == "RA") {
             let newValue = {...this.state.value};
             newValue["RA"]++;
             this.logScore("RA");
@@ -112,7 +111,6 @@ class TeleopCounter extends React.Component {
         return UIList;
     }
 
-    // TODO: change handle remove to remove elements that are not named the same as their score acronym (ie CORAL FUMBLE)
     handleRemove = (logElement, index) => {
         let newValue = {...this.state.value};
         let newLog = [...this.state.scoreLog];
