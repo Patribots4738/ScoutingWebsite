@@ -5,7 +5,7 @@ import reefbasered from "../images/reefbasered.png";
 class ReefSection extends React.Component {
 
     render() {  
-        if (this.props.alliance == "BLUE") {
+        if (this.props.alliance === "BLUE") {
         return (
             <div className="reef-section">
                 <img src={reefbaseblue} alt="" className="reef-base-graphic"/>
@@ -62,7 +62,7 @@ class ReefSection extends React.Component {
                 </div>
             </div>
         );
-        } else if (this.props.alliance == "RED") {
+        } else if (this.props.alliance === "RED") {
             return (
                 <div className="reef-section">
                 <img src={reefbasered} alt="" className="reef-base-graphic"/>

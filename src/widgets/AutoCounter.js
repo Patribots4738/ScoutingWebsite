@@ -83,7 +83,7 @@ class AutoCounter extends React.Component {
     }
 
     handleLocationChange = (value) => {
-        if (this.state.reefLocation == "S") {
+        if (this.state.reefLocation === "S") {
             
         } else {
             this.setState(
@@ -102,13 +102,13 @@ class AutoCounter extends React.Component {
 
 
     processor = () => {
-        if (this.state.alliance == "BLUE") {
+        if (this.state.alliance === "BLUE") {
             return(
                 <div className="processor-button" onClick={() => this.handleAlgaeChange("P")}>
                     <div className="processor-text">Processor</div>
                 </div>
             );
-        } else if (this.state.alliance == "RED") {
+        } else if (this.state.alliance === "RED") {
             return(
                 <div className="processor-button-red" onClick={() => this.handleAlgaeChange("P")}>
                     <div className="processor-text">Processor</div>
@@ -118,13 +118,13 @@ class AutoCounter extends React.Component {
     }
 
     net = () => {
-        if (this.state.alliance == "BLUE") {
+        if (this.state.alliance === "BLUE") {
         return(
             <div className="processor-button" onClick={() => this.handleAlgaeChange("N")}>
                 <div className="processor-text">Net</div>
             </div>
         );
-        } else if (this.state.alliance == "RED") {
+        } else if (this.state.alliance === "RED") {
             return(
                 <div className="processor-button-red" onClick={() => this.handleAlgaeChange("N")}>
                     <div className="processor-text">Net</div>
@@ -213,7 +213,7 @@ class AutoCounter extends React.Component {
     }
 
     bigUIArray = () => {
-        if (this.state.alliance == "BLUE") {
+        if (this.state.alliance === "BLUE") {
             let arr = [
                 (<ScoringSection
                     fail1="FR"
@@ -277,7 +277,7 @@ class AutoCounter extends React.Component {
                 </div>)
             ]
             return arr;
-        } else if (this.state.alliance == "RED") {
+        } else if (this.state.alliance === "RED") {
             let arr = [
                 (<div className="misc" key="3">
                     <div className="undo-button">
@@ -301,7 +301,7 @@ class AutoCounter extends React.Component {
                         <div>
                             {this.fumbleAlgaeNet()}
                         </div>
-                 </div>
+                    </div>
                 </div>),
                 (<ReefSection
                     handleReefFace={this.handlePieceChange}

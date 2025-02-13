@@ -77,7 +77,7 @@ class TeleopCounter extends React.Component {
     }
 
     handleScoreLocation = (location) => {
-        if (location == "RA") {
+        if (location === "RA") {
             let newValue = {...this.state.value};
             newValue["RA"]++;
             this.logScore("RA");

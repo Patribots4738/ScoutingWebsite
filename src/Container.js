@@ -3,7 +3,6 @@ import './App.css';
 import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox';
 import TeleopCounter from './widgets/TeleopCounter';
-import Counter from './widgets/Counter';
 import AutoCounter from './widgets/AutoCounter';
 import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';

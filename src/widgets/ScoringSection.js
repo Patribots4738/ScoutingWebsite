@@ -3,7 +3,7 @@ import React from "react";
 class ScoringSection extends React.Component {
 
     render() {
-        if (this.props.alliance == "BLUE") {
+        if (this.props.alliance === "BLUE") {
         return (
             <div className="scoring">
                 <div className="place-button" onClick={() => this.props.handleLevel(this.props.l4Text)}>
@@ -38,7 +38,7 @@ class ScoringSection extends React.Component {
                 </div>
             </div>
         );
-        } else if (this.props.alliance == "RED") {
+        } else if (this.props.alliance === "RED") {
             return (
                 <div className="scoring">
                     <div className="place-button-red" onClick={() => this.props.handleLevel(this.props.l4Text)}>
