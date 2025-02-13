@@ -57,7 +57,6 @@ class AutoCounter extends React.Component {
         this.setState({
             scoreValue: [...this.state.scoreValue, this.state.reefLocation + this.state.reefHeight]
         });
-        this.handleExport()
     }
 
     handleRemove = () => {
@@ -66,13 +65,6 @@ class AutoCounter extends React.Component {
                 scoreValue: this.state.scoreValue.slice(0, this.state.scoreValue.length - 1)
             });
         }
-        this.handleExport()
-    }
-
-    handleExport = () => {
-        this.setState({
-            autoExport: [ this.state.scoreValue.join(" - ") , this.state.alliance]
-        })
     }
 
     handlePieceChange = (value) => {
@@ -346,7 +338,7 @@ class AutoCounter extends React.Component {
 
     render() {
         return (
-            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={this.state.autoExport.join("  -  ")}>
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={[this.state.scoreValue.join(" - ") , this.state.alliance].join("  -  ")}>
                 <div>
                     <button className= {this.state.blueAllianceBtn} onClick={() => this.handleAllianceBlue()}>
                         <div className="alliance-text">Blue</div>

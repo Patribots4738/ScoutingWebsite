@@ -73,9 +73,13 @@ class Container extends React.Component {
         let matchNumber = data[1][1];
         let autoExported = data[4][1].split("  -  ");
         let autoPieces = autoExported[0];
-        let autoPieceCounts = this.autoPieceCount(autoPieces);
+        let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
         let teleopPieceCounts = JSON.parse(data[7][1]);
         let position = autoExported[1];
+
+        if (autoExported[1] !== "BLUE" || autoExported[1] !== "RED") {
+          position = "BLUE";
+        }
         
         let commentData = { 
           "Name": name,
@@ -172,7 +176,7 @@ class Container extends React.Component {
       algaeRemove: 0
     };
 
-    for (let i = 0; i < arr.length - 1; i++) {
+    for (let i = 0; i < arr.length; i++) {
       let loc = arr[i].substring(1);
       // eslint-disable-next-line default-case
       switch (loc) {
