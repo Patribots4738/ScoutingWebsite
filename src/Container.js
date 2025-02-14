@@ -323,8 +323,8 @@ class Container extends React.Component {
                     value: "Center"
                   },
                   {
-                    title: "Not Processor",
-                    value: "Not Processor"
+                    title: "Opposite Processor",
+                    value: "Opposite Processor"
                   }
                 ]}
               />
