@@ -545,6 +545,13 @@ link {
   height: 60px;
   width: 60px;
   border-radius: 50%;
+  font-size: 30px;
+  font-weight: 800;
+  color: white;
+  align-content: center;
+  justify-content: center;
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 1px;
 }
 
 .processor-location {

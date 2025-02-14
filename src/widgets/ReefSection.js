@@ -58,7 +58,7 @@ class ReefSection extends React.Component {
                     </button>
                 </div>
                 <div className={this.props.toggleStaged} onClick={() => this.props.handleReefFace("S")}>
-                    <div className="algae-graphic"></div>
+                    <div className="algae-graphic">S</div>
                 </div>
             </div>
         );
@@ -115,7 +115,7 @@ class ReefSection extends React.Component {
                     </button>
                 </div>
                 <div className={this.props.toggleStaged} onClick={() => this.props.handleReefFace("S")}>
-                    <div className="algae-graphic"></div>
+                    <div className="algae-graphic">S</div>
                 </div>
             </div>
             );

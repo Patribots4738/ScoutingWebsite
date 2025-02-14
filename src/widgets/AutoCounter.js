@@ -207,15 +207,14 @@ class AutoCounter extends React.Component {
         if (this.state.alliance === "BLUE") {
             let arr = [
                 (<ScoringSection
-                    fail1="FR"
-                    fail2="FS"
+                    fail1="FC"
                     failText="Fumble"
                     l4Text="L4"
                     l3Text="L3"
                     l2Text="L2"
                     l1Text="L1"
                     algaeText="Remove Algae"
-                    algaeremove="RG"
+                    algaeremove="RA"
                     handleLevel={this.handleLocationChange}
                     alliance={this.state.alliance}
                 />),
@@ -270,30 +269,18 @@ class AutoCounter extends React.Component {
             return arr;
         } else if (this.state.alliance === "RED") {
             let arr = [
-                (<div className="misc" key="3">
-                    <div className="undo-button">
-                        {this.undo()}
-                    </div>
-                    <div className="value-display">
-                        <div className="value-text">
-                            {this.state.reefLocation}
-                        </div>
-                    </div>
-                    <div className="algae-box">
-                        <div>
-                            {this.processor()}
-                        </div>
-                        <div>
-                            {this.fumbleAlgaeProcessor()}
-                        </div>
-                        <div>
-                            {this.net()}
-                        </div>
-                        <div>
-                            {this.fumbleAlgaeNet()}
-                        </div>
-                    </div>
-                </div>),
+                (<ScoringSection
+                    fail1="FC"
+                    failText="Fumble"
+                    l4Text="L4"
+                    l3Text="L3"
+                    l2Text="L2"
+                    l1Text="L1"
+                    algaeText="Remove Algae"
+                    algaeremove="RA"
+                    handleLevel={this.handleLocationChange}
+                    alliance={this.state.alliance}
+                />),
                 (<ReefSection
                     handleReefFace={this.handlePieceChange}
                     faceA="A"
@@ -317,19 +304,30 @@ class AutoCounter extends React.Component {
                     toggleStaged={this.state.toggleStaged}
                     alliance={this.state.alliance}
                 />),
-                (<ScoringSection
-                    fail1="FR"
-                    fail2="FS"
-                    failText="Fumble"
-                    l4Text="L4"
-                    l3Text="L3"
-                    l2Text="L2"
-                    l1Text="L1"
-                    algaeText="Remove Algae"
-                    algaeremove="RG"
-                    handleLevel={this.handleLocationChange}
-                    alliance={this.state.alliance}
-                />)
+                (<div className="misc">
+                    <div className="undo-button">
+                        {this.undo()}
+                    </div>
+                    <div className="value-display">
+                        <div className="value-text">
+                            {this.state.reefLocation}
+                        </div>
+                    </div>
+                    <div className="algae-box">
+                        <div>
+                            {this.processor()}
+                        </div>
+                        <div>
+                            {this.fumbleAlgaeProcessor()}
+                        </div>
+                        <div>
+                            {this.net()}
+                        </div>
+                        <div>
+                            {this.fumbleAlgaeNet()}
+                        </div>
+                    </div>
+                </div>)
             ]
             return arr;
         }
