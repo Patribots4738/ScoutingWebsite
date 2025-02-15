@@ -1,6 +1,5 @@
 import React from "react";
-import note from "../images/note.png";
-import ScoringSection from "./ScoringSection";
+import TeleopReef from "./TeleopReef";
 
 class TeleopCounter extends React.Component {
 
@@ -9,64 +8,86 @@ class TeleopCounter extends React.Component {
         id: this.props.id,
         classNameDecorator: this.props.className,
         value: {
-            speaker: {
-                wing: 0,
-                center: 0,
-                source: 0
-            },
-            amp: {
-                wing: 0,
-                center: 0,
-                source: 0
-            },
-            pass: {
-                wing: 0,
-                center: 0,
-                source: 0
-            },
-            fumbleSpeaker: {
-                wing: 0,
-                center: 0,
-                source: 0
-            },
-            fumbleAmp: {
-                wing: 0,
-                center: 0,
-                source: 0
-            }
+            "L1": 0,
+            "L2": 0,
+            "L3": 0,
+            "L4": 0,
+            "P": 0,
+            "N": 0,
+            "CF": 0,
+            "NF": 0,
+            "PF": 0,
+            "RA": 0
+
         },
-        intakeLocation: "wing",
+        scoreLocation: "-",
         scoreLog: []
     }
 
-    handleLocationChange = (location) => {
-        this.setState({
-            intakeLocation: location
-        });
+    logScore = (location) => {
+        let newLog;
+        switch (location) {
+            case "P":
+                newLog = [...this.state.scoreLog, "Processor"];
+                break;
+            case "N":
+                newLog = [...this.state.scoreLog, "Net"];
+                break;
+            case "NF":
+                newLog = [...this.state.scoreLog, "Net Fumble"];
+                break;
+            case "PF":
+                newLog = [...this.state.scoreLog, "Processor Fumble"];
+                break;
+            case "CF":
+                newLog = [...this.state.scoreLog, "Coral Fumble"];
+                break;
+            case "RA":
+                newLog = [...this.state.scoreLog, "Remove Algae"];
+                break;
+            default:
+                newLog = [...this.state.scoreLog, this.state.scoreLocation];
+            }
+            this.setState({
+                scoreLog: newLog
+            });
     }
 
-    handleScore = (location) => {
+    handleScore = (confirmed) => {
         let newValue = {...this.state.value};
-        newValue[location][this.state.intakeLocation]++;
+        if (!this.state.scoreLocation.includes("-") && this.state.scoreLocation !== "RA") { 
+            if (confirmed) {
+                newValue[this.state.scoreLocation] ++;
+                this.logScore(this.state.scoreLocation);
+    
+            }
+            else if (this.state.scoreLocation.slice(0, 1) === "L") {
+                newValue["CF"]++;
+                this.logScore("CF");
+            }
+            else {
+                newValue[this.state.scoreLocation + "F"] ++;
+                this.logScore(this.state.scoreLocation + "F");
+            }
+        }
+
         this.setState({
-            value: newValue,
-            scoreLog: [...this.state.scoreLog, [this.state.intakeLocation, location]]
+            value: newValue
         });
     }
 
-    fieldSection = (location, text) => {
-        return (
-            <div className="section-container-teleop">
-                <div className="field-section" onClick={() => this.handleLocationChange(location)}>
-                    <div className="inner-flex">
-                        <div className="field-section-text">
-                            {text}
-                        </div>
-                        <img className="note-img" alt="" src={note}/>
-                    </div>
-                </div>
-            </div>
-        )
+    handleScoreLocation = (location) => {
+        if (location === "RA") {
+            let newValue = {...this.state.value};
+            newValue["RA"]++;
+            this.logScore("RA");
+            this.setState({
+                value: newValue
+            });
+        }
+        this.setState({
+            scoreLocation: location
+        });
     }
 
     scoreLogUI = () => {
@@ -76,7 +97,7 @@ class TeleopCounter extends React.Component {
                 <div className="score-cell" key={i}>
                     <div className="score-cell-text">
                         <div className="cell-text">
-                            {this.state.scoreLog[i][0].toUpperCase()} TO {this.getScoreResult(this.state.scoreLog[i][1].toUpperCase())}
+                            {this.state.scoreLog[i].toUpperCase()}
                         </div>
                     </div>
                     <div className="score-cell-remove" onClick={() => this.handleRemove(this.state.scoreLog[i], i)}>
@@ -90,19 +111,31 @@ class TeleopCounter extends React.Component {
         return UIList;
     }
 
-    getScoreResult = (result) => {
-        if (result.substring(0, 6) === "FUMBLE") {
-            return result.substring(0, 6) + " " + result.substring(6);
-        }
-        return result;
-    }
-
     handleRemove = (logElement, index) => {
-        let intakeLoc = logElement[0];
-        let resultLoc = logElement[1];
         let newValue = {...this.state.value};
         let newLog = [...this.state.scoreLog];
-        newValue[resultLoc][intakeLoc]--;
+        switch (logElement) {
+            case "Processor":
+                newValue["P"]--;
+                break;
+            case "Net":
+                newValue["N"]--;
+                break;
+            case "Net Fumble":
+                newValue["NF"]--;
+                break;
+            case "Processor Fumble":
+                newValue["PF"]--;
+                break;
+            case "Coral Fumble":
+                newValue["CF"]--;
+                break;
+            case "Remove Algae":
+                newValue["RA"]--;
+                break;
+            default:
+                newValue[logElement]--;
+            }
         newLog.splice(index, 1);
         this.setState({
             value: newValue,
@@ -110,83 +143,79 @@ class TeleopCounter extends React.Component {
         });
     }
 
-    bigUIArray = (reverse) => {
+    processorbtn = () => {
+        return(
+            <div className="processor-btn" onClick={() => this.handleScoreLocation("P")}>
+                <div className="processor-btn-text">Processor</div>
+            </div>
+        );
+    }
+
+    netbtn = () => {
+        return(
+            <div className="processor-btn" onClick={() => this.handleScoreLocation("N")}>
+                <div className="processor-btn-text">Net</div>
+            </div>
+        );
+    }
+
+    scorebtn = () => {
+        return(
+            <div className="score-btn" onClick={() => this.handleScore(true)}>
+                <div className="score-btn-text">Score</div>
+            </div>
+        );
+    }
+
+    fumblebtn = () => {
+        return(
+            <div className="fumble-btn" onClick={() => this.handleScore(false)}>
+                <div className="fumble-btn-text">Fumble</div>
+            </div>
+        );
+    }
+
+    //this guy is very silly
+    bigUIArray = () => {
         let arr = [
-            (<ScoringSection
-                speaker="speaker"
-                amp="amp"
-                fail1="fumbleAmp"
-                fail2="fumbleSpeaker"
-                failText1="F AMP"
-                failText2="F SPEAKER"
-                handleScore={this.handleScore}
-                reverse={reverse}
-                key="0"
+            (<TeleopReef
+                handleLocation={this.handleScoreLocation}
+                l1Score="L1"
+                l2Score="L2"
+                l3Score="L3"
+                l4Score="L4"
+                removeAlgae="RA"
             />),
-            (<div className="field-column" key="1">
-                <div className="upper-section">
-                    <div className="pass-button" onClick={() => this.handleScore("pass")}>
-                        <div className="pass-text">
-                            PASS
-                        </div>
+            (<div className="teleop-misic">
+                <div className="teleop-algae-box">
+                    {this.processorbtn()}
+                    {this.netbtn()}
+                </div>
+                <div className="teleop-display">
+                    <div className="teleop-display-text">
+                        {this.state.scoreLocation}
                     </div>
                 </div>
-                {this.fieldSection("wing", "WING")}
-            </div>),
-            (<div className="field-column" key="2">
-                <div className="upper-section">
-                    {
-                        reverse
-                            ? (
-                                <div className="intake-value-text">
-                                    {this.state.intakeLocation.toUpperCase()}
-                                </div>
-                            )
-                            : (
-                                <div className="intake-text">
-                                    INTAKE FROM:
-                                </div>
-                            )
-                    }
+                <div className="teleop-score-box">
+                    {this.scorebtn()}
+                    {this.fumblebtn()}
                 </div>
-                {this.fieldSection("center", "CENTER")}
-            </div>),
-            (<div className="field-column" key="3">
-                <div className="upper-section">
-                    {
-                        reverse
-                            ? (
-                                <div className="intake-text">
-                                    INTAKE FROM:
-                                </div>
-                            )
-                            : (
-                                <div className="intake-value-text">
-                                    {this.state.intakeLocation.toUpperCase()}
-                                </div>
-                            )
-                    }
-                </div>
-                {this.fieldSection("source", "OPP WING")}
             </div>)
         ]
-
-        return reverse ? arr.reverse() : arr;
+        return arr;
     }
 
     render() {
         return (
-            <span className={"widget"+this.state.classNameDecorator}>
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={JSON.stringify(this.state.value)}>
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>
                 <div className="teleop-counter-container">
-                    <div className="field-map" id={this.state.id} value={JSON.stringify(this.state.value)}>
-                        {this.bigUIArray(this.props.reverse)}
+                    <div className="reef-map">
+                        {this.bigUIArray()}
                     </div>
-                    <div className= {"subtitle"}>
-                        Score Log 
-                    </div>
+                    <div className="subtitle">Score Log</div>
                     <div className="log-container">
                         <div className="log-display-teleop">
                             {this.scoreLogUI()}
@@ -194,7 +223,7 @@ class TeleopCounter extends React.Component {
                     </div>
                 </div>
             </span>
-        )
+        );
     }
 }
 

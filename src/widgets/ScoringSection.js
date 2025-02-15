@@ -1,46 +1,79 @@
 import React from "react";
-import speaker from "../images/speaker.png";
 
 class ScoringSection extends React.Component {
 
     render() {
+        if (this.props.alliance === "BLUE") {
         return (
             <div className="scoring">
-                <div className={this.props.reverse ? "amp-reverse" : "amp"} onClick={() => this.props.handleScore(this.props.amp)}>
-                    <div className="amp-graphic"></div>
-                    <div className="amp-text">AMP</div>
+                <div className="place-button" onClick={() => this.props.handleLevel(this.props.l4Text)}>
+                    <div className="autolevel-text">
+                            {this.props.l4Text}
+                    </div>  
                 </div>
-                <div className="speaker" onClick={() => this.props.handleScore(this.props.speaker)}>
-                    {
-                        this.props.reverse
-                            ? (
-                                <div className="speaker-inner-reverse">
-                                    <div className="speaker-text-reverse">SPEAKER</div>
-                                    <img src={speaker} alt="" className="speaker-img-reverse"/>
-                                </div>
-                            )
-                            : (
-                                <div className="speaker-inner">
-                                    <img src={speaker} alt="" className="speaker-img"/>
-                                    <div className="speaker-text">SPEAKER</div>
-                                </div>
-                            )
-                    }
+                <div className="place-button" onClick={() => this.props.handleLevel(this.props.l3Text)}>
+                    <div className="autolevel-text">
+                            {this.props.l3Text}
+                    </div>  
                 </div>
-                <div className="fail">
-                    <div className="fail-button" onClick={() => this.props.handleScore(this.props.fail1)}>
-                        <div className="fail-text">
-                            {this.props.failText1}
-                        </div>
+                <div className="place-button" onClick={() => this.props.handleLevel(this.props.l2Text)}>
+                    <div className="autolevel-text">
+                            {this.props.l2Text}
+                    </div>  
+                </div>
+                <div className="place-button" onClick={() => this.props.handleLevel(this.props.l1Text)}>
+                    <div className="autolevel-text">
+                            {this.props.l1Text}
+                    </div>  
+                </div>
+                <div className="fail-button" onClick={() => this.props.handleLevel(this.props.fail1)}>
+                    <div className="fail-text">
+                            {this.props.failText}
                     </div>
-                    <div className="fail-button" onClick={() => this.props.handleScore(this.props.fail2)}>
-                        <div className="fail-text">
-                            {this.props.failText2}
-                        </div>
+                </div>
+                <div className="algae-button" onClick={() => this.props.handleLevel(this.props.algaeremove)}>
+                    <div className="algae-text">
+                        {this.props.algaeText}
                     </div>
                 </div>
             </div>
         );
+        } else if (this.props.alliance === "RED") {
+            return (
+                <div className="scoring">
+                    <div className="place-button-red" onClick={() => this.props.handleLevel(this.props.l4Text)}>
+                        <div className="autolevel-text">
+                                {this.props.l4Text}
+                        </div>  
+                    </div>
+                    <div className="place-button-red" onClick={() => this.props.handleLevel(this.props.l3Text)}>
+                        <div className="autolevel-text">
+                                {this.props.l3Text}
+                        </div>  
+                    </div>
+                    <div className="place-button-red" onClick={() => this.props.handleLevel(this.props.l2Text)}>
+                        <div className="autolevel-text">
+                                {this.props.l2Text}
+                        </div>  
+                    </div>
+                    <div className="place-button-red" onClick={() => this.props.handleLevel(this.props.l1Text)}>
+                        <div className="autolevel-text">
+                                {this.props.l1Text}
+                        </div>  
+                    </div>
+                    <div className="fail-button" onClick={() => this.props.handleLevel(this.props.fail1)}>
+                        <div className="fail-text">
+                                {this.props.failText}
+                        </div>
+                    </div>
+                    <div className="algae-button" onClick={() => this.props.handleLevel(this.props.algaeremove)}>
+                        <div className="algae-text">
+                            {this.props.algaeText}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
     }
 }
 

@@ -60,11 +60,30 @@ link {
 .cube, .cone, 
 .teleopCheckbox, .autoCheckbox, .dissapointmentCheckbox {
   color: rgb(219, 186, 0);
-  padding-top: 10px;
+  padding-top: 5px;
+  font-size: 27px;
 }
 
 .title {
   stroke:white;
+}
+
+.scouting-guidelines {
+  color: gold;
+}
+
+.dropdown-auto {
+  color: black;
+  border-radius: calc(0.5 * 100px);
+  box-shadow: 0 1px 6px 0 var(--box-border-color);
+  border-width: 2px;
+  padding-left: 30px;
+  padding-right: 10px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 20px;
+  background-color: white;
+  margin-top: 5px;
 }
 
 .dropdown {
@@ -79,7 +98,6 @@ link {
   background-color: white;
   margin-top: 5px;
 }
-
 
 .section-title {
   border-radius: calc(0.5 * 100px);
@@ -109,6 +127,10 @@ link {
 
 .widget {
   padding: 10px;
+}
+
+.widgetteleop-counter {
+  width: 100%;
 }
 
 
@@ -240,8 +262,8 @@ link {
 }
 .temporary, .critical, .defend, .subtitleonstage {
   color: rgb(255, 215, 0);
-  
 }
+
 .dbtn {
   padding-bottom: 20px;
 }
@@ -268,8 +290,16 @@ link {
 
 .checkboxes1 {
   display: grid;
-  grid-template-columns: 150px 150px;
+  grid-template-columns: auto auto auto;
+  align-items: flex-end;
+  width: 85%;
+  margin: 0 auto;
+}
+.checkboxes2 {
+  display: grid;
+  grid-template-rows: auto auto auto;
   align-items: center;
+  justify-items: center;
   width: 75%;
   margin: 0 auto;
 }
@@ -357,7 +387,7 @@ link {
   text-align: center;
   border: none;
   border-radius: 25px;
-  color: black;
+  color: yellow;
 }
 
 .auto-btn-text {
@@ -391,83 +421,173 @@ link {
   border-radius: 20px;
   margin-bottom: 10px;
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-columns: auto auto auto;
   text-align: center;
+  align-content: center;
+}
+
+.active-blue-button {
+  background-color: blue;
+  height: 60px;
+  width: 90px;
+  border-style: inset;
+  border-radius: 20px;
+  border-color: darkblue;
+  border-width: 5px;
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+.inactive-blue-button {
+  background-color: navy;
+  height: 60px;
+  width: 90px;
+  border-style: outset;
+  border-radius: 20px;
+  border-color: darkblue;
+  border-width: 5px;
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+.active-red-button {
+  background: red;
+  height: 60px;
+  width: 90px;
+  border-style: inset;
+  border-radius: 20px;
+  border-color: darkred;
+  border-width: 5px;
+  font-size: 22px;
+  margin-left: 10px;
+}
+
+.inactive-red-button {
+  background: maroon;
+  height: 60px;
+  width: 90px;
+  border-style: outset;
+  border-radius: 20px;
+  border-color: darkred;
+  border-width: 5px;
+  font-size: 22px;
+  margin-left: 10px;
+}
+
+.alliance-text {
+  color: white;
+  font-weight: 750;
 }
 
 .scoring {
+  height: 300px;
+  width: 100px;
   display: grid;
-  grid-template-rows: 20% 50% 30%;
+  grid-template-rows: 15% 15% 15% 15% 15% 15%;
+  align-content: center;
+  justify-items: center;
 }
 
-.speaker {
-  display: flex;
-  align-items: center;
+.reef-section {
+  margin-top: 5px;
+  display: grid;
+  grid-template-rows: 45px 45px 45px auto;
+  width: 150px;
+  height: 300px;
+  justify-items: center;
+  justify-content: center;
 }
 
-.speaker-inner {
-  display: flex;
-  align-items: center;
-  height: 80%;
-  width: 80%;
-  border-radius: 0px 20px 20px 0px;
-}
-
-.speaker-inner-reverse {
-  display: flex;
-  align-items: center;
-  height: 80%;
-  width: 80%;
-  border-radius: 20px 0px 0px 20px;
-  margin-left: auto;
-  margin-right: 0;
-}
-
-.speaker-inner:active,
-.speaker-inner-reverse:active {
-  background-color: rgb(40, 40, 40);
-}
-
-
-.amp {
-  border-radius: 20px 0px 20px 0px;
-}
-
-.amp-reverse {
-  border-radius: 0px 20px 0px 20px;
-}s
-
-.amp:active,
-.amp-reverse:active {
-  background-color: rgb(40, 40, 40);
-}
-
-.amp-text {
-  color: white;
-  margin-top: 3px;
-}
-
-.speaker-text {
-  margin-left: 10px;
-  color: white;
-  writing-mode: vertical-rl;
-}
-
-.speaker-text-reverse {
-  margin-left: 10px;
-  color: white;
-  writing-mode: vertical-rl;
-  transform: scale(-1);
-}
-
-.amp-graphic {
+.reef-base-graphic {
   margin: 0 auto;
+  margin-top: 20px;
+  height: 170px;
+  width: auto;
+  position: absolute;
+  align-self: flex-start;
+  z-index: 0.5;
+}
+
+.staged-tree {
+  border-radius: 10px;
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  align-self: flex-end;
+  justify-items: center;
+  align-content: center;
+  margin-bottom: 8px;
+}
+
+.staged-tree:active {
+  background: rgb(40, 40, 40);
+}
+
+.staged-tree-on {
+  background: rgb(120, 120, 120);
+  border-radius: 10px;
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  align-self: flex-end;
+  justify-items: center;
+  align-content: center;
+  margin-bottom: 8px;
+}
+
+.staged-tree-on:active {
+  background: rgb(40, 40, 40);
+
+}
+
+.algae-graphic {
+  background: rgb(0, 140, 100);
+  height: 60px;
   width: 60px;
-  height: 30px;
-  border-style: solid;
-  border-width: 4px;
-  border-color: red;
-  border-top: none;
+  border-radius: 50%;
+  font-size: 30px;
+  font-weight: 800;
+  color: white;
+  align-content: center;
+  justify-content: center;
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 1px;
+}
+
+.processor-location {
+  color: white;
+  font-size: 20px;
+  font-style: oblique;
+}
+
+.processor-location-disabled {
+  font-size: 20px;
+  font-style: oblique;
+  color: transparent;
+}
+
+.reef-top-position {
+  margin: 0 auto;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: auto auto;
+  z-index: 2;
+}
+
+.reef-middle-position {
+  margin: 0 auto;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 100px 100px;
+  z-index: 2;
+}
+
+.reef-bottom-position {
+  margin: 0 auto;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: auto auto;
+  z-index: 2;
 }
 
 .wing {
@@ -480,110 +600,317 @@ link {
   grid-template-rows: 20% 20% 20% 20% 20%;
 }
 
-.note {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  background: none;
-  border: none;
-}
-
-.note-clickable {
-  margin: 0 auto;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  width: 90%;
-  height: 90%;
-  border-radius: 10px;
-  transition: 0.12s;
-}
-
-.auto-button-text:active,
-.note-clickable:active {
+.undo-button-text:active {
   background-color: rgb(40, 40, 40);
 }
 
-.note-img {
-  height: 40px;
-  width: 40px;
-  margin: 0 auto;
-}
-
-.note-text {
-  color: white;
-  position: absolute;
-}
-
-.speaker-img {
-  height: 100px;
-}
-
-.speaker-img-reverse {
-  height: 100px;
-  transform: scaleX(-1);
-  margin-left: auto;
-  margin-right: 0;
-}
-
 .fail {
-  display: grid;
-  grid-template-rows: 50% 50%;
-  border-radius: 0px 20px 0px 0px;
+  display: flex;
+  grid-template-rows: 5% 5%;
+  border-radius: 10px 10px 10px 10px;
   padding: 5px;
 }
 
 .fail-button {
-  background-color: red;
+  background-color: goldenrod;
+  border-style: outset;
+  border-color: darkgoldenrod;
+  border-width: 3px;
   display: flex;
+  margin: 0 auto;
   align-items: center;
-  margin-top: 5px;
-  width: 90%;
+  justify-items: center;
+  height: 35px;
+  width: 90px;
   border-radius: 20px;
-  font-size: 14px;
+  font-size: 18px;
   transition: 0.12s;
 }
 
 .fail-button:active {
-  background: maroon;
+  background: darkgoldenrod;
+  border-style: inset;
 }
 
-.auto-button-text {
+.algae-button {
+  background: olivedrab;
+  border-style: outset;
+  border-color: darkgreen;
+  border-width: 3px;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-items: center;
+  height: 55px;
+  width: 90px;
+  border-radius: 20px;
+  font-size: 18px;
+}
+
+.algae-button:active {
+  background: darkolivegreen;
+  border-style: inset;
+}
+
+.algae-text {
+  margin: 0 auto;
+  color: white;
+}
+
+.reef-button {
+  margin: 0 auto;
+  display: flex;
+  height: auto;
+  width: auto;
+  border-style: none;
+  align-items: center;
+  justify-items: left;
+  border-radius: 5px;
+  background: none;
+}
+
+.reef-button:active {
+  background-color: darkgray;
+}
+
+.place-button {
+  background-color: navy;
+  border-style: outset;
+  border-color: darkblue;
+  border-width: 3px;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  width: 80%;
+  border-radius: 20px;
+  font-size: 22px;
+}
+
+.place-button:active {
+  background: blue;
+  border-style: inset;
+}
+
+.place-button-red {
+  background-color: maroon;
+  border-style: outset;
+  border-color: darkred;
+  border-width: 3px;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  width: 80%;
+  border-radius: 20px;
+  font-size: 22px;
+}
+
+.place-button-red:active {
+  background: red;
+  border-style: inset;
+}
+
+.reef-button-display {
+  background-color: navy;
+  border-style: outset;
+  border-color: darkblue;
+  border-width: 3px;
+  margin: 0 auto;
+  display: flex;
+  height: 38px;
+  width: 38px;
+  font-size: 25px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.reef-button-display:active {
+  background-color: blue;
+  border-style: inset;
+}
+
+.reef-button-display-red {
+  background-color: maroon;
+  border-style: outset;
+  border-width: 3px;
+  border-color: darkred;
+  margin: 0 auto;
+  display: flex;
+  height: 38px;
+  width: 38px;
+  font-size: 25px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.reef-button-display-red:active {
+  background: red;
+  border-style: inset;
+}
+
+.reef-button-display-on {
+  background-color: darkorchid;
+  border-style: outset;
+  border-color: darkmagenta;
+  border-width: 3px;
+  margin: 0 auto;
+  display: flex;
+  height: 38px;
+  width: 38px;
+  font-size: 25px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.reef-button-display-on:active {
+  background: magenta;
+  border-style: inset;
+}
+
+.algae-box {
+  height: 150px;
+  width: 140px;
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  align-items: center;
+  justify-items: center;
+}
+
+.processor-button {
+  display: flex;
+  background-color: navy;
+  border-style: outset;
+  border-color: darkblue;
+  border-width: 3px;
+  height: 30px;
+  width: 100px;
+  border-radius: 15px;
+  font-size: 15px;
+  align-items: center;
+}
+
+.processor-button:active {
+  background-color: blue;
+  border-style: inset;
+}
+
+.processor-button-red {
+  display: flex;
+  background-color: maroon;
+  border-style: outset;
+  border-width: 3px;
+  border-color: darkred;
+  height: 30px;
+  width: 100px;
+  border-radius: 15px;
+  font-size: 15px;
+  align-items: center;
+}
+
+.processor-button-red:active {
+  background-color: red;
+  border-style: inset;
+}
+
+.processor-text {
+  margin: 0 auto;
+  color: white;
+  font-weight: 750;
+}
+
+.fumble-algae-button {
+  background: goldenrod;
+  border-style: outset;
+  border-color: darkgoldenrod;
+  border-width: 3px;
+  height: 30px;
+  width: 125px;
+  border-radius: 15px;
+  align-content: center;
+  justify-items: center;
+  font-size: 14px;
+}
+
+.fumble-algae-button:active {
+  background: darkgoldenrod;
+  border-style: inset;
+}
+
+.fumble-algae-text {
+  color: white;
+  font-weight: 750;
+}
+
+.autolevel-text {
+  margin: 30%;
+  color: white;
+  font-weight: 750;
+}
+
+.undo-button-text {
   display: flex;
   align-items: center;
-  width: 90%;
-  height: 90%;
-  border-radius: 20px;
+  width: 70px;
+  height: 60px;
+  border-radius: 40px;
   transition: 0.12s;
+  font-style: bold;
+  color: white;
+}
+
+.reef-base-text {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  width: 50%;
+  height: 100%;
+  border-radius: 40px;
+  transition: 0.12s;
+  font-style: bold;
+  color: white;
+  font-weight: 750;
 }
 
 .fail-text, 
 .value-text, 
-.auto-button-text {
+.undo-button-text,
+.reef-base-text {
   margin: 0 auto;
 }
 
 .value-text, 
-.auto-button-text {
+.undo-button-text,
+.reef-base-text,
+.fail-text {
   color: white;
 }
 
 .misc {
   display: grid;
-  grid-template-rows: 33% 33% 33%;
+  grid-template-rows: auto auto auto;
 }
 
 .value-display {
   display: flex;
+  justify-self: center;
   align-items: center;
+  width: 60px;
+  height: 40px;
   font-size: 30px;
+  font-weight: 650;
+  background: black;
+  border-style: inset;
+  border-color: lightgray;
+  border-width: 5px;
 }
 
-.auto-button {
+.undo-button {
   display: flex;
   align-items: center;
   border-radius: 20px;
-  transition: .12s;
 }
 
 .undo-img {
@@ -685,9 +1012,16 @@ link {
 }
 
 .teleop-counter-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  display: grid;
+  width: 100%;
+}
+
+.score-btn-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 40%;
+    float: right;
 }
 
 .log-container {
@@ -699,6 +1033,7 @@ link {
   padding-top: 20px;
   padding-bottom: 20px;
   border-width: 2px;
+  justify-self: center;
 }
 
 .score-cell-text {
@@ -723,4 +1058,214 @@ link {
 
 .cell-text {
   margin: 0 auto;
+}
+
+.reef-map {
+  display: grid;
+  grid-template-columns: auto auto;
+  height: 300px;
+  width: 400px;
+  background: rgb(54, 54, 54);
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.teleopCounters {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.teleop-scoring {
+  display: grid;
+  grid-template-rows: auto auto;
+  align-content: center;
+  height: 300px;
+  width: 200px;
+  justify-content: center;
+}
+
+.teleop-misic {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  height: 300px;
+  width: 190px;
+}
+
+.teleop-algae-box {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 2px;
+  height: 120px;
+  width: auto;
+  justify-items: center;
+  align-items: center;
+}
+
+.processor-btn {
+  display: flex;
+  background-color: rgb(6, 195, 132);
+  border-style: solid;
+  border-color: rgb(0, 108, 72);
+  border-width: 5px;
+  border-radius: 15px;
+  height: 40px;
+  width: 120px;
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.processor-btn:active {
+  background: rgb(0, 108, 72);
+}
+
+.processor-btn-text {
+  color: white;
+  font-weight: 850;
+}
+
+.teleop-display {
+  display: flex;
+  margin: 0 auto;
+  height: 50px;
+  width: 100px;
+  background: black;
+  border-style:inset;
+  border-color: lightgray;
+  border-width: 5px;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.teleop-display-text {
+  color: white;
+  font-weight: 750;
+}
+
+.teleop-score-box {
+  display: grid;
+  grid-template-rows: auto auto;
+  height: 120px;
+  width: auto;
+  align-items: center;
+  justify-items: center;
+}
+
+.score-btn {
+  display: flex;
+  background-color: green;
+  height: 35px;
+  width: 100px;
+  font-size: 20px;
+  border-style: solid;
+  border-color: darkgreen;
+  border-width: 5px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.score-btn:active {
+  background-color: darkgreen;
+}
+
+.score-btn-text {
+  color: white;
+  font-weight: 800;
+}
+
+.fumble-btn {
+  display: flex;
+  background-color: red;
+  height: 35px;
+  width: 100px;
+  font-size: 20px;
+  border-style: solid;
+  border-color: maroon;
+  border-width: 5px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.fumble-btn:active {
+  background-color: maroon;
+}
+
+.fumble-btn-text {
+  color: white;
+  font-weight: 800;
+}
+
+.teleop-reef-scoring {
+  display: grid;
+  grid-template-columns: auto auto;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
+}
+
+.teleop-buttons {
+  height: 230px;
+  width: auto;
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  justify-self: left;
+  margin: 0 auto;
+}
+
+.tele-btn {
+  background: darkorchid;
+  border-style: solid;
+  border-color: indigo;
+  border-radius: 15px;
+  border-width: 5px;
+  width: 60px;
+  height: 40px;
+  margin: 0 auto;
+  font-size: 24px;
+}
+
+.tele-btn:active {
+  background: purple;
+}
+
+.tele-btn-text {
+  color: white;
+  font-weight: 800;
+}
+
+.remove-algae-teleop {
+  display: flex;
+  background: rgb(0, 140, 100);
+  border-style: solid;
+  border-color: rgb(0, 100, 80);
+  border-width: 5px;
+  height: 40px;
+  width: 150px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+
+.remove-algae-teleop:active {
+  background: rgb(0, 170, 140);
+}
+
+.remove-algae-text {
+  margin: 0 auto;
+  color: white;
+  font-weight: 750;
+  font-size: 18px;
+}
+
+.reef-graphic {
+  align-self: center;
+  height: 230px;
+  width: auto;
 }
