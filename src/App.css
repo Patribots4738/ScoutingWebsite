@@ -512,7 +512,7 @@ link {
   border-radius: 10px;
   height: 100px;
   width: 100px;
-  position: absolute;
+  justify-self: center;
   align-self: flex-end;
   justify-items: center;
   align-content: center;
