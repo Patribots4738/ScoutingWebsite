@@ -58,7 +58,7 @@ class Container extends React.Component {
     var sendData = data[1];
     data = data[0];
 
-    const eventID = '2025ISDE1';
+    const eventID = '2025CAOCPractice';
 
     if (sendData) {
       let validMatch = true;
@@ -123,8 +123,8 @@ class Container extends React.Component {
           "Defense": data[15][1]
         };
         //                      event             match #                                Name|Position-Team#               
-        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, 'test2025/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
+        set(ref(db, '2025Scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, '2025Scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name);
         localStorage.setItem("matchNumber", matchNumber);
