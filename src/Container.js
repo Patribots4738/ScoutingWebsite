@@ -55,8 +55,8 @@ class Container extends React.Component {
 
     var data = this.gatherData()
 
-    var sendData = data[1];
-    data = data[0];
+    var sendData = data[1]
+    data = data[0]
 
     const eventID = '2025WeekOne';
 
@@ -76,9 +76,12 @@ class Container extends React.Component {
         let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
         let teleopPieceCounts = JSON.parse(data[7][1]);
         let position = autoExported[1];
+        let didItLeave = false;
 
-        if (autoExported[1] !== "BLUE" || autoExported[1] !== "RED") {
-          position = "BLUE";
+        if (data[3][1] === "" && data[5][1] === false) {
+          didItLeave = false;
+        } else if (data[3][1] !== "" || data[5][1] === true) {
+          didItLeave = true;
         }
         
         let commentData = { 
@@ -90,6 +93,7 @@ class Container extends React.Component {
           "Auto Start": data[3][1],
           "Auto Path": autoPieces
         }
+        
         let jsonData = {     
           "L4 Auto": autoPieceCounts["L4"],
           "L3 Auto": autoPieceCounts["L3"],
@@ -119,41 +123,42 @@ class Container extends React.Component {
           "Station Intake": data[14][1],
           "Temp Failure": data[11][1],
           "Critical Failure": data[12][1],
-          "Auto Leave": data[5][1],
+          "Auto Leave": didItLeave,
           "Defense": data[15][1]
         };
         //                      event             match #                                Name|Position-Team#               
-        set(ref(db, '2025Scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, '2025Scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
+        set(ref(db, '20Test25/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, '20Test25/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
 
-        localStorage.setItem("name", name);
-        localStorage.setItem("matchNumber", matchNumber);
+        localStorage.setItem("name", name)
+        localStorage.setItem("matchNumber", matchNumber)
+        localStorage.setItem("alliance", position)
 
-        let cachedData = JSON.parse(localStorage.getItem("matchData"));
+        let cachedData = JSON.parse(localStorage.getItem("matchData"))
         
         if (cachedData === null) {
-          cachedData = {};
+          cachedData = {}
         }
 
-        let matchPath = `match-${matchNumber}`;
-        let botPath = `${name}|-${data[2][1]}`;
+        let matchPath = `match-${matchNumber}`
+        let botPath = `${name}|-${data[2][1]}`
 
         if (cachedData[matchPath] === undefined) {
           cachedData[matchPath] = {};
-          cachedData[matchPath][botPath] = { data: jsonData, comments: commentData };
+          cachedData[matchPath][botPath] = { data: jsonData, comments: commentData }
         } else {
-          cachedData[matchPath][botPath] = { data: jsonData, comments: commentData };
+          cachedData[matchPath][botPath] = { data: jsonData, comments: commentData }
         }
         
-        cachedData = JSON.stringify(cachedData, null, "\t");
+        cachedData = JSON.stringify(cachedData, null, "\t")
 
-        localStorage.setItem("matchData", cachedData);
+        localStorage.setItem("matchData", cachedData)
 
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 0)
         setTimeout(() => {
-          document.location.reload();
-        }, 3500);
-        alert("Data submitted, press ok to continue");
+          document.location.reload()
+        }, 3500)
+        alert("Data submitted, press ok to continue")
       }
     }
   }
@@ -174,44 +179,45 @@ class Container extends React.Component {
       netFumble: 0,
       processorFumble: 0,
       algaeRemove: 0
-    };
+    }
 
     for (let i = 0; i < arr.length; i++) {
-      let loc = arr[i].substring(1);
+      let loc = arr[i];
       // eslint-disable-next-line default-case
       switch (loc) {
         case "L1":
-          pieceCounts["L1"]++;
-          break;
+          pieceCounts["L1"]++
+          break
         case "L2": 
-          pieceCounts["L2"]++;
-          break;
+          pieceCounts["L2"]++
+          break
         case "L3":
-          pieceCounts["L3"]++;
-          break;
+          pieceCounts["L3"]++
+          break
         case "L4":
-          pieceCounts["L4"]++;
-          break;
+          pieceCounts["L4"]++
+          break
         case "P":
-          pieceCounts["processor"]++;
-          break;
+          pieceCounts["processor"]++
+          break
         case "N":
-          pieceCounts["net"]++;
-          break;
+          pieceCounts["net"]++
+          break
         case "FR":
-          pieceCounts["coralFumble"]++;
-          break;
+          pieceCounts["coralFumble"]++
+          break
         case "FP":
-          pieceCounts["processorFumble"]++;
-          break;
+          pieceCounts["processorFumble"]++
+          break
         case "FN":
-          pieceCounts["netFumble"]++;
-          break;
+          pieceCounts["netFumble"]++
+          break
         case "RG":
-          pieceCounts["algaeRemove"]++;
-          break;
+          pieceCounts["algaeRemove"]++
+          break
       }
     }
+    
     return pieceCounts;
   }
 

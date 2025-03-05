@@ -6,34 +6,38 @@ class ScoringSection extends React.Component {
         if (this.props.alliance === "BLUE") {
         return (
             <div className="scoring">
-                <div className="place-button" onClick={() => this.props.handleLevel(this.props.l4Text)}>
-                    <div className="autolevel-text">
+                <div>
+                    <div className="place-button" onClick={() => this.props.handleLevel(this.props.l4Text)}>
+                        <div className="autolevel-text">
                             {this.props.l4Text}
-                    </div>  
-                </div>
-                <div className="place-button" onClick={() => this.props.handleLevel(this.props.l3Text)}>
-                    <div className="autolevel-text">
+                        </div>  
+                    </div>
+                    <div className="place-button" onClick={() => this.props.handleLevel(this.props.l3Text)}>
+                        <div className="autolevel-text">
                             {this.props.l3Text}
-                    </div>  
-                </div>
-                <div className="place-button" onClick={() => this.props.handleLevel(this.props.l2Text)}>
-                    <div className="autolevel-text">
+                        </div>  
+                    </div>
+                    <div className="place-button" onClick={() => this.props.handleLevel(this.props.l2Text)}>
+                        <div className="autolevel-text">
                             {this.props.l2Text}
-                    </div>  
-                </div>
-                <div className="place-button" onClick={() => this.props.handleLevel(this.props.l1Text)}>
-                    <div className="autolevel-text">
+                        </div>  
+                    </div>
+                    <div className="place-button" onClick={() => this.props.handleLevel(this.props.l1Text)}>
+                        <div className="autolevel-text">
                             {this.props.l1Text}
-                    </div>  
-                </div>
-                <div className="fail-button" onClick={() => this.props.handleLevel(this.props.fail1)}>
-                    <div className="fail-text">
-                            {this.props.failText}
+                        </div>  
                     </div>
                 </div>
-                <div className="algae-button" onClick={() => this.props.handleLevel(this.props.algaeremove)}>
-                    <div className="algae-text">
-                        {this.props.algaeText}
+                <div>
+                    <div className="fail-button" onClick={() => this.props.handleLevel(this.props.fail1)}>
+                        <div className="fail-text">
+                            {this.props.failText}
+                        </div>
+                    </div>
+                    <div className="algae-button" onClick={() => this.props.handleLevel(this.props.algaeremove)}>
+                        <div className="algae-text">
+                            {this.props.algaeText}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,6 +45,7 @@ class ScoringSection extends React.Component {
         } else if (this.props.alliance === "RED") {
             return (
                 <div className="scoring">
+                    <div>
                     <div className="place-button-red" onClick={() => this.props.handleLevel(this.props.l4Text)}>
                         <div className="autolevel-text">
                                 {this.props.l4Text}
@@ -61,6 +66,8 @@ class ScoringSection extends React.Component {
                                 {this.props.l1Text}
                         </div>  
                     </div>
+                    </div>
+                    <div>
                     <div className="fail-button" onClick={() => this.props.handleLevel(this.props.fail1)}>
                         <div className="fail-text">
                                 {this.props.failText}
@@ -70,6 +77,7 @@ class ScoringSection extends React.Component {
                         <div className="algae-text">
                             {this.props.algaeText}
                         </div>
+                    </div>
                     </div>
                 </div>
             );
