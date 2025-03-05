@@ -72,6 +72,11 @@ link {
   color: gold;
 }
 
+.suggestions {
+  color: gold;
+  font-size: 20px;
+}
+
 .dropdown-auto {
   color: black;
   border-radius: calc(0.5 * 100px);

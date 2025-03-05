@@ -93,7 +93,7 @@ class Container extends React.Component {
           "Auto Start": data[3][1],
           "Auto Path": autoPieces
         }
-        
+
         let jsonData = {     
           "L4 Auto": autoPieceCounts["L4"],
           "L3 Auto": autoPieceCounts["L3"],
@@ -271,7 +271,6 @@ class Container extends React.Component {
         >
           Scouting Guidelines
         </a>
-
         <h1 className="title">
           PATRIBOTS SCOUTING
         </h1>
@@ -280,7 +279,6 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             IDENTIFICATION
           </h2>
-
           <div>
             <TextBox
               className="textbox name"
@@ -483,7 +481,14 @@ class Container extends React.Component {
           </div>
 
         </div>
-
+        <a
+          className="suggestions"
+          href="https://docs.google.com/forms/d/e/1FAIpQLScuS7hTiPxkxvk8t2dImAYtfXdHkqCzennD2szbqtXMaAw5zg/viewform?usp=header"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Suggestions or Bugs
+        </a>
         <div className='submit-container'>
           <Submit title="Submit" handleFormSubmit={this.handleFormSubmit} />
         </div>

@@ -11,27 +11,43 @@ class AutoCounter extends React.Component {
         classNameDecorator: this.props.decorator,
         reefHeight: "-",
         alliance: localStorage.getItem("alliance"),
-        redAllianceBtn: "inactive-red-button",
-        blueAllianceBtn: "active-blue-button",
+    }
+
+    allianceButtons = () => {
+        if (this.state.alliance === "BLUE") {
+            return (
+                <div>
+                    <button className="inactive-red-button" onClick={() => this.handleAllianceBlue()}>
+                        <div className="alliance-text">Blue</div>
+                    </button>
+                    <button className="active-blue-button" onClick={() => this.handleAllianceRed()}>
+                        <div className="alliance-text">Red</div>
+                    </button>
+                </div>
+            );
+        } else if (this.state.alliance === "RED") {
+            return (
+                <div>
+                    <button className="inactive-blue-button" onClick={() => this.handleAllianceBlue()}>
+                        <div className="alliance-text">Blue</div>
+                    </button>
+                    <button className="active-red-button" onClick={() => this.handleAllianceRed()}>
+                        <div className="alliance-text">Red</div>
+                    </button>
+                </div>
+            );
+        }
     }
 
     handleAllianceRed = () => {
         this.setState({
-            alliance: "RED",
-            blueAllianceBtn: "inactive-blue-button",
-            redAllianceBtn: "active-red-button",
-            redProcessor: "processor-location",
-            blueProcessor: "processor-location-disabled"
+            alliance: "RED"
         })
     }
 
     handleAllianceBlue = () => {
         this.setState({
-            alliance: "BLUE",
-            redAllianceBtn: "inactive-red-button",
-            blueAllianceBtn: "active-blue-button",
-            blueProcessor: "processor-location",
-            redProcessor: "processor-location-disabled"
+            alliance: "BLUE"
         })
     }
 
@@ -192,12 +208,7 @@ class AutoCounter extends React.Component {
         return (
             <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={[this.state.scoreValue.join(" - "), this.state.alliance].join("  -  ")}>
                 <div>
-                    <button className={this.state.blueAllianceBtn} onClick={() => this.handleAllianceBlue()}>
-                        <div className="alliance-text">Blue</div>
-                    </button>
-                    <button className={this.state.redAllianceBtn} onClick={() => this.handleAllianceRed()}>
-                        <div className="alliance-text">Red</div>
-                    </button>
+                    {this.allianceButtons()}
                 </div>
                 <div className={"subtitle"}>
                     {this.state.title}
