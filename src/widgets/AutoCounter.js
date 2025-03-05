@@ -17,10 +17,10 @@ class AutoCounter extends React.Component {
         if (this.state.alliance === "BLUE") {
             return (
                 <div>
-                    <button className="inactive-red-button" onClick={() => this.handleAllianceBlue()}>
+                    <button className="active-blue-button" onClick={() => this.handleAllianceBlue()}>
                         <div className="alliance-text">Blue</div>
                     </button>
-                    <button className="active-blue-button" onClick={() => this.handleAllianceRed()}>
+                    <button className="inactive-red-button" onClick={() => this.handleAllianceRed()}>
                         <div className="alliance-text">Red</div>
                     </button>
                 </div>
@@ -32,6 +32,17 @@ class AutoCounter extends React.Component {
                         <div className="alliance-text">Blue</div>
                     </button>
                     <button className="active-red-button" onClick={() => this.handleAllianceRed()}>
+                        <div className="alliance-text">Red</div>
+                    </button>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <button className="inactive-blue-button" onClick={() => this.handleAllianceBlue()}>
+                        <div className="alliance-text">Blue</div>
+                    </button>
+                    <button className="inactive-red-button" onClick={() => this.handleAllianceRed()}>
                         <div className="alliance-text">Red</div>
                     </button>
                 </div>
