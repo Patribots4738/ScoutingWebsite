@@ -58,7 +58,7 @@ class Container extends React.Component {
     var sendData = data[1]
     data = data[0]
 
-    const eventID = '2025WeekOne';
+    const eventID = '2025WeekOnePlayoffs';
 
     if (sendData) {
       let validMatch = true;
@@ -78,11 +78,11 @@ class Container extends React.Component {
         let position = autoExported[1];
         let didItLeave = false;
 
-        if (data[3][1] === "" && data[5][1] === false) {
-          didItLeave = false;
-        } else if (data[3][1] !== "" || data[5][1] === true) {
-          didItLeave = true;
-        }
+        // if (data[3][1] === "" && data[5][1] === false) {
+        //   didItLeave = false;
+        // } else if (data[3][1] !== "" || data[5][1] === true) {
+        //   didItLeave = true;
+        // }
         
         let commentData = { 
           "Name": name,
@@ -123,7 +123,7 @@ class Container extends React.Component {
           "Station Intake": data[14][1],
           "Temp Failure": data[11][1],
           "Critical Failure": data[12][1],
-          "Auto Leave": didItLeave,
+          "Auto Leave": 1,
           "Defense": data[15][1]
         };
         //                      event             match #                                Name|Position-Team#               
