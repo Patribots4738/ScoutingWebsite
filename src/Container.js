@@ -76,7 +76,7 @@ class Container extends React.Component {
         let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
         let teleopPieceCounts = JSON.parse(data[7][1]);
         let position = autoExported[1];
-        let didItLeave = false;
+
 
         // if (data[3][1] === "" && data[5][1] === false) {
         //   didItLeave = false;
