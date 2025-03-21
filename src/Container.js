@@ -58,7 +58,7 @@ class Container extends React.Component {
     var sendData = data[1]
     data = data[0]
 
-    const eventID = '2025WeekOnePlayoffs';
+    const eventID = '2025CASDPractice';
 
     if (sendData) {
       let validMatch = true;
