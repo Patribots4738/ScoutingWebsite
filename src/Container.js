@@ -58,7 +58,7 @@ class Container extends React.Component {
     var sendData = data[1]
     data = data[0]
 
-    const eventID = '2025JOHPractice';
+    const eventID = '2025JOH';
 
     if (sendData) {
       let validMatch = true;
@@ -77,7 +77,7 @@ class Container extends React.Component {
         let teleopPieceCounts = JSON.parse(data[7][1]);
         let position = autoExported[1];
         let didItLeave = 0;
-
+        
         if (data[3][1] === "" && data[5][1] === false) {
           didItLeave = 0;
         } else if (data[3][1] !== "" || data[5][1] === true) {
