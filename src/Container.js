@@ -58,6 +58,7 @@ class Container extends React.Component {
     var sendData = data[1]
     data = data[0]
 
+<<<<<<< HEAD
     const eventID = '2025CASAN1';
 
     if (sendData) {
