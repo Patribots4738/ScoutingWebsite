@@ -58,7 +58,8 @@ class Container extends React.Component {
     var sendData = data[1]
     data = data[0]
 
-    const eventID = '2025CABL';
+    const eventID = '2026Test';
+    const gameID = '2026REBUILT';
 
     if (sendData) {
       let validMatch = true;
@@ -126,9 +127,9 @@ class Container extends React.Component {
           "Auto Leave": didItLeave,
           "Defense": data[15][1]
         };
-        //                      event             match #                                Name|Position-Team#               
-        set(ref(db, '2025Scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, '2025Scouting/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
+        //           game           event                  match #           Name         Position               
+        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
+        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name)
         localStorage.setItem("matchNumber", matchNumber)
