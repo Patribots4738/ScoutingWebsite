@@ -366,12 +366,21 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <TeleopCounter
-            className="teleop-counter"
-            id={this.assignUUID()}
-            title="Piece Counter"
-            value={{}}
+
+          <Counter
+              id={this.assignUUID()}
+              title={"Fuel Scored"}
+              upperLimit={200}
+              value={{}}
           />
+
+          <Counter
+              id={this.assignUUID()}
+              title={"Fuel Passed"}
+              upperLimit={200}
+              value={{}}
+          />
+
           <div className="checkboxes1">
             <CheckBox
               className="deep-cage"
