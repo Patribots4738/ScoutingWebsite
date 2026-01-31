@@ -1,6 +1,7 @@
 import React from "react";
 import undo from "../images/undo.png";
 import ScoringSection from "./ScoringSection";
+import Counter from "./Counter";
 
 class AutoCounter extends React.Component {
 
@@ -83,7 +84,7 @@ class AutoCounter extends React.Component {
         )
     }
 
-    handleAlgaeChange = (value) => {
+    handleAutoChange = (value) => {
         this.setState(
             { reefHeight: value },
             () => { this.handleAdd(); }
@@ -91,53 +92,46 @@ class AutoCounter extends React.Component {
     }
 
 
-    processor = () => {
+    AutoClimb = () => {
         if (this.state.alliance === "BLUE") {
             return (
-                <div className="processor-button" onClick={() => this.handleAlgaeChange("P")}>
-                    <div className="processor-text">Processor</div>
+                <div className="auto-climb-button" onClick={() => this.handleAutoChange("C")}>
+                    <div className="auto-climb-text">Auto Climb</div>
                 </div>
             );
         } else if (this.state.alliance === "RED") {
             return (
-                <div className="processor-button-red" onClick={() => this.handleAlgaeChange("P")}>
-                    <div className="processor-text">Processor</div>
+                <div className="auto-climb-button-red" onClick={() => this.handleAutoChange("C")}>
+                    <div className="auto-climb-text">Auto Climb</div>
                 </div>
             );
         }
     }
 
-    net = () => {
+    autoScore = () => {
         if (this.state.alliance === "BLUE") {
             return (
-                <div className="processor-button" onClick={() => this.handleAlgaeChange("N")}>
-                    <div className="processor-text">Net</div>
+                <div className="auto-score-button" onClick={() => this.handleAutoChange("F")}>
+                    <div className="auto-score-text"> Score </div>
                 </div>
             );
         } else if (this.state.alliance === "RED") {
             return (
-                <div className="processor-button-red" onClick={() => this.handleAlgaeChange("N")}>
-                    <div className="processor-text">Net</div>
+                <div className="auto-score-button-red" onClick={() => this.handleAutoChange("F")}>
+                    <div className="auto-score-text">Score</div>
                 </div>
             );
         }
     }
 
-    fumbleAlgaeProcessor = () => {
+    fumbleAutoClimb = () => {
         return (
-            <div className="fumble-algae-button" onClick={() => this.handleAlgaeChange("FP")}>
-                <div className="fumble-algae-text">Fumble Processor</div>
+            <div className="fumble-auto-climb-button" onClick={() => this.handleAutoChange("FC")}>
+                <div className="fumble-auto-climb-text">Fumble Auto Climb</div>
             </div>
         );
     }
 
-    fumbleAlgaeNet = () => {
-        return (
-            <div className="fumble-algae-button" onClick={() => this.handleAlgaeChange("FN")}>
-                <div className="fumble-algae-text">Fumble Net</div>
-            </div>
-        );
-    }
 
     undo = () => {
         return (
@@ -149,64 +143,35 @@ class AutoCounter extends React.Component {
 
     bigUIArray = () => {
         if (this.state.alliance === "BLUE") {
-            let arr = [
-                (<ScoringSection
-                    fail1="FC"
-                    failText="Fumble Coral"
-                    l4Text="L4"
-                    l3Text="L3"
-                    l2Text="L2"
-                    l1Text="L1"
-                    algaeText="Remove Algae"
-                    algaeremove="RA"
-                    handleLevel={this.handleLocationChange}
-                    alliance={this.state.alliance}
-                />),
+            let arr = [    
+                                
                 (<div className="misc">
+                    <div className="score-box">
+                        {this.autoScore()}
+                    </div>
                     <div className="algae-box">
                         <div>
-                            {this.processor()}
+                            {this.AutoClimb()}
                         </div>
                         <div>
-                            {this.fumbleAlgaeProcessor()}
-                        </div>
-                        <div>
-                            {this.net()}
-                        </div>
-                        <div>
-                            {this.fumbleAlgaeNet()}
+                            {this.fumbleAutoClimb()}
                         </div>
                     </div>
                 </div>)
             ]
             return arr;
         } else if (this.state.alliance === "RED") {
-            let arr = [
-                (<ScoringSection
-                    fail1="FC"
-                    failText="Fumble Coral"
-                    l4Text="L4"
-                    l3Text="L3"
-                    l2Text="L2"
-                    l1Text="L1"
-                    algaeText="Remove Algae"
-                    algaeremove="RA"
-                    handleLevel={this.handleLocationChange}
-                    alliance={this.state.alliance}
-                />),
+            let arr = [                   
+                <div>
+                    {this.autoScore()}
+                </div>,
                 (<div className="misc">
                     <div className="algae-box">
                         <div>
-                            {this.processor()}
+                            {this.AutoClimb()}
                         </div>
                         <div>
-                            {this.fumbleAlgaeProcessor()}
-                        </div>
-                        <div>
-                            {this.net()}
-                        </div>
-                        <div>
-                            {this.fumbleAlgaeNet()}
+                            {this.fumbleAutoClimb()}
                         </div>
                     </div>
                 </div>)

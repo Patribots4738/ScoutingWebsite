@@ -3,11 +3,10 @@ import './App.css';
 import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox';
 import TeleopCounter from './widgets/TeleopCounter';
-import AutoCounter from './widgets/AutoCounter';
 import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
-import Dropdown from './widgets/Dropdown';
+//import Dropdown from './widgets/Dropdown';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -15,6 +14,7 @@ import ClearLocalStorage from './widgets/ClearLocalStorage';
 
 import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
+import Dropdown from './widgets/Dropdown';
 
 class Container extends React.Component {
   
@@ -299,6 +299,25 @@ class Container extends React.Component {
             />
           </div>
           <div>
+            {/* <Dropdown
+                    className={this.assignUUID()}
+                    id = {this.assignUUID()}
+                    value = {""}
+                    title = {"Alliance"}
+            />               */}
+            <Dropdown
+              className="dropdown alliance"
+              id={this.assignUUID()}
+              title={"Alliance"}
+              value={localStorage.getItem("alliance")}
+              items={[
+                {id:1, value: "red", title: "Red"},
+                {id:2, value: "blue", title: "Blue"}
+              ]}
+              handleDropdownChange={this.handleDropdownChange}
+              selected={this.state.selectedAlliance}
+
+            />
             <TextBox
               className="textbox team"
               id={this.assignUUID()}
@@ -306,65 +325,7 @@ class Container extends React.Component {
               value={""}
               required={true}
               numeric={true}
-            />
-          </div>
-        </div>
-        <div className="auto-container">
-          <h2 className="subtitle section-title">
-            AUTONOMOUS
-          </h2>
-          <div className="style1">
-            <span>
-              <Dropdown
-                className="dropdown-auto"
-                id={this.assignUUID()}
-                title={"Starting Side"}
-                value={localStorage.getItem("position")}
-                selected={localStorage.getItem("position")}
-                required={true}
-                items={[
-                  {
-                    title: "Processor",
-                    value: "Processor"
-                  },
-                  {
-                    title: "Center",
-                    value: "Center"
-                  },
-                  {
-                    title: "Opposite Processor",
-                    value: "Opposite Processor"
-                  }
-                ]}
-              />
-            </span>
-            <div>
-              <AutoCounter
-                className="auto-counter"
-                id={this.assignUUID()}
-                title="Auto Counter"
-                decorator="auto-counter"
-                value={{}}
-              />
-              <div>
-                <CheckBox
-                className="byebye-auto"
-                title="Leave in Auto"
-                id={this.assignUUID()}
-                value={false}
-                decorator="dissapointmentCheckbox"
-                />
-              </div>
-            </div>
-            <div>
-              <TextBoxLong
-                className="text-box"
-                id={this.assignUUID()}
-                title={"Describe Auto Path"}
-                value={""}
-                numeric={false}
-              />
-            </div>
+            />          
           </div>
         </div>
 

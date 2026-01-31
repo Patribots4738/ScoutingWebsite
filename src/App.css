@@ -435,6 +435,7 @@ link {
   grid-template-columns: auto auto auto;
   text-align: center;
   align-content: center;
+  align-items: center;
 }
 
 .active-blue-button {
@@ -786,7 +787,13 @@ link {
   justify-items: center;
 }
 
-.processor-button {
+.score-box {
+  justify-items: center;
+  align-items: center;
+  background-color: #ff00b3;
+}
+
+.auto-climb-button {
   display: flex;
   background-color: navy;
   border-style: outset;
@@ -800,12 +807,33 @@ link {
   margin: auto 0px;
 }
 
-.processor-button:active {
+.auto-score-button {
+  display: flex;
+  background-color: navy;
+  border-style: outset;
+  border-color: darkblue;
+  border-width: 3px;
+  height: 40px;
+  width: 120px;
+  border-radius: 15px;
+  font-size: 20px;
+  align-items: center;
+  justify-self: center;
+  align-self: center;
+  margin-top: 1000px;
+}
+
+.auto-climb-button:active {
   background-color: blue;
   border-style: inset;
 }
 
-.processor-button-red {
+.auto-score-button:active {
+  background-color: blue;
+  border-style: inset;
+}
+
+.auto-climb-button-red {
   display: flex;
   background-color: maroon;
   border-style: outset;
@@ -819,18 +847,44 @@ link {
   margin: auto 0px;
 }
 
-.processor-button-red:active {
+.auto-score-button-red {
+  display: flex;
+  background-color: maroon;
+  border-style: outset;
+  border-width: 3px;
+  border-color: darkred;
+  height: 40px;
+  width: 120px;
+  border-radius: 15px;
+  font-size: 20px;
+  align-items: center;
+  margin: auto 0px;
+}
+
+.auto-climb-button-red:active {
   background-color: red;
   border-style: inset;
 }
 
-.processor-text {
+.auto-score-button-red:active {
+  background-color: red;
+  border-style: inset;
+}
+
+
+.auto-climb-text {
   margin: 0 auto;
   color: white;
   font-weight: 750;
 }
 
-.fumble-algae-button {
+.auto-score-text {
+  margin: 0 auto;
+  color: white;
+  font-weight: 750;
+}
+
+.fumble-auto-climb-button {
   background: goldenrod;
   border-style: outset;
   border-color: darkgoldenrod;
@@ -843,12 +897,12 @@ link {
   font-size: 20px;
 }
 
-.fumble-algae-button:active {
+.fumble-auto-climb-button:active {
   background: darkgoldenrod;
   border-style: inset;
 }
 
-.fumble-algae-text {
+.fumble-auto-climb-text {
   color: white;
   font-weight: 750;
 }
@@ -886,6 +940,7 @@ link {
 .misc {
   display: grid;
   grid-template-rows: auto auto auto;
+  justify-items: center;
 }
 
 .value-display {
@@ -1266,4 +1321,19 @@ link {
   align-self: center;
   height: 230px;
   width: auto;
+}
+
+
+.dropdown-alliance{
+  color: rgb(0, 0, 0);
+  border-radius: calc(0.5 * 100px);
+  box-shadow: 0 1px 6px 0 var(--box-border-color);
+  border-width: 2px;
+  padding-left: 30px;
+  padding-right: 10px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 20px;
+  background-color: white;
+  margin-top: 5px;
 }
