@@ -10,18 +10,18 @@ class Counter extends React.Component{
         classNameDecorator: this.props.decorator,
     }
 
-    increaseCounter = () => {
-        if (this.state.value !== this.state.upperLimit){
+    increaseCounter = (amount = 1) => {
+        if (this.state.value + amount <= this.state.upperLimit){
             this.setState({
-                value: this.state.value + 1
+                value: this.state.value + amount
             })
         }
     }
 
-    decreaseCounter = () => {
-        if (this.state.value !== 0){
+    decreaseCounter = (amount = 1) => {
+        if (this.state.value - amount >= 0){
             this.setState({
-                value: this.state.value - 1
+                value: this.state.value - amount
             })
         }
     }
@@ -38,21 +38,35 @@ class Counter extends React.Component{
                     <span className="btn-container">
                        
                         <button
-                            className={"btn dbtn"}
-                            onClick={() => this.decreaseCounter()}>
-                            -
+                            className={"btn-dbtn-5"}
+                            onClick={() => this.decreaseCounter(5)}>
+                            -5
+                        </button>
+
+                        <button
+                            className={"btn-dbtn-1"}
+                            onClick={() => this.decreaseCounter(1)}>
+                            -1
                         </button>
                        
                         <div className="value" id={this.state.id} value={this.state.value} title={this.state.title}>
                             {this.state.value}
                         </div>    
 
+                        <button
+                            className={"btn-ubtn-1"}
+                            onClick={() => this.increaseCounter(1)}>
+                            +1
+                        </button>
 
                         <button
-                            className={"btn ubtn"}
-                            onClick={() => this.increaseCounter()}>
-                            +
+                            className={"btn-ubtn-5"}
+                            onClick={() => this.increaseCounter(5)}>
+                            +5
                         </button>
+
+                    
+
                     </span>
                    
                 </span>

@@ -15,8 +15,10 @@ import ClearLocalStorage from './widgets/ClearLocalStorage';
 import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
 import Dropdown from './widgets/Dropdown';
+import Counter from './widgets/Counter';
 
 class Container extends React.Component {
+ 
   
   state = {
     scoutingLog: []
@@ -299,12 +301,6 @@ class Container extends React.Component {
             />
           </div>
           <div>
-            {/* <Dropdown
-                    className={this.assignUUID()}
-                    id = {this.assignUUID()}
-                    value = {""}
-                    title = {"Alliance"}
-            />               */}
             <Dropdown
               className="dropdown alliance"
               id={this.assignUUID()}
@@ -327,6 +323,43 @@ class Container extends React.Component {
               numeric={true}
             />          
           </div>
+        </div>
+        
+        <div className="teleop-container">
+          <h2 className="subtitle section-title">
+            AUTO
+          </h2>
+        
+          <div classname="auto-scorebox">  
+            <Counter
+              id={this.assignUUID()}
+              title={"Auto Score"}
+              upperLimit={200}
+              value={{}}
+            />
+          </div>
+
+          <div classname="auto-climb-box">
+            <CheckBox
+              className="auto-climb"
+              title="Auto Climb"
+              id={this.assignUUID()}
+              value={false}
+              decorator="onstage"
+            />
+          </div>
+
+          <div classname="auto-notes-box">
+            <TextBoxLong
+              className="text-box-long"
+              id={this.assignUUID()}
+              title={"Auto Path"}
+              value={""}
+              numeric={false}
+              placeholder="Describe where they started, where they intook fuel from, where they shot from and where they ended... "
+            />
+          </div>
+
         </div>
 
         <div className="teleop-container">
