@@ -1431,7 +1431,7 @@ link {
   padding-bottom: 0%;
 }
 
-.teleop-counter, .auto-scorebox {
+.teleop-counter, .auto-scorebox, .auto-counter {
   padding: 5px 5px 5px 5px;
   border-radius: calc(0.5 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
