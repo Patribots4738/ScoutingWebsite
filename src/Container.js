@@ -277,7 +277,6 @@ class Container extends React.Component {
         <h1 className="title">
           PATRIBOTS SCOUTING
         </h1>
-
         <div className='identification-container'>
           <h2 className="subtitle section-title">
             IDENTIFICATION
@@ -312,7 +311,6 @@ class Container extends React.Component {
               ]}
               handleDropdownChange={this.handleDropdownChange}
               selected={this.state.selectedAlliance}
-
             />
             <TextBox
               className="textbox team"
@@ -324,12 +322,10 @@ class Container extends React.Component {
             />          
           </div>
         </div>
-        
         <div className="teleop-container">
           <h2 className="subtitle section-title">
             AUTO
           </h2>
-        
           <div className='teleop-counter'>
             <Counter
               id={this.assignUUID()}
@@ -338,7 +334,6 @@ class Container extends React.Component {
               value={{}}
             />
           </div>
-
           <div className='teleop-counter'>
             <Counter
               id={this.assignUUID()}
@@ -347,7 +342,6 @@ class Container extends React.Component {
               value={{}}
             />
           </div>
-
           <div classname="auto-climb-box">
             <CheckBox
               className="auto-climb"
@@ -357,7 +351,6 @@ class Container extends React.Component {
               decorator="onstage"
             />
           </div>
-
           <div classname="auto-notes-box">
             <TextBoxLong
               className="text-box-long"
@@ -368,14 +361,11 @@ class Container extends React.Component {
               placeholder="Describe where they started, where they intook fuel from, where they shot from and where they ended... "
             />
           </div>
-
         </div>
-
         <div className="teleop-container">
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-
           <div className='teleop-counter'>
             <Counter
               id={this.assignUUID()}
@@ -384,7 +374,6 @@ class Container extends React.Component {
               value={{}}
             />
           </div>
-
           <div className='teleop-counter'>
             <Counter
               id={this.assignUUID()}
@@ -393,7 +382,6 @@ class Container extends React.Component {
               value={{}}
             />
           </div>
-
           <div className='teleop-counter'>
             <Counter
               id={this.assignUUID()}
@@ -402,7 +390,6 @@ class Container extends React.Component {
               value={{}}
             />
           </div>
-
           <div classname="tele-offcyle-box">
             <TextBoxLong
               className="text-box-long"
@@ -413,7 +400,6 @@ class Container extends React.Component {
               placeholder="Describe what the robot was doing while their HUB was deactivated. Were they doing defense? Were they collecting fuel? Were they passing?"
             />
           </div>
-
           <div className="checkboxes1">
             <CheckBox
               className="deep-cage"
