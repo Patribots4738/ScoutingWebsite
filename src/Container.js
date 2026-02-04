@@ -328,7 +328,7 @@ class Container extends React.Component {
             AUTO
           </h2>
         
-          <div className='teleop-counter'>
+          <div className='auto-counter'>
             <Counter
               id={this.assignUUID()}
               title={"Auto Score"}
