@@ -325,12 +325,12 @@ class Container extends React.Component {
           </div>
         </div>
         
-        <div className="teleop-container">
+        <div className="auto-container">
           <h2 className="subtitle section-title">
             AUTO
           </h2>
         
-          <div className='teleop-counter'>
+          <div className='auto-counter'>
             <Counter
               id={this.assignUUID()}
               title={"Auto Score"}
@@ -339,7 +339,7 @@ class Container extends React.Component {
             />
           </div>
 
-          <div className='teleop-counter'>
+          <div className='auto-counter'>
             <Counter
               id={this.assignUUID()}
               title={"Fumble"}
