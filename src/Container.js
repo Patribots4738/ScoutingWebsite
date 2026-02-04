@@ -2,7 +2,7 @@ import './App.css';
 
 import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox';
-import TeleopCounter from './widgets/TeleopCounter';
+//import TeleopCounter from './widgets/TeleopCounter';
 import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
@@ -330,10 +330,19 @@ class Container extends React.Component {
             AUTO
           </h2>
         
-          <div classname="auto-scorebox">  
+          <div className='teleop-counter'>
             <Counter
               id={this.assignUUID()}
               title={"Auto Score"}
+              upperLimit={200}
+              value={{}}
+            />
+          </div>
+
+          <div className='teleop-counter'>
+            <Counter
+              id={this.assignUUID()}
+              title={"Fumble"}
               upperLimit={200}
               value={{}}
             />
@@ -367,19 +376,43 @@ class Container extends React.Component {
             TELEOP
           </h2>
 
-          <Counter
+          <div className='teleop-counter'>
+            <Counter
               id={this.assignUUID()}
-              title={"Fuel Scored"}
+              title={"Score"}
               upperLimit={200}
               value={{}}
-          />
+            />
+          </div>
 
-          <Counter
+          <div className='teleop-counter'>
+            <Counter
               id={this.assignUUID()}
-              title={"Fuel Passed"}
+              title={"Pass"}
               upperLimit={200}
               value={{}}
-          />
+            />
+          </div>
+
+          <div className='teleop-counter'>
+            <Counter
+              id={this.assignUUID()}
+              title={"Fumble"}
+              upperLimit={200}
+              value={{}}
+            />
+          </div>
+
+          <div classname="tele-offcyle-box">
+            <TextBoxLong
+              className="text-box-long"
+              id={this.assignUUID()}
+              title={"Off Time"}
+              value={""}
+              numeric={false}
+              placeholder="Describe what the robot was doing while their HUB was deactivated. Were they doing defense? Were they collecting fuel? Were they passing?"
+            />
+          </div>
 
           <div className="checkboxes1">
             <CheckBox
