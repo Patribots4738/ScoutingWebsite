@@ -438,7 +438,7 @@ link {
   border-radius: 20px;
   margin-bottom: 10px;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto auto;
   text-align: center;
   align-content: center;
   align-items: center;
@@ -796,7 +796,6 @@ link {
 .score-box {
   justify-items: center;
   align-items: center;
-  background-color: #ff00b3;
 }
 
 .auto-climb-button {
@@ -820,13 +819,13 @@ link {
   border-color: darkblue;
   border-width: 3px;
   height: 40px;
-  width: 120px;
+  width: 50px;
   border-radius: 15px;
   font-size: 20px;
   align-items: center;
   justify-self: center;
   align-self: center;
-  margin-top: 1000px;
+  margin-top: 70px;
 }
 
 .auto-climb-button:active {
@@ -1436,4 +1435,39 @@ link {
   border-radius: calc(0.5 * 100px);
   box-shadow: 0 1px 6px 0 var(--box-border-color);
   background-color: rgb(34, 33, 33);
+}
+
+.center-field-img{
+  height: 300px
+}
+
+.auto-center-button:active {
+ background-color: rgb(88, 88, 88);
+}
+
+.hub-img{
+  height: 100px;
+}
+
+.start-depot-button, .start-hub-button, .start-outpost-button{
+  display: flex;
+  background-color: rgb(60, 60, 60);
+  border-style: solid;
+  border-color: rgb(28, 28, 28);
+  border-width: 5px;
+  height: 90px;
+  width: 50px;
+  font-size: 20px;
+  align-items: center;
+  justify-self: center;
+  align-self: center;
+  
+}
+
+.depot-img{
+  height: 50px;
+}
+
+.climb-img{
+  height: 90px;
 }

@@ -7,6 +7,7 @@ import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
 //import Dropdown from './widgets/Dropdown';
+import AutoCounter from './widgets/AutoCounter';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -328,23 +329,12 @@ class Container extends React.Component {
             AUTO
           </h2>
         
-          <div className='auto-counter'>
-            <Counter
-              id={this.assignUUID()}
-              title={"Auto Score"}
-              upperLimit={200}
-              value={{}}
+          <div classname="auto-widget-box">
+            <AutoCounter
+            id={this.assignUUID()}
             />
           </div>
 
-          <div className='auto-counter'>
-            <Counter
-              id={this.assignUUID()}
-              title={"Fumble"}
-              upperLimit={200}
-              value={{}}
-            />
-          </div>
           <div classname="auto-climb-box">
             <CheckBox
               className="auto-climb"

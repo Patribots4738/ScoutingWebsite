@@ -1,7 +1,10 @@
 import React from "react";
 import undo from "../images/undo.png";
-import ScoringSection from "./ScoringSection";
-import Counter from "./Counter";
+import center from "../images/center.png";
+import hub from "../images/hub.png";
+import depot from "../images/depot.png";
+import climb from "../images/climb.png";
+
 
 class AutoCounter extends React.Component {
 
@@ -11,57 +14,9 @@ class AutoCounter extends React.Component {
         id: this.props.id,
         classNameDecorator: this.props.decorator,
         reefHeight: "-",
-        alliance: localStorage.getItem("alliance"),
+        alliance: "RED",
     }
 
-    allianceButtons = () => {
-        if (this.state.alliance === "BLUE") {
-            return (
-                <div>
-                    <button className="active-blue-button" onClick={() => this.handleAllianceBlue()}>
-                        <div className="alliance-text">Blue</div>
-                    </button>
-                    <button className="inactive-red-button" onClick={() => this.handleAllianceRed()}>
-                        <div className="alliance-text">Red</div>
-                    </button>
-                </div>
-            );
-        } else if (this.state.alliance === "RED") {
-            return (
-                <div>
-                    <button className="inactive-blue-button" onClick={() => this.handleAllianceBlue()}>
-                        <div className="alliance-text">Blue</div>
-                    </button>
-                    <button className="active-red-button" onClick={() => this.handleAllianceRed()}>
-                        <div className="alliance-text">Red</div>
-                    </button>
-                </div>
-            );
-        } else {
-            return (
-                <div>
-                    <button className="inactive-blue-button" onClick={() => this.handleAllianceBlue()}>
-                        <div className="alliance-text">Blue</div>
-                    </button>
-                    <button className="inactive-red-button" onClick={() => this.handleAllianceRed()}>
-                        <div className="alliance-text">Red</div>
-                    </button>
-                </div>
-            );
-        }
-    }
-
-    handleAllianceRed = () => {
-        this.setState({
-            alliance: "RED"
-        })
-    }
-
-    handleAllianceBlue = () => {
-        this.setState({
-            alliance: "BLUE"
-        })
-    }
 
     handleAdd = () => {
         this.setState({
@@ -93,41 +48,90 @@ class AutoCounter extends React.Component {
 
 
     AutoClimb = () => {
-        if (this.state.alliance === "BLUE") {
             return (
-                <div className="auto-climb-button" onClick={() => this.handleAutoChange("C")}>
-                    <div className="auto-climb-text">Auto Climb</div>
+                <div className="climb-score-button" onClick={() => this.handleAutoChange("C")}>
+                    <div className="auto-score-text">
+                        <img src={climb} alt="" className="climb-img" />
+                    </div>
                 </div>
             );
-        } else if (this.state.alliance === "RED") {
-            return (
-                <div className="auto-climb-button-red" onClick={() => this.handleAutoChange("C")}>
-                    <div className="auto-climb-text">Auto Climb</div>
-                </div>
-            );
-        }
+
     }
 
     autoScore = () => {
-        if (this.state.alliance === "BLUE") {
             return (
                 <div className="auto-score-button" onClick={() => this.handleAutoChange("F")}>
                     <div className="auto-score-text"> Score </div>
                 </div>
             );
-        } else if (this.state.alliance === "RED") {
-            return (
-                <div className="auto-score-button-red" onClick={() => this.handleAutoChange("F")}>
-                    <div className="auto-score-text">Score</div>
+    }
+
+    outpostIntake = () => {
+        return (
+            <div className="auto-score-button" onClick={() => this.handleAutoChange("OI")}>
+                <div className="auto-score-text"> Outpost pic here </div>
+            </div>
+        );
+    }
+
+    startDepot = () => {
+        return (
+            <div className="start-depot-button" onClick={() => this.handleAutoChange("SD")}>
+                <div className="auto-score-text">  </div>
+            </div>
+        );
+    }
+
+    startHub = () => {
+        return (
+            <div className="start-hub-button" onClick={() => this.handleAutoChange("SH")}>
+                <div className="auto-score-text">  </div>
+            </div>
+        );
+    }
+
+    startOutpost = () => {
+        return (
+            <div className="start-outpost-button" onClick={() => this.handleAutoChange("SO")}>
+                <div className="auto-score-text">  </div>
+            </div>
+        );
+    }
+
+    depotIntake = () => {
+        return (
+            <div className="depot-button" onClick={() => this.handleAutoChange("DI")}>
+                <div className="auto-score-text"> 
+                    <img src={depot} alt="" className="depot-img" /> 
                 </div>
-            );
-        }
+            </div>
+        );
+    }
+
+    centerIntake = () => {
+        return (
+            <div className="auto-center-button" onClick={() => this.handleAutoChange("CI")}>
+                <div className="auto-score-text">                 
+                    <img src={center} alt="" className="center-field-img" /> 
+                </div>
+            </div>
+        );
+    }
+
+    score = () => {
+        return (
+            <div className="hub-score-button" onClick={() => this.handleAutoChange("S")}>
+                <div className="auto-score-text"> 
+                    <img src={hub} alt="" className="hub-img" /> 
+                </div>
+            </div>
+        );
     }
 
     fumbleAutoClimb = () => {
         return (
             <div className="fumble-auto-climb-button" onClick={() => this.handleAutoChange("FC")}>
-                <div className="fumble-auto-climb-text">Fumble Auto Climb</div>
+                <div className="fumble-auto-climb-text"> </div>
             </div>
         );
     }
@@ -142,50 +146,70 @@ class AutoCounter extends React.Component {
     }
 
     bigUIArray = () => {
-        if (this.state.alliance === "BLUE") {
-            let arr = [    
-                                
-                (<div className="misc">
-                    <div className="score-box">
-                        {this.autoScore()}
+            let arr = [
+                
+                <div classname="misc">
+                    <div>empty</div>
+                    <div>empty</div>
+                    <div classname="outpost-box">
+                        {this.outpostIntake()}
                     </div>
-                    <div className="algae-box">
-                        <div>
-                            {this.AutoClimb()}
-                        </div>
-                        <div>
-                            {this.fumbleAutoClimb()}
-                        </div>
-                    </div>
-                </div>)
-            ]
-            return arr;
-        } else if (this.state.alliance === "RED") {
-            let arr = [                   
-                <div>
-                    {this.autoScore()}
+
+
                 </div>,
-                (<div className="misc">
-                    <div className="algae-box">
+                <div className="misc">
+                    <div className="depot-box">
+                        {this.depotIntake()}
+                    </div>
+                    <div className="climb-box">
                         <div>
                             {this.AutoClimb()}
                         </div>
-                        <div>
-                            {this.fumbleAutoClimb()}
-                        </div>
                     </div>
-                </div>)
+                    <div>
+                        empty 
+                    </div>
+                    
+                </div>,
+                <div classname="misc">
+                    <div className="start-box">
+                        {this.startDepot()}
+                    </div>
+                    <div className="start-box">
+                        {this.startHub()}
+                    </div>
+                    <div className="start-box">
+                        {this.startOutpost()}
+                    </div>
+                </div>,
+                <div classname="misc">
+                    <div>
+                        empty
+                    </div>
+                    <div className="Hub-box">
+                        {this.score()}
+                    </div>
+                    <div>
+                        empty
+                    </div>
+                </div>,
+                <div classname="misc">
+                    
+                    <div classname="center-intake">
+                        {this.centerIntake()}
+                    </div>
+                    
+                </div>
+
             ]
             return arr;
-        }
     }
+    
 
     render() {
         return (
             <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={[this.state.scoreValue.join(" - "), this.state.alliance].join("  -  ")}>
-                <div>
-                    {this.allianceButtons()}
-                </div>
+
                 <div className={"subtitle"}>
                     {this.state.title}
                 </div>
