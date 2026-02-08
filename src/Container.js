@@ -334,16 +334,6 @@ class Container extends React.Component {
             id={this.assignUUID()}
             />
           </div>
-
-          <div classname="auto-climb-box">
-            <CheckBox
-              className="auto-climb"
-              title="Auto Climb"
-              id={this.assignUUID()}
-              value={false}
-              decorator="onstage"
-            />
-          </div>
           <div classname="auto-notes-box">
             <TextBoxLong
               className="text-box-long"
@@ -393,21 +383,32 @@ class Container extends React.Component {
               placeholder="Describe what the robot was doing while their HUB was deactivated. Were they doing defense? Were they collecting fuel? Were they passing?"
             />
           </div>
-          <div className="checkboxes1">
+          <div className="checkboxes-top">
             <CheckBox
-              className="deep-cage"
-              title="Deep Climb"
+              className="climb1"
+              title="L1 Climb"
               id={this.assignUUID()}
               value={false}
               decorator="onstage"
             />
             <CheckBox
-              className="shallow-cage"
-              title="Shallow Climb"
+              className="climb2"
+              title="L2 Climb"
               id={this.assignUUID()}
               value={false}
               decorator="onstage"
             />
+            <CheckBox
+              className="climb3"
+              title="Traversal Climb"
+              id={this.assignUUID()}
+              value={false}
+              decorator="onstage"
+            />
+          </div>
+
+          <div className="checkboxes-bottom">
+
             <CheckBox
               className="isFailure"
               title="Climb Failure"
@@ -455,6 +456,24 @@ class Container extends React.Component {
                 decorator={"critical"}
               />
             </div>
+
+            <div>
+              <CheckBox
+                className="Bump"
+                title="Over Bump"
+                id={this.assignUUID()}
+                value={false}
+                decorator={"critical"}
+              />
+              <CheckBox
+                className="trench"
+                title="Under Trench"
+                id={this.assignUUID()}
+                value={false}
+                decorator={"critical"}
+              />
+            </div>
+
             <div>
               <CheckBox
                 className="defense"
@@ -462,6 +481,14 @@ class Container extends React.Component {
                 id={this.assignUUID()}
                 value={false}
                 decorator={"onstage"}
+              />
+
+              <CheckBox
+                className="shoot&drive"
+                title="Shooting While Drving"
+                id={this.assignUUID()}
+                value={false}
+                decorator={"critical"}
               />
             </div>
           </div>
@@ -492,7 +519,7 @@ class Container extends React.Component {
               title={"Additional comments"}
               value={""}
               numeric={false}
-              placeholder=""
+              placeholder="Include anything abnormal that happened in the match and could have influenced the outcome of the match. Include their driving and defense capabilities"
             />
           </div>
 

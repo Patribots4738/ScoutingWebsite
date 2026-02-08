@@ -14,15 +14,17 @@ class AutoCounter extends React.Component {
         title: "Auto Pieces",
         id: this.props.id,
         classNameDecorator: this.props.decorator,
-        reefHeight: "-",
+        autoPath: "-",
         alliance: "RED",
     }
 
 
-    handleAdd = () => {
-        this.setState({
-            scoreValue: [...this.state.scoreValue, this.state.reefHeight]
+    handleAdd = ( count = 1) => {
+        const newScores = Array (count).fill(this.state.autoPath);
+        this.setState({ 
+            scoreValue: [...this.state.scoreValue, ... newScores]
         });
+
     }
 
     handleRemove = () => {
@@ -35,15 +37,15 @@ class AutoCounter extends React.Component {
 
     handleLocationChange = (value) => {
         this.setState(
-            { reefHeight: value },
+            { autoPath: value },
             () => { this.handleAdd(); }
         )
     }
 
-    handleAutoChange = (value) => {
+    handleAutoChange = (value, count = 1) => {
         this.setState(
-            { reefHeight: value },
-            () => { this.handleAdd(); }
+            { autoPath: value },
+            () => { this.handleAdd(count); }
         )
     }
 
@@ -59,13 +61,6 @@ class AutoCounter extends React.Component {
 
     }
 
-    autoScore = () => {
-            return (
-                <div className="auto-score-button" onClick={() => this.handleAutoChange("F")}>
-                    <div className="auto-score-text"> Score </div>
-                </div>
-            );
-    }
 
     outpostIntake = () => {
         return (
@@ -131,19 +126,32 @@ class AutoCounter extends React.Component {
         );
     }
 
-    fumbleAutoClimb = () => {
-        return (
-            <div className="fumble-auto-climb-button" onClick={() => this.handleAutoChange("FC")}>
-                <div className="fumble-auto-climb-text"> </div>
-            </div>
-        );
-    }
 
 
     undo = () => {
         return (
             <div className="undo-button-text" onClick={() => this.handleRemove()}>
                 <img src={undo} alt="" className="undo-img" />
+            </div>
+        );
+    }
+
+    score5x = () => {
+        return (
+            <div className="hub-score-button-5x" onClick={() => this.handleAutoChange("S", 5)}>
+                <div className="auto-score-text"> 
+                    <span> x5</span>
+                </div>
+            </div>
+        );
+    }
+    
+    score10x = () => {
+        return (
+            <div className="hub-score-button-10x" onClick={() => this.handleAutoChange("S", 10)}>
+                <div className="auto-score-text">  
+                    <span> x10</span>
+                </div>
             </div>
         );
     }
@@ -227,6 +235,10 @@ class AutoCounter extends React.Component {
                 <div className="selector">
                     <div className="field-map">
                         {this.bigUIArray()}
+                        <div className="point-increase">
+                            {this.score5x()}
+                            {this.score10x()}
+                        </div>
                     </div>
                 </div>
             </span>
