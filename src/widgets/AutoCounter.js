@@ -4,6 +4,7 @@ import center from "../images/center.png";
 import hub from "../images/hub.png";
 import depot from "../images/depot.png";
 import climb from "../images/climb.png";
+import outpost from "../images/outpost.png";
 
 
 class AutoCounter extends React.Component {
@@ -68,8 +69,10 @@ class AutoCounter extends React.Component {
 
     outpostIntake = () => {
         return (
-            <div className="auto-score-button" onClick={() => this.handleAutoChange("OI")}>
-                <div className="auto-score-text"> Outpost pic here </div>
+            <div className="outpost-intake-button" onClick={() => this.handleAutoChange("OI")}>
+                <div className="auto-score-text"> 
+                    <img src={outpost} alt="" className="outpost-img" />
+                </div>
             </div>
         );
     }
@@ -148,10 +151,10 @@ class AutoCounter extends React.Component {
     bigUIArray = () => {
             let arr = [
                 
-                <div classname="misc">
-                    <div>empty</div>
-                    <div>empty</div>
-                    <div classname="outpost-box">
+                <div className="misc">
+                    <div className="empty-space">  hesejj ords that are hidden here </div>
+                    <div className="empty-space"> s that are hidden here </div>
+                    <div className="outpost-box">
                         {this.outpostIntake()}
                     </div>
 
@@ -167,7 +170,7 @@ class AutoCounter extends React.Component {
                         </div>
                     </div>
                     <div>
-                        empty 
+                    
                     </div>
                     
                 </div>,
@@ -182,20 +185,20 @@ class AutoCounter extends React.Component {
                         {this.startOutpost()}
                     </div>
                 </div>,
-                <div classname="misc">
+                <div className="misc">
                     <div>
-                        empty
+                        
                     </div>
                     <div className="Hub-box">
                         {this.score()}
                     </div>
                     <div>
-                        empty
+                        
                     </div>
                 </div>,
-                <div classname="misc">
+                <div className="misc">
                     
-                    <div classname="center-intake">
+                    <div className="center-intake">
                         {this.centerIntake()}
                     </div>
                     

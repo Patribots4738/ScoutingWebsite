@@ -1441,7 +1441,7 @@ link {
   height: 300px
 }
 
-.auto-center-button:active {
+.auto-center-button:active, .hub-score-button:active {
  background-color: rgb(88, 88, 88);
 }
 
@@ -1465,9 +1465,25 @@ link {
 }
 
 .depot-img{
-  height: 50px;
+  height: 90px;
+  transform: rotate(180deg);
 }
 
 .climb-img{
+  height: 120px;
+  transform: rotate(180deg);
+  padding-top: 50px;
+  padding-left: 2px;
+}
+
+.start-depot-button:active, .start-hub-button:active, .start-outpost-button:active, .climb-score-button:active, .depot-button:active, .outpost-intake-button:active{
+  background-color: rgb(88, 88, 88);
+}
+
+.outpost-img{
   height: 90px;
+}
+
+.empty-space{
+  color: #383838;
 }
