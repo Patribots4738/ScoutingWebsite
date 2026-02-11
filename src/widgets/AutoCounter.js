@@ -75,7 +75,7 @@ class AutoCounter extends React.Component {
     startDepot = () => {
         return (
             <div className="start-depot-button" onClick={() => this.handleAutoChange("SD")}>
-                <div className="auto-score-text">  </div>
+                <div className="auto-score-text"> SD </div>
             </div>
         );
     }
@@ -83,7 +83,7 @@ class AutoCounter extends React.Component {
     startHub = () => {
         return (
             <div className="start-hub-button" onClick={() => this.handleAutoChange("SH")}>
-                <div className="auto-score-text">  </div>
+                <div className="auto-score-text"> SH </div>
             </div>
         );
     }
@@ -91,7 +91,7 @@ class AutoCounter extends React.Component {
     startOutpost = () => {
         return (
             <div className="start-outpost-button" onClick={() => this.handleAutoChange("SO")}>
-                <div className="auto-score-text">  </div>
+                <div className="auto-score-text"> SO </div>
             </div>
         );
     }
@@ -156,60 +156,35 @@ class AutoCounter extends React.Component {
         );
     }
 
+    score1x = () => {
+        return (
+            <div className="hub-score-button-1x" onClick={() => this.handleAutoChange("S", 1)}>
+                <div className="auto-score-text">  
+                    <span> x1</span>
+                </div>
+            </div>
+        );
+    }
+
     bigUIArray = () => {
             let arr = [
-                
-                <div className="misc">
-                    <div className="empty-space">  hesejj ords that are hidden here </div>
-                    <div className="empty-space"> s that are hidden here </div>
-                    <div className="outpost-box">
-                        {this.outpostIntake()}
-                    </div>
-
-
-                </div>,
-                <div className="misc">
-                    <div className="depot-box">
+                <div className="left-auto-widget">
                         {this.depotIntake()}
-                    </div>
-                    <div className="climb-box">
-                        <div>
-                            {this.AutoClimb()}
-                        </div>
-                    </div>
-                    <div>
-                    
-                    </div>
-                    
+                        {this.AutoClimb()}
+                        {this.outpostIntake()}
                 </div>,
-                <div classname="misc">
-                    <div className="start-box">
+                <div classname="Pose-box">
                         {this.startDepot()}
-                    </div>
-                    <div className="start-box">
                         {this.startHub()}
-                    </div>
-                    <div className="start-box">
                         {this.startOutpost()}
-                    </div>
                 </div>,
                 <div className="misc">
-                    <div>
-                        
-                    </div>
-                    <div className="Hub-box">
                         {this.score()}
-                    </div>
-                    <div>
-                        
-                    </div>
                 </div>,
                 <div className="misc">
-                    
                     <div className="center-intake">
                         {this.centerIntake()}
                     </div>
-                    
                 </div>
 
             ]
@@ -235,11 +210,14 @@ class AutoCounter extends React.Component {
                 <div className="selector">
                     <div className="field-map">
                         {this.bigUIArray()}
-                        <div className="point-increase">
+                    </div>
+                </div>
+
+                <div className="point-increase">
+                            {this.score1x()}
                             {this.score5x()}
                             {this.score10x()}
-                        </div>
-                    </div>
+                            
                 </div>
             </span>
         )

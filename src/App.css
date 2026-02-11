@@ -873,7 +873,7 @@ link {
 
 .auto-score-text {
   margin: 0 auto;
-  color: white;
+  color: rgb(28, 28, 28);
   font-weight: 750;
 }
 
@@ -1243,14 +1243,6 @@ link {
   font-weight: 800;
 }
 
-.teleop-reef-scoring {
-  display: grid;
-  grid-template-columns: auto auto;
-  height: auto;
-  width: auto;
-  margin: 0 auto;
-}
-
 .teleop-buttons {
   height: 230px;
   width: auto;
@@ -1283,39 +1275,6 @@ link {
   color: white;
   font-weight: 800;
 }
-
-.remove-algae-teleop {
-  display: flex;
-  background: rgb(0, 140, 100);
-  border-style: solid;
-  border-color: rgb(0, 100, 80);
-  border-width: 5px;
-  height: 40px;
-  width: 150px;
-  border-radius: 10px;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  margin-top: 5px;
-}
-
-.remove-algae-teleop:active {
-  background: rgb(0, 170, 140);
-}
-
-.remove-algae-text {
-  margin: 0 auto;
-  color: white;
-  font-weight: 750;
-  font-size: 18px;
-}
-
-.reef-graphic {
-  align-self: center;
-  height: 230px;
-  width: auto;
-}
-
 
 .dropdown-alliance{
   color: rgb(0, 0, 0);
@@ -1434,22 +1393,37 @@ link {
 }
 
 .hub-img{
-  height: 100px;
+  height: 80px;
+  margin: 3px;
 }
 
 .start-depot-button, .start-hub-button, .start-outpost-button{
   display: flex;
-  background-color: rgb(60, 60, 60);
+  background-color: rgba(171, 171, 171, 0.19);
   border-style: solid;
-  border-color: rgb(28, 28, 28);
-  border-width: 5px;
-  height: 90px;
-  width: 50px;
+  border-color: rgb(255, 255, 255);
+  border-width: 0;
+  height: 110px;
   font-size: 20px;
   align-items: center;
-  justify-self: center;
-  align-self: center;
-  
+}
+
+.Pose-box{
+  outline: auto;
+  display: grid;
+  grid-template-rows: 33% 33% 33%;
+  height: 400px;
+  width: auto;
+}
+
+.left-auto-widget{
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-row-gap: 35px;
+  height: 400px;
+  width: auto;
+  justify-items: left;
+  align-content: center;
 }
 
 .depot-img{
@@ -1458,19 +1432,22 @@ link {
 }
 
 .climb-img{
-  height: 120px;
+  height: 80px;
   transform: rotate(180deg);
-  padding-left: 2px;
+}
+
+.outpost-img{
+  height: 100px;
+  transform: rotate(180deg);
 }
 
 .start-depot-button:active, .start-hub-button:active, .start-outpost-button:active, .climb-score-button:active, .depot-button:active, .outpost-intake-button:active{
   background-color: rgb(88, 88, 88);
+  height: auto;
+  width: auto;
 }
 
-.outpost-img{
-  height: 90px;
-  padding-right: 20px;
-}
+
 
 .empty-space{
   color: #383838;
@@ -1489,11 +1466,13 @@ link {
   gap: 10px;
   justify-content: center;
   padding: 10px;
+  border-radius: 30px;
 }
 
 .hub-score-button-5x,
-.hub-score-button-10x {
-  background-color: rgb(70, 70, 70);
+.hub-score-button-10x,
+.hub-score-button-1x {
+  background-color: rgb(146, 146, 146);
   padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
@@ -1512,8 +1491,7 @@ link {
   border-radius: 20px;
   margin-bottom: 10px;
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  grid-template-rows: auto auto;
+  grid-template-columns: 20% 35% 30% 15%;
   text-align: center;
   align-content: center;
   align-items: center;
