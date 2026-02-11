@@ -1453,8 +1453,13 @@ link {
   width: auto;
 }
 
-
-
+.checkboxes-post {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  justify-content: center; 
+  gap: 10px;
+}
 .empty-space{
   color: #383838;
 }

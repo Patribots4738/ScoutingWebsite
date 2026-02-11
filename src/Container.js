@@ -19,7 +19,7 @@ import Dropdown from './widgets/Dropdown';
 import Counter from './widgets/Counter';
 
 class Container extends React.Component {
- 
+
   
   state = {
     scoutingLog: []
@@ -424,23 +424,7 @@ class Container extends React.Component {
             POST-MATCH
           </h2>
           <div className="checkboxes2">
-            <div>
-              <CheckBox
-                className="temporary"
-                title="Temp. Failure"
-                id={this.assignUUID()}
-                value={false}
-                decorator={"temporary"}
-              />
-              <CheckBox
-                className="critical"
-                title="Critical Failure"
-                id={this.assignUUID()}
-                value={false}
-                decorator={"critical"}
-              />
-            </div>
-            <div>
+            <div className="checkboxes-post">
               <CheckBox
                 className="ground-intake"
                 title="Ground Intake"
@@ -457,7 +441,7 @@ class Container extends React.Component {
               />
             </div>
 
-            <div>
+            <div className="checkboxes-post">
               <CheckBox
                 className="Bump"
                 title="Over Bump"
@@ -474,7 +458,7 @@ class Container extends React.Component {
               />
             </div>
 
-            <div>
+            <div className="checkboxes-post">
               <CheckBox
                 className="defense"
                 title="Defense"
@@ -485,12 +469,29 @@ class Container extends React.Component {
 
               <CheckBox
                 className="shoot&drive"
-                title="Shooting While Drving"
+                title="Shoot on Move"
                 id={this.assignUUID()}
                 value={false}
                 decorator={"critical"}
               />
             </div>
+            <div className="checkboxes-post">
+              <CheckBox
+                className="temporary"
+                title="Temp. Failure"
+                id={this.assignUUID()}
+                value={false}
+                decorator={"temporary"}
+              />
+              <CheckBox
+                className="critical"
+                title="Critical Failure"
+                id={this.assignUUID()}
+                value={false}
+                decorator={"critical"}
+              />
+            </div>
+
           </div>
           <div>
             <TextBoxLong
