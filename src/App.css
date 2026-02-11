@@ -1393,27 +1393,33 @@ link {
 }
 
 .hub-img{
-  height: 80px;
+  height: 90px;
   margin: 3px;
 }
 
 .start-depot-button, .start-hub-button, .start-outpost-button{
   display: flex;
+  color: antiquewhite;
   background-color: rgba(171, 171, 171, 0.19);
   border-style: solid;
   border-color: rgb(255, 255, 255);
-  border-width: 0;
-  height: 110px;
-  font-size: 20px;
+  border-width: 3px;
+  border-radius: 10px;
+  height: auto;
+  width: 90%;
+  font-size: 35px;
   align-items: center;
+  justify-content: center;
 }
 
 .Pose-box{
-  outline: auto;
   display: grid;
-  grid-template-rows: 33% 33% 33%;
+  grid-template-rows: 30% 30% 30%;
+  grid-row-gap: 3%;
   height: 400px;
   width: auto;
+  align-content: center;
+  justify-items: center;
 }
 
 .left-auto-widget{

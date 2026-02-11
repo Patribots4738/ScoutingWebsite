@@ -341,7 +341,7 @@ class Container extends React.Component {
               title={"Auto Path"}
               value={""}
               numeric={false}
-              placeholder="Describe where they started, where they intook fuel from, where they shot from and where they ended... "
+              placeholder="Describe any abnormalities in the auto, anything that would not have been included in the auto path, and if their climb failed or where they ended. "
             />
           </div>
         </div>

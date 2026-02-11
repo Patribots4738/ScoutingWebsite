@@ -75,7 +75,7 @@ class AutoCounter extends React.Component {
     startDepot = () => {
         return (
             <div className="start-depot-button" onClick={() => this.handleAutoChange("SD")}>
-                <div className="auto-score-text"> SD </div>
+                SD
             </div>
         );
     }
@@ -83,7 +83,7 @@ class AutoCounter extends React.Component {
     startHub = () => {
         return (
             <div className="start-hub-button" onClick={() => this.handleAutoChange("SH")}>
-                <div className="auto-score-text"> SH </div>
+                SH
             </div>
         );
     }
@@ -91,7 +91,7 @@ class AutoCounter extends React.Component {
     startOutpost = () => {
         return (
             <div className="start-outpost-button" onClick={() => this.handleAutoChange("SO")}>
-                <div className="auto-score-text"> SO </div>
+                SO
             </div>
         );
     }
@@ -173,7 +173,7 @@ class AutoCounter extends React.Component {
                         {this.AutoClimb()}
                         {this.outpostIntake()}
                 </div>,
-                <div classname="Pose-box">
+                <div className="Pose-box">
                         {this.startDepot()}
                         {this.startHub()}
                         {this.startOutpost()}
