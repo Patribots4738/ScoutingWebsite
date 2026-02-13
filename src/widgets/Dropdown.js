@@ -8,16 +8,14 @@ class Dropdown extends React.Component{
         id: this.props.id,
         title: this.props.title,
         items: this.props.items,
-        handleDropdownChange: this.props.handleDropdownChange,
-        selected: this.props.selected,
         className: this.props.className
     }
-    
     
     handleDropdownChange = (e) => {
         this.setState({
             value: e.target.value
         })
+        this.props.selected(e.target.value)
     }
 
     render(){
@@ -26,7 +24,6 @@ class Dropdown extends React.Component{
                 <div className={"subtitle"}>
                     {this.state.title}
                 </div>
-                
                 <select
                     type="dropdown"
                     className={this.state.className}

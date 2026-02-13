@@ -3,7 +3,7 @@
 :root {
   --box-border-color: rgba(255, 255, 255, 0.38);
   min-width: 100%;
-  
+  --team-color: red;
 }
 
 
@@ -1121,59 +1121,35 @@ link {
 
 .teleop-scoring {
   display: grid;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto auto auto auto;
   align-content: center;
   height: 300px;
-  width: 200px;
+  width: 100%;
   justify-content: center;
+  outline: auto;
+  justify-self: end;
+}
+
+.fuel-graphic {
+  border-radius: 100%;
+  background-color: rgb(255, 228, 46);
+  display: block;
+  height: 80px;
+  width: 80px;
 }
 
 .teleop-misic {
   display: grid;
   grid-template-rows: auto auto auto;
   height: 300px;
-  width: 190px;
-}
-
-.teleop-algae-box {
-  display: grid;
-  grid-template-rows: auto auto;
-  gap: 2px;
-  height: 120px;
-  width: auto;
-  justify-items: center;
-  align-items: center;
-}
-
-.processor-btn {
-  display: flex;
-  background-color: rgb(6, 195, 132);
-  border-style: solid;
-  border-color: rgb(0, 108, 72);
-  border-width: 5px;
-  border-radius: 15px;
-  height: 40px;
-  width: 120px;
-  font-size: 22px;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-}
-
-.processor-btn:active {
-  background: rgb(0, 108, 72);
-}
-
-.processor-btn-text {
-  color: white;
-  font-weight: 850;
+  width: 100%;
 }
 
 .teleop-display {
   display: flex;
   margin: 0 auto;
   height: 50px;
-  width: 100px;
+  width: 75%;
   background: black;
   border-style:inset;
   border-color: lightgray;
@@ -1188,20 +1164,41 @@ link {
   font-weight: 750;
 }
 
+.Hub-btn {
+  background-color: var(--team-color);
+
+}
+
 .teleop-score-box {
   display: grid;
-  grid-template-rows: auto auto;
+  grid-template-columns: auto auto;
+  grid-column-gap: 0%;
   height: 120px;
   width: auto;
   align-items: center;
   justify-items: center;
+  outline: auto;
+}
+
+.amount-btn {
+  display: ruby;
+  border-radius: 10px;
+  background-color: var(--team-color);
+}
+
+.teleop-display-box {
+  outline: auto;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  grid-column-gap: 0%;
 }
 
 .score-btn {
   display: flex;
   background-color: green;
   height: 35px;
-  width: 100px;
+  width: 80%;
   font-size: 20px;
   border-style: solid;
   border-color: darkgreen;
@@ -1224,7 +1221,7 @@ link {
   display: flex;
   background-color: red;
   height: 35px;
-  width: 100px;
+  width: 80%;
   font-size: 20px;
   border-style: solid;
   border-color: maroon;
@@ -1470,10 +1467,6 @@ link {
 .outpost-img{
   height: 90px;
   padding-right: 20px;
-}
-
-.empty-space{
-  color: #383838;
 }
 
 .point-increase {

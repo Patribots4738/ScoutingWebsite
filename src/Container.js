@@ -17,12 +17,14 @@ import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
 import Dropdown from './widgets/Dropdown';
 import Counter from './widgets/Counter';
+import TeleopCounter from './widgets/TeleopCounter';
 
 class Container extends React.Component {
  
   
   state = {
-    scoutingLog: []
+    scoutingLog: [],
+    selectedAlliance: localStorage.getItem('alliance')
   }
 
   gatherData = () => {
@@ -261,6 +263,14 @@ class Container extends React.Component {
     }
   }
 
+  handleAllianceChange = (input) => {
+    if (input === "BLUE") {
+      document.querySelector(':root').style.setProperty('--team-color','blue')
+    } else if (input === "RED") {
+      document.querySelector(':root').style.setProperty('--team-color','red')
+    }
+  }
+
   render() {
     return (
       <ul className="container">
@@ -307,11 +317,10 @@ class Container extends React.Component {
               title={"Alliance"}
               value={localStorage.getItem("alliance")}
               items={[
-                {id:1, value: "red", title: "Red"},
-                {id:2, value: "blue", title: "Blue"}
+                {id:1, value: "RED", title: "Red"},
+                {id:2, value: "BLUE", title: "Blue"}
               ]}
-              handleDropdownChange={this.handleDropdownChange}
-              selected={this.state.selectedAlliance}
+              selected={this.handleAllianceChange}
             />
             <TextBox
               className="textbox team"
@@ -349,30 +358,7 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <div className='teleop-counter'>
-            <Counter
-              id={this.assignUUID()}
-              title={"Score"}
-              upperLimit={200}
-              value={{}}
-            />
-          </div>
-          <div className='teleop-counter'>
-            <Counter
-              id={this.assignUUID()}
-              title={"Pass"}
-              upperLimit={200}
-              value={{}}
-            />
-          </div>
-          <div className='teleop-counter'>
-            <Counter
-              id={this.assignUUID()}
-              title={"Fumble"}
-              upperLimit={200}
-              value={{}}
-            />
-          </div>
+          <TeleopCounter/>
           <div classname="tele-offcyle-box">
             <TextBoxLong
               className="text-box-long"
