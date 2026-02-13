@@ -331,14 +331,15 @@ class Container extends React.Component {
         
           <div classname="auto-widget-box">
             <AutoCounter
-            id={this.assignUUID()}
+              title={"Auto Path"}
+              id={this.assignUUID()}
             />
           </div>
           <div classname="auto-notes-box">
             <TextBoxLong
               className="text-box-long"
               id={this.assignUUID()}
-              title={"Auto Path"}
+              title={"Auto Notes"}
               value={""}
               numeric={false}
               placeholder="Describe any abnormalities in the auto, anything that would not have been included in the auto path, and if their climb failed or where they ended. "
@@ -426,21 +427,20 @@ class Container extends React.Component {
           <div className="checkboxes2">
             <div className="checkboxes-post">
               <CheckBox
-                className="ground-intake"
-                title="Ground Intake"
+                className="temporary"
+                title="Temp. Failure"
                 id={this.assignUUID()}
                 value={false}
-                decorator={"critical"}
+                decorator={"temporary"}
               />
               <CheckBox
-                className="station-intake"
-                title="Station Intake"
+                className="critical"
+                title="Critical Failure"
                 id={this.assignUUID()}
                 value={false}
                 decorator={"critical"}
               />
             </div>
-
             <div className="checkboxes-post">
               <CheckBox
                 className="Bump"
@@ -457,35 +457,26 @@ class Container extends React.Component {
                 decorator={"critical"}
               />
             </div>
-
             <div className="checkboxes-post">
               <CheckBox
-                className="defense"
-                title="Defense"
+                className="ground-intake"
+                title="Ground Intake"
                 id={this.assignUUID()}
                 value={false}
-                decorator={"onstage"}
+                decorator={"critical"}
               />
-
+              <CheckBox
+                className="station-intake"
+                title="Station Intake"
+                id={this.assignUUID()}
+                value={false}
+                decorator={"critical"}
+              />
+            </div>
+            <div className="checkboxes-post">
               <CheckBox
                 className="shoot&drive"
-                title="Shoot on Move"
-                id={this.assignUUID()}
-                value={false}
-                decorator={"critical"}
-              />
-            </div>
-            <div className="checkboxes-post">
-              <CheckBox
-                className="temporary"
-                title="Temp. Failure"
-                id={this.assignUUID()}
-                value={false}
-                decorator={"temporary"}
-              />
-              <CheckBox
-                className="critical"
-                title="Critical Failure"
+                title="Shooting While Driving"
                 id={this.assignUUID()}
                 value={false}
                 decorator={"critical"}
@@ -497,30 +488,10 @@ class Container extends React.Component {
             <TextBoxLong
               className="text-box-long"
               id={this.assignUUID()}
-              title={"What they did well"}
+              title={"Comments"}
               value={""}
               numeric={false}
-              placeholder=""
-            />
-          </div>
-          <div>
-            <TextBoxLong
-              className="text-box-long"
-              id={this.assignUUID()}
-              title={"What they didn't do well"}
-              value={""}
-              numeric={false}
-              placeholder=""
-            />
-          </div>
-          <div>
-            <TextBoxLong
-              className="text-box-long"
-              id={this.assignUUID()}
-              title={"Additional comments"}
-              value={""}
-              numeric={false}
-              placeholder="Include anything abnormal that happened in the match and could have influenced the outcome of the match. Include their driving and defense capabilities"
+              placeholder="Include anything abnormal that could have influenced the match, their driving and defense capabilities, and things they did well and not so well."
             />
           </div>
 

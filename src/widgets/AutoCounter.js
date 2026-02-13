@@ -166,6 +166,16 @@ class AutoCounter extends React.Component {
         );
     }
 
+    climbFailure = () => {
+        return (
+            <div className="climb-fail-button" onClick={() => this.handleAutoChange("CF")}>
+                <div className="auto-score-text">
+                    <span> Climb Failure </span>
+                </div>
+            </div>
+        );
+    }
+
     bigUIArray = () => {
             let arr = [
                 <div className="left-auto-widget">
@@ -214,6 +224,7 @@ class AutoCounter extends React.Component {
                 </div>
 
                 <div className="point-increase">
+                            {this.climbFailure()}
                             {this.score1x()}
                             {this.score5x()}
                             {this.score10x()}

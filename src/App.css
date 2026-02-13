@@ -1482,7 +1482,8 @@ link {
 
 .hub-score-button-5x,
 .hub-score-button-10x,
-.hub-score-button-1x {
+.hub-score-button-1x, 
+.climb-fail-button {
   background-color: rgb(146, 146, 146);
   padding: 10px 20px;
   border-radius: 10px;
@@ -1490,7 +1491,9 @@ link {
 }
 
 .hub-score-button-5x:active,
-.hub-score-button-10x:active {
+.hub-score-button-10x:active,
+.hub-score-button-1x:active,
+.climb-fail-button:active {
   background-color: rgb(90, 90, 90);
 }
 
