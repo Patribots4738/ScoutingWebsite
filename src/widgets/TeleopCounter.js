@@ -1,5 +1,6 @@
 import React from "react";
 import TeleopReef from "./TeleopSelecterWidget";
+import TeleopSelecterWidget from "./TeleopSelecterWidget";
 
 class TeleopCounter extends React.Component {
 
@@ -18,28 +19,28 @@ class TeleopCounter extends React.Component {
         let newLog
         if (this.scoreLocation == "HUB") {
             switch (amount) {
-                case "x1":
+                case "1":
                     newLog = this.state.hubValue + 1
                     break;
-                case "x5":
+                case "5":
                     newLog = this.state.hubValue + 5
                     break;
-                case "x10":
+                case "10":
                     newLog = this.state.hubValue + 10
                     break;
                 }
             this.setState({
-                hubValuevalue: newLog
+                hubValue: newLog
             })
         } else if (this.scoreLocation == "PASS") {
             switch (amount) {
-                case "x1":
+                case "1":
                     newLog = this.state.passValue + 1
                     break;
-                case "x5":
+                case "5":
                     newLog = this.state.passValue + 5
                     break;
-                case "x10":
+                case "10":
                     newLog = this.state.passValue + 10
                     break;
                 }
@@ -66,28 +67,28 @@ class TeleopCounter extends React.Component {
         let newLog
         if (this.scoreLocation == "HUB") {
             switch (amount) {
-                case "x1":
+                case "1":
                     newLog = this.state.hubValue - 1
                     break;
-                case "x5":
+                case "5":
                     newLog = this.state.hubValue - 5
                     break;
-                case "x10":
+                case "10":
                     newLog = this.state.hubValue - 10
                     break;
                 }
             this.setState({
-                hubValuevalue: newLog
+                hubValue: newLog
             })
         } else if (this.scoreLocation == "PASS") {
             switch (amount) {
-                case "x1":
+                case "1":
                     newLog = this.state.passValue - 1
                     break;
-                case "x5":
+                case "5":
                     newLog = this.state.passValue - 5
                     break;
-                case "x10":
+                case "10":
                     newLog = this.state.passValue - 10
                     break;
                 }
@@ -113,6 +114,22 @@ class TeleopCounter extends React.Component {
         )
     }
 
+    hubBtn = () => {
+        return(
+            <button className="Hub-btn" onClick={this.handleScoreLocation("HUB")}>
+                Hub
+            </button>
+        )
+    }
+
+    passBtn = () => {
+        return(
+            <button className="Pass-btn" onClick={this.handleScoreLocation("PASS")}>
+                Pass
+            </button>
+        )
+    }
+
     //this guy is very silly
     bigUIArray = () => {
         let arr = [
@@ -128,23 +145,21 @@ class TeleopCounter extends React.Component {
                             Pass: {this.state.passValue}
                         </div>
                     </div>
-                    <button className="Hub-btn" onClick={this.handleScoreLocation("HUB")}>
-                        Hub
-                    </button>
-                    <button className="Pass-btn" onClick={this.handleScoreLocation("PASS")}>
-                        Pass
-                    </button>
+                    <div className="location-box">
+                        {this.hubBtn()}
+                        {this.passBtn()}
+                    </div>
                 </div>
                 <div className="teleop-score-box">
                     {this.scorebtn()}
                     {this.removebtn()}
                 </div>
             </div>),
-            (<TeleopReef
+            (<TeleopSelecterWidget
                 handleScoreAmount={this.handleScoreAmount}
-                x1="x1"
-                x5="x5"
-                x10="x10"
+                x1="1"
+                x5="5"
+                x10="10"
             />)
         ]
         return arr;
