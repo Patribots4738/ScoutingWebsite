@@ -14,9 +14,9 @@ class TeleopCounter extends React.Component {
     }
 
     handleScore = () => {
-        let amount = this.scoreAmount
+        let amount = this.state.scoreAmount
         let newLog
-        if (this.scoreLocation == "HUB") {
+        if (this.state.scoreLocation === "HUB") {
             switch (amount) {
                 case "x1":
                     newLog = this.state.hubValue + 1
@@ -29,9 +29,9 @@ class TeleopCounter extends React.Component {
                     break;
                 }
             this.setState({
-                hubValuevalue: newLog
+                hubValue: newLog
             })
-        } else if (this.scoreLocation == "PASS") {
+        } else if (this.scoreLocation === "PASS") {
             switch (amount) {
                 case "x1":
                     newLog = this.state.passValue + 1
@@ -61,10 +61,10 @@ class TeleopCounter extends React.Component {
         })
     }
 
-   handleRemove = () => {
+    handleRemove = () => {
         let amount = this.scoreAmount
         let newLog
-        if (this.scoreLocation == "HUB") {
+        if (this.scoreLocation === "HUB") {
             switch (amount) {
                 case "x1":
                     newLog = this.state.hubValue - 1
@@ -77,9 +77,9 @@ class TeleopCounter extends React.Component {
                     break;
                 }
             this.setState({
-                hubValuevalue: newLog
+                hubValue: newLog
             })
-        } else if (this.scoreLocation == "PASS") {
+        } else if (this.scoreLocation === "PASS") {
             switch (amount) {
                 case "x1":
                     newLog = this.state.passValue - 1
@@ -128,10 +128,10 @@ class TeleopCounter extends React.Component {
                             Pass: {this.state.passValue}
                         </div>
                     </div>
-                    <button className="Hub-btn" onClick={this.handleScoreLocation("HUB")}>
+                    <button className="Hub-btn" onClick={() => this.handleScoreLocation("HUB")}>
                         Hub
                     </button>
-                    <button className="Pass-btn" onClick={this.handleScoreLocation("PASS")}>
+                    <button className="Pass-btn" onClick={() => this.handleScoreLocation("PASS")}>
                         Pass
                     </button>
                 </div>
@@ -152,7 +152,7 @@ class TeleopCounter extends React.Component {
 
     render() {
         return (
-            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={JSON.stringify(this.state.value)}>
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={JSON.stringify({hubValue: this.state.hubValue, passValue: this.state.passValue})}>
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>
