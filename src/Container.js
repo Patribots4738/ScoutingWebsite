@@ -16,7 +16,6 @@ import ClearLocalStorage from './widgets/ClearLocalStorage';
 import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
 import Dropdown from './widgets/Dropdown';
-import Counter from './widgets/Counter';
 import TeleopCounter from './widgets/TeleopCounter';
 
 class Container extends React.Component {
@@ -338,13 +337,13 @@ class Container extends React.Component {
             AUTO
           </h2>
         
-          <div classname="auto-widget-box">
+          <div className="auto-widget-box">
             <AutoCounter
               title={"Auto Path"}
               id={this.assignUUID()}
             />
           </div>
-          <div classname="auto-notes-box">
+          <div className="auto-notes-box">
             <TextBoxLong
               className="text-box-long"
               id={this.assignUUID()}
@@ -359,8 +358,12 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <TeleopCounter/>
-          <div classname="tele-offcyle-box">
+          <TeleopCounter
+            id={this.assignUUID()}
+            title={"Teleop Scoring"}
+            className={"teleop"}
+          />
+          <div className="tele-offcyle-box">
             <TextBoxLong
               className="text-box-long"
               id={this.assignUUID()}

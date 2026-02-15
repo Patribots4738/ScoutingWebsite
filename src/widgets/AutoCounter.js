@@ -22,7 +22,7 @@ class AutoCounter extends React.Component {
     handleAdd = ( count = 1) => {
         const newScores = Array (count).fill(this.state.autoPath);
         this.setState({ 
-            scoreValue: [...this.state.scoreValue, ... newScores]
+            scoreValue: [...this.state.scoreValue, ...newScores]
         });
 
     }
