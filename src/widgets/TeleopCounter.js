@@ -1,5 +1,4 @@
 import React from "react";
-import TeleopReef from "./TeleopSelecterWidget";
 import TeleopSelecterWidget from "./TeleopSelecterWidget";
 
 class TeleopCounter extends React.Component {
@@ -63,9 +62,9 @@ class TeleopCounter extends React.Component {
     }
 
     handleRemove = () => {
-        let amount = this.scoreAmount
+        let amount = this.state.scoreAmount
         let newLog
-        if (this.scoreLocation === "HUB") {
+        if (this.state.scoreLocation === "HUB") {
             switch (amount) {
                 case "1":
                     newLog = this.state.hubValue - 1

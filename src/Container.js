@@ -22,7 +22,6 @@ class Container extends React.Component {
 
   
   state = {
-    scoutingLog: [],
     selectedAlliance: localStorage.getItem('alliance')
   }
 
@@ -238,7 +237,6 @@ class Container extends React.Component {
 
   assignUUID = () => {
     var id = uuidv4();
-    this.state.scoutingLog.push(id);
     return id;
   }
 
