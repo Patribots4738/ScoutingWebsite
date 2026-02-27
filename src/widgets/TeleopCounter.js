@@ -12,6 +12,7 @@ class TeleopCounter extends React.Component {
         scoreAmount: localStorage.getItem("scoreAmount"),
         scoreLocation: "HUB"
     }
+    
 
     handleScore = () => {
         let amount = this.state.scoreAmount

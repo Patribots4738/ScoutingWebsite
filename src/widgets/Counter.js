@@ -36,7 +36,14 @@ class Counter extends React.Component{
                     </div>
                    
                     <span className="btn-container">
-                       
+                        
+                        <button
+                            className={"btn-dbtn-10"}
+                            onClick={() => this.decreaseCounter(10)}>
+                            -10
+                        </button>
+
+
                         <button
                             className={"btn-dbtn-5"}
                             onClick={() => this.decreaseCounter(5)}>
@@ -64,7 +71,11 @@ class Counter extends React.Component{
                             onClick={() => this.increaseCounter(5)}>
                             +5
                         </button>
-
+                        <button
+                            className={"btn-ubtn-10"}
+                            onClick={() => this.increaseCounter(10)}>
+                            +10
+                        </button>
                     
 
                     </span>
