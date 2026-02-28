@@ -17,14 +17,14 @@ import ClearLocalStorage from './widgets/ClearLocalStorage';
 import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
 import Dropdown from './widgets/Dropdown';
-import TeleopCounter from './widgets/TeleopCounter';
 import Slider from './widgets/Slider';
 
 class Container extends React.Component {
 
   
   state = {
-    selectedAlliance: localStorage.getItem('alliance')
+    selectedAlliance: localStorage.getItem('alliance'),
+    scoutingLog: []
   }
 
   gatherData = () => {
@@ -80,7 +80,9 @@ class Container extends React.Component {
         let autoExported = data[4][1].split("  -  ");
         let autoPieces = autoExported[0];
         let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
-        let teleopPieceCounts = JSON.parse(data[7][1]);
+        let scoreCount = data[7][1];
+        let passCount = data[8][1];
+        let fumblePercent = data[9][1];
         let position = autoExported[1];
         let didItLeave = 0;
         
@@ -101,26 +103,18 @@ class Container extends React.Component {
         }
 
         let jsonData = {     
-          "L4 Auto": autoPieceCounts["L4"],
-          "L3 Auto": autoPieceCounts["L3"],
-          "L2 Auto": autoPieceCounts["L2"],
-          "L1 Auto": autoPieceCounts["L1"],
-          "Processor Auto": autoPieceCounts["processor"],
-          "Net Auto": autoPieceCounts["net"],
-          "Coral Fumble Auto": autoPieceCounts["coralFumble"],
-          "Net Fumble Auto": autoPieceCounts["netFumble"],
-          "Processor Fumble Auto": autoPieceCounts["processorFumble"],
-          "Algae Removed Auto": autoPieceCounts["algaeRemove"],
-          "L4 Teleop": teleopPieceCounts["L4"],
-          "L3 Teleop": teleopPieceCounts["L3"],
-          "L2 Teleop": teleopPieceCounts["L2"],
-          "L1 Teleop": teleopPieceCounts["L1"],
-          "Processor Teleop": teleopPieceCounts["P"],
-          "Net Teleop": teleopPieceCounts["N"],
-          "Coral Fumble Teleop": teleopPieceCounts["CF"],
-          "Net Fumble Teleop": teleopPieceCounts["NF"],
-          "Processor Fumble Teleop": teleopPieceCounts["PF"],
-          "Algae Removed Teleop": teleopPieceCounts["RA"],
+          "Climb Auto": autoPieceCounts["C"],
+          "Start Depot": autoPieceCounts["SD"],
+          "Start Hub": autoPieceCounts["SH"],
+          "Start Outpost": autoPieceCounts["SO"],
+          "Outpost Intake": autoPieceCounts["OI"],
+          "Depot Intake": autoPieceCounts["DI"],
+          "Center Intake Auto": autoPieceCounts["CI"],
+          "Score Auto": autoPieceCounts["S"],
+          "Climb Failure Auto": autoPieceCounts["CF"],
+          "Score Teleop": scoreCount,
+          "Pass Teleop": passCount,
+          "Fumble Percent": fumblePercent,
           "Match Number": matchNumber,
           "Deep Cage": data[8][1],
           "Shallow Cage": data[9][1],
@@ -175,51 +169,47 @@ class Container extends React.Component {
 
   autoPieceCount  = (arr) => {
     let pieceCounts = {
-      L4: 0,
-      L3: 0,
-      L2: 0,
-      L1: 0,
-      processor: 0,
-      net: 0,
-      coralFumble: 0,
-      netFumble: 0,
-      processorFumble: 0,
-      algaeRemove: 0
+      C: 0,
+      SD: 0,
+      SH: 0,
+      SO: 0,
+      OI: 0,
+      DI: 0,
+      CI: 0,
+      S: 0,
+      CF: 0
     }
 
     for (let i = 0; i < arr.length; i++) {
       let loc = arr[i];
       // eslint-disable-next-line default-case
       switch (loc) {
-        case "L1":
-          pieceCounts["L1"]++
+        case "C":
+          pieceCounts["C"]++
           break
-        case "L2": 
-          pieceCounts["L2"]++
+        case "SD": 
+          pieceCounts["SD"]++
           break
-        case "L3":
-          pieceCounts["L3"]++
+        case "SH":
+          pieceCounts["SH"]++
           break
-        case "L4":
-          pieceCounts["L4"]++
+        case "SO":
+          pieceCounts["SO"]++
           break
-        case "P":
-          pieceCounts["processor"]++
+        case "OI":
+          pieceCounts["OI"]++
           break
-        case "N":
-          pieceCounts["net"]++
+        case "DI":
+          pieceCounts["DI"]++
           break
-        case "FR":
-          pieceCounts["coralFumble"]++
+        case "CI":
+          pieceCounts["CI"]++
           break
-        case "FP":
-          pieceCounts["processorFumble"]++
+        case "S":
+          pieceCounts["S"]++
           break
-        case "FN":
-          pieceCounts["netFumble"]++
-          break
-        case "RG":
-          pieceCounts["algaeRemove"]++
+        case "CF":
+          pieceCounts["CF"]++
           break
       }
     }
@@ -365,24 +355,30 @@ class Container extends React.Component {
           /> */}
 
           <div className="teleop-counter">
-            <Counter
-              id={this.assignUUID()}
-              title="Score"
-              decorator="teleop-score"
-              upperLimit={3000}
-            />
-            <Counter
-              id={this.assignUUID()}
-              title="Pass"
-              decorator="teleop-pass"
-              upperLimit={3000}
-            />
-            <Slider
-              title="Fumble Percent"
-              id={this.assignUUID()}
-              value={5}
-              decorator="fumble"
-            />
+            <div className="tele-score-box">
+              <Counter
+                id={this.assignUUID()}
+                title="Score"
+                decorator="teleop-score"
+                upperLimit={3000}
+              />
+            </div>
+            <div className="tele-pass-box">
+              <Counter
+                id={this.assignUUID()}
+                title="Pass"
+                decorator="teleop-pass"
+                upperLimit={3000}
+              />
+            </div>
+            <div className="slider-box">
+              <Slider
+                title="Fumble Percent"
+                id={this.assignUUID()}
+                value={5}
+                decorator="fumble"
+              />
+            </div>
           </div>
 
           <div className="tele-offcyle-box">
