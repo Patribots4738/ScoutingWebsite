@@ -22,17 +22,20 @@ import Slider from './widgets/Slider';
 class Container extends React.Component {
 
   
-  state = {
-    selectedAlliance: localStorage.getItem('alliance'),
-    scoutingLog: []
+  constructor(props) {
+    super(props);
+    this.state = {
+        selectedAlliance: localStorage.getItem('alliance'),
+    };
+    this.scoutingLog = [];  
   }
 
   gatherData = () => {
     var arr = []
 
-    for (var i = 0; i < this.state.scoutingLog.length; i++) {
+    for (var i = 0; i < this.scoutingLog.length; i++) {
 
-      var element = document.getElementById(this.state.scoutingLog[i]);
+      var element = document.getElementById(this.scoutingLog[i]);
       console.log(element);
       if (element !== null) {
         var value;
@@ -85,7 +88,6 @@ class Container extends React.Component {
         let scoreCount = data[6][1];
         let passCount = data[7][1];
         let fumblePercent = data[8][1];
-        let position = autoExported[1];
         
         let commentData = { 
           "Name": name,
@@ -123,13 +125,13 @@ class Container extends React.Component {
           "Under Trench": data[16][1],
           "Shooting While Driving": data[19][1],
         };
-        //           game           event                  match #           Name         Position               
-        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
+        //           game           event                  match #           Name            team             
+        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[2][1] + '/data/'), jsonData);
+        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[2][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name)
         localStorage.setItem("matchNumber", matchNumber)
-        localStorage.setItem("alliance", position)
+        localStorage.setItem("alliance", alliance)
 
         let cachedData = JSON.parse(localStorage.getItem("matchData"))
         
@@ -226,9 +228,7 @@ class Container extends React.Component {
 
   assignUUID = () => {
     var id = uuidv4();
-    this.setState({
-      scoutingLog: [...this.state.scoutingLog, id]
-    });
+    this.scoutingLog.push(id);
     return id;
   }
 
