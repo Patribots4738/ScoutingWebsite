@@ -77,29 +77,23 @@ class Container extends React.Component {
         }
         let name = data[0][1];
         let matchNumber = data[1][1];
+        let alliance = data[2][1];
+        let teamNumber = data[3][1];
         let autoExported = data[4][1].split("  -  ");
         let autoPieces = autoExported[0];
         let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
-        let scoreCount = data[7][1];
-        let passCount = data[8][1];
-        let fumblePercent = data[9][1];
+        let scoreCount = data[6][1];
+        let passCount = data[7][1];
+        let fumblePercent = data[8][1];
         let position = autoExported[1];
-        let didItLeave = 0;
-        
-        if (data[3][1] === "" && data[5][1] === false) {
-          didItLeave = 0;
-        } else if (data[3][1] !== "" || data[5][1] === true) {
-          didItLeave = 1;
-        }
         
         let commentData = { 
           "Name": name,
-          "What they did well": data[16][1],
-          "What they did bad": data[17][1],
-          "Additional Comments": data[18][1],
-          "Auto Description": data[6][1],
-          "Auto Start": data[3][1],
-          "Auto Path": autoPieces
+          "Team": teamNumber,
+          "Comments": data[20][1],
+          "Auto Description": data[5][1],
+          "Auto Path": autoPieces,
+          "Off Time": data[9][1],
         }
 
         let jsonData = {     
@@ -116,15 +110,18 @@ class Container extends React.Component {
           "Pass Teleop": passCount,
           "Fumble Percent": fumblePercent,
           "Match Number": matchNumber,
-          "Deep Cage": data[8][1],
-          "Shallow Cage": data[9][1],
-          "Climb Failure": data[10][1],
-          "Ground Intake": data[13][1],
-          "Station Intake": data[14][1],
-          "Temp Failure": data[11][1],
-          "Critical Failure": data[12][1],
-          "Auto Leave": didItLeave,
-          "Defense": data[15][1]
+          "Team": teamNumber,
+          "Alliance": alliance,
+          "L1 Climb": data[10][1],
+          "L2 Climb": data[11][1],
+          "Climb Failure": data[12][1],
+          "Ground Intake": data[17][1],
+          "Station Intake": data[18][1],
+          "Temp Failure": data[13][1],
+          "Critical Failure": data[14][1],
+          "Over Bump": data[15][1],
+          "Under Trench": data[16][1],
+          "Shooting While Driving": data[19][1],
         };
         //           game           event                  match #           Name         Position               
         set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
@@ -229,6 +226,9 @@ class Container extends React.Component {
 
   assignUUID = () => {
     var id = uuidv4();
+    this.setState({
+      scoutingLog: [...this.state.scoutingLog, id]
+    });
     return id;
   }
 
