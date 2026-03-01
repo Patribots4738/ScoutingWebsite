@@ -92,7 +92,7 @@ class Container extends React.Component {
         let commentData = { 
           "Name": name,
           "Team": teamNumber,
-          "Comments": data[20][1],
+          "Comments": data[21][1],
           "Auto Description": data[5][1],
           "Auto Path": autoPieces,
           "Off Time": data[9][1],
@@ -116,18 +116,19 @@ class Container extends React.Component {
           "Alliance": alliance,
           "L1 Climb": data[10][1],
           "L2 Climb": data[11][1],
+          "Traversal Climb": data[13][1],
           "Climb Failure": data[12][1],
-          "Ground Intake": data[17][1],
-          "Station Intake": data[18][1],
-          "Temp Failure": data[13][1],
-          "Critical Failure": data[14][1],
-          "Over Bump": data[15][1],
-          "Under Trench": data[16][1],
-          "Shooting While Driving": data[19][1],
+          "Ground Intake": data[18][1],
+          "Station Intake": data[19][1],
+          "Temp Failure": data[14][1],
+          "Critical Failure": data[15][1],
+          "Over Bump": data[16][1],
+          "Under Trench": data[17][1],
+          "Shooting While Driving": data[20][1],
         };
         //           game           event                  match #           Name            team             
-        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[2][1] + '/data/'), jsonData);
-        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[2][1] + '/comments/'), commentData);
+        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[3][1] + '/data/'), jsonData);
+        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[3][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name)
         localStorage.setItem("matchNumber", matchNumber)
