@@ -2,12 +2,13 @@ import './App.css';
 
 import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox';
-import TeleopCounter from './widgets/TeleopCounter';
-import AutoCounter from './widgets/AutoCounter';
+//import TeleopCounter from './widgets/TeleopCounter';
 import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
-import Dropdown from './widgets/Dropdown';
+//import Dropdown from './widgets/Dropdown';
+import AutoCounter from './widgets/AutoCounter';
+import Counter from './widgets/Counter'; 
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -15,19 +16,26 @@ import ClearLocalStorage from './widgets/ClearLocalStorage';
 
 import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
+import Dropdown from './widgets/Dropdown';
+import Slider from './widgets/Slider';
 
 class Container extends React.Component {
+
   
-  state = {
-    scoutingLog: []
+  constructor(props) {
+    super(props);
+    this.state = {
+        selectedAlliance: localStorage.getItem('alliance'),
+    };
+    this.scoutingLog = [];  
   }
 
   gatherData = () => {
     var arr = []
 
-    for (var i = 0; i < this.state.scoutingLog.length; i++) {
+    for (var i = 0; i < this.scoutingLog.length; i++) {
 
-      var element = document.getElementById(this.state.scoutingLog[i]);
+      var element = document.getElementById(this.scoutingLog[i]);
       console.log(element);
       if (element !== null) {
         var value;
@@ -72,68 +80,59 @@ class Container extends React.Component {
         }
         let name = data[0][1];
         let matchNumber = data[1][1];
+        let alliance = data[2][1];
+        let teamNumber = data[3][1];
         let autoExported = data[4][1].split("  -  ");
         let autoPieces = autoExported[0];
         let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
-        let teleopPieceCounts = JSON.parse(data[7][1]);
-        let position = autoExported[1];
-        let didItLeave = 0;
-        
-        if (data[3][1] === "" && data[5][1] === false) {
-          didItLeave = 0;
-        } else if (data[3][1] !== "" || data[5][1] === true) {
-          didItLeave = 1;
-        }
+        let scoreCount = data[6][1];
+        let passCount = data[7][1];
+        let fumblePercent = data[8][1];
         
         let commentData = { 
           "Name": name,
-          "What they did well": data[16][1],
-          "What they did bad": data[17][1],
-          "Additional Comments": data[18][1],
-          "Auto Description": data[6][1],
-          "Auto Start": data[3][1],
-          "Auto Path": autoPieces
+          "Team": teamNumber,
+          "Comments": data[21][1],
+          "Auto Description": data[5][1],
+          "Auto Path": autoPieces,
+          "Off Time": data[9][1],
         }
 
         let jsonData = {     
-          "L4 Auto": autoPieceCounts["L4"],
-          "L3 Auto": autoPieceCounts["L3"],
-          "L2 Auto": autoPieceCounts["L2"],
-          "L1 Auto": autoPieceCounts["L1"],
-          "Processor Auto": autoPieceCounts["processor"],
-          "Net Auto": autoPieceCounts["net"],
-          "Coral Fumble Auto": autoPieceCounts["coralFumble"],
-          "Net Fumble Auto": autoPieceCounts["netFumble"],
-          "Processor Fumble Auto": autoPieceCounts["processorFumble"],
-          "Algae Removed Auto": autoPieceCounts["algaeRemove"],
-          "L4 Teleop": teleopPieceCounts["L4"],
-          "L3 Teleop": teleopPieceCounts["L3"],
-          "L2 Teleop": teleopPieceCounts["L2"],
-          "L1 Teleop": teleopPieceCounts["L1"],
-          "Processor Teleop": teleopPieceCounts["P"],
-          "Net Teleop": teleopPieceCounts["N"],
-          "Coral Fumble Teleop": teleopPieceCounts["CF"],
-          "Net Fumble Teleop": teleopPieceCounts["NF"],
-          "Processor Fumble Teleop": teleopPieceCounts["PF"],
-          "Algae Removed Teleop": teleopPieceCounts["RA"],
+          "Climb Auto": autoPieceCounts["C"],
+          "Start Depot": autoPieceCounts["SD"],
+          "Start Hub": autoPieceCounts["SH"],
+          "Start Outpost": autoPieceCounts["SO"],
+          "Outpost Intake": autoPieceCounts["OI"],
+          "Depot Intake": autoPieceCounts["DI"],
+          "Center Intake Auto": autoPieceCounts["CI"],
+          "Score Auto": autoPieceCounts["S"],
+          "Climb Failure Auto": autoPieceCounts["CF"],
+          "Score Teleop": scoreCount,
+          "Pass Teleop": passCount,
+          "Fumble Percent": fumblePercent,
           "Match Number": matchNumber,
-          "Deep Cage": data[8][1],
-          "Shallow Cage": data[9][1],
-          "Climb Failure": data[10][1],
-          "Ground Intake": data[13][1],
-          "Station Intake": data[14][1],
-          "Temp Failure": data[11][1],
-          "Critical Failure": data[12][1],
-          "Auto Leave": didItLeave,
-          "Defense": data[15][1]
+          "Team": teamNumber,
+          "Alliance": alliance,
+          "L1 Climb": data[10][1],
+          "L2 Climb": data[11][1],
+          "Traversal Climb": data[13][1],
+          "Climb Failure": data[12][1],
+          "Ground Intake": data[18][1],
+          "Station Intake": data[19][1],
+          "Temp Failure": data[14][1],
+          "Critical Failure": data[15][1],
+          "Over Bump": data[16][1],
+          "Under Trench": data[17][1],
+          "Shooting While Driving": data[20][1],
         };
-        //           game           event                  match #           Name         Position               
-        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
+        //           game           event                  match #           Name            team             
+        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[3][1] + '/data/'), jsonData);
+        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[3][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name)
         localStorage.setItem("matchNumber", matchNumber)
-        localStorage.setItem("alliance", position)
+        localStorage.setItem("alliance", alliance)
 
         let cachedData = JSON.parse(localStorage.getItem("matchData"))
         
@@ -170,51 +169,47 @@ class Container extends React.Component {
 
   autoPieceCount  = (arr) => {
     let pieceCounts = {
-      L4: 0,
-      L3: 0,
-      L2: 0,
-      L1: 0,
-      processor: 0,
-      net: 0,
-      coralFumble: 0,
-      netFumble: 0,
-      processorFumble: 0,
-      algaeRemove: 0
+      C: 0,
+      SD: 0,
+      SH: 0,
+      SO: 0,
+      OI: 0,
+      DI: 0,
+      CI: 0,
+      S: 0,
+      CF: 0
     }
 
     for (let i = 0; i < arr.length; i++) {
       let loc = arr[i];
       // eslint-disable-next-line default-case
       switch (loc) {
-        case "L1":
-          pieceCounts["L1"]++
+        case "C":
+          pieceCounts["C"]++
           break
-        case "L2": 
-          pieceCounts["L2"]++
+        case "SD": 
+          pieceCounts["SD"]++
           break
-        case "L3":
-          pieceCounts["L3"]++
+        case "SH":
+          pieceCounts["SH"]++
           break
-        case "L4":
-          pieceCounts["L4"]++
+        case "SO":
+          pieceCounts["SO"]++
           break
-        case "P":
-          pieceCounts["processor"]++
+        case "OI":
+          pieceCounts["OI"]++
           break
-        case "N":
-          pieceCounts["net"]++
+        case "DI":
+          pieceCounts["DI"]++
           break
-        case "FR":
-          pieceCounts["coralFumble"]++
+        case "CI":
+          pieceCounts["CI"]++
           break
-        case "FP":
-          pieceCounts["processorFumble"]++
+        case "S":
+          pieceCounts["S"]++
           break
-        case "FN":
-          pieceCounts["netFumble"]++
-          break
-        case "RG":
-          pieceCounts["algaeRemove"]++
+        case "CF":
+          pieceCounts["CF"]++
           break
       }
     }
@@ -234,7 +229,7 @@ class Container extends React.Component {
 
   assignUUID = () => {
     var id = uuidv4();
-    this.state.scoutingLog.push(id);
+    this.scoutingLog.push(id);
     return id;
   }
 
@@ -258,6 +253,14 @@ class Container extends React.Component {
     }
   }
 
+  handleAllianceChange = (input) => {
+    if (input === "BLUE") {
+      document.querySelector(':root').style.setProperty('--team-color','blue')
+    } else if (input === "RED") {
+      document.querySelector(':root').style.setProperty('--team-color','red')
+    }
+  }
+
   render() {
     return (
       <ul className="container">
@@ -275,7 +278,6 @@ class Container extends React.Component {
         <h1 className="title">
           PATRIBOTS SCOUTING
         </h1>
-
         <div className='identification-container'>
           <h2 className="subtitle section-title">
             IDENTIFICATION
@@ -299,6 +301,17 @@ class Container extends React.Component {
             />
           </div>
           <div>
+            <Dropdown
+              className="dropdown alliance"
+              id={this.assignUUID()}
+              title={"Alliance"}
+              value={localStorage.getItem("alliance")}
+              items={[
+                {id:1, value: "RED", title: "Red"},
+                {id:2, value: "BLUE", title: "Blue"}
+              ]}
+              selected={this.handleAllianceChange}
+            />
             <TextBox
               className="textbox team"
               id={this.assignUUID()}
@@ -306,93 +319,105 @@ class Container extends React.Component {
               value={""}
               required={true}
               numeric={true}
+            />          
+          </div>
+        </div>
+        
+        <div className="auto-container">
+          <h2 className="subtitle section-title">
+            AUTO
+          </h2>
+        
+          <div className="auto-widget-box">
+            <AutoCounter
+              title={"Auto Path"}
+              id={this.assignUUID()}
+            />
+          </div>
+          <div className="auto-notes-box">
+            <TextBoxLong
+              className="text-box-long"
+              id={this.assignUUID()}
+              title={"Auto Notes"}
+              value={""}
+              numeric={false}
+              placeholder="Describe any abnormalities in the auto, anything that would not have been included in the auto path, and if their climb failed or where they ended. "
             />
           </div>
         </div>
-        <div className="auto-container">
-          <h2 className="subtitle section-title">
-            AUTONOMOUS
-          </h2>
-          <div className="style1">
-            <span>
-              <Dropdown
-                className="dropdown-auto"
-                id={this.assignUUID()}
-                title={"Starting Side"}
-                value={localStorage.getItem("position")}
-                selected={localStorage.getItem("position")}
-                required={true}
-                items={[
-                  {
-                    title: "Processor",
-                    value: "Processor"
-                  },
-                  {
-                    title: "Center",
-                    value: "Center"
-                  },
-                  {
-                    title: "Opposite Processor",
-                    value: "Opposite Processor"
-                  }
-                ]}
-              />
-            </span>
-            <div>
-              <AutoCounter
-                className="auto-counter"
-                id={this.assignUUID()}
-                title="Auto Counter"
-                decorator="auto-counter"
-                value={{}}
-              />
-              <div>
-                <CheckBox
-                className="byebye-auto"
-                title="Leave in Auto"
-                id={this.assignUUID()}
-                value={false}
-                decorator="dissapointmentCheckbox"
-                />
-              </div>
-            </div>
-            <div>
-              <TextBoxLong
-                className="text-box"
-                id={this.assignUUID()}
-                title={"Describe Auto Path"}
-                value={""}
-                numeric={false}
-              />
-            </div>
-          </div>
-        </div>
-
         <div className="teleop-container">
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <TeleopCounter
-            className="teleop-counter"
+          {/* <TeleopCounter
             id={this.assignUUID()}
-            title="Piece Counter"
-            value={{}}
-          />
-          <div className="checkboxes1">
+            title={"Teleop Scoring"}
+            className={"teleop"}
+          /> */}
+
+          <div className="teleop-counter">
+            <div className="tele-score-box">
+              <Counter
+                id={this.assignUUID()}
+                title="Score"
+                decorator="teleop-score"
+                upperLimit={3000}
+              />
+            </div>
+            <div className="tele-pass-box">
+              <Counter
+                id={this.assignUUID()}
+                title="Pass"
+                decorator="teleop-pass"
+                upperLimit={3000}
+              />
+            </div>
+            <div className="slider-box">
+              <Slider
+                title="Fumble Percent"
+                id={this.assignUUID()}
+                value={5}
+                decorator="fumble"
+              />
+            </div>
+          </div>
+
+          <div className="tele-offcyle-box">
+            <TextBoxLong
+              className="text-box-long"
+              id={this.assignUUID()}
+              title={"Off Time"}
+              value={""}
+              numeric={false}
+              placeholder="Describe what the robot was doing while their HUB was deactivated. Were they doing defense? Were they collecting fuel? Were they passing?"
+            />
+          </div>
+          <div className="checkboxes-top">
             <CheckBox
-              className="deep-cage"
-              title="Deep Climb"
+              className="climb1"
+              title="L1 Climb"
               id={this.assignUUID()}
               value={false}
               decorator="onstage"
             />
             <CheckBox
-              className="shallow-cage"
-              title="Shallow Climb"
+              className="climb2"
+              title="L2 Climb"
               id={this.assignUUID()}
               value={false}
               decorator="onstage"
             />
+            <CheckBox
+              className="climb3"
+              title="Traversal Climb"
+              id={this.assignUUID()}
+              value={false}
+              decorator="onstage"
+            />
+          </div>
+
+          <div className="checkboxes-bottom">
+
             <CheckBox
               className="isFailure"
               title="Climb Failure"
@@ -408,7 +433,7 @@ class Container extends React.Component {
             POST-MATCH
           </h2>
           <div className="checkboxes2">
-            <div>
+            <div className="checkboxes-post">
               <CheckBox
                 className="temporary"
                 title="Temp. Failure"
@@ -424,7 +449,23 @@ class Container extends React.Component {
                 decorator={"critical"}
               />
             </div>
-            <div>
+            <div className="checkboxes-post">
+              <CheckBox
+                className="Bump"
+                title="Over Bump"
+                id={this.assignUUID()}
+                value={false}
+                decorator={"critical"}
+              />
+              <CheckBox
+                className="trench"
+                title="Under Trench"
+                id={this.assignUUID()}
+                value={false}
+                decorator={"critical"}
+              />
+            </div>
+            <div className="checkboxes-post">
               <CheckBox
                 className="ground-intake"
                 title="Ground Intake"
@@ -440,44 +481,25 @@ class Container extends React.Component {
                 decorator={"critical"}
               />
             </div>
-            <div>
+            <div className="checkboxes-post">
               <CheckBox
-                className="defense"
-                title="Defense"
+                className="shoot&drive"
+                title="Shooting While Driving"
                 id={this.assignUUID()}
                 value={false}
-                decorator={"onstage"}
+                decorator={"critical"}
               />
             </div>
+
           </div>
           <div>
             <TextBoxLong
               className="text-box-long"
               id={this.assignUUID()}
-              title={"What they did well"}
+              title={"Comments"}
               value={""}
               numeric={false}
-              placeholder=""
-            />
-          </div>
-          <div>
-            <TextBoxLong
-              className="text-box-long"
-              id={this.assignUUID()}
-              title={"What they didn't do well"}
-              value={""}
-              numeric={false}
-              placeholder=""
-            />
-          </div>
-          <div>
-            <TextBoxLong
-              className="text-box-long"
-              id={this.assignUUID()}
-              title={"Additional comments"}
-              value={""}
-              numeric={false}
-              placeholder=""
+              placeholder="Include anything abnormal that could have influenced the match, their driving and defense capabilities, and things they did well and not so well."
             />
           </div>
 

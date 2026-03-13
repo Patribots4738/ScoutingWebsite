@@ -28,6 +28,7 @@ class TextBox extends React.Component{
         );
     }
 
+    
     determineRequired = (required) => {
         if (required) {
             return (

@@ -1,6 +1,11 @@
 import React from "react";
 import undo from "../images/undo.png";
-import ScoringSection from "./ScoringSection";
+import center from "../images/center.png";
+import hub from "../images/hub.png";
+import depot from "../images/depot.png";
+import climb from "../images/climb.png";
+import outpost from "../images/outpost.png";
+
 
 class AutoCounter extends React.Component {
 
@@ -9,63 +14,17 @@ class AutoCounter extends React.Component {
         title: "Auto Pieces",
         id: this.props.id,
         classNameDecorator: this.props.decorator,
-        reefHeight: "-",
-        alliance: localStorage.getItem("alliance"),
+        autoPath: "-",
+        alliance: "RED",
     }
 
-    allianceButtons = () => {
-        if (this.state.alliance === "BLUE") {
-            return (
-                <div>
-                    <button className="active-blue-button" onClick={() => this.handleAllianceBlue()}>
-                        <div className="alliance-text">Blue</div>
-                    </button>
-                    <button className="inactive-red-button" onClick={() => this.handleAllianceRed()}>
-                        <div className="alliance-text">Red</div>
-                    </button>
-                </div>
-            );
-        } else if (this.state.alliance === "RED") {
-            return (
-                <div>
-                    <button className="inactive-blue-button" onClick={() => this.handleAllianceBlue()}>
-                        <div className="alliance-text">Blue</div>
-                    </button>
-                    <button className="active-red-button" onClick={() => this.handleAllianceRed()}>
-                        <div className="alliance-text">Red</div>
-                    </button>
-                </div>
-            );
-        } else {
-            return (
-                <div>
-                    <button className="inactive-blue-button" onClick={() => this.handleAllianceBlue()}>
-                        <div className="alliance-text">Blue</div>
-                    </button>
-                    <button className="inactive-red-button" onClick={() => this.handleAllianceRed()}>
-                        <div className="alliance-text">Red</div>
-                    </button>
-                </div>
-            );
-        }
-    }
 
-    handleAllianceRed = () => {
-        this.setState({
-            alliance: "RED"
-        })
-    }
-
-    handleAllianceBlue = () => {
-        this.setState({
-            alliance: "BLUE"
-        })
-    }
-
-    handleAdd = () => {
-        this.setState({
-            scoreValue: [...this.state.scoreValue, this.state.reefHeight]
+    handleAdd = ( count = 1) => {
+        const newScores = Array (count).fill(this.state.autoPath);
+        this.setState({ 
+            scoreValue: [...this.state.scoreValue, ...newScores]
         });
+
     }
 
     handleRemove = () => {
@@ -78,66 +37,96 @@ class AutoCounter extends React.Component {
 
     handleLocationChange = (value) => {
         this.setState(
-            { reefHeight: value },
+            { autoPath: value },
             () => { this.handleAdd(); }
         )
     }
 
-    handleAlgaeChange = (value) => {
+    handleAutoChange = (value, count = 1) => {
         this.setState(
-            { reefHeight: value },
-            () => { this.handleAdd(); }
+            { autoPath: value },
+            () => { this.handleAdd(count); }
         )
     }
 
 
-    processor = () => {
-        if (this.state.alliance === "BLUE") {
+    AutoClimb = () => {
             return (
-                <div className="processor-button" onClick={() => this.handleAlgaeChange("P")}>
-                    <div className="processor-text">Processor</div>
+                <div className="climb-score-button" onClick={() => this.handleAutoChange("C")}>
+                    <div className="auto-score-text">
+                        <img src={climb} alt="" className="climb-img" />
+                    </div>
                 </div>
             );
-        } else if (this.state.alliance === "RED") {
-            return (
-                <div className="processor-button-red" onClick={() => this.handleAlgaeChange("P")}>
-                    <div className="processor-text">Processor</div>
-                </div>
-            );
-        }
+
     }
 
-    net = () => {
-        if (this.state.alliance === "BLUE") {
-            return (
-                <div className="processor-button" onClick={() => this.handleAlgaeChange("N")}>
-                    <div className="processor-text">Net</div>
-                </div>
-            );
-        } else if (this.state.alliance === "RED") {
-            return (
-                <div className="processor-button-red" onClick={() => this.handleAlgaeChange("N")}>
-                    <div className="processor-text">Net</div>
-                </div>
-            );
-        }
-    }
 
-    fumbleAlgaeProcessor = () => {
+    outpostIntake = () => {
         return (
-            <div className="fumble-algae-button" onClick={() => this.handleAlgaeChange("FP")}>
-                <div className="fumble-algae-text">Fumble Processor</div>
+            <div className="outpost-intake-button" onClick={() => this.handleAutoChange("OI")}>
+                <div className="auto-score-text"> 
+                    <img src={outpost} alt="" className="outpost-img" />
+                </div>
             </div>
         );
     }
 
-    fumbleAlgaeNet = () => {
+    startDepot = () => {
         return (
-            <div className="fumble-algae-button" onClick={() => this.handleAlgaeChange("FN")}>
-                <div className="fumble-algae-text">Fumble Net</div>
+            <div className="start-depot-button" onClick={() => this.handleAutoChange("SD")}>
+                SD
             </div>
         );
     }
+
+    startHub = () => {
+        return (
+            <div className="start-hub-button" onClick={() => this.handleAutoChange("SH")}>
+                SH
+            </div>
+        );
+    }
+
+    startOutpost = () => {
+        return (
+            <div className="start-outpost-button" onClick={() => this.handleAutoChange("SO")}>
+                SO
+            </div>
+        );
+    }
+
+    depotIntake = () => {
+        return (
+            <div className="depot-button" onClick={() => this.handleAutoChange("DI")}>
+                <div className="auto-score-text"> 
+                    <img src={depot} alt="" className="depot-img" /> 
+                </div>
+            </div>
+        );
+    }
+
+    centerIntake = () => {
+        return (
+            <div className="auto-center-button" onClick={() => this.handleAutoChange("CI")}>
+                <div className="auto-score-text">                 
+                    <img src={center} alt="" className="center-field-img" /> 
+                </div>
+            </div>
+        );
+    }
+
+    score = () => {
+        return (
+            <div className="hub-score-button" onClick={() => this.handleAutoChange("S")}>
+                <div className="auto-score-text"> 
+                    <img src={hub} alt="" className="hub-img" /> 
+                </div>
+            </div>
+        );
+    }
+
+
 
     undo = () => {
         return (
@@ -147,80 +136,76 @@ class AutoCounter extends React.Component {
         );
     }
 
-    bigUIArray = () => {
-        if (this.state.alliance === "BLUE") {
-            let arr = [
-                (<ScoringSection
-                    fail1="FC"
-                    failText="Fumble Coral"
-                    l4Text="L4"
-                    l3Text="L3"
-                    l2Text="L2"
-                    l1Text="L1"
-                    algaeText="Remove Algae"
-                    algaeremove="RA"
-                    handleLevel={this.handleLocationChange}
-                    alliance={this.state.alliance}
-                />),
-                (<div className="misc">
-                    <div className="algae-box">
-                        <div>
-                            {this.processor()}
-                        </div>
-                        <div>
-                            {this.fumbleAlgaeProcessor()}
-                        </div>
-                        <div>
-                            {this.net()}
-                        </div>
-                        <div>
-                            {this.fumbleAlgaeNet()}
-                        </div>
-                    </div>
-                </div>)
-            ]
-            return arr;
-        } else if (this.state.alliance === "RED") {
-            let arr = [
-                (<ScoringSection
-                    fail1="FC"
-                    failText="Fumble Coral"
-                    l4Text="L4"
-                    l3Text="L3"
-                    l2Text="L2"
-                    l1Text="L1"
-                    algaeText="Remove Algae"
-                    algaeremove="RA"
-                    handleLevel={this.handleLocationChange}
-                    alliance={this.state.alliance}
-                />),
-                (<div className="misc">
-                    <div className="algae-box">
-                        <div>
-                            {this.processor()}
-                        </div>
-                        <div>
-                            {this.fumbleAlgaeProcessor()}
-                        </div>
-                        <div>
-                            {this.net()}
-                        </div>
-                        <div>
-                            {this.fumbleAlgaeNet()}
-                        </div>
-                    </div>
-                </div>)
-            ]
-            return arr;
-        }
+    score5x = () => {
+        return (
+            <div className="hub-score-button-5x" onClick={() => this.handleAutoChange("S", 5)}>
+                <div className="auto-score-text"> 
+                    <span> x5</span>
+                </div>
+            </div>
+        );
     }
+    
+    score10x = () => {
+        return (
+            <div className="hub-score-button-10x" onClick={() => this.handleAutoChange("S", 10)}>
+                <div className="auto-score-text">  
+                    <span> x10</span>
+                </div>
+            </div>
+        );
+    }
+
+    score1x = () => {
+        return (
+            <div className="hub-score-button-1x" onClick={() => this.handleAutoChange("S", 1)}>
+                <div className="auto-score-text">  
+                    <span> x1</span>
+                </div>
+            </div>
+        );
+    }
+
+    climbFailure = () => {
+        return (
+            <div className="climb-fail-button" onClick={() => this.handleAutoChange("CF")}>
+                <div className="auto-score-text">
+                    <span> Climb Failure </span>
+                </div>
+            </div>
+        );
+    }
+
+    bigUIArray = () => {
+            let arr = [
+                <div className="left-auto-widget">
+                        {this.depotIntake()}
+                        {this.AutoClimb()}
+                        {this.outpostIntake()}
+                </div>,
+                <div className="Pose-box">
+                        {this.startDepot()}
+                        {this.startHub()}
+                        {this.startOutpost()}
+                </div>,
+                <div className="misc">
+                        {this.score()}
+                </div>,
+                <div className="misc">
+                    <div className="center-intake">
+                        {this.centerIntake()}
+                    </div>
+                </div>
+
+            ]
+            return arr;
+    }
+    
 
     render() {
         return (
             <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={[this.state.scoreValue.join(" - "), this.state.alliance].join("  -  ")}>
-                <div>
-                    {this.allianceButtons()}
-                </div>
+
                 <div className={"subtitle"}>
                     {this.state.title}
                 </div>
@@ -236,6 +221,14 @@ class AutoCounter extends React.Component {
                     <div className="field-map">
                         {this.bigUIArray()}
                     </div>
+                </div>
+
+                <div className="point-increase">
+                            {this.climbFailure()}
+                            {this.score1x()}
+                            {this.score5x()}
+                            {this.score10x()}
+                            
                 </div>
             </span>
         )

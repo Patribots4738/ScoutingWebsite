@@ -1,4 +1,5 @@
 import React from "react";
+import Counter from "./Counter";
 
 class ScoringSection extends React.Component {
 
@@ -28,18 +29,6 @@ class ScoringSection extends React.Component {
                         </div>  
                     </div>
                 </div>
-                <div>
-                    <div className="fail-button" onClick={() => this.props.handleLevel(this.props.fail1)}>
-                        <div className="fail-text">
-                            {this.props.failText}
-                        </div>
-                    </div>
-                    <div className="algae-button" onClick={() => this.props.handleLevel(this.props.algaeremove)}>
-                        <div className="algae-text">
-                            {this.props.algaeText}
-                        </div>
-                    </div>
-                </div>
             </div>
         );
         } else if (this.props.alliance === "RED") {
@@ -66,18 +55,8 @@ class ScoringSection extends React.Component {
                                 {this.props.l1Text}
                         </div>  
                     </div>
-                    </div>
-                    <div>
-                    <div className="fail-button" onClick={() => this.props.handleLevel(this.props.fail1)}>
-                        <div className="fail-text">
-                                {this.props.failText}
-                        </div>
-                    </div>
-                    <div className="algae-button" onClick={() => this.props.handleLevel(this.props.algaeremove)}>
-                        <div className="algae-text">
-                            {this.props.algaeText}
-                        </div>
-                    </div>
+
+
                     </div>
                 </div>
             );
