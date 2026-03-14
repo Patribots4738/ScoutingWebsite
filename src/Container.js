@@ -341,7 +341,7 @@ class Container extends React.Component {
               title={"Auto Notes"}
               value={""}
               numeric={false}
-              placeholder="Describe any abnormalities in the auto, anything that would not have been included in the auto path, and if their climb failed or where they ended. "
+              placeholder="Describe any abnormalities in the auto, anything that would not have been included in the auto path, and where they ended. "
             />
           </div>
         </div>
@@ -504,14 +504,6 @@ class Container extends React.Component {
           </div>
 
         </div>
-        <a
-          className="suggestions"
-          href="https://docs.google.com/forms/d/e/1FAIpQLScuS7hTiPxkxvk8t2dImAYtfXdHkqCzennD2szbqtXMaAw5zg/viewform?usp=header"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Suggestions or Bugs
-        </a>
         <div className='submit-container'>
           <Submit title="Submit" handleFormSubmit={this.handleFormSubmit} />
         </div>
