@@ -30,10 +30,10 @@ class Slider extends React.Component{
                             this.handleSliderChange(e.target.value)
                         }}
                         id={this.state.id}
-                        value={this.state.value || 5}
+                        value={this.state.value || 50}
                         title={this.state.title}
                         min={this.state.minValue ||  1}
-                        max="10"     
+                        max="100"     
                     />
                 </span>
                 

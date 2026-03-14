@@ -376,11 +376,12 @@ class Container extends React.Component {
               <Slider
                 title="Fumble Percent"
                 id={this.assignUUID()}
-                value={5}
+                value={50}
                 decorator="fumble"
               />
             </div>
           </div>
+
 
           <div className="tele-offcyle-box">
             <TextBoxLong
