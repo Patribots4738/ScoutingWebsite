@@ -359,7 +359,7 @@ class Container extends React.Component {
             <div className="tele-score-box">
               <Counter
                 id={this.assignUUID()}
-                title="Score"
+                title="Shoot"
                 decorator="teleop-score"
                 upperLimit={3000}
               />
