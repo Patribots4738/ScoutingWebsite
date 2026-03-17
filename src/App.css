@@ -1303,42 +1303,6 @@ link {
   margin-top: 5px;
 }
 
-.btn-dbtn-5{
-  height: 70px;
-  width: 55px;
-  font-size: 30px;
-  text-align: center;
-  display: inline-block;
-  color: black;
-  background-color: rgb(162, 12, 12);
-  border-radius: 15px;
-  border-radius: 30px;
-  border-color: black;
-  padding-top: 0%;
-  padding: 0%;
-  padding-left: 0%;
-  padding-right: 0%;
-  padding-bottom: 0%;
-}
-
-.btn-dbtn-1{
-  height: 70px;
-  width: 55px;
-  font-size: 30px;
-  text-align: center;
-  display: inline-block;
-  color: black;
-  background-color: rgb(255, 0, 0);
-  border-radius: 15px;
-  border-radius: 30px;
-  border-color: black;
-  padding-top: 0%;
-  padding: 0%;
-  padding-left: 0%;
-  padding-right: 0%;
-  padding-bottom: 0%;
-}
-
 .value{
   height: 70px;
   width: 55px;
@@ -1347,49 +1311,48 @@ link {
   display: inline-block;
   color: rgb(255, 255, 255);
   border-color: black;
-  padding-top: 100px;
+  padding-top: 10px;
   padding: 0%;
   padding-left: 0%;
   padding-right: 0%;
   padding-bottom: 0%;
 }
 
-.btn-ubtn-1{
+.btn-dbtn-10, .btn-dbtn-1, .btn-dbtn-5{
   height: 70px;
   width: 55px;
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
   display: inline-block;
   color: black;
-  background-color: rgb(102, 255, 0);
-  border-radius: 15px;
-  border-radius: 30px;
-  border-color: black;
-  padding-top: 0%;
+  background-color: rgb(170, 21, 21);
+  border-color: rgb(0, 0, 0);
   padding: 0%;
-  padding-left: 0%;
-  padding-right: 0%;
-  padding-bottom: 0%;
+  border-radius: 10px;
+  border-style: solid;
 }
 
-.btn-ubtn-5{
+.btn-ubtn-10, .btn-ubtn-5, .btn-ubtn-1{
   height: 70px;
   width: 55px;
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
   display: inline-block;
   color: black;
-  background-color: rgb(19, 139, 35);
-  border-radius: 15px;
-  border-radius: 30px;
-  border-color: black;
-  padding-top: 0%;
+  background-color: rgb(29, 170, 21);
+  border-color: rgb(0, 0, 0);
   padding: 0%;
-  padding-left: 0%;
-  padding-right: 0%;
-  padding-bottom: 0%;
+  border-radius: 10px;
+  border-style: solid;
 }
 
+.btn-ubtn-10:active, .btn-ubtn-5:active, .btn-ubtn-1:active{
+  background-color: rgb(35, 238, 17);
+}
+
+.btn-dbtn-10:active, .btn-dbtn-5:active, .btn-dbtn-1:active{
+  background-color: rgb(238, 17, 17);
+}
 .teleop-counter, .auto-scorebox, .auto-counter {
   padding: 5px 5px 5px 5px;
   border-radius: calc(0.5 * 100px);

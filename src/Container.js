@@ -8,6 +8,7 @@ import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
 //import Dropdown from './widgets/Dropdown';
 import AutoCounter from './widgets/AutoCounter';
+import Counter from './widgets/Counter'; 
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -16,21 +17,25 @@ import ClearLocalStorage from './widgets/ClearLocalStorage';
 import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
 import Dropdown from './widgets/Dropdown';
-import TeleopCounter from './widgets/TeleopCounter';
+import Slider from './widgets/Slider';
 
 class Container extends React.Component {
 
   
-  state = {
-    selectedAlliance: localStorage.getItem('alliance')
+  constructor(props) {
+    super(props);
+    this.state = {
+        selectedAlliance: localStorage.getItem('alliance'),
+    };
+    this.scoutingLog = [];  
   }
 
   gatherData = () => {
     var arr = []
 
-    for (var i = 0; i < this.state.scoutingLog.length; i++) {
+    for (var i = 0; i < this.scoutingLog.length; i++) {
 
-      var element = document.getElementById(this.state.scoutingLog[i]);
+      var element = document.getElementById(this.scoutingLog[i]);
       console.log(element);
       if (element !== null) {
         var value;
@@ -75,68 +80,59 @@ class Container extends React.Component {
         }
         let name = data[0][1];
         let matchNumber = data[1][1];
+        let alliance = data[2][1];
+        let teamNumber = data[3][1];
         let autoExported = data[4][1].split("  -  ");
         let autoPieces = autoExported[0];
         let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
-        let teleopPieceCounts = JSON.parse(data[7][1]);
-        let position = autoExported[1];
-        let didItLeave = 0;
-        
-        if (data[3][1] === "" && data[5][1] === false) {
-          didItLeave = 0;
-        } else if (data[3][1] !== "" || data[5][1] === true) {
-          didItLeave = 1;
-        }
+        let scoreCount = data[6][1];
+        let passCount = data[7][1];
+        let fumblePercent = data[8][1];
         
         let commentData = { 
           "Name": name,
-          "What they did well": data[16][1],
-          "What they did bad": data[17][1],
-          "Additional Comments": data[18][1],
-          "Auto Description": data[6][1],
-          "Auto Start": data[3][1],
-          "Auto Path": autoPieces
+          "Team": teamNumber,
+          "Comments": data[21][1],
+          "Auto Description": data[5][1],
+          "Auto Path": autoPieces,
+          "Off Time": data[9][1],
         }
 
         let jsonData = {     
-          "L4 Auto": autoPieceCounts["L4"],
-          "L3 Auto": autoPieceCounts["L3"],
-          "L2 Auto": autoPieceCounts["L2"],
-          "L1 Auto": autoPieceCounts["L1"],
-          "Processor Auto": autoPieceCounts["processor"],
-          "Net Auto": autoPieceCounts["net"],
-          "Coral Fumble Auto": autoPieceCounts["coralFumble"],
-          "Net Fumble Auto": autoPieceCounts["netFumble"],
-          "Processor Fumble Auto": autoPieceCounts["processorFumble"],
-          "Algae Removed Auto": autoPieceCounts["algaeRemove"],
-          "L4 Teleop": teleopPieceCounts["L4"],
-          "L3 Teleop": teleopPieceCounts["L3"],
-          "L2 Teleop": teleopPieceCounts["L2"],
-          "L1 Teleop": teleopPieceCounts["L1"],
-          "Processor Teleop": teleopPieceCounts["P"],
-          "Net Teleop": teleopPieceCounts["N"],
-          "Coral Fumble Teleop": teleopPieceCounts["CF"],
-          "Net Fumble Teleop": teleopPieceCounts["NF"],
-          "Processor Fumble Teleop": teleopPieceCounts["PF"],
-          "Algae Removed Teleop": teleopPieceCounts["RA"],
+          "Climb Auto": autoPieceCounts["C"],
+          "Start Depot": autoPieceCounts["SD"],
+          "Start Hub": autoPieceCounts["SH"],
+          "Start Outpost": autoPieceCounts["SO"],
+          "Outpost Intake": autoPieceCounts["OI"],
+          "Depot Intake": autoPieceCounts["DI"],
+          "Center Intake Auto": autoPieceCounts["CI"],
+          "Score Auto": autoPieceCounts["S"],
+          "Climb Failure Auto": autoPieceCounts["CF"],
+          "Score Teleop": scoreCount,
+          "Pass Teleop": passCount,
+          "Fumble Percent": fumblePercent,
           "Match Number": matchNumber,
-          "Deep Cage": data[8][1],
-          "Shallow Cage": data[9][1],
-          "Climb Failure": data[10][1],
-          "Ground Intake": data[13][1],
-          "Station Intake": data[14][1],
-          "Temp Failure": data[11][1],
-          "Critical Failure": data[12][1],
-          "Auto Leave": didItLeave,
-          "Defense": data[15][1]
+          "Team": teamNumber,
+          "Alliance": alliance,
+          "L1 Climb": data[10][1],
+          "L2 Climb": data[11][1],
+          "Traversal Climb": data[13][1],
+          "Climb Failure": data[12][1],
+          "Ground Intake": data[18][1],
+          "Station Intake": data[19][1],
+          "Temp Failure": data[14][1],
+          "Critical Failure": data[15][1],
+          "Over Bump": data[16][1],
+          "Under Trench": data[17][1],
+          "Shooting While Driving": data[20][1],
         };
-        //           game           event                  match #           Name         Position               
-        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/data/'), jsonData);
-        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|' + position + '-' + data[2][1] + '/comments/'), commentData);
+        //           game           event                  match #           Name            team             
+        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[3][1] + '/data/'), jsonData);
+        set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[3][1] + '/comments/'), commentData);
 
         localStorage.setItem("name", name)
         localStorage.setItem("matchNumber", matchNumber)
-        localStorage.setItem("alliance", position)
+        localStorage.setItem("alliance", alliance)
 
         let cachedData = JSON.parse(localStorage.getItem("matchData"))
         
@@ -171,6 +167,56 @@ class Container extends React.Component {
     return (val.toString().length > 2)
   }
 
+  autoPieceCount  = (arr) => {
+    let pieceCounts = {
+      C: 0,
+      SD: 0,
+      SH: 0,
+      SO: 0,
+      OI: 0,
+      DI: 0,
+      CI: 0,
+      S: 0,
+      CF: 0
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+      let loc = arr[i];
+      // eslint-disable-next-line default-case
+      switch (loc) {
+        case "C":
+          pieceCounts["C"]++
+          break
+        case "SD": 
+          pieceCounts["SD"]++
+          break
+        case "SH":
+          pieceCounts["SH"]++
+          break
+        case "SO":
+          pieceCounts["SO"]++
+          break
+        case "OI":
+          pieceCounts["OI"]++
+          break
+        case "DI":
+          pieceCounts["DI"]++
+          break
+        case "CI":
+          pieceCounts["CI"]++
+          break
+        case "S":
+          pieceCounts["S"]++
+          break
+        case "CF":
+          pieceCounts["CF"]++
+          break
+      }
+    }
+    
+    return pieceCounts;
+  }
+
   clearLocalStorage = () => {
     var response = window.confirm("Are you sure you want to clear all saved matches?");
     if (!response) { alert("Aborted wiping local storage"); return; }
@@ -182,6 +228,7 @@ class Container extends React.Component {
 
   assignUUID = () => {
     var id = uuidv4();
+    this.scoutingLog.push(id);
     return id;
   }
 
@@ -311,11 +358,39 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          <TeleopCounter
+          {/* <TeleopCounter
             id={this.assignUUID()}
-            title="Teleop Scoring"
-            className="teleop"
-          />
+            title={"Teleop Scoring"}
+            className={"teleop"}
+          /> */}
+
+          <div className="teleop-counter">
+            <div className="tele-score-box">
+              <Counter
+                id={this.assignUUID()}
+                title="Score"
+                decorator="teleop-score"
+                upperLimit={3000}
+              />
+            </div>
+            <div className="tele-pass-box">
+              <Counter
+                id={this.assignUUID()}
+                title="Pass"
+                decorator="teleop-pass"
+                upperLimit={3000}
+              />
+            </div>
+            <div className="slider-box">
+              <Slider
+                title="Fumble Percent"
+                id={this.assignUUID()}
+                value={5}
+                decorator="fumble"
+              />
+            </div>
+          </div>
+
           <div className="tele-offcyle-box">
             <TextBoxLong
               className="text-box-long"

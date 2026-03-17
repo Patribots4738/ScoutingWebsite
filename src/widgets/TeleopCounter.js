@@ -13,6 +13,7 @@ class TeleopCounter extends React.Component {
         scoreAmount: 1,
         scoreLocation: "HUB"
     }
+    
 
     let 
 
