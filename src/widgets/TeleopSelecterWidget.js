@@ -7,7 +7,6 @@ class TeleopSelecterWidget extends React.Component {
         return(
             <div className="teleop-scoring">
                 <object className="fuel-graphic"></object>
-                
                 <button className="amount-btn" onClick={() => this.props.handleScoreAmount(this.props.x1)}>
                     1x
                 </button>

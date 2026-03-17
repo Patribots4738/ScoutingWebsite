@@ -3,7 +3,8 @@
 :root {
   --box-border-color: rgba(255, 255, 255, 0.38);
   min-width: 100%;
-  --team-color: red;
+  --team-color: darkgray;
+  --team-active-color: grey;
 }
 
 
@@ -1000,21 +1001,6 @@ link {
   align-items: center;
 }
 
-.pass-button {
-  margin: 0 auto;
-  background-color: rgb(7, 242, 35);
-  display: flex;
-  align-items: center;
-  width: 90%;
-  height: 90%;
-  border-radius: 20px;
-  transition: 0.12s
-}
-
-.pass-button:active {
-  background-color: green;
-}
-
 .field-section:active {
   background-color: rgb(32, 32, 32);
 }
@@ -1113,6 +1099,11 @@ link {
   margin-top: 10px;
 }
 
+.bigUIArr {
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+
 .teleopCounters {
   display: flex;
   flex-direction: column;
@@ -1141,7 +1132,7 @@ link {
 .teleop-misic {
   display: grid;
   grid-template-rows: auto auto auto;
-  height: 300px;
+  height: 350px;
   width: 100%;
 }
 
@@ -1162,11 +1153,26 @@ link {
 .teleop-display-text {
   color: white;
   font-weight: 750;
+  font-size: auto;
 }
 
 .Hub-btn {
   background-color: var(--team-color);
+  height: 70%;
+  width: 85%;
+  border-radius: 10px;
+  border-color: grey;
+  border-style: outset;
+  border-width: 5px;
+}
 
+.Pass-btn {
+  background-color: darkorchid;
+  height: 70%;
+  width: 85%;
+  border-radius: 10px;
+  border-style: outset;
+  border-width: 5px;
 }
 
 .teleop-score-box {
@@ -1189,9 +1195,19 @@ link {
 .teleop-display-box {
   outline: auto;
   display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
+  grid-template-columns: 50% 50%;
   grid-column-gap: 0%;
+  align-items: center;
+
+}
+
+.location-box {
+  outline: auto;
+  width: auto;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-items: center;
+  align-items: center;
 }
 
 .score-btn {

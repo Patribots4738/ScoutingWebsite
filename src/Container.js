@@ -171,60 +171,6 @@ class Container extends React.Component {
     return (val.toString().length > 2)
   }
 
-  autoPieceCount  = (arr) => {
-    let pieceCounts = {
-      L4: 0,
-      L3: 0,
-      L2: 0,
-      L1: 0,
-      processor: 0,
-      net: 0,
-      coralFumble: 0,
-      netFumble: 0,
-      processorFumble: 0,
-      algaeRemove: 0
-    }
-
-    for (let i = 0; i < arr.length; i++) {
-      let loc = arr[i];
-      // eslint-disable-next-line default-case
-      switch (loc) {
-        case "L1":
-          pieceCounts["L1"]++
-          break
-        case "L2": 
-          pieceCounts["L2"]++
-          break
-        case "L3":
-          pieceCounts["L3"]++
-          break
-        case "L4":
-          pieceCounts["L4"]++
-          break
-        case "P":
-          pieceCounts["processor"]++
-          break
-        case "N":
-          pieceCounts["net"]++
-          break
-        case "FR":
-          pieceCounts["coralFumble"]++
-          break
-        case "FP":
-          pieceCounts["processorFumble"]++
-          break
-        case "FN":
-          pieceCounts["netFumble"]++
-          break
-        case "RG":
-          pieceCounts["algaeRemove"]++
-          break
-      }
-    }
-    
-    return pieceCounts;
-  }
-
   clearLocalStorage = () => {
     var response = window.confirm("Are you sure you want to clear all saved matches?");
     if (!response) { alert("Aborted wiping local storage"); return; }
@@ -234,12 +180,10 @@ class Container extends React.Component {
     alert("Cleared all match data.")
   }
 
-
   assignUUID = () => {
     var id = uuidv4();
     return id;
   }
-
 
   handleExportData = (_) => {
     let cachedDataJSON = localStorage.getItem("matchData");
@@ -260,15 +204,26 @@ class Container extends React.Component {
     }
   }
 
-  handleAllianceChange = (input) => {
-    if (input === "BLUE") {
+  checkAlliance = () => {
+    if (this.state.selectedAlliance === "BLUE") {
       document.querySelector(':root').style.setProperty('--team-color','blue')
-    } else if (input === "RED") {
+      document.querySelector(':root').style.setProperty('--team-active-color','navy')
+    } else if (this.state.selectedAlliance === "RED") {
       document.querySelector(':root').style.setProperty('--team-color','red')
+      document.querySelector(':root').style.setProperty('--team-active-color','maroon')
     }
   }
 
+  handleAllianceChange = (alliance) => {
+    this.setState({
+      selectedAlliance: {alliance}
+    })
+    console.log("Alliance: " + alliance)
+    console.log("What Site Be Thinking: " + this.state.selectedAlliance)
+  }
+
   render() {
+    this.checkAlliance()
     return (
       <ul className="container">
         <span className="label cookie">
@@ -301,7 +256,7 @@ class Container extends React.Component {
             <TextBox
               className="textbox match"
               id={this.assignUUID()}
-              title={"Match Number"}
+              title="Match Number"
               value={+localStorage.getItem("matchNumber") + 1}
               required={true}
               numeric={true}
@@ -311,8 +266,8 @@ class Container extends React.Component {
             <Dropdown
               className="dropdown alliance"
               id={this.assignUUID()}
-              title={"Alliance"}
-              value={localStorage.getItem("alliance")}
+              title="Alliance"
+              value={this.state.selectedAlliance}
               items={[
                 {id:1, value: "RED", title: "Red"},
                 {id:2, value: "BLUE", title: "Blue"}
@@ -322,7 +277,7 @@ class Container extends React.Component {
             <TextBox
               className="textbox team"
               id={this.assignUUID()}
-              title={"Team Number"}
+              title="Team Number"
               value={""}
               required={true}
               numeric={true}
@@ -337,7 +292,7 @@ class Container extends React.Component {
         
           <div className="auto-widget-box">
             <AutoCounter
-              title={"Auto Path"}
+              title="Auto Path"
               id={this.assignUUID()}
             />
           </div>
@@ -345,7 +300,7 @@ class Container extends React.Component {
             <TextBoxLong
               className="text-box-long"
               id={this.assignUUID()}
-              title={"Auto Notes"}
+              title="Auto Notes"
               value={""}
               numeric={false}
               placeholder="Describe any abnormalities in the auto, anything that would not have been included in the auto path, and if their climb failed or where they ended. "
@@ -358,15 +313,15 @@ class Container extends React.Component {
           </h2>
           <TeleopCounter
             id={this.assignUUID()}
-            title={"Teleop Scoring"}
-            className={"teleop"}
+            title="Teleop Scoring"
+            className="teleop"
           />
           <div className="tele-offcyle-box">
             <TextBoxLong
               className="text-box-long"
               id={this.assignUUID()}
-              title={"Off Time"}
-              value={""}
+              title="Off Time"
+              value=""
               numeric={false}
               placeholder="Describe what the robot was doing while their HUB was deactivated. Were they doing defense? Were they collecting fuel? Were they passing?"
             />

@@ -15,9 +15,10 @@ class Dropdown extends React.Component{
         this.setState({
             value: e.target.value
         })
-        this.props.selected(e.target.value)
+        this.props.selected()
     }
 
+    has
     render(){
         return (
             <span className={"widget"}>
