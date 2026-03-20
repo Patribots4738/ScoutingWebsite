@@ -66,7 +66,7 @@ class Container extends React.Component {
     var sendData = data[1]
     data = data[0]
 
-    const eventID = '2026CASND';
+    const eventID = '2026CASD';
     const gameID = '2026REBUILT';
 
     if (sendData) {
