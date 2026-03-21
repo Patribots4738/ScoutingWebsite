@@ -8,7 +8,7 @@ import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
 //import Dropdown from './widgets/Dropdown';
 import AutoCounter from './widgets/AutoCounter';
-import Counter from './widgets/Counter'; 
+// import Counter from './widgets/Counter';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -17,7 +17,8 @@ import ClearLocalStorage from './widgets/ClearLocalStorage';
 import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
 import Dropdown from './widgets/Dropdown';
-import Slider from './widgets/Slider';
+// import Slider from './widgets/Slider';
+import TeleopCounter from "./widgets/TeleopCounter";
 
 class Container extends React.Component {
 
@@ -358,39 +359,12 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          {/* <TeleopCounter
+          <TeleopCounter
             id={this.assignUUID()}
             title={"Teleop Scoring"}
             className={"teleop"}
-          /> */}
-
-          <div className="teleop-counter">
-            <div className="tele-score-box">
-              <Counter
-                id={this.assignUUID()}
-                title="Score"
-                decorator="teleop-score"
-                upperLimit={3000}
-              />
-            </div>
-            <div className="tele-pass-box">
-              <Counter
-                id={this.assignUUID()}
-                title="Pass"
-                decorator="teleop-pass"
-                upperLimit={3000}
-              />
-            </div>
-            <div className="slider-box">
-              <Slider
-                title="Fumble Percent"
-                id={this.assignUUID()}
-                value={5}
-                decorator="fumble"
-              />
-            </div>
-          </div>
-
+          />
+        
           <div className="tele-offcyle-box">
             <TextBoxLong
               className="text-box-long"
@@ -424,9 +398,9 @@ class Container extends React.Component {
               decorator="onstage"
             />
           </div>
-
+        
           <div className="checkboxes-bottom">
-
+        
             <CheckBox
               className="isFailure"
               title="Climb Failure"

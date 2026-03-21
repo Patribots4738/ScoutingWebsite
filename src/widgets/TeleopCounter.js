@@ -1,6 +1,6 @@
 import React from "react";
 import TeleopSelecterWidget from "./TeleopSelecterWidget";
-import { preload } from "react-dom";
+// import { preload } from "react-dom";
 
 class TeleopCounter extends React.Component {
 
@@ -22,7 +22,7 @@ class TeleopCounter extends React.Component {
         let preLog
         let newLog
         if (this.state.scoreLocation === "HUB") {
-            preLog = this .state.hubValue
+            preLog = this.state.hubValue
             switch (amount) {
                 case "1":
                     newLog = preLog + 1
@@ -41,7 +41,7 @@ class TeleopCounter extends React.Component {
                 hubValue: newLog
             })
         } else if (this.state.scoreLocation === "PASS") {
-            preLog = this .state.passValue
+            preLog = this.state.passValue
             switch (amount) {
                 case "1":
                     newLog = preLog + 1
