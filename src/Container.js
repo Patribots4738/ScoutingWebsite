@@ -20,6 +20,8 @@ import Dropdown from './widgets/Dropdown';
 // import Slider from './widgets/Slider';
 import TeleopCounter from "./widgets/TeleopCounter";
 
+import { GameId, EventId } from "./GameIds";
+
 class Container extends React.Component {
 
   
@@ -67,8 +69,8 @@ class Container extends React.Component {
     var sendData = data[1]
     data = data[0]
 
-    const eventID = '2026Test';
-    const gameID = '2026REBUILT';
+    const eventID = EventId;
+    const gameID = GameId;
 
     if (sendData) {
       let validMatch = true;

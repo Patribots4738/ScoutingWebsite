@@ -74,6 +74,10 @@ link {
   color: gold;
 }
 
+.qualitativeScouting {
+  color: greenyellow;
+}
+
 .suggestions {
   color: gold;
   font-size: 20px;
