@@ -1,5 +1,5 @@
 import React from "react";
-import TeleopSelecterWidget from "./TeleopSelecterWidget";
+import Slider from "./Slider.js";
 // import { preload } from "react-dom";
 
 class TeleopCounter extends React.Component {
@@ -14,48 +14,15 @@ class TeleopCounter extends React.Component {
         scoreLocation: "HUB"
     }
     
-
-    let 
-
     handleScore = () => {
-        let amount = this.state.scoreAmount
-        let preLog
         let newLog
         if (this.state.scoreLocation === "HUB") {
-            preLog = this.state.hubValue
-            switch (amount) {
-                case "1":
-                    newLog = preLog + 1
-                    break;
-                case "5":
-                    newLog = preLog + 5
-                    break;
-                case "10":
-                    newLog = preLog + 10
-                    break;
-                default: 
-                    newLog = preLog + 0
-                    break
-                }
+            newLog = this.state.hubValue + this.state.scoreAmount
             this.setState({
                 hubValue: newLog
             })
         } else if (this.state.scoreLocation === "PASS") {
-            preLog = this.state.passValue
-            switch (amount) {
-                case "1":
-                    newLog = preLog + 1
-                    break;
-                case "5":
-                    newLog = preLog + 5
-                    break;
-                case "10":
-                    newLog = preLog + 10
-                    break;
-                default: 
-                    newLog = preLog + 0
-                    break
-                }
+            newLog = this.state.passValue + this.state.scoreAmount
             this.setState({
                 passValue: newLog
             })
@@ -86,59 +53,43 @@ class TeleopCounter extends React.Component {
     }
 
     handleRemove = () => {
-        let amount = this.state.scoreAmount
         let newLog
         if (this.state.scoreLocation === "HUB") {
-            switch (amount) {
-                case "1":
-                    newLog = this.state.hubValue - 1
-                    break;
-                case "5":
-                    newLog = this.state.hubValue - 5
-                    break;
-                case "10":
-                    newLog = this.state.hubValue - 10
-                    break;
-                default: 
-                    newLog = this.state.hubValue - 0
-                    break
-                }
-                console.log(newLog);
-            this.setState({
-                hubValue: newLog
-            })
-        } else if (this.scoreLocation === "PASS") {
-            switch (amount) {
-                case "1":
-                    newLog = this.state.passValue - 1
-                    break;
-                case "5":
-                    newLog = this.state.passValue - 5
-                    break;
-                case "10":
-                    newLog = this.state.passValue - 10
-                    break;
-                default: 
-                    newLog = this.state.passValue - 0
-                    break
-                }
-            this.setState({
-                passValue: newLog
-            })
+            newLog = this.state.hubValue - this.state.scoreAmount
+            if (newLog < 0) {
+                this.setState({
+                    hubValue: 0
+                })
+            } else {
+                this.setState({
+                    hubValue: newLog
+                })
+            }
+        } else if (this.state.scoreLocation === "PASS") {
+            newLog = this.state.passValue - this.state.scoreAmount
+            if (newLog < 0) {
+                this.setState({
+                    passValue: 0
+                })
+            } else {
+                this.setState({
+                    passValue: newLog
+                })
+            }
         }
     }
 
-    scorebtn = () => {
+    scoreBtn = () => {
         return(
-            <div className="score-btn" onClick={() => this.handleScore(this.state.scoreAmount)}>
+            <div className="score-btn" onClick={() => this.handleScore()}>
                 <div className="score-btn-text">Shoot</div>
             </div>
         )
     }
 
-    removebtn = () => {
+    removeBtn = () => {
         return(
-            <div className="fumble-btn" onClick={() => this.handleRemove(this.state.scoreAmount)}>
+            <div className="fumble-btn" onClick={() => this.handleRemove()}>
                 <div className="fumble-btn-text">Remove</div>
             </div>
         )
@@ -163,7 +114,7 @@ class TeleopCounter extends React.Component {
     //this guy is very silly
     bigUIArray = () => {
         return (
-        <div className="bigUIArr">
+        <div className="reef-map">
             <div className="teleop-misic">
                 <div className="teleop-display-box">
                     <div className="teleop-display">
@@ -182,17 +133,33 @@ class TeleopCounter extends React.Component {
                     {this.passBtn()}
                 </div>
                 <div className="teleop-score-box">
-                    {this.scorebtn()}
-                    {this.removebtn()}
+                    {this.scoreBtn()}
+                    {this.removeBtn()}
                 </div>
             </div>
-            <TeleopSelecterWidget
-                handleScoreAmount={this.handleScoreAmount}
-                x1="1"
-                x5="5"
-                x10="10"
+            <div className="teleop-scoring">
+                <object className="fuel-graphic" aria-label={"Fuel Icon"}></object>
+                <button className="amount-btn" onClick={() => this.handleScoreAmount(1)}>
+                    1x
+                </button>
+                <button className="amount-btn" onClick={() => this.handleScoreAmount(5)}>
+                    5x
+                </button>
+                <button className="amount-btn" onClick={() => this.handleScoreAmount(10)}>
+                    10x
+                </button>
+            </div>
+            <Slider
+                title="Accuracey"
+                units="%"
+                value={100}
+                minValue={0}
+                maxVaule={100}
+                decorator="acurate-title"
+                sliderdecorator="acurate-slider"
+                boxdecorator="teleop-slider-box"
             />
-        </div>    
+        </div>  
         )
     }
 
@@ -203,9 +170,7 @@ class TeleopCounter extends React.Component {
                     {this.state.title}
                 </div>
                 <div className="teleop-counter-container">
-                    <div className="reef-map">
-                        {this.bigUIArray()}
-                    </div>
+                    {this.bigUIArray()}
                 </div>
             </span>
         );

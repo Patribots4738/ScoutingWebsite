@@ -132,11 +132,6 @@ link {
   font-size: 25px;
 }
 
-
-.widget {
-  padding: 10px;
-}
-
 .widgetteleop-counter {
   width: 100%;
 }
@@ -227,13 +222,6 @@ link {
 
 .double-line {
   max-width: 250px;
-}
-.slider {
-  width: 200px;
-  height: 25px;
-  background: rgb(47, 49, 45);
-  padding: 0;
-  position: center;
 }
 
  .slider-valueslide {
@@ -1091,17 +1079,13 @@ link {
 
 .reef-map {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 80% 20%;
   height: 300px;
   width: 400px;
   background: rgb(54, 54, 54);
   border-radius: 10px;
   margin-top: 10px;
-}
-
-.bigUIArr {
-  display: grid;
-  grid-template-columns: 70% 30%;
 }
 
 .teleopCounters {
@@ -1114,10 +1098,10 @@ link {
   display: grid;
   grid-template-rows: auto auto auto auto;
   align-content: center;
-  height: 300px;
+  grid-row-gap: 5%;
+  height: 100%;
   width: 100%;
   justify-content: center;
-  outline: auto;
   justify-self: end;
 }
 
@@ -1131,15 +1115,15 @@ link {
 
 .teleop-misic {
   display: grid;
-  grid-template-rows: auto auto auto;
-  height: 350px;
+  grid-template-rows: 33% 33% 33%;
+  height: 100%;
   width: 100%;
 }
 
 .teleop-display {
   display: flex;
   margin: 0 auto;
-  height: 50px;
+  height: 65%;
   width: 75%;
   background: black;
   border-style:inset;
@@ -1159,7 +1143,7 @@ link {
 .Hub-btn {
   background-color: var(--team-color);
   height: 70%;
-  width: 85%;
+  width: 80%;
   border-radius: 10px;
   border-color: grey;
   border-style: outset;
@@ -1169,7 +1153,7 @@ link {
 .Pass-btn {
   background-color: darkorchid;
   height: 70%;
-  width: 85%;
+  width: 80%;
   border-radius: 10px;
   border-style: outset;
   border-width: 5px;
@@ -1179,11 +1163,10 @@ link {
   display: grid;
   grid-template-columns: auto auto;
   grid-column-gap: 0%;
-  height: 120px;
+  height: auto;
   width: auto;
   align-items: center;
   justify-items: center;
-  outline: auto;
 }
 
 .amount-btn {
@@ -1193,21 +1176,58 @@ link {
 }
 
 .teleop-display-box {
-  outline: auto;
   display: grid;
   grid-template-columns: 50% 50%;
   grid-column-gap: 0%;
   align-items: center;
-
+  height: auto;
 }
 
 .location-box {
-  outline: auto;
+  height: auto;
   width: auto;
   display: grid;
   grid-template-columns: 50% 50%;
   justify-items: center;
   align-items: center;
+}
+
+.teleop-slider-box {
+  height: 100%;
+  width: 100%;
+  grid-column: 1 /span 2;
+  align-content: center;
+  justify-content: center;
+}
+
+/*  
+  the part -webkit-appearance part despite it being yellow is necesary or else it doesn't work
+*/
+.acurate-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 80%;
+  height: 20%;
+  background-color: black;
+  border-color: darkgray;
+  border-style: inset;
+  border-width: 4px;
+  cursor: pointer;
+}
+
+.acurate-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-style: outset;
+  border-color: whitesmoke;
+  border-radius: 50%;
+}
+
+.acurate-title {
+  color: White;
+  font-weight: bolder;
 }
 
 .score-btn {
