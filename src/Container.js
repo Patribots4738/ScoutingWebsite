@@ -279,6 +279,7 @@ class Container extends React.Component {
         <span className="label cookie">
           By Continuing to Use Our Website You Agree to Use Cookies :)
         </span>
+        <a className="qualitativeScouting" href="/SuperDuperExtremelyTuffAppAndQuantativeScouting"><p>Qualitative Scouting</p></a>
         <a
           className="scouting-guidelines"
           href="https://docs.google.com/document/d/1OiVVfB9Mx3mIwIE4ahyO1Sa65VuAJsUcy7czSVyzZJ4/edit?usp=sharing"
@@ -517,3 +518,4 @@ class Container extends React.Component {
 
 }
 export default Container;
+

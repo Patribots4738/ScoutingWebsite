@@ -1,10 +1,10 @@
 import React from 'react';
-import SuperDuperExtremelyTuffAppAndQuantativeScouting from './SuperDuperExtremelyTuffAppAndQuantativeScouting';
+import SuperDuperExtremelyTuffAppAndQualitativeScouting from './SuperDuperExtremelyTuffAppAndQualitativeScouting';
 
 function TufferApp() {
 	return (
 		<div>
-			<SuperDuperExtremelyTuffAppAndQuantativeScouting/>
+			<SuperDuperExtremelyTuffAppAndQualitativeScouting/>
 		</div>
 	);
 }

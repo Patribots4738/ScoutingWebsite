@@ -1,12 +1,9 @@
 import './App.css';
 
-import CheckBox from './widgets/CheckBox';
 import TextBox from './widgets/TextBox';
 import Submit from './widgets/Submit';
 import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
-import AutoCounter from './widgets/AutoCounter';
-import TeleopCounter from './widgets/TeleopCounter';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -18,7 +15,9 @@ import Dropdown from './widgets/Dropdown';
 
 import { GameId, EventId } from "./GameIds";
 
-class SuperDuperExtremelyTuffAppAndQuantativeScouting extends React.Component {
+class SuperDuperExtremelyTuffAppAndQualitativeScouting extends React.Component {
+	
+	counter = 0;
 	
 	constructor(props) {
 		super(props);
@@ -59,13 +58,14 @@ class SuperDuperExtremelyTuffAppAndQuantativeScouting extends React.Component {
 	handleFormSubmit = (e) => {
 		e.preventDefault()
 		
-		var data = this.gatherData()
+		let data = this.gatherData();
 		
-		var sendData = data[1]
-		data = data[0]
+		const sendData = data[1];
+		
 		
 		const eventID = EventId;
 		const gameID = GameId;
+		const dataType = 'qualitative';
 		
 		if (sendData) {
 			let validMatch = true;
@@ -73,60 +73,25 @@ class SuperDuperExtremelyTuffAppAndQuantativeScouting extends React.Component {
 				validMatch = window.confirm("Are you sure your match and team numbers are correct?");
 			}
 			if (validMatch) {
-				for (let i = 0; i < 17; i++) {
+				for (let i = 0; i < 8; i++) {
 					console.log("item " + i + " " + data[i][1] + data[i][1].id)
 				}
 				let name = data[0][1];
 				let matchNumber = data[1][1];
 				let alliance = data[2][1];
 				let teamNumber = data[3][1];
-				let autoExported = data[4][1].split("  -  ");
-				let autoPieces = autoExported[0];
-				let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
-				let scoreCount = data[6][1];
-				let passCount = data[7][1];
-				let fumblePercent = data[8][1];
 				
 				let commentData = {
 					"Name": name,
 					"Team": teamNumber,
-					"Comments": data[21][1],
+					"Comments": data[4][1],
 					"Auto Description": data[5][1],
-					"Auto Path": autoPieces,
-					"Off Time": data[9][1],
+					"Off Time": data[6][1],
+					"Other Notes": data[7][1]
 				}
 				
-				let jsonData = {
-					"Climb Auto": autoPieceCounts["C"],
-					"Start Depot": autoPieceCounts["SD"],
-					"Start Hub": autoPieceCounts["SH"],
-					"Start Outpost": autoPieceCounts["SO"],
-					"Outpost Intake": autoPieceCounts["OI"],
-					"Depot Intake": autoPieceCounts["DI"],
-					"Center Intake Auto": autoPieceCounts["CI"],
-					"Score Auto": autoPieceCounts["S"],
-					"Climb Failure Auto": autoPieceCounts["CF"],
-					"Score Teleop": scoreCount,
-					"Pass Teleop": passCount,
-					"Fumble Percent": fumblePercent,
-					"Match Number": matchNumber,
-					"Team": teamNumber,
-					"Alliance": alliance,
-					"L1 Climb": data[10][1],
-					"L2 Climb": data[11][1],
-					"Traversal Climb": data[13][1],
-					"Climb Failure": data[12][1],
-					"Ground Intake": data[18][1],
-					"Station Intake": data[19][1],
-					"Temp Failure": data[14][1],
-					"Critical Failure": data[15][1],
-					"Over Bump": data[16][1],
-					"Under Trench": data[17][1],
-					"Shooting While Driving": data[20][1],
-				};
-				//           game           event                  match #           Name            team
-				set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[3][1] + '/data/'), jsonData);
-				set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[3][1] + '/comments/'), commentData);
+				//           game           event          type of scouting           match #           Name            team
+				set(ref(db, gameID + '/' + eventID + dataType + '/match-' + matchNumber + '/' + name + '|'  + data[3][1] + '/coolFreshmanCode/'), commentData);
 				
 				localStorage.setItem("name", name)
 				localStorage.setItem("matchNumber", matchNumber)
@@ -143,9 +108,9 @@ class SuperDuperExtremelyTuffAppAndQuantativeScouting extends React.Component {
 				
 				if (cachedData[matchPath] === undefined) {
 					cachedData[matchPath] = {};
-					cachedData[matchPath][botPath] = { data: jsonData, comments: commentData }
+					cachedData[matchPath][botPath] = { data: data, comments: commentData }
 				} else {
-					cachedData[matchPath][botPath] = { data: jsonData, comments: commentData }
+					cachedData[matchPath][botPath] = { data: data, comments: commentData }
 				}
 				
 				cachedData = JSON.stringify(cachedData, null, "\t")
@@ -162,57 +127,7 @@ class SuperDuperExtremelyTuffAppAndQuantativeScouting extends React.Component {
 	}
 	
 	badMatchNumber = (val) => {
-		return (val.toString().length > 2)
-	}
-	
-	autoPieceCount  = (arr) => {
-		let pieceCounts = {
-			C: 0,
-			SD: 0,
-			SH: 0,
-			SO: 0,
-			OI: 0,
-			DI: 0,
-			CI: 0,
-			S: 0,
-			CF: 0
-		}
-		
-		for (let i = 0; i < arr.length; i++) {
-			let loc = arr[i];
-			// eslint-disable-next-line default-case
-			switch (loc) {
-				case "C":
-					pieceCounts["C"]++
-					break
-				case "SD":
-					pieceCounts["SD"]++
-					break
-				case "SH":
-					pieceCounts["SH"]++
-					break
-				case "SO":
-					pieceCounts["SO"]++
-					break
-				case "OI":
-					pieceCounts["OI"]++
-					break
-				case "DI":
-					pieceCounts["DI"]++
-					break
-				case "CI":
-					pieceCounts["CI"]++
-					break
-				case "S":
-					pieceCounts["S"]++
-					break
-				case "CF":
-					pieceCounts["CF"]++
-					break
-			}
-		}
-		
-		return pieceCounts;
+		return (val.toString().length > 2 || parseInt(val) < 0)
 	}
 	
 	clearLocalStorage = () => {
@@ -274,17 +189,15 @@ class SuperDuperExtremelyTuffAppAndQuantativeScouting extends React.Component {
 	        <span className="label cookie">
 	          By Continuing to Use Our Website You Agree to Use Cookies :)
 	        </span>
-				
-				<button className="qualitativeScouting" onClick="window.location.href='/TufferApp'">Quantative Scouting</button>
-				
-				{/*<a*/}
-				{/*	className="scouting-guidelines"*/}
-				{/*	href="https://docs.google.com/document/d/1OiVVfB9Mx3mIwIE4ahyO1Sa65VuAJsUcy7czSVyzZJ4/edit?usp=sharing"*/}
-				{/*	target="_blank"*/}
-				{/*	rel="noreferrer"*/}
-				{/*>*/}
-				{/*	Scouting Guidelines*/}
-				{/*</a>*/}
+				<a className="qualitativeScouting" href="/"><p>Regular Scouting</p></a>
+				<a
+					className="scouting-guidelines"
+					href="https://docs.google.com/document/d/1OiVVfB9Mx3mIwIE4ahyO1Sa65VuAJsUcy7czSVyzZJ4/edit?usp=sharing"
+					target="_blank"
+					rel="noreferrer"
+				>
+					Scouting Guidelines
+				</a>
 				<h1 className="title">
 					PATRIBOTS SCOUTING
 				</h1>
@@ -337,13 +250,6 @@ class SuperDuperExtremelyTuffAppAndQuantativeScouting extends React.Component {
 					<h2 className="subtitle section-title">
 						AUTO
 					</h2>
-					
-					<div className="auto-widget-box">
-						<AutoCounter
-							title="Auto Path"
-							id={this.assignUUID()}
-						/>
-					</div>
 					<div className="auto-notes-box">
 						<TextBoxLong
 							className="text-box-long"
@@ -359,122 +265,19 @@ class SuperDuperExtremelyTuffAppAndQuantativeScouting extends React.Component {
 					<h2 className="subtitle section-title">
 						TELEOP
 					</h2>
-					<TeleopCounter
+					<TextBoxLong
+						className="text-box-long"
 						id={this.assignUUID()}
-						title={"Teleop Scoring"}
-						className={"teleop"}
+						title={"Comments"}
+						value={""}
+						numeric={false}
+						placeholder="Note down anything interesting about the robot or it's capabilities during any point in TeleOp."
 					/>
-					
-					<div className="tele-offcyle-box">
-						<TextBoxLong
-							className="text-box-long"
-							id={this.assignUUID()}
-							title="Off Time"
-							value=""
-							numeric={false}
-							placeholder="Describe what the robot was doing while their HUB was deactivated. Were they doing defense? Were they collecting fuel? Were they passing?"
-						/>
-					</div>
-					<div className="checkboxes-top">
-						<CheckBox
-							className="climb1"
-							title="L1 Climb"
-							id={this.assignUUID()}
-							value={false}
-							decorator="onstage"
-						/>
-						<CheckBox
-							className="climb2"
-							title="L2 Climb"
-							id={this.assignUUID()}
-							value={false}
-							decorator="onstage"
-						/>
-						<CheckBox
-							className="climb3"
-							title="Traversal Climb"
-							id={this.assignUUID()}
-							value={false}
-							decorator="onstage"
-						/>
-					</div>
-					
-					<div className="checkboxes-bottom">
-						
-						<CheckBox
-							className="isFailure"
-							title="Climb Failure"
-							id={this.assignUUID()}
-							value={false}
-							decorator="onstage"
-						/>
-					</div>
 				</div>
-				
 				<div className="post-match-container">
 					<h2 className="subtitle section-title">
 						POST-MATCH
 					</h2>
-					<div className="checkboxes2">
-						<div className="checkboxes-post">
-							<CheckBox
-								className="temporary"
-								title="Temp. Failure"
-								id={this.assignUUID()}
-								value={false}
-								decorator={"temporary"}
-							/>
-							<CheckBox
-								className="critical"
-								title="Critical Failure"
-								id={this.assignUUID()}
-								value={false}
-								decorator={"critical"}
-							/>
-						</div>
-						<div className="checkboxes-post">
-							<CheckBox
-								className="Bump"
-								title="Over Bump"
-								id={this.assignUUID()}
-								value={false}
-								decorator={"critical"}
-							/>
-							<CheckBox
-								className="trench"
-								title="Under Trench"
-								id={this.assignUUID()}
-								value={false}
-								decorator={"critical"}
-							/>
-						</div>
-						<div className="checkboxes-post">
-							<CheckBox
-								className="ground-intake"
-								title="Ground Intake"
-								id={this.assignUUID()}
-								value={false}
-								decorator={"critical"}
-							/>
-							<CheckBox
-								className="station-intake"
-								title="Station Intake"
-								id={this.assignUUID()}
-								value={false}
-								decorator={"critical"}
-							/>
-						</div>
-						<div className="checkboxes-post">
-							<CheckBox
-								className="shoot&drive"
-								title="Shooting While Driving"
-								id={this.assignUUID()}
-								value={false}
-								decorator={"critical"}
-							/>
-						</div>
-					
-					</div>
 					<div>
 						<TextBoxLong
 							className="text-box-long"
@@ -485,7 +288,15 @@ class SuperDuperExtremelyTuffAppAndQuantativeScouting extends React.Component {
 							placeholder="Include anything abnormal that could have influenced the match, their driving and defense capabilities, and things they did well and not so well."
 						/>
 					</div>
-				
+				</div>
+				<div className="extra-container">
+					<h2 className="subtitle section-title">
+						EXTRA NOTES
+					</h2>
+					<div className="extra-boxes" id="extra-boxes">
+						<button type="button" onClick={this.addBox} className="add-notes-button">+ Add Notes</button>
+						<button type="button" onClick={this.removeBox} className="remove-notes-button">- Remove Notes</button>
+					</div>
 				</div>
 				<a
 					className="suggestions"
@@ -506,5 +317,38 @@ class SuperDuperExtremelyTuffAppAndQuantativeScouting extends React.Component {
 			</ul>
 		);
 	}
+	
+	addBox = () => {
+		const container = document.getElementById('extra-boxes');
+		if (!container) {
+			return;
+		}
+
+		const extraId = 'extra-text-box-' + this.counter;
+		const newTextBox = document.createElement('textarea');
+		newTextBox.id = extraId;
+		newTextBox.className = 'text-box-long';
+		newTextBox.setAttribute('title', 'Extra Notes');
+		newTextBox.setAttribute('placeholder', 'Include any extra notes you have about the robot that do not fit in the other categories.');
+
+		container.appendChild(newTextBox);
+		this.scoutingLog.push(extraId);
+		this.counter += 1;
+	}
+
+	removeBox = () => {
+		if (this.counter <= 0) {
+			return;
+		}
+
+		const targetId = 'extra-text-box-' + (this.counter - 1);
+		const textBox = document.getElementById(targetId);
+		if (textBox) {
+			textBox.remove();
+		}
+
+		this.scoutingLog = this.scoutingLog.filter((id) => id !== targetId);
+		this.counter -= 1;
+	}
 }
-export default SuperDuperExtremelyTuffAppAndQuantativeScouting;
+export default SuperDuperExtremelyTuffAppAndQualitativeScouting;
