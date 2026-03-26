@@ -22,12 +22,12 @@ import TeleopCounter from "./widgets/TeleopCounter";
 
 class Container extends React.Component {
 
+  state = {
+    selectedAlliance: localStorage.getItem('alliance')
+  }
   
   constructor(props) {
     super(props);
-    this.state = {
-        selectedAlliance: localStorage.getItem('alliance'),
-    };
     this.scoutingLog = [];  
   }
 
@@ -83,9 +83,6 @@ class Container extends React.Component {
         let matchNumber = data[1][1];
         let alliance = data[2][1];
         let teamNumber = data[3][1];
-        let autoExported = data[4][1].split("  -  ");
-        let autoPieces = autoExported[0];
-        let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
         let scoreCount = data[6][1];
         let passCount = data[7][1];
         let fumblePercent = data[8][1];
@@ -253,21 +250,18 @@ class Container extends React.Component {
   }
 
   checkAlliance = () => {
-    if (this.state.selectedAlliance === "BLUE") {
+    if (localStorage.getItem("alliance") === "BLUE") {
       document.querySelector(':root').style.setProperty('--team-color','blue')
       document.querySelector(':root').style.setProperty('--team-active-color','navy')
-    } else if (this.state.selectedAlliance === "RED") {
+    } else if (localStorage.getItem("alliance") === "RED") {
       document.querySelector(':root').style.setProperty('--team-color','red')
       document.querySelector(':root').style.setProperty('--team-active-color','maroon')
     }
   }
 
   handleAllianceChange = (alliance) => {
-    this.setState({
-      selectedAlliance: {alliance}
-    })
-    console.log("Alliance: " + alliance)
-    console.log("What Site Be Thinking: " + this.state.selectedAlliance)
+    localStorage.setItem("alliance", alliance)
+    this.checkAlliance()
   }
 
   render() {
@@ -312,10 +306,10 @@ class Container extends React.Component {
           </div>
           <div>
             <Dropdown
-              className="dropdown alliance"
+              className="dropdown-alliance"
               id={this.assignUUID()}
               title="Alliance"
-              value={this.state.selectedAlliance}
+              value={localStorage.getItem("alliance")}
               items={[
                 {id:1, value: "RED", title: "Red"},
                 {id:2, value: "BLUE", title: "Blue"}

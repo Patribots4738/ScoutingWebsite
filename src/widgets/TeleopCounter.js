@@ -11,7 +11,8 @@ class TeleopCounter extends React.Component {
         hubValue: 0,
         passValue: 0,
         scoreAmount: 1,
-        scoreLocation: "HUB"
+        scoreLocation: "HUB",
+        fumblePercent: 100
     }
     
     handleScore = () => {
@@ -138,7 +139,7 @@ class TeleopCounter extends React.Component {
                 </div>
             </div>
             <div className="teleop-scoring">
-                <object className="fuel-graphic" aria-label={"Fuel Icon"}></object>
+                <object className="fuel-graphic" aria-label={"Fuel Icon"}> {this.state.scoreAmount} </object>
                 <button className="amount-btn" onClick={() => this.handleScoreAmount(1)}>
                     1x
                 </button>
@@ -152,7 +153,7 @@ class TeleopCounter extends React.Component {
             <Slider
                 title="Accuracey"
                 units="%"
-                value={100}
+                value={this.state.fumblePercent}
                 minValue={0}
                 maxVaule={100}
                 decorator="acurate-title"
@@ -165,7 +166,7 @@ class TeleopCounter extends React.Component {
 
     render() {
         return (
-            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={JSON.stringify({hubValue: this.state.hubValue, passValue: this.state.passValue})}>
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={JSON.stringify({hubValue: this.state.hubValue, passValue: this.state.passValue, fumblePercent: this.state.fumblePercent})}>
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>
