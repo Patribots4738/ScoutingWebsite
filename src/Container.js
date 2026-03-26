@@ -234,7 +234,7 @@ class Container extends React.Component {
     this.scoutingLog.push(id);
     return id;
   }
-
+  
   handleExportData = (_) => {
     let cachedDataJSON = localStorage.getItem("matchData");
 
@@ -335,12 +335,10 @@ class Container extends React.Component {
             />          
           </div>
         </div>
-        
         <div className="auto-container">
           <h2 className="subtitle section-title">
             AUTO
           </h2>
-        
           <div className="auto-widget-box">
             <AutoCounter
               title="Auto Path"
@@ -401,9 +399,7 @@ class Container extends React.Component {
               decorator="onstage"
             />
           </div>
-        
           <div className="checkboxes-bottom">
-        
             <CheckBox
               className="isFailure"
               title="Climb Failure"
@@ -413,7 +409,6 @@ class Container extends React.Component {
             />
           </div>
         </div>
-
         <div className="post-match-container">
           <h2 className="subtitle section-title">
             POST-MATCH
