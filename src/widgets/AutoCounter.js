@@ -207,13 +207,13 @@ class AutoCounter extends React.Component {
 
     render() {
         return (
-            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={[this.state.autoPath].join(" - ")}>
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={this.state.autoPath.join(" - ")}>
                 <div className={"subtitle"}>
                     {this.state.title}
                 </div>
                 <div className="awsome-val-display">
                     <div className="val-display" id={this.state.id} title={this.state.title}>
-                        {(this.state.autoPath.length > 0) ? [...this.state.autoPath].join(" - ") : "-"}
+                        {(this.state.autoPath.length > 0) ? this.state.autoPath.join(" - ") : "-"}
                     </div>
                     <div className="undo-button">
                         {this.undo()}

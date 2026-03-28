@@ -165,8 +165,8 @@ class TeleopCounter extends React.Component {
     }
 
     render() {
-        return (
-            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={JSON.stringify({hubValue: this.state.hubValue, passValue: this.state.passValue, fumblePercent: this.state.fumblePercent})}>
+        return (                                                                                         //0                     //1                     //2
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={[this.state.hubValue, this.state.passValue, this.state.fumblePercent]}>
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>
