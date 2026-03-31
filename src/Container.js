@@ -81,9 +81,9 @@ class Container extends React.Component {
         let teamNumber = data[3][1]
         let autoPath = data[4][0]
         let autoComment = data[5][1]
-        let scoreCount = data[6][0]
-        let passCount = data[6][1]
-        let fumblePercent = data[6][2]
+        let scoreCount = (data[6][1].split(","))[0]
+        let passCount = (data[6][1].split(","))[1]
+        let fumblePercent = (data[6][1].split(","))[2]
         let teleopComment = data[7][0]
         let climbL1 = data[8][1]
         let climbL2 = data[9][1]
@@ -97,8 +97,8 @@ class Container extends React.Component {
         let stationIntake = data[17][1]
         let shootScoot = data[18][1]
         let extraComment = data[19][1]
-        console.log("Score: " + scoreCount)
-        console.log("Pass" + passCount)
+        console.log("Percent: " + fumblePercent)
+        console.log("Teleop: " + data[6][1])
 
         let commentData = { 
           "Name": name,

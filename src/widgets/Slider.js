@@ -18,6 +18,7 @@ class Slider extends React.Component{
 
     handleSliderChange = (value) => {
         this.setState({value: value})
+        this.props.activeFunction(value)
     }
 
 
