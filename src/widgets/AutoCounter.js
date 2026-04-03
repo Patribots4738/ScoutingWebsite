@@ -41,7 +41,7 @@ class AutoCounter extends React.Component {
             newValue = value + this.state.scoreAmount
             newPath = [...this.state.autoPath, newValue]
         } else if (value.charAt(0) === 'S') {
-            if (this.state.autoPath.find((start) => (start.charAt(0) === "S")) != undefined) {
+            if (this.state.autoPath.find((start) => (start.charAt(0) == "S")) != undefined) {
                 this.state.autoPath.shift()
                 newPath = [value, ...this.state.autoPath]
             } else {
