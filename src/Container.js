@@ -8,7 +8,7 @@ import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
 //import Dropdown from './widgets/Dropdown';
 import AutoCounter from './widgets/AutoCounter';
-// import Counter from './widgets/Counter';
+import Counter from './widgets/Counter';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -17,7 +17,7 @@ import ClearLocalStorage from './widgets/ClearLocalStorage';
 import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
 import Dropdown from './widgets/Dropdown';
-// import Slider from './widgets/Slider';
+import Slider from './widgets/Slider';
 import TeleopCounter from "./widgets/TeleopCounter";
 
 class Container extends React.Component {
@@ -319,7 +319,7 @@ class Container extends React.Component {
             id={this.assignUUID()} //6
             title={"Teleop Scoring"}
             className={"teleop"}
-          /> */}
+          />
 
           <div className="teleop-counter">
             <div className="tele-score-box">
