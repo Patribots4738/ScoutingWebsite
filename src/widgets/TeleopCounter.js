@@ -112,6 +112,12 @@ class TeleopCounter extends React.Component {
         )
     }
 
+    changePercent = (input) => {
+        this.setState ({
+            fumblePercent: input
+        })
+    }
+
     //this guy is very silly
     bigUIArray = () => {
         return (
@@ -154,19 +160,36 @@ class TeleopCounter extends React.Component {
                 title="Accuracey"
                 units="%"
                 value={this.state.fumblePercent}
+                activeFunction={this.changePercent}
                 minValue={0}
                 maxVaule={100}
                 decorator="acurate-title"
                 sliderdecorator="acurate-slider"
                 boxdecorator="teleop-slider-box"
+                id={3}
             />
         </div>  
         )
     }
 
+    getPercent = () => {
+        var value
+        var element = document.getElementById(3)
+        try {
+            value = element.getAttribute("value")
+        } catch {
+            value = null
+        }
+        console.log("Val: " + value)
+        if (!value) {
+            value = "No Value"
+        }
+        return value
+    }
+
     render() {
         return (                                                                                         //0                     //1                     //2
-            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={[this.state.hubValue, this.state.passValue, this.state.fumblePercent]}>
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={[this.state.hubValue, this.state.passValue, this.getPercent()]}>
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>

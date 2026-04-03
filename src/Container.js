@@ -8,7 +8,7 @@ import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
 //import Dropdown from './widgets/Dropdown';
 import AutoCounter from './widgets/AutoCounter';
-// import Counter from './widgets/Counter';
+import Counter from './widgets/Counter';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -17,7 +17,7 @@ import ClearLocalStorage from './widgets/ClearLocalStorage';
 import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
 import Dropdown from './widgets/Dropdown';
-// import Slider from './widgets/Slider';
+import Slider from './widgets/Slider';
 import TeleopCounter from "./widgets/TeleopCounter";
 
 class Container extends React.Component {
@@ -63,7 +63,7 @@ class Container extends React.Component {
     var sendData = data[1]
     data = data[0]
 
-    const eventID = '2026Test';
+    const eventID = '2026CASD';
     const gameID = '2026REBUILT';
 
     if (sendData) {
@@ -81,9 +81,9 @@ class Container extends React.Component {
         let teamNumber = data[3][1]
         let autoPath = data[4][0]
         let autoComment = data[5][1]
-        let scoreCount = data[6][0]
-        let passCount = data[6][1]
-        let fumblePercent = data[6][2]
+        let scoreCount = (data[6][1].split(","))[0]
+        let passCount = (data[6][1].split(","))[1]
+        let fumblePercent = (data[6][1].split(","))[2]
         let teleopComment = data[7][0]
         let climbL1 = data[8][1]
         let climbL2 = data[9][1]
@@ -97,8 +97,8 @@ class Container extends React.Component {
         let stationIntake = data[17][1]
         let shootScoot = data[18][1]
         let extraComment = data[19][1]
-        console.log("Score: " + scoreCount)
-        console.log("Pass" + passCount)
+        console.log("Percent: " + fumblePercent)
+        console.log("Teleop: " + data[6][1])
 
         let commentData = { 
           "Name": name,
@@ -307,7 +307,7 @@ class Container extends React.Component {
               title="Auto Notes"
               value={""}
               numeric={false}
-              placeholder="Describe any abnormalities in the auto, anything that would not have been included in the auto path, and if their climb failed or where they ended. "
+              placeholder="Describe any abnormalities in the auto, anything that would not have been included in the auto path, and where they ended. "
             />
           </div>
         </div>
@@ -320,6 +320,35 @@ class Container extends React.Component {
             title={"Teleop Scoring"}
             className={"teleop"}
           />
+
+          <div className="teleop-counter">
+            <div className="tele-score-box">
+              <Counter
+                id={this.assignUUID()}
+                title="Shoot"
+                decorator="teleop-score"
+                upperLimit={3000}
+              />
+            </div>
+            <div className="tele-pass-box">
+              <Counter
+                id={this.assignUUID()}
+                title="Pass"
+                decorator="teleop-pass"
+                upperLimit={3000}
+              />
+            </div>
+            <div className="slider-box">
+              <Slider
+                title="Fumble Percent"
+                id={this.assignUUID()}
+                value={50}
+                decorator="fumble"
+              />
+            </div>
+          </div>
+
+
           <div className="tele-offcyle-box">
             <TextBoxLong
               className="text-box-long"
@@ -438,14 +467,6 @@ class Container extends React.Component {
           </div>
 
         </div>
-        <a
-          className="suggestions"
-          href="https://docs.google.com/forms/d/e/1FAIpQLScuS7hTiPxkxvk8t2dImAYtfXdHkqCzennD2szbqtXMaAw5zg/viewform?usp=header"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Suggestions or Bugs
-        </a>
         <div className='submit-container'>
           <Submit title="Submit" handleFormSubmit={this.handleFormSubmit} />
         </div>
