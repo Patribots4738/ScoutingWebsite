@@ -62,8 +62,8 @@ class Container extends React.Component {
 
     var sendData = data[1]
     data = data[0]
-
-    const eventID = '2026CASD';
+    // CALP stands for California Palmdale
+    const eventID = '2026CAPD';
     const gameID = '2026REBUILT';
 
     if (sendData) {
