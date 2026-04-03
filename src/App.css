@@ -3,7 +3,8 @@
 :root {
   --box-border-color: rgba(255, 255, 255, 0.38);
   min-width: 100%;
-  --team-color: red;
+  --team-color: darkgray;
+  --team-active-color: grey;
 }
 
 
@@ -131,11 +132,6 @@ link {
   font-size: 25px;
 }
 
-
-.widget {
-  padding: 10px;
-}
-
 .widgetteleop-counter {
   width: 100%;
 }
@@ -226,13 +222,6 @@ link {
 
 .double-line {
   max-width: 250px;
-}
-.slider {
-  width: 200px;
-  height: 25px;
-  background: rgb(47, 49, 45);
-  padding: 0;
-  position: center;
 }
 
  .slider-valueslide {
@@ -1000,21 +989,6 @@ link {
   align-items: center;
 }
 
-.pass-button {
-  margin: 0 auto;
-  background-color: rgb(7, 242, 35);
-  display: flex;
-  align-items: center;
-  width: 90%;
-  height: 90%;
-  border-radius: 20px;
-  transition: 0.12s
-}
-
-.pass-button:active {
-  background-color: green;
-}
-
 .field-section:active {
   background-color: rgb(32, 32, 32);
 }
@@ -1105,7 +1079,8 @@ link {
 
 .reef-map {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 80% 20%;
   height: 300px;
   width: 400px;
   background: rgb(54, 54, 54);
@@ -1122,11 +1097,11 @@ link {
 .teleop-scoring {
   display: grid;
   grid-template-rows: auto auto auto auto;
-  align-content: center;
-  height: 300px;
+  align-items: center;
+  grid-row-gap: 5%;
+  height: 100%;
   width: 100%;
-  justify-content: center;
-  outline: auto;
+  justify-items: center;
   justify-self: end;
 }
 
@@ -1136,19 +1111,24 @@ link {
   display: block;
   height: 80px;
   width: 80px;
+  color: black;
+  font-weight: 1000;
+  font-size: 200%;
+  justify-content: center;
+  align-content: center;
 }
 
 .teleop-misic {
   display: grid;
-  grid-template-rows: auto auto auto;
-  height: 300px;
+  grid-template-rows: 33% 33% 33%;
+  height: 100%;
   width: 100%;
 }
 
 .teleop-display {
   display: flex;
   margin: 0 auto;
-  height: 50px;
+  height: 65%;
   width: 75%;
   background: black;
   border-style:inset;
@@ -1162,36 +1142,102 @@ link {
 .teleop-display-text {
   color: white;
   font-weight: 750;
+  font-size: auto;
 }
 
 .Hub-btn {
   background-color: var(--team-color);
+  height: 70%;
+  width: 80%;
+  border-radius: 10px;
+  border-color: grey;
+  border-style: outset;
+  border-width: 5px;
+}
 
+.Pass-btn {
+  background-color: darkorchid;
+  height: 70%;
+  width: 80%;
+  border-radius: 10px;
+  border-style: outset;
+  border-width: 5px;
 }
 
 .teleop-score-box {
   display: grid;
   grid-template-columns: auto auto;
   grid-column-gap: 0%;
-  height: 120px;
+  height: auto;
   width: auto;
   align-items: center;
   justify-items: center;
-  outline: auto;
 }
 
 .amount-btn {
   display: ruby;
   border-radius: 10px;
+  height: 110%;
+  width: 65%;
+  font-weight: 800;
+  font-size: 130%;
+  color: white;
   background-color: var(--team-color);
 }
 
 .teleop-display-box {
-  outline: auto;
   display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
+  grid-template-columns: 50% 50%;
   grid-column-gap: 0%;
+  align-items: center;
+  height: auto;
+}
+
+.location-box {
+  height: auto;
+  width: auto;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-items: center;
+  align-items: center;
+}
+
+.teleop-slider-box {
+  height: 100%;
+  width: 100%;
+  grid-column: 1 /span 2;
+  align-content: center;
+  justify-content: center;
+}
+
+/*  
+  the part -webkit-appearance part despite it being yellow is necesary or else it doesn't work
+*/
+.acurate-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 80%;
+  height: 20%;
+  background-color: black;
+  border-color: darkgray;
+  border-style: inset;
+  border-width: 4px;
+  cursor: pointer;
+}
+
+.acurate-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-style: outset;
+  border-color: whitesmoke;
+  border-radius: 50%;
+}
+
+.acurate-title {
+  color: White;
+  font-weight: bolder;
 }
 
 .score-btn {
@@ -1407,10 +1453,12 @@ link {
   transform: rotate(180deg);
 }
 
-.start-depot-button:active, .start-hub-button:active, .start-outpost-button:active, .climb-score-button:active, .depot-button:active, .outpost-intake-button:active{
+.start-depot-button:active, .start-hub-button:active, .start-outpost-button:active {
   background-color: rgb(88, 88, 88);
-  height: auto;
-  width: auto;
+}
+
+.climb-score-button:active, .depot-button:active, .outpost-intake-button:active {
+  background-color: rgb(88, 88, 88);
 }
 
 .checkboxes-post {
@@ -1455,6 +1503,20 @@ link {
 }
 
 .field-map {
+  user-select: none;
+  background-color: rgb(54, 54, 54);
+  width: 400px;
+  height: 400px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 20% 35% 30% 15%;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+}
+
+.field-map-Auto {
   user-select: none;
   background-color: rgb(54, 54, 54);
   width: 400px;

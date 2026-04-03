@@ -8,7 +8,7 @@ import TextBoxLong from './widgets/TextBoxLong';
 import Export from './widgets/Export';
 //import Dropdown from './widgets/Dropdown';
 import AutoCounter from './widgets/AutoCounter';
-import Counter from './widgets/Counter'; 
+// import Counter from './widgets/Counter';
 
 import { v4 as uuidv4 } from "uuid"
 import React from 'react';
@@ -17,28 +17,25 @@ import ClearLocalStorage from './widgets/ClearLocalStorage';
 import { set, ref } from "firebase/database";
 import { db } from "./firebaseConfig";
 import Dropdown from './widgets/Dropdown';
-import Slider from './widgets/Slider';
+// import Slider from './widgets/Slider';
+import TeleopCounter from "./widgets/TeleopCounter";
 
 class Container extends React.Component {
 
-  
-  constructor(props) {
-    super(props);
-    this.state = {
-        selectedAlliance: localStorage.getItem('alliance'),
-    };
-    this.scoutingLog = [];  
+  state = {
+    selectedAlliance: localStorage.getItem('alliance'),
+    scoutingLog: []
   }
 
   gatherData = () => {
     var arr = []
 
-    for (var i = 0; i < this.scoutingLog.length; i++) {
+    for (var i = 0; i < this.state.scoutingLog.length; i++) {
 
-      var element = document.getElementById(this.scoutingLog[i]);
-      console.log(element);
+      var element = document.getElementById(this.state.scoutingLog[i]);
+      console.log(element)
       if (element !== null) {
-        var value;
+        var value
         if (element.getAttribute("value") !== null && element.getAttribute("value") !== undefined) {
 
           value = (element.getAttribute("value"))
@@ -75,56 +72,62 @@ class Container extends React.Component {
         validMatch = window.confirm("Are you sure your match and team numbers are correct?");
       }
       if (validMatch) {
-        for (let i = 0; i < 17; i++) {
-          console.log("item " + i + " " + data[i][1] + data[i][1].id)
+        for (let i = 0; i < 19; i++) {
+          console.log("item " + i + " " + data[i][1] + " ID: "+ data[i][1].id)
         }
-        let name = data[0][1];
-        let matchNumber = data[1][1];
-        let alliance = data[2][1];
-        let teamNumber = data[3][1];
-        let autoExported = data[4][1].split("  -  ");
-        let autoPieces = autoExported[0];
-        let autoPieceCounts = this.autoPieceCount(autoPieces.split(" - "));
-        let scoreCount = data[6][1];
-        let passCount = data[7][1];
-        let fumblePercent = data[8][1];
-        
+        let name = data[0][1]
+        let matchNumber = data[1][1]
+        let alliance = data[2][1]
+        let teamNumber = data[3][1]
+        let autoPath = data[4][0]
+        let autoComment = data[5][1]
+        let scoreCount = (data[6][1].split(","))[0]
+        let passCount = (data[6][1].split(","))[1]
+        let fumblePercent = (data[6][1].split(","))[2]
+        let teleopComment = data[7][0]
+        let climbL1 = data[8][1]
+        let climbL2 = data[9][1]
+        let climbTransversal = data[10][1]
+        let climbFailure = data[11][1]
+        let tempFail = data[12][1]
+        let criticalFail = data[13][1]
+        let bump = data[14][1]
+        let trench = data[15][1]
+        let groundIntake = data[16][1]
+        let stationIntake = data[17][1]
+        let shootScoot = data[18][1]
+        let extraComment = data[19][1]
+        console.log("Percent: " + fumblePercent)
+        console.log("Teleop: " + data[6][1])
+
         let commentData = { 
           "Name": name,
           "Team": teamNumber,
-          "Comments": data[21][1],
-          "Auto Description": data[5][1],
-          "Auto Path": autoPieces,
-          "Off Time": data[9][1],
+          "Comments": extraComment,
+          "Auto Description": autoComment,
+          "Auto Path": autoPath,
+          "Off Time": teleopComment
         }
 
         let jsonData = {     
-          "Climb Auto": autoPieceCounts["C"],
-          "Start Depot": autoPieceCounts["SD"],
-          "Start Hub": autoPieceCounts["SH"],
-          "Start Outpost": autoPieceCounts["SO"],
-          "Outpost Intake": autoPieceCounts["OI"],
-          "Depot Intake": autoPieceCounts["DI"],
-          "Center Intake Auto": autoPieceCounts["CI"],
-          "Score Auto": autoPieceCounts["S"],
-          "Climb Failure Auto": autoPieceCounts["CF"],
+          "Score Auto": this.autoPieceCount(autoPath),
           "Score Teleop": scoreCount,
           "Pass Teleop": passCount,
           "Fumble Percent": fumblePercent,
           "Match Number": matchNumber,
           "Team": teamNumber,
           "Alliance": alliance,
-          "L1 Climb": data[10][1],
-          "L2 Climb": data[11][1],
-          "Traversal Climb": data[13][1],
-          "Climb Failure": data[12][1],
-          "Ground Intake": data[18][1],
-          "Station Intake": data[19][1],
-          "Temp Failure": data[14][1],
-          "Critical Failure": data[15][1],
-          "Over Bump": data[16][1],
-          "Under Trench": data[17][1],
-          "Shooting While Driving": data[20][1],
+          "L1 Climb": climbL1,
+          "L2 Climb": climbL2,
+          "Traversal Climb": climbTransversal,
+          "Climb Failure": climbFailure,
+          "Ground Intake": groundIntake,
+          "Station Intake": stationIntake,
+          "Temp Failure": tempFail,
+          "Critical Failure": criticalFail,
+          "Over Bump": bump,
+          "Under Trench": trench,
+          "Shooting While Driving": shootScoot,
         };
         //           game           event                  match #           Name            team             
         set(ref(db, gameID + '/' + eventID + '/match-' + matchNumber + '/' + name + '|'  + data[3][1] + '/data/'), jsonData);
@@ -167,53 +170,12 @@ class Container extends React.Component {
     return (val.toString().length > 2)
   }
 
-  autoPieceCount  = (arr) => {
-    let pieceCounts = {
-      C: 0,
-      SD: 0,
-      SH: 0,
-      SO: 0,
-      OI: 0,
-      DI: 0,
-      CI: 0,
-      S: 0,
-      CF: 0
+  autoPieceCount(arr) {
+    let ScoreArr = [arr].filter((point) => point === ("S1" || "S5" || "S10"))
+    let pieceCounts = 0
+    for (let i = 0; i < ScoreArr.length; i++) {
+      pieceCounts = pieceCounts + ScoreArr[i].slice(1, 2)
     }
-
-    for (let i = 0; i < arr.length; i++) {
-      let loc = arr[i];
-      // eslint-disable-next-line default-case
-      switch (loc) {
-        case "C":
-          pieceCounts["C"]++
-          break
-        case "SD": 
-          pieceCounts["SD"]++
-          break
-        case "SH":
-          pieceCounts["SH"]++
-          break
-        case "SO":
-          pieceCounts["SO"]++
-          break
-        case "OI":
-          pieceCounts["OI"]++
-          break
-        case "DI":
-          pieceCounts["DI"]++
-          break
-        case "CI":
-          pieceCounts["CI"]++
-          break
-        case "S":
-          pieceCounts["S"]++
-          break
-        case "CF":
-          pieceCounts["CF"]++
-          break
-      }
-    }
-    
     return pieceCounts;
   }
 
@@ -226,14 +188,12 @@ class Container extends React.Component {
     alert("Cleared all match data.")
   }
 
-
   assignUUID = () => {
     var id = uuidv4();
-    this.scoutingLog.push(id);
+    this.state.scoutingLog.push(id);
     return id;
   }
-
-
+  
   handleExportData = (_) => {
     let cachedDataJSON = localStorage.getItem("matchData");
 
@@ -253,15 +213,23 @@ class Container extends React.Component {
     }
   }
 
-  handleAllianceChange = (input) => {
-    if (input === "BLUE") {
+  checkAlliance = () => {
+    if (localStorage.getItem("alliance") === "BLUE") {
       document.querySelector(':root').style.setProperty('--team-color','blue')
-    } else if (input === "RED") {
+      document.querySelector(':root').style.setProperty('--team-active-color','navy')
+    } else if (localStorage.getItem("alliance") === "RED") {
       document.querySelector(':root').style.setProperty('--team-color','red')
+      document.querySelector(':root').style.setProperty('--team-active-color','maroon')
     }
   }
 
+  handleAllianceChange = (alliance) => {
+    localStorage.setItem("alliance", alliance)
+    this.checkAlliance()
+  }
+
   render() {
+    this.checkAlliance()
     return (
       <ul className="container">
         <span className="label cookie">
@@ -285,7 +253,7 @@ class Container extends React.Component {
           <div>
             <TextBox
               className="textbox name"
-              id={this.assignUUID()}
+              id={this.assignUUID()} //0
               title={"Name"}
               value={localStorage.getItem("name")}
               required={"true"}
@@ -293,8 +261,8 @@ class Container extends React.Component {
             />
             <TextBox
               className="textbox match"
-              id={this.assignUUID()}
-              title={"Match Number"}
+              id={this.assignUUID()} //1
+              title="Match Number"
               value={+localStorage.getItem("matchNumber") + 1}
               required={true}
               numeric={true}
@@ -302,9 +270,9 @@ class Container extends React.Component {
           </div>
           <div>
             <Dropdown
-              className="dropdown alliance"
-              id={this.assignUUID()}
-              title={"Alliance"}
+              className="dropdown-alliance"
+              id={this.assignUUID()}  //2
+              title="Alliance"
               value={localStorage.getItem("alliance")}
               items={[
                 {id:1, value: "RED", title: "Red"},
@@ -314,31 +282,29 @@ class Container extends React.Component {
             />
             <TextBox
               className="textbox team"
-              id={this.assignUUID()}
-              title={"Team Number"}
+              id={this.assignUUID()} //3
+              title="Team Number"
               value={""}
               required={true}
               numeric={true}
             />          
           </div>
         </div>
-        
         <div className="auto-container">
           <h2 className="subtitle section-title">
             AUTO
           </h2>
-        
           <div className="auto-widget-box">
             <AutoCounter
-              title={"Auto Path"}
-              id={this.assignUUID()}
+              title="Auto Path"
+              id={this.assignUUID()} //4
             />
           </div>
           <div className="auto-notes-box">
             <TextBoxLong
               className="text-box-long"
-              id={this.assignUUID()}
-              title={"Auto Notes"}
+              id={this.assignUUID()} //5
+              title="Auto Notes"
               value={""}
               numeric={false}
               placeholder="Describe any abnormalities in the auto, anything that would not have been included in the auto path, and where they ended. "
@@ -349,46 +315,17 @@ class Container extends React.Component {
           <h2 className="subtitle section-title">
             TELEOP
           </h2>
-          {/* <TeleopCounter
-            id={this.assignUUID()}
+          <TeleopCounter
+            id={this.assignUUID()} //6
             title={"Teleop Scoring"}
             className={"teleop"}
-          /> */}
-
-          <div className="teleop-counter">
-            <div className="tele-score-box">
-              <Counter
-                id={this.assignUUID()}
-                title="Shoot"
-                decorator="teleop-score"
-                upperLimit={3000}
-              />
-            </div>
-            <div className="tele-pass-box">
-              <Counter
-                id={this.assignUUID()}
-                title="Pass"
-                decorator="teleop-pass"
-                upperLimit={3000}
-              />
-            </div>
-            <div className="slider-box">
-              <Slider
-                title="Fumble Percent"
-                id={this.assignUUID()}
-                value={50}
-                decorator="fumble"
-              />
-            </div>
-          </div>
-
-
+          />
           <div className="tele-offcyle-box">
             <TextBoxLong
               className="text-box-long"
-              id={this.assignUUID()}
-              title={"Off Time"}
-              value={""}
+              id={this.assignUUID()} //7
+              title="Off Time"
+              value=""
               numeric={false}
               placeholder="Describe what the robot was doing while their HUB was deactivated. Were they doing defense? Were they collecting fuel? Were they passing?"
             />
@@ -397,38 +334,35 @@ class Container extends React.Component {
             <CheckBox
               className="climb1"
               title="L1 Climb"
-              id={this.assignUUID()}
+              id={this.assignUUID()} //8
               value={false}
               decorator="onstage"
             />
             <CheckBox
               className="climb2"
               title="L2 Climb"
-              id={this.assignUUID()}
+              id={this.assignUUID()} //9
               value={false}
               decorator="onstage"
             />
             <CheckBox
               className="climb3"
               title="Traversal Climb"
-              id={this.assignUUID()}
+              id={this.assignUUID()} //10
               value={false}
               decorator="onstage"
             />
           </div>
-
           <div className="checkboxes-bottom">
-
             <CheckBox
               className="isFailure"
               title="Climb Failure"
-              id={this.assignUUID()}
+              id={this.assignUUID()} //11
               value={false}
               decorator="onstage"
             />
           </div>
         </div>
-
         <div className="post-match-container">
           <h2 className="subtitle section-title">
             POST-MATCH
@@ -438,14 +372,14 @@ class Container extends React.Component {
               <CheckBox
                 className="temporary"
                 title="Temp. Failure"
-                id={this.assignUUID()}
+                id={this.assignUUID()} //12
                 value={false}
                 decorator={"temporary"}
               />
               <CheckBox
                 className="critical"
                 title="Critical Failure"
-                id={this.assignUUID()}
+                id={this.assignUUID()} //13
                 value={false}
                 decorator={"critical"}
               />
@@ -454,14 +388,14 @@ class Container extends React.Component {
               <CheckBox
                 className="Bump"
                 title="Over Bump"
-                id={this.assignUUID()}
+                id={this.assignUUID()} //14
                 value={false}
                 decorator={"critical"}
               />
               <CheckBox
                 className="trench"
                 title="Under Trench"
-                id={this.assignUUID()}
+                id={this.assignUUID()} //15
                 value={false}
                 decorator={"critical"}
               />
@@ -470,14 +404,14 @@ class Container extends React.Component {
               <CheckBox
                 className="ground-intake"
                 title="Ground Intake"
-                id={this.assignUUID()}
+                id={this.assignUUID()} //16
                 value={false}
                 decorator={"critical"}
               />
               <CheckBox
                 className="station-intake"
                 title="Station Intake"
-                id={this.assignUUID()}
+                id={this.assignUUID()} //17
                 value={false}
                 decorator={"critical"}
               />
@@ -486,17 +420,16 @@ class Container extends React.Component {
               <CheckBox
                 className="shoot&drive"
                 title="Shooting While Driving"
-                id={this.assignUUID()}
+                id={this.assignUUID()} //18
                 value={false}
                 decorator={"critical"}
               />
             </div>
-
           </div>
           <div>
             <TextBoxLong
               className="text-box-long"
-              id={this.assignUUID()}
+              id={this.assignUUID()} //19
               title={"Comments"}
               value={""}
               numeric={false}

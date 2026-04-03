@@ -66,9 +66,7 @@ class TextBox extends React.Component{
                 <div className="subtitle">
                     {this.state.title}
                 </div>
-
                 {this.determineRequired(this.state.required)}
-
             </span>
         )
     }
