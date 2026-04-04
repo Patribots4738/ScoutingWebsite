@@ -18,13 +18,14 @@ class Slider extends React.Component{
 
     handleSliderChange = (value) => {
         this.setState({value: value})
-        this.props.activeFunction(value)
+        this.props.changeFunc()
+        console.log(this.state.value)
     }
 
 
     render(){
         return (
-            <span className={this.state.boxdecorator}>
+            <span className={this.state.boxdecorator} value={this.state.value}>
                 <div className={this.state.decorator}>
                     {this.state.title}: {this.state.value} {this.state.units}
                 </div>
@@ -33,6 +34,7 @@ class Slider extends React.Component{
                         className={this.state.sliderdecorator}
                         onChange={e => {
                             this.handleSliderChange(e.target.value)
+                            console.log("Slid Tar: " + e.target.value)
                         }}
                         id={this.state.id}
                         value={this.state.value}

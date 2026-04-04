@@ -112,12 +112,6 @@ class TeleopCounter extends React.Component {
         )
     }
 
-    changePercent = (input) => {
-        this.setState ({
-            fumblePercent: input
-        })
-    }
-
     //this guy is very silly
     bigUIArray = () => {
         return (
@@ -159,8 +153,8 @@ class TeleopCounter extends React.Component {
             <Slider
                 title="Accuracey"
                 units="%"
+                changeFunc={this.getPercent}
                 value={this.state.fumblePercent}
-                activeFunction={this.changePercent}
                 minValue={0}
                 maxVaule={100}
                 decorator="acurate-title"
@@ -172,24 +166,22 @@ class TeleopCounter extends React.Component {
         )
     }
 
-    getPercent = () => {
+    getPercent = (input) => {
         var value
         var element = document.getElementById(3)
-        try {
-            value = element.getAttribute("value")
-        } catch {
-            value = null
-        }
-        console.log("Val: " + value)
+        value = input
         if (!value) {
-            value = "No Value"
+            value = element.value
         }
-        return value
+        console.log("Getter: " + value)
+        this.setState({
+            fumblePercent: value
+        })
     }
 
     render() {
-        return (                                                                                         //0                     //1                     //2
-            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={[this.state.hubValue, this.state.passValue, this.getPercent()]}>
+        return (                                                                                         //0                     //1                 //2
+            <span className={"widget-" + this.state.classNameDecorator} id={this.state.id} value={[this.state.hubValue, this.state.passValue, this.state.fumblePercent]}>
                 <div className= {"subtitle"}>
                     {this.state.title}
                 </div>

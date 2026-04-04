@@ -63,7 +63,7 @@ class Container extends React.Component {
     var sendData = data[1]
     data = data[0]
     // CALP stands for California Palmdale
-    const eventID = '2026CAPD';
+    const eventID = '2026Test';
     const gameID = '2026REBUILT';
 
     if (sendData) {
@@ -79,12 +79,12 @@ class Container extends React.Component {
         let matchNumber = data[1][1]
         let alliance = data[2][1]
         let teamNumber = data[3][1]
-        let autoPath = data[4][0]
+        let autoPath = data[4][1]
         let autoComment = data[5][1]
         let scoreCount = (data[6][1].split(","))[0]
         let passCount = (data[6][1].split(","))[1]
         let fumblePercent = (data[6][1].split(","))[2]
-        let teleopComment = data[7][0]
+        let teleopComment = data[7][1]
         let climbL1 = data[8][1]
         let climbL2 = data[9][1]
         let climbTransversal = data[10][1]
@@ -97,8 +97,6 @@ class Container extends React.Component {
         let stationIntake = data[17][1]
         let shootScoot = data[18][1]
         let extraComment = data[19][1]
-        console.log("Percent: " + fumblePercent)
-        console.log("Teleop: " + data[6][1])
 
         let commentData = { 
           "Name": name,
@@ -170,13 +168,27 @@ class Container extends React.Component {
     return (val.toString().length > 2)
   }
 
-  autoPieceCount(arr) {
-    let ScoreArr = [arr].filter((point) => point === ("S1" || "S5" || "S10"))
+  autoPieceCount(jstring) {
+    let arr = jstring.split(" - ")
+    arr.shift()
+    let ScoreArr = arr.filter(this.checkIfScore)
+    console.log("ScoreAr: " + ScoreArr)
     let pieceCounts = 0
+    let num = 0
     for (let i = 0; i < ScoreArr.length; i++) {
-      pieceCounts = pieceCounts + ScoreArr[i].slice(1, 2)
+      if (parseInt(ScoreArr[i].slice(1, 3) === null)) {
+        num = 0
+      } else {
+        num = parseInt(ScoreArr[i].slice(1, 3))
+      }
+      pieceCounts = pieceCounts + num
     }
+    console.log(pieceCounts)
     return pieceCounts;
+  }
+
+  checkIfScore(point) {
+    return point.charAt(0) === 'S'
   }
 
   clearLocalStorage = () => {
