@@ -1,24 +1,19 @@
-import './App.css';
+import './App.css'
 
-import CheckBox from './widgets/CheckBox';
-import TextBox from './widgets/TextBox';
-//import TeleopCounter from './widgets/TeleopCounter';
-import Submit from './widgets/Submit';
-import TextBoxLong from './widgets/TextBoxLong';
-import Export from './widgets/Export';
-//import Dropdown from './widgets/Dropdown';
-import AutoCounter from './widgets/AutoCounter';
-// import Counter from './widgets/Counter';
+import CheckBox from './widgets/CheckBox'
+import Submit from './widgets/Submit'
+import TextBoxLong from './widgets/TextBoxLong'
+import Export from './widgets/Export'
 
 import { v4 as uuidv4 } from "uuid"
-import React from 'react';
-import ClearLocalStorage from './widgets/ClearLocalStorage';
+import ClearLocalStorage from './widgets/ClearLocalStorage'
+import React from 'react'
 
-import { set, ref } from "firebase/database";
-import { db } from "./firebaseConfig";
-import Dropdown from './widgets/Dropdown';
-// import Slider from './widgets/Slider';
-import TeleopCounter from "./widgets/TeleopCounter";
+import { set, ref } from "firebase/database"
+import { db } from "./firebaseConfig"
+import TeleopComponent from './components/TeleopComponent'
+import AutoComponent from './components/AutoComponent'
+import IdentificationComponent from './components/IdentificationComponent'
 
 class Container extends React.Component {
 
@@ -244,136 +239,25 @@ class Container extends React.Component {
     this.checkAlliance()
     return (
       <ul className="container">
-        <span className="label cookie">
-          By Continuing to Use Our Website You Agree to Use Cookies :)
-        </span>
+        <span className="label cookie">By Continuing to Use Our Website You Agree to Use Cookies :)</span>
         <a
           className="scouting-guidelines"
           href="https://docs.google.com/document/d/1OiVVfB9Mx3mIwIE4ahyO1Sa65VuAJsUcy7czSVyzZJ4/edit?usp=sharing"
           target="_blank"
           rel="noreferrer"
-        >
-          Scouting Guidelines
-        </a>
-        <h1 className="title">
-          PATRIBOTS SCOUTING
-        </h1>
+        >Scouting Guidelines</a>
+        <h1 className="title">PATRIBOTS SCOUTING</h1>
         <div className='identification-container'>
-          <h2 className="subtitle section-title">
-            IDENTIFICATION
-          </h2>
-          <div>
-            <TextBox
-              className="textbox name"
-              id={this.assignUUID()} //0
-              title={"Name"}
-              value={localStorage.getItem("name")}
-              required={"true"}
-              numeric={false}
-            />
-            <TextBox
-              className="textbox match"
-              id={this.assignUUID()} //1
-              title="Match Number"
-              value={+localStorage.getItem("matchNumber") + 1}
-              required={true}
-              numeric={true}
-            />
-          </div>
-          <div>
-            <Dropdown
-              className="dropdown-alliance"
-              id={this.assignUUID()}  //2
-              title="Alliance"
-              value={localStorage.getItem("alliance")}
-              items={[
-                {id:1, value: "RED", title: "Red"},
-                {id:2, value: "BLUE", title: "Blue"}
-              ]}
-              selected={this.handleAllianceChange}
-            />
-            <TextBox
-              className="textbox team"
-              id={this.assignUUID()} //3
-              title="Team Number"
-              value={""}
-              required={true}
-              numeric={true}
-            />          
-          </div>
+          <IdentificationComponent />
         </div>
         <div className="auto-container">
-          <h2 className="subtitle section-title">
-            AUTO
-          </h2>
-          <div className="auto-widget-box">
-            <AutoCounter
-              title="Auto Path"
-              id={this.assignUUID()} //4
-            />
-          </div>
-          <div className="auto-notes-box">
-            <TextBoxLong
-              className="text-box-long"
-              id={this.assignUUID()} //5
-              title="Auto Notes"
-              value={""}
-              numeric={false}
-              placeholder="Describe any abnormalities in the auto, anything that would not have been included in the auto path, and where they ended. "
-            />
-          </div>
+          <AutoComponent />
         </div>
         <div className="teleop-container">
-          <h2 className="subtitle section-title">
-            TELEOP
-          </h2>
-          <TeleopCounter
-            id={this.assignUUID()} //6
-            title={"Teleop Scoring"}
-            className={"teleop"}
-          />
-          <div className="tele-offcyle-box">
-            <TextBoxLong
-              className="text-box-long"
-              id={this.assignUUID()} //7
-              title="Off Time"
-              value=""
-              numeric={false}
-              placeholder="Describe what the robot was doing while their HUB was deactivated. Were they doing defense? Were they collecting fuel? Were they passing?"
-            />
-          </div>
-          <div className="checkboxes-top">
-            <CheckBox
-              className="climb1"
-              title="L1 Climb"
-              id={this.assignUUID()} //8
-              value={false}
-              decorator="onstage"
-            />
-            <CheckBox
-              className="climb2"
-              title="L2 Climb"
-              id={this.assignUUID()} //9
-              value={false}
-              decorator="onstage"
-            />
-            <CheckBox
-              className="climb3"
-              title="Traversal Climb"
-              id={this.assignUUID()} //10
-              value={false}
-              decorator="onstage"
-            />
-          </div>
-          <div className="checkboxes-bottom">
-            <CheckBox
-              className="isFailure"
-              title="Climb Failure"
-              id={this.assignUUID()} //11
-              value={false}
-              decorator="onstage"
-            />
-          </div>
+          <TeleopComponent />
+        </div>
+        <div className="endgame-container">
+
         </div>
         <div className="post-match-container">
           <h2 className="subtitle section-title">
@@ -448,12 +332,10 @@ class Container extends React.Component {
               placeholder="Include anything abnormal that could have influenced the match, their driving and defense capabilities, and things they did well and not so well."
             />
           </div>
-
         </div>
         <div className='submit-container'>
           <Submit title="Submit" handleFormSubmit={this.handleFormSubmit} />
         </div>
-
         <div className='export-container'>
           <Export title="Export Data" handleExportData={this.handleExportData} />
           <ClearLocalStorage title="Clear local data" clearLocalStorage={this.clearLocalStorage} />
@@ -461,12 +343,5 @@ class Container extends React.Component {
       </ul>
     );
   }
-
-
-
-
-
-  
-
 }
 export default Container;
