@@ -1,13 +1,9 @@
-import Component from 'react'
+import React from 'react'
 
-class TeleopComponent extends Component {
-    render() {
-        return (
-            <div>
-                <h2>TELEOP</h2>
-            </div>
-        )
-    }
+export default function TeleopComponent() {
+    return (
+        <div>
+            <h2>TELEOP</h2>
+        </div>
+    )
 }
-
-export default TeleopComponent

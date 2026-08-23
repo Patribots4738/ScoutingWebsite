@@ -1,15 +1,11 @@
-import Component from 'react'
+import React from 'react'
 import './IdentificationComponent.css'
 
-class IdentificationComponent extends Component {
-    render() {
-        return (
-            <div>
-                <h2>IDENTIFICATION</h2>
-                <text>High</text>
-            </div>
-        )
-    }
+export default function IdentificationComponent() {
+    return (
+        <div>
+            <h2>IDENTIFICATION</h2>
+            <p>High</p>
+        </div>
+    )
 }
-
-export default IdentificationComponent
