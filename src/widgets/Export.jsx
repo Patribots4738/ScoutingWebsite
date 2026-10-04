@@ -13,7 +13,7 @@ class Export extends React.Component{
             >
                 <span className="btn-text">{this.title}</span>
             </button>
-        )
+        )  
     }
 }
 

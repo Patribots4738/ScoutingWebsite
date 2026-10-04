@@ -1,5 +1,5 @@
 import React from "react";
-import Slider from "./Slider.js";
+import Slider from "./Slider.jsx";
 // import { preload } from "react-dom";
 
 class TeleopCounter extends React.Component {
