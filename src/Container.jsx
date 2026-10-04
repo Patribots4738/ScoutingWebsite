@@ -1,5 +1,4 @@
-import './App.css'
-
+import './CSS/App.css'
 import CheckBox from './widgets/CheckBox'
 import Submit from './widgets/Submit'
 import TextBoxLong from './widgets/TextBoxLong'
