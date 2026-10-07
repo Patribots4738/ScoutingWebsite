@@ -246,6 +246,7 @@ class Container extends React.Component {
           rel="noreferrer"
         >Scouting Guidelines</a>
         <h1 className="title">PATRIBOTS SCOUTING</h1>
+        <button onClick={() => {location.href = 'Hub'}}>Hi Test</button>
         <div className='identification-container'>
           <IdentificationComponent />
         </div>
