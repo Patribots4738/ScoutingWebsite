@@ -3,13 +3,19 @@
 .header {
     color: goldenrod;
     font-weight: 900;
+    appearance: none;
+    margin: 0;
 }
 
 .title {
-    appearance: none;
-    margin: 0;
     font-style: italic;
     font-size: 50px;
+    height: 100px;
+    width: 1000px;
+}
+
+.subtitle {
+    font-size: 100px;
     height: 100px;
     width: 1000px;
 }

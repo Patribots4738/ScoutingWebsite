@@ -1,6 +1,7 @@
 import './CSS/Standard.css';
 import Container from './Container';
-import HubPage from './pages/HubPage'
+import HubPage from './pages/HubPage';
+import IdentificationPage from './pages/IdentificationPage';
 
 export default function App() {
     var page
@@ -9,6 +10,10 @@ export default function App() {
     switch(extension) {
         case 'Hub':
             page = (<HubPage />)
+            console.log(extension)
+        break;
+        case 'IdPage':
+            page = (<IdentificationPage />)
             console.log(extension)
         break;
         default:
