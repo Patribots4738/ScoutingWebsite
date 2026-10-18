@@ -1,10 +1,32 @@
 import '../CSS/IdPage.css';
+import { Link } from "wouter";
 
-export default function IdentificationPage() {
+
+function PitIdPage() {
     return(
-        <div>
+        <div className="background">
             <h2 className="header subtitle">Papers Please</h2>
-            <button onClick={() => {location.href = 'Hub'}}>Hi Test</button>
+            <Link className="temp-link" to="/">Go Home</Link>
         </div>
     )
 }
+
+function QaulIdPage() {
+    return(
+        <div className="background">
+            <h2 className="header subtitle">Papers Please</h2>
+            <Link className="temp-link" to="/">Go Home</Link>
+        </div>
+    )
+}
+
+function QauntIdPage() {
+    return(
+        <div className="background">
+            <h2 className="header subtitle">Papers Please</h2>
+            <Link className="temp-link" to="/">Go Home</Link>
+        </div>
+    )
+}
+
+export {PitIdPage, QaulIdPage, QauntIdPage};
