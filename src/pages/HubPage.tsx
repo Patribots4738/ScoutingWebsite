@@ -1,3 +1,4 @@
+import { Link } from 'wouter';
 import '../CSS/HubPage.css';
 
 export default function HubPage() {
@@ -12,8 +13,9 @@ export default function HubPage() {
                     <option>Aluminum Narwhalls</option>
                 </select>
             </div>
-            <button onClick={() => {location.href = "Test"}}>Hi another test</button>
-            <button onClick={() => {location.href = "IdPage"}}>ID Page Button</button>
+            <Link className="temp-link" to="/Identifcation">
+            High I exist
+            </Link>
         </div>
     )
 }

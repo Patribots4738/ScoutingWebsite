@@ -4,25 +4,20 @@
   "homepage": "./",
   "private": false,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "firebase": "^10.6.0",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "@preact/preset-vite": "^2.10.6",
+    "firebase": "~12.19.0",
+    "oxfmt": "^0.73.0",
+    "preact": "^11.0.0",
+    "typescript": "~7.0.2",
+    "vite": "^8.3.1",
+    "wouter": "^3.13.0"
   },
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "preview": "vite preview"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "preview": "vite preview",
+    "lint": "oxfmt --check && oxlint",
+    "lint:fix": "oxfmt --write && oxlint --fix"
   },
   "browserslist": {
     "production": [
@@ -35,10 +30,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^6.1.1",
-    "tailwindcss": "^3.4.1",
-    "vite": "^8.3.1"
   }
 }
