@@ -1,23 +1,63 @@
 
 
 .header {
-    color: goldenrod;
-    font-weight: 900;
+    padding-top: 3%;
+    padding-bottom: 1%;
+    color: gold;
+    font-weight: 1000;
     appearance: none;
     margin: 0;
+    justify-self: center;
 }
 
 .title {
-    font-style: italic;
-    font-size: 50px;
-    height: 100px;
-    width: 1000px;
+    font-family:'Lucida Sans Grande';
+    font-size: 100px;
 }
 
 .subtitle {
-    font-size: 100px;
-    height: 100px;
-    width: 1000px;
+    font-family: Georgia;
+    font-size: 80px;
+}
+
+.texttitle {
+    font-family: 'Courier New';
+    font-size: 25px;
+    justify-self: left;
+}
+
+.back-btn {
+    position: absolute;
+    margin: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkolivegreen;
+    border-radius: 8px;
+    border-style: outset;
+    border-color: darkolivegreen;
+    height: 6vh;
+    width: 7vh;
+}
+
+.num-box {
+    height: 33px;
+    border-style: inset;
+    border-width: 5px;
+    border-color: green;
+    background-color: yellowgreen;
+    color: goldenrod;
+    font-size: 25px;
+}
+
+.num-box::placeholder {
+    color: yellow;
+    font-weight: bolder;
+}
+
+.undo-img {
+    height: 5vh;
+    width: 6vh;
 }
 
 .temp-link {
@@ -29,4 +69,6 @@
     background-color: rgb(30,50,25);
     height: 100vh;
     width: 100vw;
+    position: fixed;
+    justify-content: center;
 }

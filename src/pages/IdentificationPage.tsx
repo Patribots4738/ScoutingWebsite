@@ -1,12 +1,18 @@
 import '../CSS/IdPage.css';
-import { Link } from "wouter";
+import BackButton from "../components/BackButton";
 
 
 function PitIdPage() {
     return(
         <div className="background">
-            <h2 className="header subtitle">Papers Please</h2>
-            <Link className="temp-link" to="/">Go Home</Link>
+            {BackButton("")}
+            <h2 className="header subtitle">Identification</h2>
+            <div className="pit-box">
+                <div>
+                    <h3 className="header texttitle">Team Number</h3>
+                    <input type="number" className="num-box" placeholder="Team Number"></input>
+                </div>
+            </div>
         </div>
     )
 }
@@ -14,8 +20,9 @@ function PitIdPage() {
 function QaulIdPage() {
     return(
         <div className="background">
+            {BackButton("")}
             <h2 className="header subtitle">Papers Please</h2>
-            <Link className="temp-link" to="/">Go Home</Link>
+            
         </div>
     )
 }
@@ -23,8 +30,25 @@ function QaulIdPage() {
 function QauntIdPage() {
     return(
         <div className="background">
-            <h2 className="header subtitle">Papers Please</h2>
-            <Link className="temp-link" to="/">Go Home</Link>
+            {BackButton("")}
+            <h2 className="header subtitle">Identification</h2>
+            <div className="sue-box">
+                <div>
+                    <h3 className="header texttitle">Match Number</h3>
+                    <input type="number" className="num-box" placeholder="Match Number"></input>   
+                </div>
+                <div>
+                    <h3 className="header texttitle">Team Number</h3>
+                    <input type="number" className="num-box" placeholder="Team Number"></input>
+                </div>
+                <div>
+                    <h3 className="header texttitle">Alliance</h3>   
+                    <select className="alliance-select">
+                        <option className='red-opt'>RED</option>
+                        <option className='blue-opt'>BLUE</option>
+                    </select>
+                </div>
+            </div>
         </div>
     )
 }

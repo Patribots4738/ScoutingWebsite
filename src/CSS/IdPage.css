@@ -1,0 +1,41 @@
+.sue-box {
+    display: grid;
+    gap: 15%;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    height: 50%;
+    width: 90%;
+}
+
+.pit-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    height: 50%;
+    width: 90%;
+}
+
+.alliance-select {
+    width: 50%;
+    border-style: inset;
+    border-width: 5px;
+    border-color: green;
+    background-color: yellowgreen;
+    color: goldenrod;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.red-opt {
+    background-color: lightcoral;
+    color: red;
+    font-weight: 700;
+}
+
+.blue-opt {
+    background-color: lightblue;
+    color: blue;
+    font-weight: 700;
+}
