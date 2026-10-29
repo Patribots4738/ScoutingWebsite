@@ -1,0 +1,39 @@
+
+.scouter-id-box {
+    display: grid;
+    justify-self: center;
+}
+
+.link-box {
+    background-color: rgb(30,50,35);
+    border-color: rgb(30,45,30);
+    border-style: groove;
+    border-width: 10px;
+    justify-self: center;
+    margin-top: 4%;
+    padding: 2%;
+    height: 40%;
+    width: 30%;
+    display: grid;
+    gap: 15%;
+}
+
+.nav-btns {
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(30,60,35);
+    color: gold;
+    border-color: darkgoldenrod;
+    border-radius: 7px;
+    border-style: outset;
+    border-width: 6px;
+    outline: none;
+}
+
+.nav-btns:active {
+    border-style: inset;
+}

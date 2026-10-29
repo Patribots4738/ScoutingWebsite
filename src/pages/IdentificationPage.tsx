@@ -43,7 +43,7 @@ function QauntIdPage() {
                 </div>
                 <div>
                     <h3 className="header texttitle">Alliance</h3>   
-                    <select className="alliance-select">
+                    <select className="select-box alliance-select">
                         <option className='red-opt'>RED</option>
                         <option className='blue-opt'>BLUE</option>
                     </select>

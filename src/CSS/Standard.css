@@ -41,13 +41,14 @@
 }
 
 .num-box {
-    height: 33px;
+    height: 44px;
     border-style: inset;
     border-width: 5px;
     border-color: green;
     background-color: yellowgreen;
     color: goldenrod;
     font-size: 25px;
+    box-sizing: border-box;
 }
 
 .num-box::placeholder {
@@ -55,14 +56,37 @@
     font-weight: bolder;
 }
 
+.txt-box {
+    padding: 0px;
+    height: 44px;
+    border-style: inset;
+    border-width: 5px;
+    border-color: darkgreen;
+    background-color: olivedrab;
+    color: goldenrod;
+    font-size: 25px;
+    box-sizing: border-box;
+}
+
+.txt-box::placeholder {
+    color: gold;
+    font-weight: bolder;
+}
+
+.select-box {
+    height: 44px;
+    border-style: inset;
+    border-width: 5px;
+    border-color: darkgreen;
+    background-color: darkgreen;
+    color: goldenrod;
+    font-size: 25px;
+    font-weight: 600;
+}
+
 .undo-img {
     height: 5vh;
     width: 6vh;
-}
-
-.temp-link {
-    background-color: pink;
-    outline: auto;
 }
 
 .background {

@@ -18,14 +18,7 @@
 }
 
 .alliance-select {
-    width: 50%;
-    border-style: inset;
-    border-width: 5px;
-    border-color: green;
-    background-color: yellowgreen;
-    color: goldenrod;
-    font-size: 25px;
-    font-weight: 700;
+    width: 100%;
 }
 
 .red-opt {
