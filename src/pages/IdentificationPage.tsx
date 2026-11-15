@@ -21,8 +21,19 @@ function QaulIdPage() {
     return(
         <div className="background">
             {BackButton("")}
-            <h2 className="header subtitle">Papers Please</h2>
-            
+            <h2 className="header subtitle">Qualitative Scouting</h2>
+            <input type="number" className="num-box" placeholder="Match Number"></input>   
+            <div className="team-numbers">
+
+                <h3>Red Team</h3> <h3>Blue Team</h3>
+                <input type="number" className="num-box" placeholder="Team Number"></input>
+                <input type="number" className="num-box" placeholder="Team Number"></input>
+                <input type="number" className="num-box" placeholder="Team Number"></input>
+                <input type="number" className="num-box" placeholder="Team Number"></input>
+                <input type="number" className="num-box" placeholder="Team Number"></input>
+                <input type="number" className="num-box" placeholder="Team Number"></input>
+            </div>
+
         </div>
     )
 }

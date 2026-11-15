@@ -32,3 +32,18 @@
     color: blue;
     font-weight: 700;
 }
+
+
+.team-numbers {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 25% 25% 25% 25%;
+}
+
+.num-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    width: 15%;
+}
